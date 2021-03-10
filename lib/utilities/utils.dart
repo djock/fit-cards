@@ -3,7 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 
 import 'app_colors.dart';
-import 'app_theme.dart';
+import '../handlers/app_theme.dart';
 
 class Utils {
   static String formatTimeShort(int time) {
@@ -49,28 +49,6 @@ class Utils {
 
     return result;
   }
-
-  static AppBar buildAppBar(BuildContext context, String text) => AppBar(
-        backgroundColor: Theme.of(context).canvasColor,
-        elevation: 0,
-        iconTheme: IconThemeData(
-          color: AppColors.mainColor,
-        ),
-        title: Text(
-          text,
-          style: AppTheme.appBarDarkStyle(),
-        ),
-        centerTitle: true,
-      );
-
-  static AppBar buildEmptyBar(BuildContext context, String text) => AppBar(
-    backgroundColor: Theme.of(context).canvasColor,
-    elevation: 0,
-    iconTheme: IconThemeData(
-      color: AppColors.mainColor,
-    ),
-    centerTitle: true,
-  );
 
   static double buttonWidth(BuildContext context) {
     var screenWidth = MediaQuery.of(context).size.width;

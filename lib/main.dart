@@ -1,5 +1,5 @@
 import 'package:fitcards/app.dart';
-import 'package:fitcards/utilities/app_theme.dart';
+import 'package:fitcards/handlers/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 

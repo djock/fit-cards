@@ -1,6 +1,8 @@
-import 'package:fitcards/screens/game_screen.dart';
-import 'package:fitcards/screens/history_screen.dart';
+import 'package:fitcards/screens/cards_screen.dart';
+import 'package:fitcards/screens/feed_screen.dart';
+import 'package:fitcards/screens/workouts_log_screen.dart';
 import 'package:fitcards/utilities/app_colors.dart';
+import 'package:fitcards/utilities/app_localizations.dart';
 import 'package:fitcards/widgets/safe_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -11,8 +13,8 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final List<Widget> _screens = [
-    GameScreen(),
-    HistoryScreen()
+    FeedScreen(),
+    WorkoutsLogScreen()
   ];
 
   int _currentIndex = 0;
@@ -41,16 +43,17 @@ class _HomeScreenState extends State<HomeScreen> {
               unselectedItemColor: AppColors.mainColor,
               selectedItemColor: AppColors.mandarin,
               showUnselectedLabels: false,
+              showSelectedLabels: false,
               unselectedFontSize: 13,
               selectedFontSize: 13,
               items: [
                 BottomNavigationBarItem(
-                  icon: Icon(Icons.fitness_center, size: 30,),
-                  label: 'Train',
+                  icon: Icon(Icons.home, size: 32,),
+                  label: AppLocalizations.feed,
                 ),
                 BottomNavigationBarItem(
                   icon: Icon(Icons.calendar_today, size: 30,),
-                  label: 'Workouts Log',
+                  label: AppLocalizations.log,
                 ),
               ],
             ),

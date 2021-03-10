@@ -35,8 +35,16 @@ dev_dependencies:
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
+
+# The following section is specific to Flutter.
 # The following section is specific to Flutter.
 flutter:
+  fonts:
+    - family: digital
+      fonts:
+        - asset: fonts/digital-7.ttf
+        - asset: fonts/digital-7-italic.ttf
+          style: italic
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in

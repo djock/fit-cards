@@ -21,6 +21,7 @@ class TinderSwapCard extends StatefulWidget {
   CardSwipeCompleteCallback swipeCompleteCallback;
   CardDragUpdateCallback swipeUpdateCallback;
   CardController cardController;
+  bool isInteractive;
 
   @override
   _TinderSwapCardState createState() => _TinderSwapCardState();
@@ -45,6 +46,7 @@ class TinderSwapCard extends StatefulWidget {
         double minWidth,
         double minHeight,
         bool allowVerticalMovement = true,
+        bool isInteractive = false,
         this.cardController,
         this.swipeCompleteCallback,
         this.swipeUpdateCallback})
@@ -60,7 +62,8 @@ class TinderSwapCard extends StatefulWidget {
         this._swipeUp = swipeUp,
         this._swipeDown = swipeDown,
         assert(maxWidth > minWidth && maxHeight > minHeight),
-        this._allowVerticalMovement = allowVerticalMovement {
+        this._allowVerticalMovement = allowVerticalMovement,
+        this.isInteractive = isInteractive{
     double widthGap = maxWidth - minWidth;
     double heightGap = maxHeight - minHeight;
 
@@ -167,6 +170,8 @@ class _TinderSwapCardState extends State<TinderSwapCard>
     cards.add(new SizedBox.expand(
       child: new GestureDetector(
         onPanUpdate: (DragUpdateDetails details) {
+          if(widget.isInteractive) return;
+
           setState(() {
             if (widget._allowVerticalMovement == true) {
               frontCardAlign = new Alignment(

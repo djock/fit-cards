@@ -2,27 +2,27 @@ import 'dart:async';
 
 import 'package:fitcards/models/exercise_model.dart';
 import 'package:fitcards/utilities/app_colors.dart';
-import 'package:fitcards/utilities/app_state.dart';
-import 'package:fitcards/utilities/app_state.dart';
+import 'package:fitcards/handlers/app_state.dart';
 import 'package:fitcards/utilities/json_data_handler.dart';
 import 'package:fitcards/utilities/utils.dart';
+import 'package:fitcards/widgets/custom_app_bar.dart';
 import 'package:fitcards/widgets/custom_button.dart';
 import 'package:fitcards/widgets/safe_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class TrainScreen extends StatefulWidget {
+class NotUsedTrainScreen extends StatefulWidget {
   final int exerciseIndex;
   final int schemeIndex;
 
-  const TrainScreen({Key key, this.exerciseIndex, this.schemeIndex})
+  const NotUsedTrainScreen({Key key, this.exerciseIndex, this.schemeIndex})
       : super(key: key);
 
   @override
-  _TrainScreenState createState() => _TrainScreenState();
+  _NotUsedTrainScreenState createState() => _NotUsedTrainScreenState();
 }
 
-class _TrainScreenState extends State<TrainScreen> {
+class _NotUsedTrainScreenState extends State<NotUsedTrainScreen> {
   Stopwatch _stopwatch;
   Timer _timer;
 
@@ -61,7 +61,7 @@ class _TrainScreenState extends State<TrainScreen> {
   @override
   Widget build(BuildContext context) {
     return SafeScreen(
-      appBar: Utils.buildAppBar(context, ''),
+      appBar: CustomAppBar.buildEmpty(context),
       body: Scaffold(
         body: Padding(
           padding: const EdgeInsets.all(8.0),

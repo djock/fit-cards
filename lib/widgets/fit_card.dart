@@ -1,5 +1,4 @@
 import 'package:fitcards/models/base_model.dart';
-import 'package:fitcards/screens/game_screen.dart';
 import 'package:fitcards/utilities/app_colors.dart';
 import 'package:fitcards/widgets/flutter_tindercard.dart';
 import 'package:flutter/material.dart';
@@ -10,19 +9,21 @@ class FitCard extends StatelessWidget {
   final List<BaseModel> list;
   final Color color;
   final CardController cardController;
+  final bool isInteractive;
 
-  const FitCard({Key key, this.list, this.color, this.cardController, }) : super(key: key);
+  const FitCard({Key key, this.list, this.color, this.cardController, this.isInteractive, }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return TinderSwapCard(
+      isInteractive: isInteractive,
       swipeUp: true,
       swipeDown: true,
       orientation: AmassOrientation.RIGHT,
       totalNum: list.length,
       stackNum: 3,
       animDuration: 300,
-      swipeEdge: 4.0,
+      swipeEdge: 5.0,
       maxWidth: MediaQuery.of(context).size.width * 0.9,
       maxHeight: MediaQuery.of(context).size.width * 0.9,
       minWidth: MediaQuery.of(context).size.width * 0.8,
@@ -54,11 +55,11 @@ class FitCard extends StatelessWidget {
   Widget _buildCard(String text, Color color) {
     return Card(
       shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(0.0),
-//          side: BorderSide(
-//            color: Colors.black,
-//            width: 0.7,
-//          )
+          borderRadius: BorderRadius.circular(10.0),
+          side: BorderSide(
+            color: Colors.black.withOpacity(0.1),
+            width: 0.7,
+          )
       ),
       semanticContainer: true,
       clipBehavior: Clip.antiAliasWithSaveLayer,
