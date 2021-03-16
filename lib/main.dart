@@ -1,9 +1,12 @@
 import 'package:fitcards/app.dart';
 import 'package:fitcards/handlers/app_theme.dart';
+import 'package:fitcards/handlers/hive_handler.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-void main() {
+void main(){
+  HiveHandler.init();
+
   runApp(Main());
 }
 

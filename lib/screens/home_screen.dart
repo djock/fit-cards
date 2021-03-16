@@ -25,39 +25,39 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: null,
       body: Scaffold(
           body: _screens[_currentIndex],
-          bottomNavigationBar: Container(
-            decoration: BoxDecoration(
-              border: Border(
-                top: BorderSide(
-                  color: AppColors.mandarin,
-                  width: 0.2,
-                ),
-              ),
-            ),
-            child: BottomNavigationBar(
-              backgroundColor: AppColors.mainGrey,
-              type: BottomNavigationBarType.fixed,
-              elevation: 0,
-              onTap: _onTabTapped,
-              currentIndex: _currentIndex,
-              unselectedItemColor: AppColors.mainColor,
-              selectedItemColor: AppColors.mandarin,
-              showUnselectedLabels: false,
-              showSelectedLabels: false,
-              unselectedFontSize: 13,
-              selectedFontSize: 13,
-              items: [
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.home, size: 32,),
-                  label: AppLocalizations.feed,
-                ),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.calendar_today, size: 30,),
-                  label: AppLocalizations.log,
-                ),
-              ],
-            ),
-          )
+//          bottomNavigationBar: Container(
+//            decoration: BoxDecoration(
+//              border: Border(
+//                top: BorderSide(
+//                  color: AppColors.mandarin,
+//                  width: 0.2,
+//                ),
+//              ),
+//            ),
+//            child: BottomNavigationBar(
+//              backgroundColor: AppColors.mainGrey,
+//              type: BottomNavigationBarType.fixed,
+//              elevation: 0,
+//              onTap: _onTabTapped,
+//              currentIndex: _currentIndex,
+//              unselectedItemColor: AppColors.mainColor,
+//              selectedItemColor: AppColors.mandarin,
+//              showUnselectedLabels: false,
+//              showSelectedLabels: false,
+//              unselectedFontSize: 13,
+//              selectedFontSize: 13,
+//              items: [
+//                BottomNavigationBarItem(
+//                  icon: Icon(Icons.home, size: 32,),
+//                  label: AppLocalizations.feed,
+//                ),
+//                BottomNavigationBarItem(
+//                  icon: Icon(Icons.calendar_today, size: 30,),
+//                  label: AppLocalizations.log,
+//                ),
+//              ],
+//            ),
+//          )
       ),
     );
   }

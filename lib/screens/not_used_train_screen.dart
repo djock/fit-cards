@@ -16,6 +16,10 @@ class NotUsedTrainScreen extends StatefulWidget {
   final int schemeIndex;
 
   const NotUsedTrainScreen({Key key, this.exerciseIndex, this.schemeIndex})
+
+
+
+
       : super(key: key);
 
   @override

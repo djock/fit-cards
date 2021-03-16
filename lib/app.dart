@@ -1,3 +1,4 @@
+import 'package:fitcards/handlers/hive_handler.dart';
 import 'package:fitcards/screens/home_screen.dart';
 import 'package:fitcards/screens/loading_screen.dart';
 import 'package:fitcards/utilities/json_data_handler.dart';
@@ -20,6 +21,8 @@ class _AppState extends State<App> {
         })
       }
     });
+
+    HiveHandler.openWorkoutsLogBox();
 
     super.initState();
   }
