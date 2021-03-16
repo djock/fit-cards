@@ -2,9 +2,6 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 
-import 'app_colors.dart';
-import '../handlers/app_theme.dart';
-
 class Utils {
   static String formatTimeShort(int time) {
     if (time == null && time > 0) return '';

@@ -1,8 +1,5 @@
-import 'package:fitcards/screens/cards_screen.dart';
 import 'package:fitcards/screens/feed_screen.dart';
 import 'package:fitcards/screens/workouts_log_screen.dart';
-import 'package:fitcards/utilities/app_colors.dart';
-import 'package:fitcards/utilities/app_localizations.dart';
 import 'package:fitcards/widgets/safe_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -61,10 +58,10 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
     );
   }
-
-  _onTabTapped(newValue) {
-    setState(() {
-      _currentIndex = newValue;
-    });
-  }
+//
+//  _onTabTapped(newValue) {
+//    setState(() {
+//      _currentIndex = newValue;
+//    });
+//  }
 }

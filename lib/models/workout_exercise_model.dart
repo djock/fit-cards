@@ -1,7 +1,7 @@
 import 'package:hive/hive.dart';
 
 @HiveType()
-class WorkoutExercise extends HiveObject {
+class WorkoutExerciseModel extends HiveObject {
   @HiveField(0)
   int index;
 
@@ -11,6 +11,6 @@ class WorkoutExercise extends HiveObject {
   @HiveField(2)
   String scheme;
 
-  WorkoutExercise(this.index, this.exercise, this.scheme);
+  WorkoutExerciseModel(this.index, this.exercise, this.scheme);
 }
 

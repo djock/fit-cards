@@ -171,6 +171,7 @@ class _NotUsedTrainScreenState extends State<NotUsedTrainScreen> {
   Text _buildNextRound() {
     var nextExercise = JsonDataHandler.exercises[_exerciseIndex + 1];
     var nextScheme = JsonDataHandler.schemes[_schemeIndex + 1];
+    // ignore: unrelated_type_equality_checks
     var suffix = nextScheme.type == schemeType.reps ? ' for reps' : ' for time';
 
     return Text('Next: ${nextExercise.name} $suffix', style: _nextLabelStyle(), textAlign: TextAlign.center,);

@@ -8,7 +8,7 @@ List<Alignment> _cardAligns = new List();
 enum TriggerDirection { none, right, left, up, down }
 
 /// A Tinder-Like Widget.
-class TinderSwapCard extends StatefulWidget {
+class TinderSwapCard extends StatefulWidget { // ignore: must_be_immutable
   CardBuilder _cardBuilder;
   int _totalNum;
   int _stackNum;

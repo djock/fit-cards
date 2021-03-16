@@ -1,12 +1,24 @@
+import 'package:fitcards/handlers/hive_handler.dart';
 import 'package:fitcards/models/workout_exercise_model.dart';
-import 'package:fitcards/utilities/key_value_pair_model.dart';
-import 'package:flutter/foundation.dart';
-import 'package:hive/hive.dart';
+import 'package:fitcards/models/workout_log_model.dart';
 
 class AppState {
-  static int workoutIndex;
   static int trainingSessionMilliseconds = 0;
 
-  static List<WorkoutExercise> loggedExercisesList;
-  static List<WorkoutExercise> activeExercisesList;
+  static List<WorkoutExerciseModel> loggedExercisesList;
+  static List<WorkoutExerciseModel> activeExercisesList;
+
+  static List<WorkoutLogModel> loggedWorkouts;
+
+  static void logExercise() {
+    AppState.loggedExercisesList.addAll(AppState.activeExercisesList);
+    AppState.activeExercisesList.clear();
+    HiveHandler.saveExerciseToBox();
+  }
+
+  static void logWorkout(WorkoutLogModel workoutLogModel) {
+    loggedWorkouts.add(workoutLogModel);
+
+    HiveHandler.saveWorkoutToBox();
+  }
 }

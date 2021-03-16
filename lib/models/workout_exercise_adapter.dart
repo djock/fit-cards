@@ -1,17 +1,17 @@
 import 'package:fitcards/models/workout_exercise_model.dart';
 import 'package:hive/hive.dart';
 
-class WorkoutExerciseModelAdapter extends TypeAdapter<WorkoutExercise> {
+class WorkoutExerciseModelAdapter extends TypeAdapter<WorkoutExerciseModel> {
   @override
   final typeId = 0;
 
   @override
-  WorkoutExercise read(BinaryReader reader) {
+  WorkoutExerciseModel read(BinaryReader reader) {
     var numOfFields = reader.readByte();
     var fields = <int, dynamic>{
       for (var i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return WorkoutExercise(
+    return WorkoutExerciseModel(
       fields[0] as int,
       fields[1] as String,
       fields[2] as String,
@@ -19,7 +19,7 @@ class WorkoutExerciseModelAdapter extends TypeAdapter<WorkoutExercise> {
   }
 
   @override
-  void write(BinaryWriter writer, WorkoutExercise obj) {
+  void write(BinaryWriter writer, WorkoutExerciseModel obj) {
     writer
       ..writeByte(3)
       ..writeByte(0)

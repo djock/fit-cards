@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:fitcards/handlers/app_state.dart';
 import 'package:fitcards/utilities/app_colors.dart';
 import 'package:fitcards/utilities/utils.dart';
 import 'package:flutter/material.dart';
@@ -47,6 +48,8 @@ class _CardsTimerState extends State<CardsTimer> {
   }
 
   Widget _buildTimer() {
+    AppState.trainingSessionMilliseconds = _stopwatch.elapsedMilliseconds;
+
     return Padding(
       padding: const EdgeInsets.only(top: 0),
       child: Container(
