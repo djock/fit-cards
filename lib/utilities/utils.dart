@@ -60,12 +60,6 @@ class Utils {
     var minutes = ((secs % 3600) ~/ 60).toString().padLeft(2, '0');
     var seconds = (secs % 60).toString().padLeft(2, '0');
 
-    debugPrint(hours);
-
-    var hoursString = hours != '00' ? '${hours}h' : '';
-    var minutesString = minutes != '00' ? '${minutes}m' : '';
-    var secondsString = seconds != '00' ? '${seconds}s' : '';
-
-    return "$hoursString $minutesString $secondsString";
+    return "$hours:$minutes:$seconds";
   }
 }

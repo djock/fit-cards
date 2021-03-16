@@ -46,7 +46,7 @@ class HiveHandler {
   }
 
   static void loadLoggedWorkouts() {
-    var _box = exercisesBox.get('workouts');
+    var _box = workoutsBox.get('workouts');
 
     for (var item in _box) {
       AppState.loggedWorkouts.add(item);
