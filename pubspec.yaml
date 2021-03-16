@@ -29,6 +29,7 @@ dependencies:
   hive_flutter: 0.3.1
   path_provider: 1.6.27
   html_unescape: ^1.0.2
+  intl: 0.16.0
 
 dev_dependencies:
   flutter_test:
