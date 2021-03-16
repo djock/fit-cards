@@ -4,7 +4,7 @@ import 'package:fitcards/handlers/app_state.dart';
 import 'package:fitcards/handlers/hive_handler.dart';
 import 'package:fitcards/models/exercise_model.dart';
 import 'package:fitcards/models/scheme_model.dart';
-import 'package:fitcards/models/workout_log_model.dart';
+import 'package:fitcards/models/workout_exercise_model.dart';
 import 'package:fitcards/utilities/app_colors.dart';
 import 'package:fitcards/utilities/json_data_handler.dart';
 import 'package:fitcards/utilities/key_value_pair_model.dart';
@@ -33,8 +33,6 @@ class _CardsScreenState extends State<CardsScreen>
 
   CardController _exerciseController = new CardController();
   CardController _schemeController = new CardController();
-
-  List<WorkoutLogModel> _currentWorkoutLog = <WorkoutLogModel>[];
 
   bool _isActive = false;
 
@@ -96,6 +94,9 @@ class _CardsScreenState extends State<CardsScreen>
     return CustomButton(
       buttonColor: AppColors.mandarin,
       onPressed: () {
+        var currentExercise = new KeyValuePair(JsonDataHandler.exercises[_exerciseController.index].name, JsonDataHandler.schemes[_schemeController.index].name);
+        AppState.activeExercisesList.add(new WorkoutExercise(AppState.workoutIndex, currentExercise.key, currentExercise.value));
+
         var exerciseRandom = new Random();
         if (exerciseRandom.nextBool()) {
           _exerciseController.triggerLeft();
@@ -104,8 +105,6 @@ class _CardsScreenState extends State<CardsScreen>
           _exerciseController.triggerRight();
           _schemeController.triggerRight();
         }
-
-        AppState.activeWorkoutExercises.add(new KeyValuePair(JsonDataHandler.exercises[_exerciseController.index].name, JsonDataHandler.schemes[_schemeController.index].name));
       },
       textColor: AppColors.mainGrey,
       isOutline: false,
@@ -120,14 +119,13 @@ class _CardsScreenState extends State<CardsScreen>
       onPressed: () {
 
         if(_isActive) {
-          AppState.activeWorkoutExercises.add(new KeyValuePair(JsonDataHandler.exercises[_exerciseController.index].name, JsonDataHandler.schemes[_schemeController.index].name));
-          AppState.workoutsLog.add(new WorkoutLogModel(1, AppState.activeWorkoutExercises));
+          var currentExercise = new KeyValuePair(JsonDataHandler.exercises[_exerciseController.index].name, JsonDataHandler.schemes[_schemeController.index].name);
+          AppState.activeExercisesList.add(new WorkoutExercise(AppState.workoutIndex, currentExercise.key, currentExercise.value));
 
-          HiveHandler.saveWorkoutsLogToBox();
+          HiveHandler.logExercises();
+          HiveHandler.logWorkoutIndex();
 
-          AppState.activeWorkoutExercises.clear();
-
-          debugPrint('STOP');
+          debugPrint('STOP Workout');
         }
 
         setState(() {

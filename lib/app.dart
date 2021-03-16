@@ -22,7 +22,7 @@ class _AppState extends State<App> {
       }
     });
 
-    HiveHandler.openWorkoutsLogBox();
+    HiveHandler.openHiveBoxes();
 
     super.initState();
   }

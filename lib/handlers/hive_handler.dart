@@ -1,44 +1,63 @@
 import 'package:fitcards/handlers/app_state.dart';
-import 'package:fitcards/models/workout_log_adapter.dart';
-import 'package:fitcards/models/workout_log_model.dart';
+import 'package:fitcards/models/workout_exercise_adapter.dart';
+import 'package:fitcards/models/workout_exercise_model.dart';
 import 'package:fitcards/utilities/key_value_pair_model.dart';
 import 'package:flutter/foundation.dart';
 import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart';
 
 class HiveHandler {
+  static Box workoutsLogBox;
+  static Box workoutsIndexBox;
+
   static void init() {
-    Hive.registerAdapter(WorkoutLogModelAdapter());
-    Hive.registerAdapter(KeyValuePairAdapter());
+    Hive.registerAdapter(WorkoutExerciseModelAdapter());
   }
 
-  static Future<bool> openWorkoutsLogBox() async {
+  static Future<bool> openHiveBoxes() async {
     var dir = await getApplicationDocumentsDirectory();
     Hive.init(dir.path);
-    AppState.workoutsLogBox = await Hive.openBox('workoutsLog');
-    AppState.workoutsLog = <WorkoutLogModel>[];
 
-    if (AppState.workoutsLogBox.isEmpty) {
-      debugPrint('nothing yet');
-      return false;
-    } else {
-      loadWorkoutsLog();
-      return true;
+    workoutsIndexBox = await Hive.openBox('workoutIndex');
+    AppState.workoutIndex = 0;
+
+    if (workoutsIndexBox.isNotEmpty) {
+      loadWorkoutIndex();
     }
+
+    workoutsLogBox = await Hive.openBox('workoutsLog');
+    AppState.activeExercisesList = <WorkoutExercise>[];
+    AppState.loggedExercisesList = <WorkoutExercise>[];
+
+    if (workoutsLogBox.isNotEmpty) {
+      loadWorkoutsLog();
+    }
+
+    return true;
   }
 
   static void loadWorkoutsLog() {
-    var _box = AppState.workoutsLogBox.get('workoutsLog');
+    var _box = workoutsLogBox.get('workoutsLog');
 
     for (var item in _box) {
-      AppState.workoutsLog.add(item);
-    }
-
-    for(var item in AppState.workoutsLog) {
+      AppState.loggedExercisesList.add(item);
     }
   }
 
-  static void saveWorkoutsLogToBox() {
-    AppState.workoutsLogBox.put('workoutsLog', AppState.workoutsLog);
+  static void loadWorkoutIndex() {
+    var existingIndex = workoutsIndexBox.get('workoutIndex');
+    AppState.workoutIndex = existingIndex + 1;
+  }
+
+  static void logExercises() {
+    AppState.loggedExercisesList.addAll(AppState.activeExercisesList);
+    AppState.activeExercisesList.clear();
+
+    workoutsLogBox.put('workoutsLog', AppState.loggedExercisesList);
+  }
+
+  static void logWorkoutIndex() {
+    workoutsIndexBox.put('workoutIndex', AppState.workoutIndex);
+    AppState.workoutIndex++;
   }
 }

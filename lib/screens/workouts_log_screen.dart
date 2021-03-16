@@ -7,10 +7,8 @@ class WorkoutsLogScreen extends StatelessWidget {
   List<Widget> _buildWorkoutsLog() {
     List<Widget> _tempList = <Widget>[];
 
-    for (var log in AppState.workoutsLog) {
-      for (var entry in log.entries) {
-        _tempList.add(Text('[${log.index}] ${entry.key} | ${entry.value}'));
-      }
+    for (var log in AppState.loggedExercisesList) {
+      _tempList.add(Text('[${log.index}] ${log.exercise} | ${log.scheme}'));
     }
 
     return _tempList;

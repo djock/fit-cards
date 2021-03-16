@@ -27,4 +27,9 @@ class JsonDataHandler {
 
     return true;
   }
+
+  static void shuffleJson() {
+    schemes.shuffle();
+    exercises.shuffle();
+  }
 }
