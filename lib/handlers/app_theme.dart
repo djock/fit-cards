@@ -65,6 +65,10 @@ class AppTheme {
     return _textStyle(12, FontWeight.normal, AppColors.mainColor);
   }
 
+  static TextStyle customLightStyle(FontWeight fontWeight, double fontSize) {
+    return _textStyle(fontSize, fontWeight, AppColors.textColor);
+  }
+
   static TextStyle _textStyle(double fontSize, FontWeight fontWeight, Color color){
     return TextStyle(
         color: color,

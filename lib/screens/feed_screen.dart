@@ -1,5 +1,4 @@
 import 'package:fitcards/handlers/app_state_handler.dart';
-import 'package:fitcards/screens/cards_screen.dart';
 import 'package:fitcards/screens/tutorial_cards_screen.dart';
 import 'package:fitcards/screens/workouts_log_screen.dart';
 import 'package:fitcards/utilities/app_colors.dart';

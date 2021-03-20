@@ -21,6 +21,7 @@ enum workoutState {
   countdown,
   active,
   idle,
+  finish,
 }
 
 class CardsScreen extends StatefulWidget {

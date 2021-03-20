@@ -7,6 +7,9 @@ import 'package:fitcards/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 
 class TimerAppBar extends StatefulWidget with PreferredSizeWidget{
+
+  const TimerAppBar({Key key,}) : super(key: key);
+
   @override
   _TimerAppBarState createState() => _TimerAppBarState();
 
