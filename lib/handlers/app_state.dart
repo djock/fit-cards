@@ -13,4 +13,6 @@ class AppState {
 
   static List<ExerciseModel> exercises = new List<ExerciseModel>();
   static List<SchemeModel> schemes = new List<SchemeModel>();
+
+  static bool tutorialFinished;
 }

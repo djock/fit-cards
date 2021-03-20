@@ -4,8 +4,7 @@ import 'dart:math';
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:fitcards/handlers/app_state.dart';
 import 'package:fitcards/handlers/app_theme.dart';
-import 'package:fitcards/models/exercise_model.dart';
-import 'package:fitcards/models/scheme_model.dart';
+import 'package:fitcards/handlers/user_preferences_handler.dart';
 import 'package:fitcards/models/workout_exercise_model.dart';
 import 'package:fitcards/utilities/app_colors.dart';
 import 'package:fitcards/utilities/app_localizations.dart';
@@ -73,14 +72,14 @@ class _TutorialCardsScreenState extends State<TutorialCardsScreen>
 
   @override
   Widget build(BuildContext context) {
-
       return _state == workoutState.finish ?
       SafeScreen(
         appBar: null,
         body: Container(
           child: InkWell(
-            onTap: () => {
-              Navigator.pop(context)
+            onTap: () {
+              _onCloseTutorial();
+              Navigator.pop(context);
             },
             child: Container(
               color: AppColors.mandarin,
@@ -385,6 +384,7 @@ class _TutorialCardsScreenState extends State<TutorialCardsScreen>
         }
       },
       onSkip: () {
+        UserPreferencesHandler.markTutorialAsFinished();
       },
       onClickOverlay: (target) {
         _tutorialCoachMark.next();
@@ -405,10 +405,12 @@ class _TutorialCardsScreenState extends State<TutorialCardsScreen>
       onClickTarget: (target) {
         _tutorialCoachMark.next();
         if (target.identify == 'stopButton') {
+          _onCloseTutorial();
           _onStopWorkout();
         }
       },
       onSkip: () {
+        _onCloseTutorial();
       },
       onClickOverlay: (target) {
         _tutorialCoachMark.next();
@@ -461,5 +463,9 @@ class _TutorialCardsScreenState extends State<TutorialCardsScreen>
       shape: shape,
       radius: 5,
     );
+  }
+
+  void _onCloseTutorial() {
+    UserPreferencesHandler.markTutorialAsFinished();
   }
 }

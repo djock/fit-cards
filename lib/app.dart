@@ -4,6 +4,8 @@ import 'package:fitcards/screens/loading_screen.dart';
 import 'package:fitcards/utilities/json_data_handler.dart';
 import 'package:flutter/material.dart';
 
+import 'handlers/user_preferences_handler.dart';
+
 class App extends StatefulWidget {
   @override
   _AppState createState() => _AppState();
@@ -23,6 +25,7 @@ class _AppState extends State<App> {
     });
 
     HiveHandler.openHiveBoxes();
+    UserPreferencesHandler.initSharedPreferences();
 
     super.initState();
   }

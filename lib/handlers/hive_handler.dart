@@ -9,6 +9,7 @@ import 'package:path_provider/path_provider.dart';
 class HiveHandler {
   static Box exercisesBox;
   static Box workoutsBox;
+  static Box tutorialBox;
 
   static void init() {
     Hive.registerAdapter(WorkoutExerciseModelAdapter());
