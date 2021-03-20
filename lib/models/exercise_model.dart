@@ -1,18 +1,15 @@
 import 'package:fitcards/models/base_model.dart';
 
-enum schemeType {
-  reps,
-  time,
-}
-
 class ExerciseModel extends BaseModel {
+  final int points;
 
-  ExerciseModel({name, id}) : super(name, id);
+  ExerciseModel({name, id, this.points}) : super(name, id);
 
   factory ExerciseModel.fromJson(Map<String, dynamic> json) {
     var baseModel = BaseModel.fromJson(json);
+    var points = json['points'];
 
-    return ExerciseModel(name: baseModel.name, id: baseModel.id);
+    return ExerciseModel(name: baseModel.name, id: baseModel.id, points: points);
   }
 
   static List<ExerciseModel> fromJsonList(json) {

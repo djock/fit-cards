@@ -1,7 +1,13 @@
 import 'package:fitcards/models/base_model.dart';
+import 'package:fitcards/models/exercise_model.dart';
 import 'package:fitcards/utilities/app_colors.dart';
 import 'package:fitcards/widgets/flutter_tindercard.dart';
 import 'package:flutter/material.dart';
+
+enum cardType {
+  exercise,
+  scheme
+}
 
 typedef void BaseModelCallBack(BaseModel val);
 
@@ -9,14 +15,15 @@ class FitCard extends StatelessWidget {
   final List<BaseModel> list;
   final Color color;
   final CardController cardController;
-  final bool isInteractive;
+  final bool isBlocked;
+  final cardType type;
 
-  const FitCard({Key key, this.list, this.color, this.cardController, this.isInteractive, }) : super(key: key);
+  const FitCard({Key key, this.list, this.color, this.cardController, this.isBlocked, this.type, }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return TinderSwapCard(
-      isInteractive: isInteractive,
+      isBlocked: true,
       swipeUp: true,
       swipeDown: true,
       orientation: AmassOrientation.RIGHT,
@@ -33,7 +40,13 @@ class FitCard extends StatelessWidget {
           return _buildRefreshCard(color);
         }
         cardController.setIndex(index);
-        return _buildCard(list[index].name, color);
+
+        if(type == cardType.exercise) {
+          var exerciseModel = list[index] as ExerciseModel;
+          return _buildCard(exerciseModel.name, color, points: exerciseModel.points);
+        } else {
+          return _buildCard(list[index].name, color);
+        }
       },
       cardController: cardController,
       swipeUpdateCallback:
@@ -52,7 +65,7 @@ class FitCard extends StatelessWidget {
     );
   }
 
-  Widget _buildCard(String text, Color color) {
+  Widget _buildCard(String text, Color color, {int points = 0}) {
     return Card(
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10.0),
@@ -64,19 +77,37 @@ class FitCard extends StatelessWidget {
       semanticContainer: true,
       clipBehavior: Clip.antiAliasWithSaveLayer,
       color: color,
-      child: Align(
-        alignment: Alignment.center,
-        child: Padding(
-          padding: const EdgeInsets.all(6.0),
-          child: Text(
-            '$text',
-            style: TextStyle(
-                fontSize: 45,
-                fontWeight: FontWeight.normal,
-                color: AppColors.mainColor),
-            textAlign: TextAlign.center,
+      child: Stack(
+        children: [
+          Align(
+            alignment: Alignment.center,
+            child: Padding(
+              padding: const EdgeInsets.all(6.0),
+              child: Text(
+                '$text',
+                style: TextStyle(
+                    fontSize: 45,
+                    fontWeight: FontWeight.normal,
+                    color: AppColors.mainColor),
+                textAlign: TextAlign.center,
+              ),
+            ),
           ),
-        ),
+          type == cardType.exercise && points != 0 ? Align(
+            alignment: Alignment.topRight,
+            child: Padding(
+              padding: const EdgeInsets.all(12.0),
+              child: Text(
+                '+$points',
+                style: TextStyle(
+                    fontSize: 25,
+                    fontWeight: FontWeight.normal,
+                    color: AppColors.mainColor),
+                textAlign: TextAlign.center,
+              ),
+            ),
+          ) : SizedBox(height: 0,)
+        ],
       ),
     );
   }

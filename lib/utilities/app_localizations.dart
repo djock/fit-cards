@@ -5,4 +5,7 @@ class AppLocalizations {
   static String start = 'Start';
   static String stop = 'Stop';
   static String next = 'Next';
+  static String startAWorkout = 'Start A Workout';
+  static String workoutsLog = 'Workouts Log';
+
 }

@@ -19,6 +19,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return SafeScreen(
+      topSafe: false,
       appBar: null,
       body: Scaffold(
           body: _screens[_currentIndex],

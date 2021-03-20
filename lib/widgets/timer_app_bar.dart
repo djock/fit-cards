@@ -3,14 +3,18 @@ import 'dart:async';
 import 'package:fitcards/handlers/app_state.dart';
 import 'package:fitcards/utilities/app_colors.dart';
 import 'package:fitcards/utilities/utils.dart';
+import 'package:fitcards/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 
-class CardsTimer extends StatefulWidget {
+class TimerAppBar extends StatefulWidget with PreferredSizeWidget{
   @override
-  _CardsTimerState createState() => _CardsTimerState();
+  _TimerAppBarState createState() => _TimerAppBarState();
+
+  @override
+  Size get preferredSize => Size.fromHeight(kToolbarHeight);
 }
 
-class _CardsTimerState extends State<CardsTimer> {
+class _TimerAppBarState extends State<TimerAppBar> {
   Stopwatch _stopwatch;
   Timer _timer;
 
@@ -44,12 +48,11 @@ class _CardsTimerState extends State<CardsTimer> {
 
   @override
   Widget build(BuildContext context) {
-    return _buildTimer();
+    AppState.trainingSessionMilliseconds = _stopwatch.elapsedMilliseconds;
+    return CustomAppBar.buildTimer(_stopwatch.elapsedMilliseconds);
   }
 
   Widget _buildTimer() {
-    AppState.trainingSessionMilliseconds = _stopwatch.elapsedMilliseconds;
-
     return Padding(
       padding: const EdgeInsets.only(top: 0),
       child: Container(

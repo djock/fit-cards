@@ -16,19 +16,18 @@ import 'package:fitcards/widgets/safe_screen.dart';
 import 'package:fitcards/widgets/timer_app_bar.dart';
 import 'package:flutter/material.dart';
 
-
 enum workoutState {
   countdown,
   active,
   idle,
 }
 
-class CardsScreen extends StatefulWidget {
+class TutorialCardsScreen extends StatefulWidget {
   @override
-  _CardsScreenState createState() => _CardsScreenState();
+  _TutorialCardsScreenState createState() => _TutorialCardsScreenState();
 }
 
-class _CardsScreenState extends State<CardsScreen>
+class _TutorialCardsScreenState extends State<TutorialCardsScreen>
     with TickerProviderStateMixin {
   CardController _exerciseController = new CardController();
   CardController _schemeController = new CardController();
@@ -43,7 +42,7 @@ class _CardsScreenState extends State<CardsScreen>
       appBar: _state == workoutState.active
           ? TimerAppBar()
           : CustomAppBar.buildWithActions(context,
-              [IconButton(icon: Icon(Icons.graphic_eq), onPressed: null)]),
+          [IconButton(icon: Icon(Icons.graphic_eq), onPressed: null)], text: 'Tutorial'),
       body: Stack(
         children: [
           Container(
@@ -88,8 +87,8 @@ class _CardsScreenState extends State<CardsScreen>
                       _state == workoutState.active
                           ? _buildNextButton()
                           : SizedBox(
-                              width: 0,
-                            )
+                        width: 0,
+                      )
                     ],
                   ),
                 ),
@@ -127,8 +126,8 @@ class _CardsScreenState extends State<CardsScreen>
                   print('Countdown Started');
                 },
                 onComplete: () {
-                    changeState(workoutState.active);
-                    _onSwipeCards();
+                  changeState(workoutState.active);
+                  _onSwipeCards();
                   print('Countdown Ended');
                 },
               ),

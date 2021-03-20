@@ -1,4 +1,6 @@
+import 'package:fitcards/handlers/app_state_handler.dart';
 import 'package:fitcards/screens/cards_screen.dart';
+import 'package:fitcards/screens/tutorial_cards_screen.dart';
 import 'package:fitcards/screens/workouts_log_screen.dart';
 import 'package:fitcards/utilities/app_colors.dart';
 import 'package:fitcards/utilities/app_localizations.dart';
@@ -11,7 +13,10 @@ class FeedScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeScreen(
-      appBar: CustomAppBar.buildFeedAppBar(context, AppLocalizations.appName),
+      topSafe: false,
+      appBar: CustomAppBar.buildWithActions(
+          context, [IconButton(icon: Icon(Icons.settings), onPressed: null)],
+          text: AppLocalizations.appName),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Center(
@@ -22,25 +27,31 @@ class FeedScreen extends StatelessWidget {
               CustomButton(
                 buttonColor: AppColors.mandarin,
                 onPressed: () {
+                  AppStateHandler.shuffleJson();
+
                   Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => CardsScreen()));
+                      MaterialPageRoute(builder: (context) => TutorialCardsScreen()));
                 },
                 textColor: AppColors.mainGrey,
                 isOutline: false,
                 isRequest: false,
-                buttonText: 'Start A Workout',
+                buttonText: AppLocalizations.startAWorkout,
               ),
-              SizedBox(height: 20,),
+              SizedBox(
+                height: 20,
+              ),
               CustomButton(
                 buttonColor: AppColors.mandarin,
                 onPressed: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => WorkoutsLogScreen()));
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => WorkoutsLogScreen()));
                 },
                 textColor: AppColors.mainGrey,
                 isOutline: false,
                 isRequest: false,
-                buttonText: 'Workouts Log',
+                buttonText: AppLocalizations.workoutsLog,
               )
             ],
           ),

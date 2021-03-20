@@ -1,6 +1,7 @@
 import 'package:fitcards/handlers/app_state.dart';
+import 'package:fitcards/utilities/app_localizations.dart';
 import 'package:fitcards/widgets/custom_app_bar.dart';
-import 'package:fitcards/widgets/exercise_widget.dart';
+import 'package:fitcards/widgets/list_item.dart';
 import 'package:fitcards/widgets/safe_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -33,7 +34,8 @@ class WorkoutLogDetailsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     
     return SafeScreen(
-      appBar: CustomAppBar.buildNormal(context, 'Workouts Log'),
+      topSafe: false,
+      appBar: CustomAppBar.buildNormal(context, AppLocalizations.workoutsLog),
       body: SingleChildScrollView(
           child: Container(
             padding: EdgeInsets.symmetric(horizontal: 10),

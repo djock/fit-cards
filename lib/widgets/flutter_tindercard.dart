@@ -1,6 +1,7 @@
 
-import 'package:flutter/material.dart';
 import 'dart:math';
+
+import 'package:flutter/material.dart';
 
 List<Size> _cardSizes = new List();
 List<Alignment> _cardAligns = new List();
@@ -21,7 +22,7 @@ class TinderSwapCard extends StatefulWidget { // ignore: must_be_immutable
   CardSwipeCompleteCallback swipeCompleteCallback;
   CardDragUpdateCallback swipeUpdateCallback;
   CardController cardController;
-  bool isInteractive;
+  bool isBlocked;
 
   @override
   _TinderSwapCardState createState() => _TinderSwapCardState();
@@ -46,7 +47,7 @@ class TinderSwapCard extends StatefulWidget { // ignore: must_be_immutable
         double minWidth,
         double minHeight,
         bool allowVerticalMovement = true,
-        bool isInteractive = false,
+        bool isBlocked = false,
         this.cardController,
         this.swipeCompleteCallback,
         this.swipeUpdateCallback})
@@ -63,7 +64,7 @@ class TinderSwapCard extends StatefulWidget { // ignore: must_be_immutable
         this._swipeDown = swipeDown,
         assert(maxWidth > minWidth && maxHeight > minHeight),
         this._allowVerticalMovement = allowVerticalMovement,
-        this.isInteractive = isInteractive{
+        this.isBlocked = isBlocked{
     double widthGap = maxWidth - minWidth;
     double heightGap = maxHeight - minHeight;
 
@@ -170,7 +171,7 @@ class _TinderSwapCardState extends State<TinderSwapCard>
     cards.add(new SizedBox.expand(
       child: new GestureDetector(
         onPanUpdate: (DragUpdateDetails details) {
-          if(widget.isInteractive) return;
+          if(widget.isBlocked) return;
 
           setState(() {
             if (widget._allowVerticalMovement == true) {
