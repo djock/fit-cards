@@ -104,8 +104,13 @@ class _CardsScreenState extends State<CardsScreen>
                           list: AppState.exercises,
                           color: Colors.white,
                           cardController: _exerciseController,
-                          isBlocked: false,
+                          isBlocked: _state == workoutState.active ? false : true,
                           type: cardType.exercise,
+                          callback: () {
+                            if(_state == workoutState.active) {
+                              _schemeController.triggerLeft();
+                            }
+                          },
                         ),
                       ),
                       SizedBox(
@@ -120,6 +125,9 @@ class _CardsScreenState extends State<CardsScreen>
                           cardController: _schemeController,
                           isBlocked: true,
                           type: cardType.scheme,
+                          callback: () {
+
+                          },
                         ),
                       ),
                       SizedBox(
@@ -133,11 +141,11 @@ class _CardsScreenState extends State<CardsScreen>
                               : MainAxisAlignment.center,
                           children: [
                             _buildStartButton(),
-                            _state == workoutState.active
-                                ? _buildNextButton()
-                                : SizedBox(
-                                    width: 0,
-                                  )
+//                            _state == workoutState.active
+//                                ? _buildNextButton()
+//                                : SizedBox(
+//                                    width: 0,
+//                                  )
                           ],
                         ),
                       ),
@@ -151,7 +159,7 @@ class _CardsScreenState extends State<CardsScreen>
                           padding: const EdgeInsets.only(bottom: 80),
                           child: CircularCountDownTimer(
                             key: _startCountDownKey,
-                            duration: 7,
+                            duration: 5,
                             initialDuration: 0,
                             controller: _countDownController,
                             width: MediaQuery.of(context).size.width / 3,
@@ -193,27 +201,27 @@ class _CardsScreenState extends State<CardsScreen>
           );
   }
 
-  Widget _buildNextButton() {
-    return CustomButton(
-      key: _nextKey,
-      buttonColor: AppColors.accentColor,
-      onPressed: () {
-        var currentExercise = new KeyValuePair(
-            AppState.exercises[_exerciseController.index].name,
-            AppState.schemes[_schemeController.index].name);
-        AppState.activeExercisesList.add(new WorkoutExerciseModel(
-            AppState.loggedWorkouts.length,
-            currentExercise.key,
-            currentExercise.value));
-
-        _onSwipeCards();
-      },
-      textColor: AppColors.canvasColorLight,
-      isOutline: false,
-      isRequest: false,
-      buttonText: AppLocalizations.next,
-    );
-  }
+//  Widget _buildNextButton() {
+//    return CustomButton(
+//      key: _nextKey,
+//      buttonColor: AppColors.accentColor,
+//      onPressed: () {
+//        var currentExercise = new KeyValuePair(
+//            AppState.exercises[_exerciseController.index].name,
+//            AppState.schemes[_schemeController.index].name);
+//        AppState.activeExercisesList.add(new WorkoutExerciseModel(
+//            AppState.loggedWorkouts.length,
+//            currentExercise.key,
+//            currentExercise.value));
+//
+//        _onSwipeCards();
+//      },
+//      textColor: AppColors.canvasColorLight,
+//      isOutline: false,
+//      isRequest: false,
+//      buttonText: AppLocalizations.next,
+//    );
+//  }
 
   Widget _buildStartButton() {
     return CustomButton(
@@ -312,7 +320,7 @@ class _CardsScreenState extends State<CardsScreen>
   }
 
   void _showActiveTutorial() {
-    if (!AppState.tutorialActive) AppState.tutorialActive = true;
+    if (!AppState.tutorialActive) AppState.tutorialActive = false;
 
     _tutorialCoachMark = TutorialCoachMark(
       context,
@@ -327,6 +335,10 @@ class _CardsScreenState extends State<CardsScreen>
         if (target.identify == 'stopButton') {
           _onEndWorkout();
           _onStopWorkout();
+        }
+
+        if(target.identify == 'swipeCard') {
+          _exerciseController.triggerLeft();
         }
       },
       onSkip: () {
@@ -365,9 +377,9 @@ class _CardsScreenState extends State<CardsScreen>
     );
 
     _activeTargets.add(
-      _targetFocusBuilder(_nextKey, ContentAlign.top, ShapeLightFocus.RRect, '',
-          AppLocalizations.tutorialNextCardButtonDescription,
-          textAlign: TextAlign.right),
+      _targetFocusBuilder(_exerciseKey, ContentAlign.bottom, ShapeLightFocus.RRect, '',
+          AppLocalizations.tutorialSwipeExerciseCard,
+          identity: 'swipeCard'),
     );
 
     _activeTargets.add(

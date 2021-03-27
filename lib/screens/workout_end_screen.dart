@@ -26,7 +26,7 @@ class WorkoutEndScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    AppLocalizations.tutorialFinishDescription,
+                    AppLocalizations.workoutFinished,
                     textAlign: TextAlign.center,
                     style:
                     AppTheme.customText(FontWeight.normal, 24),

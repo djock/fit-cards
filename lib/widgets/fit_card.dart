@@ -1,6 +1,7 @@
 import 'package:fitcards/models/base_model.dart';
 import 'package:fitcards/models/exercise_model.dart';
 import 'package:fitcards/utilities/app_colors.dart';
+import 'package:fitcards/utilities/app_localizations.dart';
 import 'package:fitcards/widgets/flutter_tindercard.dart';
 import 'package:flutter/material.dart';
 
@@ -17,13 +18,14 @@ class FitCard extends StatelessWidget {
   final CardController cardController;
   final bool isBlocked;
   final cardType type;
+  final Function callback;
 
-  const FitCard({Key key, this.list, this.color, this.cardController, this.isBlocked, this.type, }) : super(key: key);
+  const FitCard({Key key, this.list, this.color, this.cardController, this.isBlocked, this.type, this.callback, }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return TinderSwapCard(
-      isBlocked: true,
+      isBlocked: isBlocked,
       swipeUp: true,
       swipeDown: true,
       orientation: AmassOrientation.RIGHT,
@@ -58,8 +60,8 @@ class FitCard extends StatelessWidget {
       swipeCompleteCallback:
           (CardSwipeOrientation orientation, int index) {
         /// Get orientation & index of swiped card!
-        if (orientation == CardSwipeOrientation.LEFT) {
-        } else if (orientation == CardSwipeOrientation.RIGHT) {
+        if (orientation == CardSwipeOrientation.LEFT || orientation == CardSwipeOrientation.RIGHT) {
+          callback();
         }
       },
     );
@@ -113,26 +115,31 @@ class FitCard extends StatelessWidget {
   }
 
   Widget _buildRefreshCard(Color color) {
-    return Card(
-      shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(0.0),
+    return InkWell(
+      onTap: () {
+
+      },
+      child: Card(
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(0.0),
 //          side: BorderSide(
 //            color: Colors.black,
 //            width: 0.7,
 //          )
-      ),
-      semanticContainer: true,
-      clipBehavior: Clip.antiAliasWithSaveLayer,
-      color: color,
-      child: Align(
-        alignment: Alignment.center,
-        child: Text(
-          'REFRESH',
-          style: TextStyle(
-              fontSize: 70,
-              fontWeight: FontWeight.bold,
-              color: AppColors.primaryColorLight),
-          textAlign: TextAlign.center,
+        ),
+        semanticContainer: true,
+        clipBehavior: Clip.antiAliasWithSaveLayer,
+        color: color,
+        child: Align(
+          alignment: Alignment.center,
+          child: Text(
+            AppLocalizations.refresh,
+            style: TextStyle(
+                fontSize: 70,
+                fontWeight: FontWeight.bold,
+                color: AppColors.primaryColorLight),
+            textAlign: TextAlign.center,
+          ),
         ),
       ),
     );
