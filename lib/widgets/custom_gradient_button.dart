@@ -1,5 +1,6 @@
 import 'package:fitcards/handlers/app_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class CustomGradientButton extends StatelessWidget {
   final Function callback;
@@ -15,7 +16,7 @@ class CustomGradientButton extends StatelessWidget {
       },
       child: Container(
         width: MediaQuery.of(context).size.width,
-        height: 100,
+        height: 75,
         margin: EdgeInsets.only(left: 10, right: 10, top: 13),
         padding: EdgeInsets.all(20.0),
         clipBehavior: Clip.antiAliasWithSaveLayer,
@@ -24,14 +25,14 @@ class CustomGradientButton extends StatelessWidget {
             gradient: LinearGradient(
                 begin: Alignment.bottomLeft,
                 end: Alignment.topRight,
-                colors: [Colors.blue[900], Colors.redAccent])),
+                colors: [Theme.of(Get.context).accentColor, Theme.of(Get.context).accentColor])),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
                 text,
-                style: AppTheme.headerLightStyle()
+                style: AppTheme.textWhiteBold24()
             ),
           ],
         ),

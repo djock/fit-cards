@@ -26,12 +26,14 @@ class AppLocalizations {
   static String skip = 'SKIP';
 
   static String chooseName = 'What\'s your username?';
-  static String errorNoName = 'Please set a username';
-  static String username = 'Username';
+  static String errorNoName = 'Please set a name!';
+  static String username = 'name...';
   static String hello = 'Hello';
   static String close = 'Close';
   static String cancel = 'Cancel';
   static String continueText = 'Continue';
   static String closeAppSubtitle = 'Are you sure you want to close the app?';
+
+  static String noWorkoutsText = 'You currently did not complete any workout';
 
 }

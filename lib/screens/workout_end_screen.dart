@@ -20,7 +20,7 @@ class WorkoutEndScreen extends StatelessWidget {
             Navigator.pop(context);
           },
           child: Container(
-            color: AppColors.mandarin,
+            color: AppColors.accentColor,
             child: Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -29,14 +29,14 @@ class WorkoutEndScreen extends StatelessWidget {
                     AppLocalizations.tutorialFinishDescription,
                     textAlign: TextAlign.center,
                     style:
-                    AppTheme.customLightStyle(FontWeight.normal, 24),
+                    AppTheme.customText(FontWeight.normal, 24),
                   ),
                   SizedBox(height: 30,),
                   Text(
                     AppLocalizations.tapToClose,
                     textAlign: TextAlign.center,
                     style:
-                    AppTheme.customLightStyle(FontWeight.normal, 24),
+                    AppTheme.customText(FontWeight.normal, 24),
                   ),
                 ],
               ),

@@ -31,7 +31,7 @@ class ListItem extends StatelessWidget {
                       backgroundColor: Colors.grey.withOpacity(0.1),
                       child: Text(
                         leftValue.toString(),
-                        style: AppTheme.mediumTextDarkStyle(),
+                        style: AppTheme.textThemeBold15(),
                       ),
                     ),
                   ),
@@ -45,7 +45,7 @@ class ListItem extends StatelessWidget {
                             children: <Widget>[
                               Text(
                                 centerValue,
-                                style: AppTheme.mediumTextDarkStyle(),
+                                style: AppTheme.textThemeBold15(),
                               ),
                             ],
                           ),
@@ -57,7 +57,7 @@ class ListItem extends StatelessWidget {
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
                       rightValue,
-                      style: AppTheme.mediumTextDarkStyle(),
+                      style: AppTheme.textThemeBold15(),
                     ),
                   ),
                 ],

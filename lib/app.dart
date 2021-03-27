@@ -31,7 +31,6 @@ class _AppState extends State<App> {
     UserPreferencesHandler.loadUserName().then((value) {
       if(value) {
         setState(() {
-          debugPrint('state '  + value.toString());
           _userNameSet = value;
         });
       }
@@ -42,9 +41,6 @@ class _AppState extends State<App> {
 
   @override
   Widget build(BuildContext context) {
-    debugPrint('_hasLoadedData ' + _hasLoadedData.toString());
-    debugPrint('_userNameSet ' + _userNameSet.toString());
-
     return _hasLoadedData
         ? _userNameSet ? HomeScreen() : WelcomeScreen()
         : LoadingScreen();

@@ -10,6 +10,7 @@ import 'package:fitcards/widgets/general_modal.dart';
 import 'package:fitcards/widgets/safe_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -38,10 +39,12 @@ class _HomeScreenState extends State<HomeScreen> {
       child: SafeScreen(
         topSafe: false,
         appBar: CustomAppBar.buildWithActions(
-            context, [IconButton(icon: Icon(Icons.settings), onPressed: null)],
+            context, [IconButton(icon: Icon(Icons.settings), color: Theme.of(Get.context).accentColor , onPressed: () {
+              AppTheme.changeTheme();
+        })],
             elevation: 0, text: ''),
         body: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(10),
           child: Stack(
             children: [
               Container(
@@ -54,11 +57,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         text: AppLocalizations.startAWorkout,
                         callback: () {
                           AppStateHandler.shuffleJson();
-
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => CardsScreen()));
+                          Get.to(() => CardsScreen());
                         },
                       ),
                       SizedBox(
@@ -67,10 +66,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       CustomGradientButton(
                         text: AppLocalizations.workoutsLog,
                         callback: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => WorkoutsLogScreen()));
+                          Get.to(() => WorkoutsLogScreen());
                         },
                       ),
                     ],
@@ -80,10 +76,20 @@ class _HomeScreenState extends State<HomeScreen> {
               Align(
                 alignment: Alignment.topLeft,
                 child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                    '${AppLocalizations.hello} ${AppState.userName}',
-                    style: AppTheme.headerDarkStyle(),
+                  padding: const EdgeInsets.all(10),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        '${AppLocalizations.hello} ${AppState.userName},',
+                        style: AppTheme.textAccentBold30(),
+                      ),
+                      SizedBox(height: 5,),
+                      Text(
+                        'Are you ready for today?',
+                        style: AppTheme.textAccentNormal15(),
+                      )
+                    ],
                   ),
                 ),
               )

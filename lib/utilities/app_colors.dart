@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 
 class AppColors {
-  static const mainColor = Color(0xff2D3142);
-  static const mainGrey = Color(0xffF3F5F6);
-  static const mandarin = Color(0xffA36D90);
+  // main app color (eg: appbar)
+  static const primaryColorLight = Color(0xff2D3142);
+  static const primaryColorDark = Color(0xff2D3142);
 
-  static const cardPink = Color(0xff9C7A97);
-  static const cardBlue = Color(0xff1985A1);
+  // main app color (eg: appbar)
+  static const canvasColorLight = Color(0xffF3F5F6);
+  static const canvasColorDark = Color(0xff2F2C52);
 
+  static const accentColor = Color(0xffFC6C30);
 
   static const textColor = Colors.white; // Color(0xfff4ecd6);
 }

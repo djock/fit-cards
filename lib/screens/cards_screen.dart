@@ -19,6 +19,7 @@ import 'package:fitcards/widgets/flutter_tindercard.dart';
 import 'package:fitcards/widgets/safe_screen.dart';
 import 'package:fitcards/widgets/timer_app_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:tutorial_coach_mark/tutorial_coach_mark.dart';
 
 enum workoutState {
@@ -69,16 +70,13 @@ class _CardsScreenState extends State<CardsScreen>
     if (AppState.tutorialActive) {
       const timeOut = const Duration(seconds: 4);
       new Timer(timeOut, () {
-        if(AppState.tutorialActive)
-          _tutorialCoachMark.finish();
+        if (AppState.tutorialActive && _tutorialCoachMark != null) _tutorialCoachMark.finish();
       });
     }
   }
 
   @override
   Widget build(BuildContext context) {
-
-    debugPrint('state ' + _state.toString());
     return _state == workoutState.finish
         ? WorkoutEndScreen(
             callback: _onEndWorkout,
@@ -90,7 +88,7 @@ class _CardsScreenState extends State<CardsScreen>
                     callback: _onStopWorkout,
                   )
                 : CustomAppBar.buildWithActions(context, [
-                    IconButton(icon: Icon(Icons.graphic_eq), onPressed: null)
+                    IconButton(icon: Icon(Icons.graphic_eq, color: Get.isDarkMode ? Theme.of(Get.context).accentColor : Theme.of(Get.context).primaryColorDark,) , onPressed: null)
                   ]),
             body: Stack(
               children: [
@@ -158,9 +156,9 @@ class _CardsScreenState extends State<CardsScreen>
                             controller: _countDownController,
                             width: MediaQuery.of(context).size.width / 3,
                             height: MediaQuery.of(context).size.height / 3,
-                            ringColor: AppColors.mandarin.withOpacity(0.5),
+                            ringColor: AppColors.accentColor.withOpacity(0.5),
                             ringGradient: null,
-                            fillColor: AppColors.mandarin,
+                            fillColor: AppColors.accentColor,
                             fillGradient: null,
                             backgroundColor: Colors.purple[500].withOpacity(0),
                             backgroundGradient: null,
@@ -168,7 +166,7 @@ class _CardsScreenState extends State<CardsScreen>
                             strokeCap: StrokeCap.round,
                             textStyle: TextStyle(
                                 fontSize: 50.0,
-                                color: AppColors.mandarin,
+                                color: AppColors.accentColor,
                                 fontWeight: FontWeight.bold),
                             textFormat: CountdownTextFormat.S,
                             isReverse: true,
@@ -198,7 +196,7 @@ class _CardsScreenState extends State<CardsScreen>
   Widget _buildNextButton() {
     return CustomButton(
       key: _nextKey,
-      buttonColor: AppColors.mandarin,
+      buttonColor: AppColors.accentColor,
       onPressed: () {
         var currentExercise = new KeyValuePair(
             AppState.exercises[_exerciseController.index].name,
@@ -210,7 +208,7 @@ class _CardsScreenState extends State<CardsScreen>
 
         _onSwipeCards();
       },
-      textColor: AppColors.mainGrey,
+      textColor: AppColors.canvasColorLight,
       isOutline: false,
       isRequest: false,
       buttonText: AppLocalizations.next,
@@ -219,10 +217,8 @@ class _CardsScreenState extends State<CardsScreen>
 
   Widget _buildStartButton() {
     return CustomButton(
-      key: _state == workoutState.active
-          ? _stopKey
-          : _startKey,
-      buttonColor: AppColors.mandarin,
+      key: _state == workoutState.active ? _stopKey : _startKey,
+      buttonColor: AppColors.accentColor,
       onPressed: () {
         if (_state == workoutState.active || _state == workoutState.countdown) {
           _onStopWorkout();
@@ -230,7 +226,7 @@ class _CardsScreenState extends State<CardsScreen>
           _onStartWorkout();
         }
       },
-      textColor: AppColors.mainGrey,
+      textColor: AppColors.canvasColorLight,
       isOutline: false,
       isRequest: false,
       buttonText:
@@ -245,10 +241,9 @@ class _CardsScreenState extends State<CardsScreen>
   }
 
   void _onStopWorkout() {
-    if(AppState.tutorialActive)
-      _tutorialCoachMark.finish();
+    if (AppState.tutorialActive) _tutorialCoachMark.finish();
 
-    if(_state == workoutState.countdown) {
+    if (_state == workoutState.countdown) {
       changeState(workoutState.idle);
     } else {
       changeState(workoutState.finish);
@@ -364,27 +359,19 @@ class _CardsScreenState extends State<CardsScreen>
 
   void _initializeActiveTargets() {
     _activeTargets.add(
-      _targetFocusBuilder(_timerKey, ContentAlign.bottom,
-          ShapeLightFocus.RRect, '', AppLocalizations.tutorialTimerDescription,
+      _targetFocusBuilder(_timerKey, ContentAlign.bottom, ShapeLightFocus.RRect,
+          '', AppLocalizations.tutorialTimerDescription,
           textAlign: TextAlign.center),
     );
 
     _activeTargets.add(
-      _targetFocusBuilder(
-          _nextKey,
-          ContentAlign.top,
-          ShapeLightFocus.RRect,
-          '',
+      _targetFocusBuilder(_nextKey, ContentAlign.top, ShapeLightFocus.RRect, '',
           AppLocalizations.tutorialNextCardButtonDescription,
           textAlign: TextAlign.right),
     );
 
     _activeTargets.add(
-      _targetFocusBuilder(
-          _stopKey,
-          ContentAlign.top,
-          ShapeLightFocus.RRect,
-          '',
+      _targetFocusBuilder(_stopKey, ContentAlign.top, ShapeLightFocus.RRect, '',
           AppLocalizations.tutorialStopButtonDescription,
           identity: 'stopButton'),
     );
@@ -410,14 +397,9 @@ class _CardsScreenState extends State<CardsScreen>
     );
 
     _idleTargets.add(
-      _targetFocusBuilder(
-          _startKey,
-          ContentAlign.top,
-          ShapeLightFocus.RRect,
-          '',
-          AppLocalizations.tutorialStartButtonDescription,
-          identity: 'startButton',
-          textAlign: TextAlign.center),
+      _targetFocusBuilder(_startKey, ContentAlign.top, ShapeLightFocus.RRect,
+          '', AppLocalizations.tutorialStartButtonDescription,
+          identity: 'startButton', textAlign: TextAlign.center),
     );
 
     _idleTargets.add(
@@ -431,12 +413,8 @@ class _CardsScreenState extends State<CardsScreen>
     );
 
     _idleTargets.add(
-      _targetFocusBuilder(
-          _startCountDownKey,
-          ContentAlign.bottom,
-          ShapeLightFocus.RRect,
-          '',
-          AppLocalizations.tutorialTimerDescription,
+      _targetFocusBuilder(_startCountDownKey, ContentAlign.bottom,
+          ShapeLightFocus.RRect, '', AppLocalizations.tutorialTimerDescription,
           textAlign: TextAlign.center),
     );
   }
@@ -447,7 +425,7 @@ class _CardsScreenState extends State<CardsScreen>
     return TargetFocus(
       identify: identity.isNotEmpty ? identity : key.toString(),
       keyTarget: key,
-      color: AppColors.mandarin,
+      color: AppColors.accentColor,
       contents: [
         TargetContent(
           align: align,
@@ -460,7 +438,7 @@ class _CardsScreenState extends State<CardsScreen>
                     ? Text(
                         title,
                         textAlign: textAlign,
-                        style: AppTheme.customLightStyle(FontWeight.bold, 26),
+                        style: AppTheme.customText(FontWeight.bold, 26),
                       )
                     : SizedBox(
                         height: 0,
@@ -472,7 +450,7 @@ class _CardsScreenState extends State<CardsScreen>
                           description,
                           textAlign: textAlign,
                           style:
-                              AppTheme.customLightStyle(FontWeight.normal, 20),
+                              AppTheme.customText(FontWeight.normal, 20),
                         ),
                       )
                     : SizedBox(

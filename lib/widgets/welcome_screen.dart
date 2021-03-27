@@ -4,6 +4,7 @@ import 'package:fitcards/utilities/app_colors.dart';
 import 'package:fitcards/utilities/app_localizations.dart';
 import 'package:fitcards/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import 'input_decoration.dart';
 
@@ -41,7 +42,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               obscureText: false,
               decoration: CustomInputDecoration.build(defaultText),
               style: TextStyle(
-                  color: Colors.white,
+                  color: Theme.of(context).accentColor,
                   fontSize: 20),
             )
           ],
@@ -68,42 +69,39 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
 
   Widget _buildScreen() {
     return Container(
-      color: Colors.red,
       child: SafeArea(
         top: false,
         child: Scaffold(
             resizeToAvoidBottomInset: false,
             body: Container(
-              color: AppColors.mandarin.withOpacity(0.9),
+              color: Theme.of(context).canvasColor.withOpacity(0.2),
               padding: EdgeInsets.symmetric(horizontal: 20),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  SizedBox(height: 180),
+                  SizedBox(height: 200),
                   Text(
                     AppLocalizations.chooseName,
-                    style: TextStyle(fontFamily: 'Lora', fontSize: 28, color: Colors.white),
+                    style: TextStyle(fontFamily: 'Lora', fontSize: 28, color: Theme.of(context).accentColor),
                   ),
                   SizedBox(
-                    height: 25,
+                    height: 50,
                   ),
                   _formWidget(),
                   SizedBox(
-                    height: 20,
+                    height: 50,
                   ),
                   CustomButton(
-                    buttonColor: Colors.white,
-                    textColor: Colors.red,
+                    buttonColor: Theme.of(context).accentColor,
+                    textColor: AppColors.textColor,
                     isOutline: false,
                     buttonText: AppLocalizations.start,
                     onPressed: () {
                     if (_formKey.currentState.validate()) {
                       UserPreferencesHandler.saveUserName(_textController.text);
 
-                      Navigator.push(context,
-                          MaterialPageRoute(
-                              builder: (context) => HomeScreen()));
+                      Get.off(() => HomeScreen());
                     }
                     },
                   ),

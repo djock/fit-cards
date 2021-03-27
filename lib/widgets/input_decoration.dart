@@ -1,27 +1,42 @@
-import 'package:fitcards/utilities/app_colors.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class CustomInputDecoration {
   static InputDecoration build(String defaultText) => InputDecoration(
       errorStyle: TextStyle(
-        color: Colors.white.withOpacity(0.7),
+        color: Colors.red,
         fontStyle: FontStyle.italic,
       ),
       errorBorder: new OutlineInputBorder(
-        borderSide: BorderSide(color: Colors.red.withOpacity(0.7), width: 2),
+        borderSide: BorderSide(color: Colors.red, width: 2),
         borderRadius: const BorderRadius.all(
           const Radius.circular(8),
         ),
       ),
       border: new OutlineInputBorder(
-        borderSide: BorderSide.none,
+        borderSide: BorderSide(color: Theme.of(Get.context).accentColor.withOpacity(0.7), width: 2),
         borderRadius: const BorderRadius.all(
           const Radius.circular(8),
         ),
       ),
-      fillColor: AppColors.mandarin,
+      enabledBorder: new OutlineInputBorder(
+        borderSide: BorderSide(color: Theme.of(Get.context).accentColor.withOpacity(0.7), width: 2),
+        borderRadius: const BorderRadius.all(
+          const Radius.circular(8),
+        ),
+      ),
+      focusedBorder: new OutlineInputBorder(
+        borderSide: BorderSide(color: Theme.of(Get.context).accentColor.withOpacity(0.7), width: 2),
+        borderRadius: const BorderRadius.all(
+          const Radius.circular(8),
+        ),
+      ),
+      fillColor: Theme.of(Get.context).canvasColor.withOpacity(0.5),
       filled: true,
       hintText: defaultText,
       contentPadding: EdgeInsets.symmetric(vertical: 18, horizontal: 20),
-      hintStyle: TextStyle(color: Colors.white70, fontSize: 18, fontStyle: FontStyle.italic));
+      hintStyle: TextStyle(
+          color: Theme.of(Get.context).accentColor.withOpacity(0.7),
+          fontSize: 18,
+          fontStyle: FontStyle.italic));
 }

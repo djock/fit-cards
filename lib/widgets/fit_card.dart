@@ -88,7 +88,7 @@ class FitCard extends StatelessWidget {
                 style: TextStyle(
                     fontSize: 45,
                     fontWeight: FontWeight.normal,
-                    color: AppColors.mainColor),
+                    color: AppColors.primaryColorLight),
                 textAlign: TextAlign.center,
               ),
             ),
@@ -102,7 +102,7 @@ class FitCard extends StatelessWidget {
                 style: TextStyle(
                     fontSize: 25,
                     fontWeight: FontWeight.normal,
-                    color: AppColors.mainColor),
+                    color: AppColors.primaryColorLight),
                 textAlign: TextAlign.center,
               ),
             ),
@@ -131,7 +131,7 @@ class FitCard extends StatelessWidget {
           style: TextStyle(
               fontSize: 70,
               fontWeight: FontWeight.bold,
-              color: AppColors.mainColor),
+              color: AppColors.primaryColorLight),
           textAlign: TextAlign.center,
         ),
       ),

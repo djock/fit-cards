@@ -3,6 +3,7 @@ import 'package:fitcards/handlers/app_theme.dart';
 import 'package:fitcards/handlers/hive_handler.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 
 void main(){
   HiveHandler.init();
@@ -17,10 +18,12 @@ class Main extends StatelessWidget {
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ]);
-    return MaterialApp(
+    return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'FitCards',
-      theme: appTheme(),
+      theme: appThemeLight(),
+      darkTheme: appThemeDark(),
+      themeMode: ThemeMode.system,
       home: App(),
     );
   }

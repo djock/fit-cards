@@ -1,71 +1,71 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../utilities/app_colors.dart';
 
-ThemeData appTheme() {
-  return new ThemeData(
-    // Define the default brightness and colors.
-    brightness: Brightness.light,
-    primaryColor: AppColors.mainColor,
-    accentColor: AppColors.mainColor,
-    canvasColor: AppColors.mainGrey,
-    floatingActionButtonTheme: FloatingActionButtonThemeData(
+ThemeData appThemeDark() => ThemeData(
+  brightness: Brightness.dark,
+  primaryColor: AppColors.primaryColorDark,
+  accentColor: AppColors.accentColor,
+  canvasColor: AppColors.canvasColorDark,
+  floatingActionButtonTheme: FloatingActionButtonThemeData(
+  ),
 
-    ),
+  fontFamily: 'Roboto',
+  highlightColor: Colors.transparent,
+  splashColor: Colors.transparent,
 
-    // Define the default font family.
-    fontFamily: 'Roboto',
-    highlightColor: Colors.transparent,
-    splashColor: Colors.transparent,
+  textTheme: TextTheme(
+    headline1: TextStyle(fontSize: 72.0, fontWeight: FontWeight.bold),
+    headline6: TextStyle(fontSize: 36.0, fontStyle: FontStyle.italic),
+    bodyText2: TextStyle(fontFamily: 'Roboto'),
+    bodyText1: TextStyle(fontFamily: 'Roboto', color: Colors.white),
+  ),
+);
 
-    // Define the default TextTheme. Use this to specify the default
-    // text styling for headlines, titles, bodies of text, and more.
-    textTheme: TextTheme(
-      headline1: TextStyle(fontSize: 72.0, fontWeight: FontWeight.bold),
-      headline6: TextStyle(fontSize: 36.0, fontStyle: FontStyle.italic),
-      bodyText2: TextStyle( fontFamily: 'Roboto'),
-    ),
-  );
-}
+ThemeData appThemeLight() => ThemeData(
+  brightness: Brightness.light,
+  primaryColor: AppColors.primaryColorLight,
+  accentColor: AppColors.accentColor,
+  canvasColor: AppColors.canvasColorLight,
+  primaryColorDark: AppColors.canvasColorDark,
+  floatingActionButtonTheme: FloatingActionButtonThemeData(
+  ),
+
+  fontFamily: 'Roboto',
+  highlightColor: Colors.transparent,
+  splashColor: Colors.transparent,
+
+  textTheme: TextTheme(
+    headline1: TextStyle(fontSize: 72.0, fontWeight: FontWeight.bold),
+    headline6: TextStyle(fontSize: 36.0, fontStyle: FontStyle.italic),
+    bodyText2: TextStyle( fontFamily: 'Roboto'),
+    bodyText1: TextStyle(fontFamily: 'Roboto', color: Colors.black),
+  ),
+);
 
 class AppTheme {
 
-  static TextStyle appBarDarkStyle() {
-    return _textStyle(22, FontWeight.bold, AppColors.mainColor);
+  static TextStyle appBarStyle() {
+    return _textStyle(22, FontWeight.bold, Get.isDarkMode ? Theme.of(Get.context).accentColor : AppColors.canvasColorDark);
   }
-  static TextStyle headerLightStyle() {
+  static TextStyle textWhiteBold24() {
     return _textStyle(24, FontWeight.bold, AppColors.textColor);
   }
 
-  static TextStyle headerDarkStyle() {
-    return _textStyle(30, FontWeight.bold, AppColors.mainColor);
+  static TextStyle textAccentBold30() {
+    return _textStyle(30, FontWeight.bold, Theme.of(Get.context).accentColor);
   }
 
-  static TextStyle mediumTextLightStyle() {
-    return _textStyle(14, FontWeight.normal, AppColors.textColor);
+  static TextStyle textAccentNormal15() {
+    return _textStyle(15, FontWeight.normal, Theme.of(Get.context).accentColor);
   }
 
-  static TextStyle mediumTextDarkStyle() {
-    return _textStyle(14, FontWeight.normal, AppColors.mainColor);
+  static TextStyle textThemeBold15() {
+    return _textStyle(14, FontWeight.bold, Get.isDarkMode ? Theme.of(Get.context).accentColor : AppColors.canvasColorDark);
   }
 
-  static TextStyle mediumTextDarkBoldStyle() {
-    return _textStyle(14, FontWeight.bold, AppColors.mainColor);
-  }
-
-  static TextStyle mediumTextGreyStyle() {
-    return _textStyle(12, FontWeight.normal, Colors.grey.withOpacity(0.5));
-  }
-
-  static TextStyle smallTextLightStyle() {
-    return _textStyle(12, FontWeight.normal, AppColors.textColor);
-  }
-
-  static TextStyle smallTextDarkStyle() {
-    return _textStyle(12, FontWeight.normal, AppColors.mainColor);
-  }
-
-  static TextStyle customLightStyle(FontWeight fontWeight, double fontSize) {
+  static TextStyle customText(FontWeight fontWeight, double fontSize) {
     return _textStyle(fontSize, fontWeight, AppColors.textColor);
   }
 
@@ -75,5 +75,13 @@ class AppTheme {
         letterSpacing: 1,
         fontWeight: fontWeight,
         fontSize: fontSize);
+  }
+
+  static void changeTheme() {
+    if(Get.isDarkMode) {
+      Get.changeThemeMode(ThemeMode.light);
+    } else {
+      Get.changeThemeMode(ThemeMode.dark);
+    }
   }
 }

@@ -2,35 +2,36 @@ import 'package:fitcards/handlers/app_theme.dart';
 import 'package:fitcards/utilities/app_colors.dart';
 import 'package:fitcards/utilities/utils.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class CustomAppBar {
   static PreferredSizeWidget buildWithActions(BuildContext context, List<Widget> actions,
-      {double elevation = 0.5, String text = ''}) =>
+      {double elevation = 0.0, String text = ''}) =>
       AppBar(
         backgroundColor: Theme.of(context).canvasColor,
         elevation: elevation,
         iconTheme: IconThemeData(
-          color: AppColors.mainColor,
+          color: Get.isDarkMode ? Theme.of(Get.context).accentColor : Theme.of(Get.context).primaryColorDark,
         ),
         actions: actions,
         title: Text(
           text,
-          style: AppTheme.appBarDarkStyle(),
+          style: AppTheme.appBarStyle(),
         ),
         centerTitle: true,
       );
 
   static PreferredSizeWidget buildNormal(BuildContext context, String text,
-      {double elevation = 0.5}) =>
+      {double elevation = 0.0}) =>
       AppBar(
         backgroundColor: Theme.of(context).canvasColor,
         elevation: elevation,
         iconTheme: IconThemeData(
-          color: AppColors.mainColor,
+          color: Get.isDarkMode ? Theme.of(Get.context).accentColor : Theme.of(Get.context).primaryColorDark,
         ),
         title: Text(
           text,
-          style: AppTheme.appBarDarkStyle(),
+          style: AppTheme.appBarStyle(),
         ),
         centerTitle: true,
       );
@@ -39,7 +40,7 @@ class CustomAppBar {
         backgroundColor: Theme.of(context).canvasColor,
         elevation: 0,
         iconTheme: IconThemeData(
-          color: AppColors.mainColor,
+          color: Get.isDarkMode ? Theme.of(Get.context).accentColor : Theme.of(Get.context).primaryColorDark,
         ),
         centerTitle: false,
       );
@@ -48,7 +49,7 @@ class CustomAppBar {
     backgroundColor: Theme.of(context).canvasColor,
     elevation: 0,
     iconTheme: IconThemeData(
-      color: AppColors.mainColor,
+      color: Get.isDarkMode ? Theme.of(Get.context).accentColor : Theme.of(Get.context).primaryColorDark,
     ),
     actions: [
       IconButton(icon: Icon(Icons.dashboard_customize), onPressed: null)

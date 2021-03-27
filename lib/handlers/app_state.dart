@@ -17,5 +17,6 @@ class AppState {
   static bool tutorialFinished = false;
   static bool tutorialActive = false;
 
-  static String userName;
+  static String userName = '';
+  static bool isDarkTheme = false;
 }

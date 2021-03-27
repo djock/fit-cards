@@ -9,13 +9,13 @@ class LoadingScreen extends StatelessWidget {
     return Scaffold(
       body: SizedBox.expand(
         child: Container(
-          color: AppColors.mainColor,
+          color: AppColors.primaryColorLight,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.end,
             children: <Widget>[
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Text(Utils.getLoadingScreenText(), style: AppTheme.mediumTextLightStyle()),
+                child: Text(Utils.getLoadingScreenText(), style: AppTheme.textAccentNormal15()),
               ),
             ],
           ),
