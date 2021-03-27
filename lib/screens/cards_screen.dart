@@ -183,12 +183,10 @@ class _CardsScreenState extends State<CardsScreen>
                             autoStart: true,
                             onStart: () {
                               _delayTutorialNext();
-                              print('Countdown Started');
                             },
                             onComplete: () {
                               changeState(workoutState.active);
                               _onSwipeCards();
-                              print('Countdown Ended');
                             },
                           ),
                         ),

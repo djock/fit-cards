@@ -62,11 +62,15 @@ class AppTheme {
   }
 
   static TextStyle textThemeBold15() {
-    return _textStyle(14, FontWeight.bold, Get.isDarkMode ? Theme.of(Get.context).accentColor : AppColors.canvasColorDark);
+    return _textStyle(15, FontWeight.bold, Get.isDarkMode ? Theme.of(Get.context).accentColor : AppColors.canvasColorDark);
+  }
+
+  static TextStyle textThemeBold30() {
+    return _textStyle(30, FontWeight.bold, Get.isDarkMode ? Theme.of(Get.context).accentColor : AppColors.canvasColorDark);
   }
 
   static TextStyle customText(FontWeight fontWeight, double fontSize) {
-    return _textStyle(fontSize, fontWeight, AppColors.textColor);
+    return _textStyle(fontSize, fontWeight, Get.isDarkMode ? Theme.of(Get.context).accentColor : AppColors.canvasColorDark);
   }
 
   static TextStyle _textStyle(double fontSize, FontWeight fontWeight, Color color){

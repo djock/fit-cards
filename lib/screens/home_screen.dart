@@ -2,6 +2,8 @@ import 'package:fitcards/handlers/app_state.dart';
 import 'package:fitcards/handlers/app_state_handler.dart';
 import 'package:fitcards/handlers/app_theme.dart';
 import 'package:fitcards/screens/cards_screen.dart';
+import 'package:fitcards/screens/confetti_screen.dart';
+import 'package:fitcards/screens/workout_end_screen.dart';
 import 'package:fitcards/screens/workouts_log_screen.dart';
 import 'package:fitcards/utilities/app_localizations.dart';
 import 'package:fitcards/widgets/custom_app_bar.dart';

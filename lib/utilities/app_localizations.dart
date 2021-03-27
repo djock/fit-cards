@@ -24,7 +24,7 @@ class AppLocalizations {
   static String tutorialFinishDescription = 'Congrats on learning how to use FitCards. Happy workouts!';
   static String workoutFinished = 'Great job!';
 
-  static String tapToClose = 'Tap to start using the app.';
+  static String tapToClose = 'Tap to close.';
 
   static String skip = 'SKIP';
 
