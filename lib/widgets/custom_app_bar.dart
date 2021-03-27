@@ -56,7 +56,7 @@ class CustomAppBar {
     centerTitle: false,
   );
 
-  static PreferredSizeWidget buildTimer(int elapsedMilliseconds) => AppBar(
+  static PreferredSizeWidget buildTimer(int elapsedMilliseconds, Function callback) => AppBar(
     title: Text(Utils.formatTime(elapsedMilliseconds),
         style: TextStyle(
           color: Colors.red,
@@ -68,6 +68,9 @@ class CustomAppBar {
     leading: new Container(),
     backgroundColor: Colors.black,
     elevation: 0,
+    actions: [
+      IconButton(icon: Icon(Icons.close, color: Colors.red, size: 35,), onPressed: callback)
+    ],
     automaticallyImplyLeading: true,
   );
 }

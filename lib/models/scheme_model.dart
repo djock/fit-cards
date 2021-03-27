@@ -18,7 +18,7 @@ class SchemeModel extends BaseModel {
   }
 
   static List<SchemeModel> fromJsonList(json) {
-    var tempList = new List<SchemeModel>();
+    var tempList = List<SchemeModel>(); // ignore: deprecated_member_use
 
     for(var item in json) {
       tempList.add(new SchemeModel.fromJson(item));

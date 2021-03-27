@@ -11,8 +11,11 @@ class AppState {
 
   static List<WorkoutLogModel> loggedWorkouts;
 
-  static List<ExerciseModel> exercises = new List<ExerciseModel>();
-  static List<SchemeModel> schemes = new List<SchemeModel>();
+  static List<ExerciseModel> exercises = [];
+  static List<SchemeModel> schemes = [];
 
-  static bool tutorialFinished;
+  static bool tutorialFinished = false;
+  static bool tutorialActive = false;
+
+  static String userName;
 }

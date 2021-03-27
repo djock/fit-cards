@@ -1,7 +1,15 @@
-import 'package:fitcards/screens/feed_screen.dart';
+import 'package:fitcards/handlers/app_state.dart';
+import 'package:fitcards/handlers/app_state_handler.dart';
+import 'package:fitcards/handlers/app_theme.dart';
+import 'package:fitcards/screens/cards_screen.dart';
 import 'package:fitcards/screens/workouts_log_screen.dart';
+import 'package:fitcards/utilities/app_localizations.dart';
+import 'package:fitcards/widgets/custom_app_bar.dart';
+import 'package:fitcards/widgets/custom_gradient_button.dart';
+import 'package:fitcards/widgets/general_modal.dart';
 import 'package:fitcards/widgets/safe_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -9,60 +17,80 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final List<Widget> _screens = [
-    FeedScreen(),
-    WorkoutsLogScreen()
-  ];
 
-  int _currentIndex = 0;
+  Future<bool> _onBackPressed() {
+    return showDialog(
+        context: context,
+        builder: (context) => GeneralModal(
+          subTitle: AppLocalizations.closeAppSubtitle,
+          okAction: () => SystemNavigator.pop(),
+          cancelAction: () => Navigator.pop(context),
+          okActionText: AppLocalizations.close,
+          cancelActionText: AppLocalizations.cancel,
+        )) ??
+        false;
+  }
 
   @override
   Widget build(BuildContext context) {
-    return SafeScreen(
-      topSafe: false,
-      appBar: null,
-      body: Scaffold(
-          body: _screens[_currentIndex],
-//          bottomNavigationBar: Container(
-//            decoration: BoxDecoration(
-//              border: Border(
-//                top: BorderSide(
-//                  color: AppColors.mandarin,
-//                  width: 0.2,
-//                ),
-//              ),
-//            ),
-//            child: BottomNavigationBar(
-//              backgroundColor: AppColors.mainGrey,
-//              type: BottomNavigationBarType.fixed,
-//              elevation: 0,
-//              onTap: _onTabTapped,
-//              currentIndex: _currentIndex,
-//              unselectedItemColor: AppColors.mainColor,
-//              selectedItemColor: AppColors.mandarin,
-//              showUnselectedLabels: false,
-//              showSelectedLabels: false,
-//              unselectedFontSize: 13,
-//              selectedFontSize: 13,
-//              items: [
-//                BottomNavigationBarItem(
-//                  icon: Icon(Icons.home, size: 32,),
-//                  label: AppLocalizations.feed,
-//                ),
-//                BottomNavigationBarItem(
-//                  icon: Icon(Icons.calendar_today, size: 30,),
-//                  label: AppLocalizations.log,
-//                ),
-//              ],
-//            ),
-//          )
+    return WillPopScope(
+      onWillPop: _onBackPressed,
+      child: SafeScreen(
+        topSafe: false,
+        appBar: CustomAppBar.buildWithActions(
+            context, [IconButton(icon: Icon(Icons.settings), onPressed: null)],
+            elevation: 0, text: ''),
+        body: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Stack(
+            children: [
+              Container(
+                child: Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      CustomGradientButton(
+                        text: AppLocalizations.startAWorkout,
+                        callback: () {
+                          AppStateHandler.shuffleJson();
+
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => CardsScreen()));
+                        },
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      CustomGradientButton(
+                        text: AppLocalizations.workoutsLog,
+                        callback: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => WorkoutsLogScreen()));
+                        },
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              Align(
+                alignment: Alignment.topLeft,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    '${AppLocalizations.hello} ${AppState.userName}',
+                    style: AppTheme.headerDarkStyle(),
+                  ),
+                ),
+              )
+            ],
+          ),
+        ),
       ),
     );
   }
-//
-//  _onTabTapped(newValue) {
-//    setState(() {
-//      _currentIndex = newValue;
-//    });
-//  }
 }

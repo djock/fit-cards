@@ -35,7 +35,7 @@ class _CustomButtonState extends State<CustomButton> {
 
   RoundedRectangleBorder _shape() {
     return RoundedRectangleBorder(
-      borderRadius: new BorderRadius.circular(0),
+      borderRadius: new BorderRadius.circular(8),
     );
   }
 

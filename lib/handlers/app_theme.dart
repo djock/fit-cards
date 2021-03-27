@@ -34,11 +34,11 @@ class AppTheme {
     return _textStyle(22, FontWeight.bold, AppColors.mainColor);
   }
   static TextStyle headerLightStyle() {
-    return _textStyle(20, FontWeight.bold, AppColors.textColor);
+    return _textStyle(24, FontWeight.bold, AppColors.textColor);
   }
 
   static TextStyle headerDarkStyle() {
-    return _textStyle(20, FontWeight.bold, AppColors.mainColor);
+    return _textStyle(30, FontWeight.bold, AppColors.mainColor);
   }
 
   static TextStyle mediumTextLightStyle() {
