@@ -14,6 +14,8 @@ class AppColors {
   static const exerciseCardColor = Color(0xff659B5E);
   static const schemeCardColor = Color(0xffCE4257);
 
+  static const testColor = Color(0xff263b2c);
+
   static Map<Color, Color> cardColors = {
     Color(0xff3FA7D6): Color(0xffA790A5),
     Color(0xff119DA4): Color(0xff6D9DC5),

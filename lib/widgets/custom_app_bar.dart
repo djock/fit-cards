@@ -6,12 +6,13 @@ import 'package:get/get.dart';
 
 class CustomAppBar {
   static PreferredSizeWidget buildWithActions(BuildContext context, List<Widget> actions,
-      {double elevation = 0.0, String text = ''}) =>
+      {double elevation = 0.0, String text = '', double iconSize = 24}) =>
       AppBar(
         backgroundColor: Theme.of(context).canvasColor,
         elevation: elevation,
         iconTheme: IconThemeData(
           color: Get.isDarkMode ? Theme.of(Get.context).accentColor : Theme.of(Get.context).primaryColorDark,
+          size: iconSize
         ),
         actions: actions,
         title: Text(

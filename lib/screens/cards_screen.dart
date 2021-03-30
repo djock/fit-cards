@@ -26,6 +26,7 @@ enum workoutState {
   active,
   idle,
   finish,
+  rest,
 }
 
 class CardsScreen extends StatefulWidget {
@@ -69,31 +70,45 @@ class _CardsScreenState extends State<CardsScreen>
     if (AppState.tutorialActive) {
       const timeOut = const Duration(seconds: 4);
       new Timer(timeOut, () {
-        if (AppState.tutorialActive && _tutorialCoachMark != null) _tutorialCoachMark.finish();
+        if (AppState.tutorialActive && _tutorialCoachMark != null)
+          _tutorialCoachMark.finish();
       });
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    final _random = new Random();
-    var minValue = 0;
-    var maxValue = AppColors.cardColors.length-1;
-    var colorIndex = minValue + _random.nextInt(maxValue - minValue);
-
     return _state == workoutState.finish
         ? WorkoutEndScreen(
             callback: _onEndWorkout,
           )
         : SafeScreen(
-            appBar: _state == workoutState.active
+            appBar: _state == workoutState.active || _state == workoutState.rest
                 ? TimerAppBar(
                     key: _timerKey,
                     callback: _onStopWorkout,
                   )
-                : CustomAppBar.buildWithActions(context, [
-                    IconButton(icon: Icon(Icons.graphic_eq, color: Get.isDarkMode ? Theme.of(Get.context).accentColor : Theme.of(Get.context).primaryColorDark,) , onPressed: () {AppTheme.changeTheme();})
-                  ]),
+                : CustomAppBar.buildWithActions(
+                    context,
+                    [
+                      IconButton(
+                          icon: Icon(
+                            _state == workoutState.countdown
+                                ? Icons.close
+                                : Icons.graphic_eq,
+                            color: Get.isDarkMode
+                                ? Theme.of(Get.context).accentColor
+                                : Theme.of(Get.context).primaryColorDark,
+                          ),
+                          onPressed: () {
+                            if (_state == workoutState.countdown)
+                              _onStopWorkout();
+                            else {
+                              debugPrint('not implemented');
+                            }
+                          })
+                    ],
+                    iconSize: _state == workoutState.countdown ? 35.0 : 24.0),
             body: Stack(
               children: [
                 Container(
@@ -109,13 +124,18 @@ class _CardsScreenState extends State<CardsScreen>
                           list: AppState.exercises,
                           color: AppColors.exerciseCardColor,
                           cardController: _exerciseController,
-                          isBlocked: _state == workoutState.countdown ? true : false,
+                          isBlocked:
+                              _state == workoutState.countdown ? true : false,
                           type: cardType.exercise,
                           callback: () {
-                            if(_state == workoutState.active) {
+                            if (_state == workoutState.active) {
                               _schemeController.triggerLeft();
+                              changeState(workoutState.rest);
                             }
-                            if (_state == workoutState.active || _state == workoutState.countdown)  return;
+
+                            if (_state == workoutState.active ||
+                                _state == workoutState.countdown ||
+                                _state == workoutState.rest) return;
 
                             _onStartWorkout();
                             _schemeController.triggerLeft();
@@ -134,9 +154,7 @@ class _CardsScreenState extends State<CardsScreen>
                           cardController: _schemeController,
                           isBlocked: true,
                           type: cardType.scheme,
-                          callback: () {
-
-                          },
+                          callback: () {},
                         ),
                       ),
                       SizedBox(
@@ -161,41 +179,15 @@ class _CardsScreenState extends State<CardsScreen>
                     ],
                   ),
                 ),
-                _state == workoutState.countdown
+                _state == workoutState.countdown || _state == workoutState.rest
                     ? Align(
                         alignment: Alignment.center,
-                        child: Padding(
-                          padding: const EdgeInsets.only(bottom: 80),
-                          child: CircularCountDownTimer(
-                            key: _startCountDownKey,
-                            duration: 5,
-                            initialDuration: 0,
-                            controller: _countDownController,
-                            width: MediaQuery.of(context).size.width / 3,
-                            height: MediaQuery.of(context).size.height / 3,
-                            ringColor: AppColors.accentColor.withOpacity(0.5),
-                            ringGradient: null,
-                            fillColor: AppColors.accentColor,
-                            fillGradient: null,
-                            backgroundColor: Colors.purple[500].withOpacity(0),
-                            backgroundGradient: null,
-                            strokeWidth: 12.0,
-                            strokeCap: StrokeCap.round,
-                            textStyle: TextStyle(
-                                fontSize: 50.0,
-                                color: AppColors.accentColor,
-                                fontWeight: FontWeight.bold),
-                            textFormat: CountdownTextFormat.S,
-                            isReverse: true,
-                            isReverseAnimation: false,
-                            isTimerTextShown: true,
-                            autoStart: true,
-                            onStart: () {
-                              _delayTutorialNext();
-                            },
-                            onComplete: () {
-                              changeState(workoutState.active);
-                            },
+                        child: Container(
+                          color: AppColors.canvasColorDark.withOpacity(0.6),
+                          width: MediaQuery.of(context).size.width,
+                          height: MediaQuery.of(context).size.height,
+                          child: Center(
+                            child: _buildCountDownTimer(),
                           ),
                         ),
                       )
@@ -205,6 +197,53 @@ class _CardsScreenState extends State<CardsScreen>
               ],
             ),
           );
+  }
+
+  Widget _buildCountDownTimer() {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text(
+          _state == workoutState.countdown ? AppLocalizations.getReady :  AppLocalizations.rest,
+          style: AppTheme.customAccentText(FontWeight.bold, 36),
+        ),
+        CircularCountDownTimer(
+          key: _startCountDownKey,
+          duration: _state == workoutState.countdown ? 5 :  10,
+          initialDuration: 0,
+          controller: _countDownController,
+          width: MediaQuery.of(context).size.width / 3,
+          height: MediaQuery.of(context).size.height / 3,
+          ringColor: Theme.of(Get.context).accentColor.withOpacity(0.5),
+          ringGradient: null,
+          fillColor: Theme.of(Get.context).accentColor,
+          fillGradient: null,
+          backgroundColor: Colors.purple[500].withOpacity(0),
+          backgroundGradient: null,
+          strokeWidth: 12.0,
+          strokeCap: StrokeCap.round,
+          textStyle: TextStyle(
+              fontSize: 50.0,
+              color: Theme.of(Get.context).accentColor,
+              fontWeight: FontWeight.bold),
+          textFormat: CountdownTextFormat.S,
+          isReverse: true,
+          isReverseAnimation: false,
+          isTimerTextShown: true,
+          autoStart: true,
+          onStart: () {
+            _delayTutorialNext();
+          },
+          onComplete: () {
+            if(_state == workoutState.countdown)
+              changeState(workoutState.active);
+
+            if(_state == workoutState.rest)
+              changeState(workoutState.active);
+          },
+        ),
+      ],
+    );
   }
 
 //  Widget _buildNextButton() {
@@ -295,6 +334,8 @@ class _CardsScreenState extends State<CardsScreen>
       _showActiveTutorial();
     }
 
+    debugPrint('STATE $state');
+
     setState(() {
       _state = state;
     });
@@ -308,11 +349,13 @@ class _CardsScreenState extends State<CardsScreen>
       targets: _idleTargets,
       colorShadow: Colors.red,
       textSkip: AppLocalizations.skip,
+      textStyleSkip: AppTheme.customAccentText(FontWeight.bold, 18),
       paddingFocus: 10,
-      opacityShadow: 0.9,
+      opacityShadow: 0.8,
       onFinish: () {},
       onClickTarget: (target) {
         if (target.identify == 'startButton') {
+          _exerciseController.triggerLeft();
           _onStartWorkout();
         }
       },
@@ -320,6 +363,7 @@ class _CardsScreenState extends State<CardsScreen>
         UserPreferencesHandler.markTutorialAsFinished();
       },
       onClickOverlay: (target) {
+        debugPrint('overlay');
         _tutorialCoachMark.next();
       },
     )..show();
@@ -333,8 +377,9 @@ class _CardsScreenState extends State<CardsScreen>
       targets: _activeTargets,
       colorShadow: Colors.red,
       textSkip: AppLocalizations.skip,
+      textStyleSkip: AppTheme.customAccentText(FontWeight.bold, 18),
       paddingFocus: 10,
-      opacityShadow: 0.9,
+      opacityShadow: 0.8,
       onFinish: () {},
       onClickTarget: (target) {
         _tutorialCoachMark.next();
@@ -343,7 +388,7 @@ class _CardsScreenState extends State<CardsScreen>
           _onStopWorkout();
         }
 
-        if(target.identify == 'swipeCard') {
+        if (target.identify == 'swipeCard') {
           _exerciseController.triggerLeft();
         }
       },
@@ -351,6 +396,7 @@ class _CardsScreenState extends State<CardsScreen>
         _onEndWorkout();
       },
       onClickOverlay: (target) {
+        debugPrint('overlay');
         _tutorialCoachMark.next();
       },
     )..show();
@@ -383,8 +429,8 @@ class _CardsScreenState extends State<CardsScreen>
     );
 
     _activeTargets.add(
-      _targetFocusBuilder(_exerciseKey, ContentAlign.bottom, ShapeLightFocus.RRect, '',
-          AppLocalizations.tutorialSwipeExerciseCard,
+      _targetFocusBuilder(_exerciseKey, ContentAlign.bottom,
+          ShapeLightFocus.RRect, '', AppLocalizations.tutorialSwipeExerciseCard,
           identity: 'swipeCard'),
     );
 
@@ -415,9 +461,14 @@ class _CardsScreenState extends State<CardsScreen>
     );
 
     _idleTargets.add(
-      _targetFocusBuilder(_startKey, ContentAlign.top, ShapeLightFocus.RRect,
-          '', AppLocalizations.tutorialStartButtonDescription,
-          identity: 'startButton', textAlign: TextAlign.center),
+      _targetFocusBuilder(
+          _exerciseKey,
+          ContentAlign.bottom,
+          ShapeLightFocus.RRect,
+          '',
+          AppLocalizations.tutorialStartButtonDescription,
+          identity: 'startButton',
+          textAlign: TextAlign.center),
     );
 
     _idleTargets.add(
@@ -443,7 +494,7 @@ class _CardsScreenState extends State<CardsScreen>
     return TargetFocus(
       identify: identity.isNotEmpty ? identity : key.toString(),
       keyTarget: key,
-      color: AppColors.accentColor,
+      color: AppColors.canvasColorDark,
       contents: [
         TargetContent(
           align: align,
@@ -456,7 +507,7 @@ class _CardsScreenState extends State<CardsScreen>
                     ? Text(
                         title,
                         textAlign: textAlign,
-                        style: AppTheme.customText(FontWeight.bold, 26),
+                        style: AppTheme.customAccentText(FontWeight.bold, 26),
                       )
                     : SizedBox(
                         height: 0,
@@ -468,7 +519,7 @@ class _CardsScreenState extends State<CardsScreen>
                           description,
                           textAlign: textAlign,
                           style:
-                              AppTheme.customText(FontWeight.normal, 20),
+                              AppTheme.customAccentText(FontWeight.normal, 20),
                         ),
                       )
                     : SizedBox(
