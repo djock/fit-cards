@@ -69,9 +69,9 @@ class CustomAppBar {
     leading: new Container(),
     backgroundColor: Theme.of(Get.context).canvasColor,
     elevation: 0,
-//    actions: [
-//      IconButton(icon: Icon(Icons.close, color: Colors.red, size: 35,), onPressed: callback)
-//    ],
+    actions: [
+      IconButton(icon: Icon(Icons.close, color: Colors.red, size: 35,), onPressed: callback)
+    ],
     automaticallyImplyLeading: true,
   );
 }

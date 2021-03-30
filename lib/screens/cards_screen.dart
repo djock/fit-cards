@@ -13,7 +13,6 @@ import 'package:fitcards/utilities/app_colors.dart';
 import 'package:fitcards/utilities/app_localizations.dart';
 import 'package:fitcards/utilities/key_value_pair_model.dart';
 import 'package:fitcards/widgets/custom_app_bar.dart';
-import 'package:fitcards/widgets/custom_button.dart';
 import 'package:fitcards/widgets/fit_card.dart';
 import 'package:fitcards/widgets/flutter_tindercard.dart';
 import 'package:fitcards/widgets/safe_screen.dart';
@@ -77,6 +76,11 @@ class _CardsScreenState extends State<CardsScreen>
 
   @override
   Widget build(BuildContext context) {
+    final _random = new Random();
+    var minValue = 0;
+    var maxValue = AppColors.cardColors.length-1;
+    var colorIndex = minValue + _random.nextInt(maxValue - minValue);
+
     return _state == workoutState.finish
         ? WorkoutEndScreen(
             callback: _onEndWorkout,
@@ -88,12 +92,13 @@ class _CardsScreenState extends State<CardsScreen>
                     callback: _onStopWorkout,
                   )
                 : CustomAppBar.buildWithActions(context, [
-                    IconButton(icon: Icon(Icons.graphic_eq, color: Get.isDarkMode ? Theme.of(Get.context).accentColor : Theme.of(Get.context).primaryColorDark,) , onPressed: null)
+                    IconButton(icon: Icon(Icons.graphic_eq, color: Get.isDarkMode ? Theme.of(Get.context).accentColor : Theme.of(Get.context).primaryColorDark,) , onPressed: () {AppTheme.changeTheme();})
                   ]),
             body: Stack(
               children: [
                 Container(
                   padding: EdgeInsets.only(top: 10, bottom: 10),
+                  width: MediaQuery.of(context).size.width,
                   height: MediaQuery.of(context).size.height * 0.91,
                   child: Column(
                     children: [
@@ -102,14 +107,18 @@ class _CardsScreenState extends State<CardsScreen>
                         child: FitCard(
                           key: _exerciseKey,
                           list: AppState.exercises,
-                          color: Colors.white,
+                          color: AppColors.exerciseCardColor,
                           cardController: _exerciseController,
-                          isBlocked: _state == workoutState.active ? false : true,
+                          isBlocked: _state == workoutState.countdown ? true : false,
                           type: cardType.exercise,
                           callback: () {
                             if(_state == workoutState.active) {
                               _schemeController.triggerLeft();
                             }
+                            if (_state == workoutState.active || _state == workoutState.countdown)  return;
+
+                            _onStartWorkout();
+                            _schemeController.triggerLeft();
                           },
                         ),
                       ),
@@ -121,7 +130,7 @@ class _CardsScreenState extends State<CardsScreen>
                         child: FitCard(
                           key: _schemeKey,
                           list: AppState.schemes,
-                          color: Colors.white,
+                          color: AppColors.schemeCardColor,
                           cardController: _schemeController,
                           isBlocked: true,
                           type: cardType.scheme,
@@ -133,22 +142,22 @@ class _CardsScreenState extends State<CardsScreen>
                       SizedBox(
                         height: 20,
                       ),
-                      Expanded(
-                        flex: 1,
-                        child: Row(
-                          mainAxisAlignment: _state == workoutState.active
-                              ? MainAxisAlignment.spaceEvenly
-                              : MainAxisAlignment.center,
-                          children: [
-                            _buildStartButton(),
-//                            _state == workoutState.active
-//                                ? _buildNextButton()
-//                                : SizedBox(
-//                                    width: 0,
-//                                  )
-                          ],
-                        ),
-                      ),
+//                      Expanded(
+//                        flex: 1,
+//                        child: Row(
+//                          mainAxisAlignment: _state == workoutState.active
+//                              ? MainAxisAlignment.spaceEvenly
+//                              : MainAxisAlignment.center,
+//                          children: [
+//                            _buildStartButton(),
+////                            _state == workoutState.active
+////                                ? _buildNextButton()
+////                                : SizedBox(
+////                                    width: 0,
+////                                  )
+//                          ],
+//                        ),
+//                      ),
                     ],
                   ),
                 ),
@@ -186,7 +195,6 @@ class _CardsScreenState extends State<CardsScreen>
                             },
                             onComplete: () {
                               changeState(workoutState.active);
-                              _onSwipeCards();
                             },
                           ),
                         ),
@@ -221,26 +229,26 @@ class _CardsScreenState extends State<CardsScreen>
 //    );
 //  }
 
-  Widget _buildStartButton() {
-    return CustomButton(
-      key: _state == workoutState.active ? _stopKey : _startKey,
-      buttonColor: AppColors.accentColor,
-      onPressed: () {
-        if (_state == workoutState.active || _state == workoutState.countdown) {
-          _onStopWorkout();
-        } else {
-          _onStartWorkout();
-        }
-      },
-      textColor: AppColors.canvasColorLight,
-      isOutline: false,
-      isRequest: false,
-      buttonText:
-          _state == workoutState.active || _state == workoutState.countdown
-              ? AppLocalizations.stop
-              : AppLocalizations.start,
-    );
-  }
+//  Widget _buildStartButton() {
+//    return CustomButton(
+//      key: _state == workoutState.active ? _stopKey : _startKey,
+//      buttonColor: AppColors.accentColor,
+//      onPressed: () {
+//        if (_state == workoutState.active || _state == workoutState.countdown) {
+//          _onStopWorkout();
+//        } else {
+//          _onStartWorkout();
+//        }
+//      },
+//      textColor: Theme.of(context).textTheme.bodyText1.color,
+//      isOutline: false,
+//      isRequest: false,
+//      buttonText:
+//          _state == workoutState.active || _state == workoutState.countdown
+//              ? AppLocalizations.stop
+//              : AppLocalizations.start,
+//    );
+//  }
 
   void _onStartWorkout() {
     changeState(workoutState.countdown);

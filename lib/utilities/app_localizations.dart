@@ -8,6 +8,10 @@ class AppLocalizations {
   static String startAWorkout = 'Start A Workout';
   static String workoutsLog = 'Workouts Log';
 
+  static String exercise = 'Exercise';
+  static String scheme = 'Scheme';
+  static String swipeToStart = 'Swipe to start';
+
   //-------------
   // tutorial
   static String tutorialExerciseCardTitle = 'Exercise card';

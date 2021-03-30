@@ -1,5 +1,6 @@
 import 'package:fitcards/utilities/utils.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class CustomButton extends StatefulWidget {
   final String buttonText;
@@ -59,7 +60,7 @@ class _CustomButtonState extends State<CustomButton> {
 
   Widget _buildOutlineButton() {
     return OutlineButton(
-      borderSide: BorderSide(color: Colors.white, width: 2),
+      borderSide: BorderSide(color: Theme.of(Get.context).textTheme.bodyText1.color, width: 2),
       shape: _shape(),
       onPressed: widget.onPressed,
       color: widget.buttonColor,

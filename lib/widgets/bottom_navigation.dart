@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class BottomNavigation extends StatefulWidget {
   @override
@@ -15,7 +16,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
       child: const Text('Here be navigation!',
           style: TextStyle(fontSize: 20)),
       color: Colors.blue,
-      textColor: Colors.white,
+      textColor: Theme.of(Get.context).textTheme.bodyText1.color,
     );
   }
 }

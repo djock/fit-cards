@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:confetti/confetti.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class ConfettiScreen extends StatefulWidget {
   @override
@@ -86,7 +87,7 @@ class _ConfettiScreentate extends State<ConfettiScreen> {
   Text _display(String text) {
     return Text(
       text,
-      style: const TextStyle(color: Colors.white, fontSize: 20),
+      style: TextStyle(color: Theme.of(Get.context).textTheme.bodyText1.color, fontSize: 20),
     );
   }
 }

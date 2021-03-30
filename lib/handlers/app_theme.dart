@@ -19,7 +19,7 @@ ThemeData appThemeDark() => ThemeData(
     headline1: TextStyle(fontSize: 72.0, fontWeight: FontWeight.bold),
     headline6: TextStyle(fontSize: 36.0, fontStyle: FontStyle.italic),
     bodyText2: TextStyle(fontFamily: 'Roboto'),
-    bodyText1: TextStyle(fontFamily: 'Roboto', color: Colors.white),
+    bodyText1: TextStyle(fontFamily: 'Roboto', color: AppColors.canvasColorDark),
   ),
 );
 
@@ -40,7 +40,7 @@ ThemeData appThemeLight() => ThemeData(
     headline1: TextStyle(fontSize: 72.0, fontWeight: FontWeight.bold),
     headline6: TextStyle(fontSize: 36.0, fontStyle: FontStyle.italic),
     bodyText2: TextStyle( fontFamily: 'Roboto'),
-    bodyText1: TextStyle(fontFamily: 'Roboto', color: Colors.black),
+    bodyText1: TextStyle(fontFamily: 'Roboto', color: AppColors.canvasColorLight),
   ),
 );
 
@@ -50,7 +50,7 @@ class AppTheme {
     return _textStyle(22, FontWeight.bold, Get.isDarkMode ? Theme.of(Get.context).accentColor : AppColors.canvasColorDark);
   }
   static TextStyle textWhiteBold24() {
-    return _textStyle(24, FontWeight.bold, AppColors.textColor);
+    return _textStyle(24, FontWeight.bold, Theme.of(Get.context).textTheme.bodyText1.color);
   }
 
   static TextStyle textAccentBold30() {

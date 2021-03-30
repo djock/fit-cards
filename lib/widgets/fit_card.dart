@@ -32,7 +32,7 @@ class FitCard extends StatelessWidget {
       totalNum: list.length,
       stackNum: 3,
       animDuration: 300,
-      swipeEdge: 5.0,
+      swipeEdge: 7.0,
       maxWidth: MediaQuery.of(context).size.width * 0.9,
       maxHeight: MediaQuery.of(context).size.width * 0.9,
       minWidth: MediaQuery.of(context).size.width * 0.8,
@@ -43,11 +43,19 @@ class FitCard extends StatelessWidget {
         }
         cardController.setIndex(index);
 
+        int colorIndex = 0;
+
+        if(index > AppColors.exerciseCardColors.length-1) {
+          colorIndex = index % AppColors.exerciseCardColors.length;
+        } else {
+          colorIndex = index;
+        }
+
         if(type == cardType.exercise) {
           var exerciseModel = list[index] as ExerciseModel;
-          return _buildCard(exerciseModel.name, color, points: exerciseModel.points);
+          return _buildCard(exerciseModel.name, AppColors.exerciseCardColors[colorIndex], points: exerciseModel.points);
         } else {
-          return _buildCard(list[index].name, color);
+          return _buildCard(list[index].name, AppColors.schemeCardColors[colorIndex]);
         }
       },
       cardController: cardController,
@@ -85,13 +93,28 @@ class FitCard extends StatelessWidget {
             alignment: Alignment.center,
             child: Padding(
               padding: const EdgeInsets.all(6.0),
-              child: Text(
-                '$text',
-                style: TextStyle(
-                    fontSize: 45,
-                    fontWeight: FontWeight.normal,
-                    color: AppColors.primaryColorLight),
-                textAlign: TextAlign.center,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    '$text',
+                    style: TextStyle(
+                        fontSize: 45,
+                        fontWeight: FontWeight.normal,
+                        color: AppColors.canvasColorLight),
+                    textAlign: TextAlign.center,
+                  ),
+                  text == AppLocalizations.exercise ?
+                  Text(
+                    AppLocalizations.swipeToStart,
+                    style: TextStyle(
+                        fontSize: 22,
+                        fontWeight: FontWeight.normal,
+                        color: AppColors.canvasColorLight),
+                    textAlign: TextAlign.center,
+                  ) :
+                      SizedBox(height: 0,),
+                ],
               ),
             ),
           ),
