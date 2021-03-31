@@ -17,6 +17,7 @@ import 'package:fitcards/widgets/flutter_tindercard.dart';
 import 'package:fitcards/widgets/safe_screen.dart';
 import 'package:fitcards/widgets/timer_app_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:tutorial_coach_mark/tutorial_coach_mark.dart';
 
@@ -75,6 +76,47 @@ class _CardsScreenState extends State<CardsScreen>
     }
   }
 
+  PreferredSizeWidget _buildAppBar() {
+    if (_state == workoutState.active) {
+      return TimerAppBar(
+        key: _timerKey,
+        callback: _onStopWorkout,
+      );
+    }
+
+    if (_state == workoutState.countdown || _state == workoutState.rest) {
+      return CustomAppBar.buildCountDown(
+          [
+            IconButton(
+                icon: FaIcon(
+                  FontAwesomeIcons.times,
+                  size: 35,
+                  color: Colors.red,
+                ),
+                onPressed: () {
+                  _onStopWorkout();
+                })
+          ],
+          text: _state == workoutState.countdown ? AppLocalizations.getReady : AppLocalizations.rest,
+          iconSize: 40);
+    }
+
+    return CustomAppBar.buildWithActions(
+        [
+          IconButton(
+              icon: FaIcon(
+                FontAwesomeIcons.slidersH,
+                color: Get.isDarkMode
+                    ? Theme.of(Get.context).accentColor
+                    : Theme.of(Get.context).primaryColorDark,
+              ),
+              onPressed: () {
+                debugPrint('not implemented');
+              })
+        ],
+        iconSize: 20.0);
+  }
+
   @override
   Widget build(BuildContext context) {
     return _state == workoutState.finish
@@ -82,32 +124,7 @@ class _CardsScreenState extends State<CardsScreen>
             callback: _onEndWorkout,
           )
         : SafeScreen(
-            appBar: _state == workoutState.active || _state == workoutState.rest
-                ? TimerAppBar(
-                    key: _timerKey,
-                    callback: _onStopWorkout,
-                  )
-                : CustomAppBar.buildWithActions(
-                    context,
-                    [
-                      IconButton(
-                          icon: Icon(
-                            _state == workoutState.countdown
-                                ? Icons.close
-                                : Icons.graphic_eq,
-                            color: Get.isDarkMode
-                                ? Theme.of(Get.context).accentColor
-                                : Theme.of(Get.context).primaryColorDark,
-                          ),
-                          onPressed: () {
-                            if (_state == workoutState.countdown)
-                              _onStopWorkout();
-                            else {
-                              debugPrint('not implemented');
-                            }
-                          })
-                    ],
-                    iconSize: _state == workoutState.countdown ? 35.0 : 24.0),
+            appBar: _buildAppBar(),
             body: Stack(
               children: [
                 Container(
@@ -128,6 +145,8 @@ class _CardsScreenState extends State<CardsScreen>
                           type: cardType.exercise,
                           callback: () {
                             if (_state == workoutState.active) {
+                              _onNextExercise();
+
                               _schemeController.triggerLeft();
                               changeState(workoutState.rest);
                             }
@@ -182,7 +201,7 @@ class _CardsScreenState extends State<CardsScreen>
                     ? Align(
                         alignment: Alignment.center,
                         child: Container(
-                          color: AppColors.canvasColorDark.withOpacity(0.6),
+                          color: Theme.of(Get.context).primaryColorDark.withOpacity(0.7),
                           width: MediaQuery.of(context).size.width,
                           height: MediaQuery.of(context).size.height,
                           child: Center(
@@ -202,20 +221,16 @@ class _CardsScreenState extends State<CardsScreen>
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text(
-          _state == workoutState.countdown ? AppLocalizations.getReady :  AppLocalizations.rest,
-          style: AppTheme.customAccentText(FontWeight.bold, 36),
-        ),
         CircularCountDownTimer(
           key: _startCountDownKey,
-          duration: _state == workoutState.countdown ? 5 :  10,
+          duration: _state == workoutState.countdown ? 5 : 10,
           initialDuration: 0,
           controller: _countDownController,
           width: MediaQuery.of(context).size.width / 3,
           height: MediaQuery.of(context).size.height / 3,
-          ringColor: Theme.of(Get.context).accentColor.withOpacity(0.5),
+          ringColor: Colors.red.withOpacity(0.65),
           ringGradient: null,
-          fillColor: Theme.of(Get.context).accentColor,
+          fillColor: Colors.red,
           fillGradient: null,
           backgroundColor: Colors.purple[500].withOpacity(0),
           backgroundGradient: null,
@@ -223,7 +238,7 @@ class _CardsScreenState extends State<CardsScreen>
           strokeCap: StrokeCap.round,
           textStyle: TextStyle(
               fontSize: 50.0,
-              color: Theme.of(Get.context).accentColor,
+              color: Colors.red,
               fontWeight: FontWeight.bold),
           textFormat: CountdownTextFormat.S,
           isReverse: true,
@@ -234,11 +249,10 @@ class _CardsScreenState extends State<CardsScreen>
             _delayTutorialNext();
           },
           onComplete: () {
-            if(_state == workoutState.countdown)
+            if (_state == workoutState.countdown)
               changeState(workoutState.active);
 
-            if(_state == workoutState.rest)
-              changeState(workoutState.active);
+            if (_state == workoutState.rest) changeState(workoutState.active);
           },
         ),
       ],
@@ -301,6 +315,8 @@ class _CardsScreenState extends State<CardsScreen>
       changeState(workoutState.finish);
     }
 
+    if(_state == workoutState.countdown) return;
+
     var currentExercise = new KeyValuePair(
         AppState.exercises[_exerciseController.index].name,
         AppState.schemes[_schemeController.index].name);
@@ -315,6 +331,16 @@ class _CardsScreenState extends State<CardsScreen>
 
     AppStateHandler.logExercise();
     AppStateHandler.logWorkout(currentWorkout);
+  }
+
+  void _onNextExercise() {
+    var currentExercise = new KeyValuePair(
+        AppState.exercises[_exerciseController.index].name,
+        AppState.schemes[_schemeController.index].name);
+    AppState.activeExercisesList.add(new WorkoutExerciseModel(
+        AppState.loggedWorkouts.length,
+        currentExercise.key,
+        currentExercise.value));
   }
 
   void changeState(workoutState state) {

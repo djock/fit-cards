@@ -12,7 +12,15 @@ class GeneralModal extends StatelessWidget {
   final Function okAction;
   final Function cancelAction;
 
-  const GeneralModal({Key key, this.title, this.subTitle, this.okAction, this.cancelAction, this.okActionText, this.cancelActionText}) : super(key: key);
+  const GeneralModal(
+      {Key key,
+      this.title,
+      this.subTitle,
+      this.okAction,
+      this.cancelAction,
+      this.okActionText,
+      this.cancelActionText})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -23,6 +31,7 @@ class GeneralModal extends StatelessWidget {
       child: dialogContent(context),
     );
   }
+
   dialogContent(BuildContext context) {
     return Stack(
       children: <Widget>[
@@ -34,7 +43,7 @@ class GeneralModal extends StatelessWidget {
             borderRadius: BorderRadius.circular(10),
             boxShadow: [
               BoxShadow(
-                color: Colors.black26,
+                color: Colors.black38,
                 blurRadius: 10.0,
                 offset: const Offset(0.0, 10.0),
               ),
@@ -45,20 +54,24 @@ class GeneralModal extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               SizedBox(height: 16.0),
-              title != null && title.isNotEmpty ? Text(
-                title,
-                style: TextStyle(
-                  fontSize: 24.0,
-                  fontWeight: FontWeight.w700,
-                ),
-                textAlign: TextAlign.center,
-              ) : SizedBox(height: 0,),
+              title != null && title.isNotEmpty
+                  ? Text(
+                      title,
+                      style: TextStyle(
+                        fontSize: 24.0,
+                        fontWeight: FontWeight.w700,
+                      ),
+                      textAlign: TextAlign.center,
+                    )
+                  : SizedBox(
+                      height: 0,
+                    ),
               SizedBox(height: 16.0),
               Text(
                 subTitle,
                 style: TextStyle(
-                  fontSize: 16.0,
-                ),
+                    fontSize: 16.0,
+                    color: Theme.of(Get.context).primaryColorDark),
                 textAlign: TextAlign.center,
               ),
               SizedBox(height: 3.0),
@@ -73,7 +86,10 @@ class GeneralModal extends StatelessWidget {
                     child: Text(
                       AppLocalizations.cancel,
                       style: TextStyle(
-                        color: Theme.of(context).errorColor, fontSize: 16.0, fontWeight: FontWeight.bold,),
+                        color: Theme.of(context).errorColor,
+                        fontSize: 16.0,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
                   FlatButton(
@@ -83,7 +99,9 @@ class GeneralModal extends StatelessWidget {
                     child: Text(
                       AppLocalizations.continueText,
                       style: TextStyle(
-                          color: Theme.of(Get.context).textTheme.bodyText1.color, fontSize: 16.0, fontWeight: FontWeight.bold),
+                          color: Theme.of(Get.context).primaryColorDark,
+                          fontSize: 16.0,
+                          fontWeight: FontWeight.bold),
                     ),
                   ),
                 ],

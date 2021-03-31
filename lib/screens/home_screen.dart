@@ -41,7 +41,7 @@ class _HomeScreenState extends State<HomeScreen> {
       child: SafeScreen(
         topSafe: false,
         appBar: CustomAppBar.buildWithActions(
-            context, [IconButton(icon: FaIcon(themeIcon), color: Theme.of(Get.context).accentColor , onPressed: () {
+            [IconButton(icon: FaIcon(themeIcon), color: Theme.of(Get.context).accentColor , onPressed: () {
               AppTheme.changeTheme();
         })],
             elevation: 0, text: ''),

@@ -41,7 +41,7 @@ class WorkoutsLogScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeScreen(
       topSafe: false,
-      appBar: CustomAppBar.buildNormal(context, AppLocalizations.workoutsLog),
+      appBar: CustomAppBar.buildNormal(AppLocalizations.workoutsLog),
       body: SingleChildScrollView(
           child: Container(
         padding: EdgeInsets.symmetric(horizontal: 10),
