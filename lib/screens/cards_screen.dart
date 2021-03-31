@@ -77,10 +77,11 @@ class _CardsScreenState extends State<CardsScreen>
   }
 
   PreferredSizeWidget _buildAppBar() {
-    if (_state == workoutState.active) {
+    if (_state == workoutState.active || _state == workoutState.rest && AppState.tutorialActive) {
       return TimerAppBar(
         key: _timerKey,
         callback: _onStopWorkout,
+        buttonKey: _stopKey,
       );
     }
 
@@ -197,7 +198,7 @@ class _CardsScreenState extends State<CardsScreen>
                     ],
                   ),
                 ),
-                _state == workoutState.countdown || _state == workoutState.rest
+                _state == workoutState.countdown || _state == workoutState.rest && !AppState.tutorialActive
                     ? Align(
                         alignment: Alignment.center,
                         child: Container(
@@ -218,12 +219,14 @@ class _CardsScreenState extends State<CardsScreen>
   }
 
   Widget _buildCountDownTimer() {
+    var timerDuration = AppState.tutorialActive ? _state == workoutState.rest ? 0 : 5 : _state == workoutState.countdown ? 5 : 5;
+
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         CircularCountDownTimer(
           key: _startCountDownKey,
-          duration: _state == workoutState.countdown ? 5 : 10,
+          duration: timerDuration,
           initialDuration: 0,
           controller: _countDownController,
           width: MediaQuery.of(context).size.width / 3,
@@ -258,49 +261,6 @@ class _CardsScreenState extends State<CardsScreen>
       ],
     );
   }
-
-//  Widget _buildNextButton() {
-//    return CustomButton(
-//      key: _nextKey,
-//      buttonColor: AppColors.accentColor,
-//      onPressed: () {
-//        var currentExercise = new KeyValuePair(
-//            AppState.exercises[_exerciseController.index].name,
-//            AppState.schemes[_schemeController.index].name);
-//        AppState.activeExercisesList.add(new WorkoutExerciseModel(
-//            AppState.loggedWorkouts.length,
-//            currentExercise.key,
-//            currentExercise.value));
-//
-//        _onSwipeCards();
-//      },
-//      textColor: AppColors.canvasColorLight,
-//      isOutline: false,
-//      isRequest: false,
-//      buttonText: AppLocalizations.next,
-//    );
-//  }
-
-//  Widget _buildStartButton() {
-//    return CustomButton(
-//      key: _state == workoutState.active ? _stopKey : _startKey,
-//      buttonColor: AppColors.accentColor,
-//      onPressed: () {
-//        if (_state == workoutState.active || _state == workoutState.countdown) {
-//          _onStopWorkout();
-//        } else {
-//          _onStartWorkout();
-//        }
-//      },
-//      textColor: Theme.of(context).textTheme.bodyText1.color,
-//      isOutline: false,
-//      isRequest: false,
-//      buttonText:
-//          _state == workoutState.active || _state == workoutState.countdown
-//              ? AppLocalizations.stop
-//              : AppLocalizations.start,
-//    );
-//  }
 
   void _onStartWorkout() {
     changeState(workoutState.countdown);
@@ -347,8 +307,6 @@ class _CardsScreenState extends State<CardsScreen>
     if (AppState.tutorialActive && state == workoutState.active) {
       _showActiveTutorial();
     }
-
-    debugPrint('STATE $state');
 
     setState(() {
       _state = state;
@@ -407,6 +365,7 @@ class _CardsScreenState extends State<CardsScreen>
         }
       },
       onSkip: () {
+        UserPreferencesHandler.markTutorialAsFinished();
         _onEndWorkout();
       },
       onClickOverlay: (target) {
@@ -447,7 +406,7 @@ class _CardsScreenState extends State<CardsScreen>
     );
 
     _activeTargets.add(
-      _targetFocusBuilder(_stopKey, ContentAlign.top, ShapeLightFocus.RRect, '',
+      _targetFocusBuilder(_stopKey, ContentAlign.bottom, ShapeLightFocus.RRect, '',
           AppLocalizations.tutorialStopButtonDescription,
           identity: 'stopButton'),
     );

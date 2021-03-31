@@ -10,7 +10,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
-class WorkoutsLogScreen extends StatelessWidget {
+class WorkoutsLogScreen extends StatefulWidget {
+  @override
+  _WorkoutsLogScreenState createState() => _WorkoutsLogScreenState();
+}
+
+class _WorkoutsLogScreenState extends State<WorkoutsLogScreen> {
   List<Widget> _buildWorkoutsLog(BuildContext context) {
     List<Widget> _tempList = <Widget>[];
 
@@ -20,9 +25,15 @@ class WorkoutsLogScreen extends StatelessWidget {
         var formattedDate = formatter.format(workout.date).toUpperCase();
 
         _tempList.add(ListItem(
-          leftValue: workout.index.toString(),
+          leftValue: '',
           centerValue: formattedDate,
           rightValue: Utils.formatTimeShort(workout.duration ~/ 1000),
+          deleteAction: () {
+            AppState.loggedWorkouts.remove(workout);
+            setState(() {
+
+            });
+          },
           onTap: () {
             Get.to(() => WorkoutLogDetailsScreen(workoutIndex: workout.index,));
           },
@@ -30,7 +41,10 @@ class WorkoutsLogScreen extends StatelessWidget {
       }
     } else {
       _tempList.add(
-        Text(AppLocalizations.noWorkoutsText, style: AppTheme.textAccentNormal15(),)
+        Center(child: Padding(
+          padding: const EdgeInsets.only(top: 15.0, left: 20, right: 20),
+          child: Text(AppLocalizations.noWorkoutsText, style: AppTheme.customDynamicText(FontWeight.normal, 16), textAlign: TextAlign.center,) ,
+        ))
       );
     }
 

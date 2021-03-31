@@ -5,25 +5,26 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 
 class CustomAppBar {
-  static PreferredSizeWidget buildWithActions( List<Widget> actions,
-          {double elevation = 0.0,
-          String text = '',
-          double iconSize = 24}) =>
-      AppBar(
-        backgroundColor: Theme.of(Get.context).canvasColor,
-        elevation: elevation,
-        iconTheme: IconThemeData(
-            color: Get.isDarkMode
-                ? Theme.of(Get.context).accentColor
-                : Theme.of(Get.context).primaryColorDark,
-            size: iconSize),
-        actions: actions,
-        title: Text(
-          text,
-          style: AppTheme.appBarStyle(),
-        ),
-        centerTitle: true,
-      );
+  static PreferredSizeWidget buildWithActions(List<Widget> actions,
+          {double elevation = 0.0, String text = '', double iconSize = 24}) {
+
+    return AppBar(
+      backgroundColor: Theme.of(Get.context).canvasColor,
+      elevation: elevation,
+      iconTheme: IconThemeData(
+          color: Get.isDarkMode
+              ? Theme.of(Get.context).accentColor
+              : Theme.of(Get.context).primaryColorDark,
+          size: iconSize),
+      actions: actions,
+      title: Text(
+        text,
+        style: AppTheme.appBarStyle(),
+      ),
+      centerTitle: true,
+    );
+  }
+
 
   static PreferredSizeWidget buildCountDown(List<Widget> actions,
           {double elevation = 0.0,
@@ -31,13 +32,15 @@ class CustomAppBar {
           double iconSize = 24,
           bool hideLeading = false}) =>
       AppBar(
-        backgroundColor: Theme.of(Get.context).primaryColorDark.withOpacity(0.6),
+        backgroundColor:
+            Theme.of(Get.context).primaryColorDark.withOpacity(0.7),
         elevation: elevation,
         actions: actions,
         leading: new Container(),
         title: Text(
           text,
-          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 34, color: Colors.red),
+          style: TextStyle(
+              fontWeight: FontWeight.bold, fontSize: 34, color: Colors.red),
         ),
         centerTitle: true,
       );
@@ -85,7 +88,7 @@ class CustomAppBar {
       );
 
   static PreferredSizeWidget buildTimer(
-          int elapsedMilliseconds, Function callback) =>
+          int elapsedMilliseconds, Function callback, GlobalKey buttonKey) =>
       AppBar(
         title: Text(Utils.formatTime(elapsedMilliseconds),
             style: TextStyle(
@@ -100,6 +103,7 @@ class CustomAppBar {
         elevation: 0,
         actions: [
           IconButton(
+              key: buttonKey,
               icon: FaIcon(
                 FontAwesomeIcons.times,
                 color: Colors.red,

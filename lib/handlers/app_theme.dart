@@ -107,6 +107,7 @@ class AppTheme {
 
   static void changeTheme() {
     var darkMode = false;
+
     if (Get.isDarkMode) {
       Get.changeThemeMode(ThemeMode.light);
     } else {

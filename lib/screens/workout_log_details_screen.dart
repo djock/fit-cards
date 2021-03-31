@@ -20,8 +20,8 @@ class WorkoutLogDetailsScreen extends StatelessWidget {
     for (var exercise in exercisesList) {
       _tempList.add(ListItem(
         leftValue: index.toString(),
-        centerValue: exercise.exercise + ' ' + exercise.scheme,
-        rightValue: '',
+        centerValue: exercise.exercise,
+        rightValue: exercise.scheme,
         onTap: null
       ));
       index++;

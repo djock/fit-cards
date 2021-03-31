@@ -6,8 +6,9 @@ import 'package:flutter/material.dart';
 
 class TimerAppBar extends StatefulWidget with PreferredSizeWidget{
   final Function callback;
+  final GlobalKey buttonKey;
 
-  const TimerAppBar({Key key, this.callback,}) : super(key: key);
+  const TimerAppBar({Key key, this.callback, this.buttonKey,}) : super(key: key);
 
   @override
   _TimerAppBarState createState() => _TimerAppBarState();
@@ -51,6 +52,6 @@ class _TimerAppBarState extends State<TimerAppBar> {
   @override
   Widget build(BuildContext context) {
     AppState.trainingSessionMilliseconds = _stopwatch.elapsedMilliseconds;
-    return CustomAppBar.buildTimer(_stopwatch.elapsedMilliseconds, widget.callback);
+    return CustomAppBar.buildTimer(_stopwatch.elapsedMilliseconds, widget.callback, widget.buttonKey);
   }
 }

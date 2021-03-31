@@ -20,6 +20,7 @@ class UserPreferencesHandler {
     final SharedPreferences prefs = await _sharedPreferences;
     prefs.setBool('tutorialFinished', true);
 
+    AppState.tutorialActive = false;
     AppState.tutorialFinished = true;
   }
 
@@ -50,7 +51,6 @@ class UserPreferencesHandler {
 
   static Future<void> savePreferredTheme(bool isDarkMode) async {
     final SharedPreferences prefs = await _sharedPreferences;
-    debugPrint('theme ' + isDarkMode.toString());
     prefs.setBool('theme', isDarkMode);
   }
 

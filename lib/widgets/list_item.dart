@@ -7,8 +7,10 @@ class ListItem extends StatelessWidget {
   final String centerValue;
   final String rightValue;
   final GestureTapCallback onTap;
+  final Function deleteAction;
+  final Function shareAction;
 
-  const ListItem({Key key, this.leftValue, this.centerValue, this.rightValue, this.onTap}) : super(key: key);
+  const ListItem({Key key, this.leftValue, this.centerValue, this.rightValue, this.onTap, this.deleteAction, this.shareAction}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -25,6 +27,7 @@ class ListItem extends StatelessWidget {
             children: <Widget>[
               Row(
                 children: [
+                  leftValue.isNotEmpty ?
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 8.0),
                     child: CircleAvatar(
@@ -34,18 +37,20 @@ class ListItem extends StatelessWidget {
                         style: AppTheme.textThemeBold15(),
                       ),
                     ),
-                  ),
+                  ) : SizedBox(width: 0,),
                   Expanded(
                     child: Column(
                       children: <Widget>[
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 20),
                           child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: <Widget>[
-                              Text(
-                                centerValue,
-                                style: AppTheme.textThemeBold15(),
+                              Expanded(
+                                child: Text(
+                                  centerValue,
+                                  style: AppTheme.textThemeBold15(),
+                                  overflow: TextOverflow.clip,
+                                ),
                               ),
                             ],
                           ),
@@ -53,41 +58,53 @@ class ListItem extends StatelessWidget {
                       ],
                     ),
                   ),
+                  rightValue.isNotEmpty ?
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
                       rightValue,
                       style: AppTheme.textThemeBold15(),
                     ),
-                  ),
+                  ) : SizedBox(width: 0,),
                 ],
               ),
             ],
           ),
         ),
-        secondaryActions: <Widget>[
-          IconSlideAction(
-            caption: 'Delete',
-            color: Colors.red,
-            icon: Icons.delete,
-            onTap: () => _delete(),
-          ),
-          IconSlideAction(
-            caption: 'Share',
-            color: Colors.indigo,
-            icon: Icons.share,
-            onTap: () => _share(),
-          ),
-        ],
+        secondaryActions: _buildActions(),
       ),
     );
   }
+  
+  List<Widget> _buildActions() {
+    List<Widget> result = [];
+
+    if(deleteAction != null || shareAction != null) {
+      if(deleteAction != null) {
+        result.add(IconSlideAction(
+          caption: 'Delete',
+          color: Colors.red,
+          icon: Icons.delete,
+          onTap: () => _delete(),
+        ));
+      }
+      if(shareAction != null) {
+        result.add(IconSlideAction(
+          caption: 'Share',
+          color: Colors.indigo,
+          icon: Icons.share,
+          onTap: () => _share(),
+        ));
+      }
+    }
+    return result;
+  }
 
   void _share() {
-    debugPrint('share');
+    shareAction();
   }
 
   void _delete() {
-    debugPrint('delete');
+    deleteAction();
   }
 }
