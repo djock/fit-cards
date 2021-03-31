@@ -28,7 +28,7 @@ class SchemeModel extends BaseModel {
   }
 
   static String getName(String baseName, schemeType type) {
-    var suffix = type == schemeType.reps ? 'reps' : 'seconds';
+    var suffix = type == schemeType.reps ? 'Reps' : 'seconds';
 
     return '$baseName $suffix';
   }

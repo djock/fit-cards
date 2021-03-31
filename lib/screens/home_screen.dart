@@ -35,13 +35,12 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    var themeIcon = Get.isDarkMode ? FontAwesomeIcons.toggleOn : FontAwesomeIcons.toggleOff;
     return WillPopScope(
       onWillPop: _onBackPressed,
       child: SafeScreen(
         topSafe: false,
         appBar: CustomAppBar.buildWithActions(
-            [IconButton(icon: FaIcon(themeIcon), color: Theme.of(Get.context).accentColor , onPressed: () {
+            [IconButton(icon: FaIcon(Get.isDarkMode ? FontAwesomeIcons.toggleOn : FontAwesomeIcons.toggleOff), color: Theme.of(Get.context).accentColor , onPressed: () {
               AppTheme.changeTheme();
         })],
             elevation: 0, text: ''),
