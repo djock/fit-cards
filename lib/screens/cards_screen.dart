@@ -224,39 +224,42 @@ class _CardsScreenState extends State<CardsScreen>
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        CircularCountDownTimer(
-          key: _startCountDownKey,
-          duration: timerDuration,
-          initialDuration: 0,
-          controller: _countDownController,
-          width: MediaQuery.of(context).size.width / 3,
-          height: MediaQuery.of(context).size.height / 3,
-          ringColor: Colors.red.withOpacity(0.65),
-          ringGradient: null,
-          fillColor: Colors.red,
-          fillGradient: null,
-          backgroundColor: Colors.purple[500].withOpacity(0),
-          backgroundGradient: null,
-          strokeWidth: 12.0,
-          strokeCap: StrokeCap.round,
-          textStyle: TextStyle(
-              fontSize: 50.0,
-              color: Colors.red,
-              fontWeight: FontWeight.bold),
-          textFormat: CountdownTextFormat.S,
-          isReverse: true,
-          isReverseAnimation: false,
-          isTimerTextShown: true,
-          autoStart: true,
-          onStart: () {
-            _delayTutorialNext();
-          },
-          onComplete: () {
-            if (_state == workoutState.countdown)
-              changeState(workoutState.active);
+        Padding(
+          padding: const EdgeInsets.only(bottom: 18.0),
+          child: CircularCountDownTimer(
+            key: _startCountDownKey,
+            duration: timerDuration,
+            initialDuration: 0,
+            controller: _countDownController,
+            width: MediaQuery.of(context).size.width / 3,
+            height: MediaQuery.of(context).size.height / 3,
+            ringColor: Colors.red.withOpacity(0.65),
+            ringGradient: null,
+            fillColor: Colors.red,
+            fillGradient: null,
+            backgroundColor: Colors.purple[500].withOpacity(0),
+            backgroundGradient: null,
+            strokeWidth: 12.0,
+            strokeCap: StrokeCap.round,
+            textStyle: TextStyle(
+                fontSize: 50.0,
+                color: Colors.red,
+                fontWeight: FontWeight.bold),
+            textFormat: CountdownTextFormat.S,
+            isReverse: true,
+            isReverseAnimation: false,
+            isTimerTextShown: true,
+            autoStart: true,
+            onStart: () {
+              _delayTutorialNext();
+            },
+            onComplete: () {
+              if (_state == workoutState.countdown)
+                changeState(workoutState.active);
 
-            if (_state == workoutState.rest) changeState(workoutState.active);
-          },
+              if (_state == workoutState.rest) changeState(workoutState.active);
+            },
+          ),
         ),
       ],
     );

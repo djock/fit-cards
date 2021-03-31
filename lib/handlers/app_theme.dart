@@ -11,15 +11,15 @@ ThemeData appThemeDark() => ThemeData(
       canvasColor: AppColors.canvasColorDark,
       primaryColorDark: AppColors.canvasColorDark,
   floatingActionButtonTheme: FloatingActionButtonThemeData(),
-      fontFamily: 'Roboto Mono',
+      fontFamily: 'Roboto',
       highlightColor: Colors.transparent,
       splashColor: Colors.transparent,
       textTheme: TextTheme(
         headline1: TextStyle(fontSize: 72.0, fontWeight: FontWeight.bold),
         headline6: TextStyle(fontSize: 36.0, fontStyle: FontStyle.italic),
-        bodyText2: TextStyle(fontFamily: 'Roboto Mono'),
+        bodyText2: TextStyle(fontFamily: 'Roboto'),
         bodyText1:
-            TextStyle(fontFamily: 'Roboto Mono', color: AppColors.canvasColorDark),
+            TextStyle(fontFamily: 'Roboto', color: AppColors.canvasColorDark),
       ),
     );
 
@@ -30,15 +30,15 @@ ThemeData appThemeLight() => ThemeData(
       canvasColor: AppColors.canvasColorLight,
       primaryColorDark: AppColors.canvasColorDark,
       floatingActionButtonTheme: FloatingActionButtonThemeData(),
-      fontFamily: 'Roboto Mono',
+      fontFamily: 'Roboto',
       highlightColor: Colors.transparent,
       splashColor: Colors.transparent,
       textTheme: TextTheme(
         headline1: TextStyle(fontSize: 72.0, fontWeight: FontWeight.bold),
         headline6: TextStyle(fontSize: 36.0, fontStyle: FontStyle.italic),
-        bodyText2: TextStyle(fontFamily: 'Roboto Mono'),
+        bodyText2: TextStyle(fontFamily: 'Roboto'),
         bodyText1:
-            TextStyle(fontFamily: 'Roboto Mono', color: AppColors.canvasColorLight),
+            TextStyle(fontFamily: 'Roboto', color: AppColors.canvasColorLight),
       ),
     );
 
