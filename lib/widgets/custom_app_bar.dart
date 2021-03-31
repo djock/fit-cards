@@ -1,7 +1,7 @@
 import 'package:fitcards/handlers/app_theme.dart';
-import 'package:fitcards/utilities/app_colors.dart';
 import 'package:fitcards/utilities/utils.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 
 class CustomAppBar {
@@ -71,7 +71,7 @@ class CustomAppBar {
     backgroundColor: Theme.of(Get.context).canvasColor,
     elevation: 0,
     actions: [
-      IconButton(icon: Icon(Icons.close, color: Colors.red, size: 35,), onPressed: callback)
+      IconButton(icon: FaIcon(FontAwesomeIcons.times, color: Colors.red, size: 35,), onPressed: callback)
     ],
     automaticallyImplyLeading: true,
   );

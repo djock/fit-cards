@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:math';
 
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:fitcards/handlers/app_state.dart';
@@ -318,17 +317,6 @@ class _CardsScreenState extends State<CardsScreen>
     AppStateHandler.logWorkout(currentWorkout);
   }
 
-  void _onSwipeCards() {
-    var exerciseRandom = new Random();
-    if (exerciseRandom.nextBool()) {
-      _exerciseController.triggerLeft();
-      _schemeController.triggerLeft();
-    } else {
-      _exerciseController.triggerRight();
-      _schemeController.triggerRight();
-    }
-  }
-
   void changeState(workoutState state) {
     if (AppState.tutorialActive && state == workoutState.active) {
       _showActiveTutorial();
@@ -412,10 +400,8 @@ class _CardsScreenState extends State<CardsScreen>
 
   GlobalKey _exerciseKey = GlobalKey();
   GlobalKey _schemeKey = GlobalKey();
-  GlobalKey _startKey = GlobalKey();
   GlobalKey _startCountDownKey = GlobalKey();
   GlobalKey _timerKey = GlobalKey();
-  GlobalKey _nextKey = GlobalKey();
   GlobalKey _stopKey = GlobalKey();
 
   List<TargetFocus> _activeTargets = [];

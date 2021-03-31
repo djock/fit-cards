@@ -1,3 +1,6 @@
+import 'dart:async';
+
+import 'package:fitcards/handlers/app_theme.dart';
 import 'package:fitcards/handlers/hive_handler.dart';
 import 'package:fitcards/screens/home_screen.dart';
 import 'package:fitcards/screens/loading_screen.dart';
@@ -15,9 +18,20 @@ class App extends StatefulWidget {
 class _AppState extends State<App> {
   bool _hasLoadedData = false;
   bool _userNameSet = false;
+  bool _themeSet = false;
+
+  bool _isAppLoading = true;
+
+  Future<Null> _startLoadingCountdown() async {
+    const timeOut = const Duration(seconds: 2);
+    new Timer(timeOut, () {
+      setState(() => _isAppLoading = false);
+    });
+  }
 
   @override
   void initState() {
+    _startLoadingCountdown();
     JsonDataHandler.loadAppData().then((value) => {
       if(this.mounted) {
         setState(() {
@@ -36,12 +50,21 @@ class _AppState extends State<App> {
       }
     });
 
+    UserPreferencesHandler.loadPreferredTheme().then((value) {
+      if(this.mounted) {
+        setState(() {
+          AppTheme.setTheme(value);
+          _themeSet = true;
+        });
+      }
+    });
+
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return _hasLoadedData
+    return _hasLoadedData && _themeSet && !_isAppLoading
         ? _userNameSet ? HomeScreen() : WelcomeScreen()
         : LoadingScreen();
   }

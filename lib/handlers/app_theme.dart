@@ -1,3 +1,4 @@
+import 'package:fitcards/handlers/user_preferences_handler.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -104,10 +105,18 @@ class AppTheme {
   }
 
   static void changeTheme() {
+    var darkMode = false;
     if (Get.isDarkMode) {
       Get.changeThemeMode(ThemeMode.light);
     } else {
+      darkMode = true;
       Get.changeThemeMode(ThemeMode.dark);
     }
+
+    UserPreferencesHandler.savePreferredTheme(darkMode);
+  }
+
+  static void setTheme(ThemeMode themeMode) {
+    Get.changeThemeMode(themeMode);
   }
 }

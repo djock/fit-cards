@@ -23,7 +23,6 @@ class Main extends StatelessWidget {
       title: 'FitCards',
       theme: appThemeLight(),
       darkTheme: appThemeDark(),
-      themeMode: ThemeMode.system,
       home: App(),
     );
   }

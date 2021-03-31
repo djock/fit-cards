@@ -4,7 +4,6 @@ import 'package:fitcards/utilities/app_colors.dart';
 import 'package:fitcards/utilities/app_localizations.dart';
 import 'package:fitcards/widgets/flutter_tindercard.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 enum cardType {
   exercise,

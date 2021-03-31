@@ -2,8 +2,6 @@ import 'package:fitcards/handlers/app_state.dart';
 import 'package:fitcards/handlers/app_state_handler.dart';
 import 'package:fitcards/handlers/app_theme.dart';
 import 'package:fitcards/screens/cards_screen.dart';
-import 'package:fitcards/screens/confetti_screen.dart';
-import 'package:fitcards/screens/workout_end_screen.dart';
 import 'package:fitcards/screens/workouts_log_screen.dart';
 import 'package:fitcards/utilities/app_localizations.dart';
 import 'package:fitcards/widgets/custom_app_bar.dart';
@@ -12,6 +10,7 @@ import 'package:fitcards/widgets/general_modal.dart';
 import 'package:fitcards/widgets/safe_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -36,12 +35,13 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var themeIcon = Get.isDarkMode ? FontAwesomeIcons.toggleOn : FontAwesomeIcons.toggleOff;
     return WillPopScope(
       onWillPop: _onBackPressed,
       child: SafeScreen(
         topSafe: false,
         appBar: CustomAppBar.buildWithActions(
-            context, [IconButton(icon: Icon(Icons.settings), color: Theme.of(Get.context).accentColor , onPressed: () {
+            context, [IconButton(icon: FaIcon(themeIcon), color: Theme.of(Get.context).accentColor , onPressed: () {
               AppTheme.changeTheme();
         })],
             elevation: 0, text: ''),

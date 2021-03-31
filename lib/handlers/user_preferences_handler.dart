@@ -1,4 +1,5 @@
 import 'package:fitcards/handlers/app_state.dart';
+import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class UserPreferencesHandler {
@@ -44,5 +45,22 @@ class UserPreferencesHandler {
         : '';
 
     return AppState.userName.isNotEmpty;
+  }
+
+
+  static Future<void> savePreferredTheme(bool isDarkMode) async {
+    final SharedPreferences prefs = await _sharedPreferences;
+    debugPrint('theme ' + isDarkMode.toString());
+    prefs.setBool('theme', isDarkMode);
+  }
+
+  static Future<ThemeMode> loadPreferredTheme() async {
+    final SharedPreferences prefs = await _sharedPreferences;
+
+    if(prefs.getBool('theme') != null) {
+      return prefs.getBool('theme') ? ThemeMode.dark : ThemeMode.light;
+    } else {
+      return ThemeMode.system;
+    }
   }
 }
