@@ -379,6 +379,7 @@ class CardController {
   TriggerListener _listener;
   int index = 0;
   bool hasSkipped = false;
+  bool cancelCallback = false;
 
   void setIndex(int value) {
     index = value;

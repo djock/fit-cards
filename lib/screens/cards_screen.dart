@@ -80,11 +80,13 @@ class _CardsScreenState extends State<CardsScreen>
 
   PreferredSizeWidget _buildAppBar() {
     if (_state == workoutState.active ||
+        _state == workoutState.rest ||
         _state == workoutState.rest && AppState.tutorialActive) {
       return TimerAppBar(
         key: _timerKey,
         callback: _onStopWorkout,
         buttonKey: _stopKey,
+        isInRest: _state == workoutState.rest,
       );
     }
 
@@ -113,6 +115,7 @@ class _CardsScreenState extends State<CardsScreen>
             color: Get.isDarkMode
                 ? Theme.of(Get.context).accentColor
                 : Theme.of(Get.context).primaryColorDark,
+            size: 18,
           ),
           onPressed: () {
             _onOpenFilters();
@@ -147,23 +150,7 @@ class _CardsScreenState extends State<CardsScreen>
                               _state == workoutState.countdown ? true : false,
                           type: cardType.exercise,
                           onCallback: () {
-                            if (_state == workoutState.active) {
-                              if(!_exerciseController.hasSkipped) {
-                                _onNextExercise();
-                                _schemeController.triggerLeft();
-                                changeState(workoutState.rest);
-                              } else {
-                                _schemeController.triggerLeft();
-                                _exerciseController.hasSkipped = false;
-                              }
-                            }
-
-                            if (_state == workoutState.active ||
-                                _state == workoutState.countdown ||
-                                _state == workoutState.rest) return;
-
-                            _onStartWorkout();
-                            _schemeController.triggerLeft();
+                            _onSwipeExerciseCard();
                           },
                           onSkip: () {
                             _onSkipExercise();
@@ -180,9 +167,11 @@ class _CardsScreenState extends State<CardsScreen>
                           list: AppState.schemes,
                           color: AppColors.schemeCardColor,
                           cardController: _schemeController,
-                          isBlocked: true,
+                          isBlocked: _state == workoutState.rest ? true : false,
                           type: cardType.scheme,
-                          onCallback: () {},
+                          onCallback: () {
+                            _onSwipeSchemeCard();
+                          },
                         ),
                       ),
                       SizedBox(
@@ -288,6 +277,7 @@ class _CardsScreenState extends State<CardsScreen>
 
     if (_state == workoutState.countdown) {
       changeState(workoutState.idle);
+      AppStateHandler.shuffleJson();
     } else {
       changeState(workoutState.finish);
     }
@@ -304,13 +294,46 @@ class _CardsScreenState extends State<CardsScreen>
 
     var now = DateTime.now();
     var currentWorkout = new WorkoutLogModel(AppState.loggedWorkouts.length,
-        now, AppState.trainingSessionMilliseconds);
+        now, WorkoutState.trainingSessionMilliseconds);
 
     AppStateHandler.logExercise();
     AppStateHandler.logWorkout(currentWorkout);
   }
 
-  void _onNextExercise() {
+  void _onSwipeExerciseCard() {
+    if (_state == workoutState.active) {
+      if (_exerciseController.hasSkipped) {
+        _schemeController.cancelCallback = true;
+        _schemeController.triggerLeft();
+        _exerciseController.hasSkipped = false;
+      }
+      else {
+        _onSwipeSuccess(_schemeController);
+      }
+    }
+
+    if (_state == workoutState.active ||
+        _state == workoutState.countdown ||
+        _state == workoutState.rest) return;
+
+    _onStartWorkout();
+    _schemeController.triggerLeft();
+  }
+
+  void _onSwipeSchemeCard() {
+    if (_state == workoutState.active) {
+      _onSwipeSuccess(_exerciseController);
+    }
+  }
+
+  void _onSwipeSuccess(CardController otherController) {
+    _onLogExercise();
+    otherController.cancelCallback = true;
+    otherController.triggerLeft();
+    changeState(workoutState.rest);
+  }
+
+  void _onLogExercise() {
     var currentExercise = new KeyValuePair(
         AppState.exercises[_exerciseController.index].name,
         AppState.schemes[_schemeController.index].name);
@@ -322,7 +345,6 @@ class _CardsScreenState extends State<CardsScreen>
 
   void _onSkipExercise() {
     _exerciseController.triggerLeft();
-//    _schemeController.triggerLeft();
   }
 
   void changeState(workoutState state) {

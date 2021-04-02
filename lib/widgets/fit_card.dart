@@ -83,7 +83,11 @@ class FitCard extends StatelessWidget {
         if (orientation == CardSwipeOrientation.LEFT ||
             orientation == CardSwipeOrientation.RIGHT) {
 
-          onCallback();
+          if(cardController.cancelCallback) {
+            cardController.cancelCallback = false;
+          } else {
+            onCallback();
+          }
         }
       },
     );

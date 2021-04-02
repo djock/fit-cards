@@ -13,11 +13,11 @@ class JsonDataHandler {
 
   static Future<bool> loadAppData() async {
     await loadJsonFile('exercises').then((value) {
-      AppState.exercises = ExerciseModel.fromJsonList(jsonDecode(value));
+      AppState.cachedExercises = ExerciseModel.fromJsonList(jsonDecode(value));
     });
 
     await loadJsonFile('schemes').then((value) {
-      AppState.schemes = SchemeModel.fromJsonList(jsonDecode(value));
+      AppState.cachedSchemes = SchemeModel.fromJsonList(jsonDecode(value));
     });
 
     AppStateHandler.shuffleJson();

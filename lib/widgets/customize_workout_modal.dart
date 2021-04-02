@@ -21,6 +21,7 @@ class _CustomizeWorkoutModal extends State<CustomizeWorkoutModal> {
   void initState() {
     _restTime = WorkoutState.restTime;
     _canSkip = WorkoutState.canSkipExercise;
+    _changeOccurred = false;
 
     super.initState();
   }

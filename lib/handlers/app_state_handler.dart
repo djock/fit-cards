@@ -8,6 +8,9 @@ import 'hive_handler.dart';
 
 class AppStateHandler {
   static void shuffleJson() {
+    AppState.exercises = List.from(AppState.cachedExercises);
+    AppState.schemes = List.from(AppState.cachedSchemes);
+
     AppState.exercises.removeAt(0);
     AppState.schemes.removeAt(0);
 

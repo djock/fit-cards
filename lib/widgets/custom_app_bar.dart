@@ -88,7 +88,7 @@ class CustomAppBar {
       );
 
   static PreferredSizeWidget buildTimer(
-          int elapsedMilliseconds, Function callback, GlobalKey buttonKey) =>
+          int elapsedMilliseconds, Function callback, GlobalKey buttonKey, bool isInRest) =>
       AppBar(
         title: Text(Utils.formatTime(elapsedMilliseconds),
             style: TextStyle(
@@ -99,7 +99,7 @@ class CustomAppBar {
             textAlign: TextAlign.center),
         centerTitle: true,
         leading: new Container(),
-        backgroundColor: Theme.of(Get.context).canvasColor,
+        backgroundColor: isInRest ? AppTheme.countDownTimerColor() : Theme.of(Get.context).canvasColor,
         elevation: 0,
         actions: [
           IconButton(
