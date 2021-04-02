@@ -26,7 +26,7 @@ class CustomAppBar {
   }
 
 
-  static PreferredSizeWidget buildCountDown(List<Widget> actions,
+  static PreferredSizeWidget buildRest(List<Widget> actions,
           {double elevation = 0.0,
           String text = '',
           double iconSize = 24,
@@ -37,6 +37,24 @@ class CustomAppBar {
         elevation: elevation,
         actions: actions,
         leading: new Container(),
+        title: Text(
+          text,
+          style: TextStyle(
+              fontWeight: FontWeight.bold, fontSize: 34, color: Colors.red),
+        ),
+        centerTitle: true,
+      );
+
+  static PreferredSizeWidget buildCountDown(
+      {double elevation = 0.0,
+        String text = '',
+        double iconSize = 24,
+        bool hideLeading = false}) =>
+      AppBar(
+        backgroundColor:
+        AppTheme.countDownTimerColor(),
+        elevation: elevation,
+        iconTheme: IconThemeData(color: Colors.red),
         title: Text(
           text,
           style: TextStyle(

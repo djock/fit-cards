@@ -90,8 +90,8 @@ class _CardsScreenState extends State<CardsScreen>
       );
     }
 
-    if (_state == workoutState.countdown || _state == workoutState.rest) {
-      return CustomAppBar.buildCountDown([
+    if (_state == workoutState.rest) {
+      return CustomAppBar.buildRest([
         IconButton(
             icon: FaIcon(
               FontAwesomeIcons.times,
@@ -101,11 +101,12 @@ class _CardsScreenState extends State<CardsScreen>
             onPressed: () {
               _onStopWorkout();
             })
-      ],
-          text: _state == workoutState.countdown
-              ? AppLocalizations.getReady
-              : AppLocalizations.rest,
-          iconSize: 40);
+      ], text: AppLocalizations.rest, iconSize: 40);
+    }
+
+    if (_state == workoutState.countdown) {
+      return CustomAppBar.buildCountDown(
+          text: AppLocalizations.getReady, iconSize: 40);
     }
 
     return CustomAppBar.buildWithActions([
@@ -217,6 +218,8 @@ class _CardsScreenState extends State<CardsScreen>
           );
   }
 
+  bool _countDownPaused = false;
+
   Widget _buildCountDownTimer() {
     var timerDuration = AppState.tutorialActive
         ? _state == workoutState.rest
@@ -231,37 +234,57 @@ class _CardsScreenState extends State<CardsScreen>
       children: [
         Padding(
           padding: const EdgeInsets.only(bottom: 18.0),
-          child: CircularCountDownTimer(
-            key: _startCountDownKey,
-            duration: timerDuration,
-            initialDuration: 0,
-            controller: _countDownController,
-            width: MediaQuery.of(context).size.width / 3,
-            height: MediaQuery.of(context).size.height / 3,
-            ringColor: Colors.red.withOpacity(0.65),
-            ringGradient: null,
-            fillColor: Colors.red,
-            fillGradient: null,
-            backgroundColor: Colors.purple[500].withOpacity(0),
-            backgroundGradient: null,
-            strokeWidth: 12.0,
-            strokeCap: StrokeCap.round,
-            textStyle: TextStyle(
-                fontSize: 50.0, color: Colors.red, fontWeight: FontWeight.bold),
-            textFormat: CountdownTextFormat.S,
-            isReverse: true,
-            isReverseAnimation: false,
-            isTimerTextShown: true,
-            autoStart: true,
-            onStart: () {
-              _delayTutorialNext();
+          child: InkWell(
+            onTap: () {
+              if (_state == workoutState.countdown) {
+                if (_countDownPaused) {
+                  _countDownController.resume();
+                  setState(() {
+                    _countDownPaused = false;
+                  });
+                } else {
+                  _countDownController.pause();
+                  setState(() {
+                    _countDownPaused = true;
+                  });
+                }
+              }
             },
-            onComplete: () {
-              if (_state == workoutState.countdown)
-                changeState(workoutState.active);
+            child: CircularCountDownTimer(
+              key: _startCountDownKey,
+              duration: timerDuration,
+              initialDuration: 0,
+              controller: _countDownController,
+              width: MediaQuery.of(context).size.width / 3,
+              height: MediaQuery.of(context).size.height / 3,
+              ringColor: Colors.red.withOpacity(0.65),
+              ringGradient: null,
+              fillColor: Colors.red,
+              fillGradient: null,
+              backgroundColor: Colors.purple[500].withOpacity(0),
+              backgroundGradient: null,
+              strokeWidth: 12.0,
+              strokeCap: StrokeCap.round,
+              textStyle: TextStyle(
+                  fontSize: 50.0,
+                  color: Colors.red,
+                  fontWeight: FontWeight.bold),
+              textFormat: CountdownTextFormat.S,
+              isReverse: true,
+              isReverseAnimation: false,
+              isTimerTextShown: true,
+              autoStart: true,
+              onStart: () {
+                _delayTutorialNext();
+              },
+              onComplete: () {
+                if (_state == workoutState.countdown)
+                  changeState(workoutState.active);
 
-              if (_state == workoutState.rest) changeState(workoutState.active);
-            },
+                if (_state == workoutState.rest)
+                  changeState(workoutState.active);
+              },
+            ),
           ),
         ),
       ],
@@ -306,8 +329,7 @@ class _CardsScreenState extends State<CardsScreen>
         _schemeController.cancelCallback = true;
         _schemeController.triggerLeft();
         _exerciseController.hasSkipped = false;
-      }
-      else {
+      } else {
         _onSwipeSuccess(_schemeController);
       }
     }
