@@ -276,8 +276,8 @@ class _CardsScreenState extends State<CardsScreen>
     if (AppState.tutorialActive) _tutorialCoachMark.finish();
 
     if (_state == workoutState.countdown) {
-      changeState(workoutState.idle);
       AppStateHandler.shuffleJson();
+      changeState(workoutState.idle);
     } else {
       changeState(workoutState.finish);
     }

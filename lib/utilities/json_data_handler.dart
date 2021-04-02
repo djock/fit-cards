@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:fitcards/handlers/app_state.dart';
-import 'package:fitcards/handlers/app_state_handler.dart';
 import 'package:fitcards/models/exercise_model.dart';
 import 'package:fitcards/models/scheme_model.dart';
 import 'package:flutter/services.dart' show rootBundle;
@@ -19,8 +18,6 @@ class JsonDataHandler {
     await loadJsonFile('schemes').then((value) {
       AppState.cachedSchemes = SchemeModel.fromJsonList(jsonDecode(value));
     });
-
-    AppStateHandler.shuffleJson();
 
     return true;
   }

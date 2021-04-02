@@ -54,6 +54,10 @@ class FitCard extends StatelessWidget {
 
         int colorIndex = 0;
 
+        if(index == 0) {
+          debugPrint('zero ' + list[index].name);
+        }
+
         if (index > AppColors.exerciseCardColors.length - 1) {
           colorIndex = index % AppColors.exerciseCardColors.length;
         } else {

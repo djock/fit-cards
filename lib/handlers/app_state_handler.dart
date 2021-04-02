@@ -2,6 +2,7 @@ import 'package:fitcards/models/exercise_model.dart';
 import 'package:fitcards/models/scheme_model.dart';
 import 'package:fitcards/models/workout_log_model.dart';
 import 'package:fitcards/utilities/app_localizations.dart';
+import 'package:flutter/foundation.dart';
 
 import 'app_state.dart';
 import 'hive_handler.dart';

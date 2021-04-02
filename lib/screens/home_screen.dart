@@ -56,7 +56,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     children: [
                       CustomGradientButton(
                         text: AppLocalizations.startAWorkout,
-                        callback: () {
+                        action: () {
                           AppStateHandler.shuffleJson();
                           Get.to(() => CardsScreen());
                         },
@@ -66,7 +66,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                       CustomGradientButton(
                         text: AppLocalizations.workoutsLog,
-                        callback: () {
+                        action: () {
                           Get.to(() => WorkoutsLogScreen());
                         },
                       ),

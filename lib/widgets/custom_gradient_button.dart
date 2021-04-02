@@ -3,16 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class CustomGradientButton extends StatelessWidget {
-  final Function callback;
+  final Function action;
   final String text;
 
-  const CustomGradientButton({Key key, this.callback, this.text}) : super(key: key);
+  const CustomGradientButton({Key key, this.action, this.text}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        callback();
+        action();
       },
       child: Container(
         width: MediaQuery.of(context).size.width,
