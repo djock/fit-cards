@@ -378,7 +378,7 @@ typedef TriggerListener = void Function(TriggerDirection trigger);
 class CardController {
   TriggerListener _listener;
   int index = 0;
-  bool triggerOther = false;
+  bool hasSkipped = false;
 
   void setIndex(int value) {
     index = value;

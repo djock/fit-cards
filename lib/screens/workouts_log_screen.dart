@@ -8,7 +8,6 @@ import 'package:fitcards/widgets/list_item.dart';
 import 'package:fitcards/widgets/safe_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
 
 class WorkoutsLogScreen extends StatefulWidget {
   @override

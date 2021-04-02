@@ -1,6 +1,5 @@
 import 'package:fitcards/handlers/app_state.dart';
 import 'package:fitcards/models/workout_log_model.dart';
-import 'package:fitcards/utilities/app_localizations.dart';
 import 'package:fitcards/utilities/utils.dart';
 import 'package:fitcards/widgets/custom_app_bar.dart';
 import 'package:fitcards/widgets/list_item.dart';

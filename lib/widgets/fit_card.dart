@@ -1,14 +1,11 @@
-import 'dart:math';
-
+import 'package:fitcards/handlers/workout_state.dart';
 import 'package:fitcards/models/base_model.dart';
 import 'package:fitcards/models/exercise_model.dart';
-import 'package:fitcards/screens/cards_screen.dart';
 import 'package:fitcards/utilities/app_colors.dart';
 import 'package:fitcards/utilities/app_localizations.dart';
 import 'package:fitcards/widgets/flutter_tindercard.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:get/get.dart';
 
 enum cardType { exercise, scheme }
 
@@ -20,7 +17,8 @@ class FitCard extends StatelessWidget {
   final CardController cardController;
   final bool isBlocked;
   final cardType type;
-  final Function callback;
+  final Function onCallback;
+  final Function onSkip;
 
   const FitCard({
     Key key,
@@ -29,7 +27,8 @@ class FitCard extends StatelessWidget {
     this.cardController,
     this.isBlocked,
     this.type,
-    this.callback,
+    this.onCallback,
+    this.onSkip,
   }) : super(key: key);
 
   @override
@@ -83,7 +82,8 @@ class FitCard extends StatelessWidget {
         /// Get orientation & index of swiped card!
         if (orientation == CardSwipeOrientation.LEFT ||
             orientation == CardSwipeOrientation.RIGHT) {
-          callback();
+
+          onCallback();
         }
       },
     );
@@ -116,6 +116,7 @@ class FitCard extends StatelessWidget {
             ),
           ),
           _buildExerciseCardPointsText(points),
+          _buildSkipExerciseButton(points),
           isFirstCard ? _buildFirstCardIcon(points) : SizedBox()
         ],
       ),
@@ -228,6 +229,24 @@ class FitCard extends StatelessWidget {
                 color: AppColors.canvasColorLight),
             textAlign: TextAlign.center,
           ),
+        ),
+      );
+    }
+
+    return SizedBox();
+  }
+
+  Widget _buildSkipExerciseButton(int points) {
+    if (type == cardType.exercise && !(points == 0) && WorkoutState.canSkipExercise) {
+      return Align(
+        alignment: Alignment.bottomRight,
+        child: IconButton(
+          icon: FaIcon(FontAwesomeIcons.forward),
+          color: AppColors.canvasColorLight.withOpacity(1),
+          onPressed: () {
+            cardController.hasSkipped = true;
+            onSkip();
+          },
         ),
       );
     }

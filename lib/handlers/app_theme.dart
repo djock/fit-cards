@@ -83,8 +83,21 @@ class AppTheme {
             : AppColors.canvasColorDark);
   }
 
+  static TextStyle textBlueBold3() {
+    return _textStyle(
+        30,
+        FontWeight.bold,
+        Get.isDarkMode
+            ? Theme.of(Get.context).accentColor
+            : AppColors.canvasColorDark);
+  }
+
   static TextStyle customAccentText(FontWeight fontWeight, double fontSize) {
     return _textStyle(fontSize, fontWeight, Theme.of(Get.context).accentColor);
+  }
+
+  static TextStyle customDarkText(FontWeight fontWeight, double fontSize) {
+    return _textStyle(fontSize, fontWeight, AppColors.canvasColorDark);
   }
 
   static TextStyle customDynamicText(FontWeight fontWeight, double fontSize) {

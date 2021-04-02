@@ -46,4 +46,9 @@ class AppLocalizations {
 
   static String getReady = 'Get Ready';
   static String rest = 'Rest';
+
+  static String skipExercise = 'Skip exercise?';
+  static String chooseRestTime = 'Chose rest duration (seconds)';
+  static String customize = 'Customize';
+  static String apply = 'Apply';
 }
