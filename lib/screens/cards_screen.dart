@@ -202,7 +202,7 @@ class _CardsScreenState extends State<CardsScreen>
                     ? Align(
                         alignment: Alignment.center,
                         child: Container(
-                          color: Theme.of(Get.context).primaryColorDark.withOpacity(0.7),
+                          color: AppTheme.countDownTimerColor(),
                           width: MediaQuery.of(context).size.width,
                           height: MediaQuery.of(context).size.height,
                           child: Center(
@@ -219,7 +219,7 @@ class _CardsScreenState extends State<CardsScreen>
   }
 
   Widget _buildCountDownTimer() {
-    var timerDuration = AppState.tutorialActive ? _state == workoutState.rest ? 0 : 5 : _state == workoutState.countdown ? 5 : 5;
+    var timerDuration = AppState.tutorialActive ? _state == workoutState.rest ? 0 : 500 : _state == workoutState.countdown ? 500 : 500;
 
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,

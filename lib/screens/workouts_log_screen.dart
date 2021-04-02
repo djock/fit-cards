@@ -21,12 +21,9 @@ class _WorkoutsLogScreenState extends State<WorkoutsLogScreen> {
 
     if(AppState.loggedWorkouts.length > 0) {
       for (var workout in AppState.loggedWorkouts) {
-        var formatter = DateFormat('dd MMM, yyyy').add_jm();
-        var formattedDate = formatter.format(workout.date).toUpperCase();
-
         _tempList.add(ListItem(
           leftValue: '',
-          centerValue: formattedDate,
+          centerValue: Utils.formatDate(workout.date),
           rightValue: Utils.formatTimeShort(workout.duration ~/ 1000),
           deleteAction: () {
             AppState.loggedWorkouts.remove(workout);
@@ -35,7 +32,7 @@ class _WorkoutsLogScreenState extends State<WorkoutsLogScreen> {
             });
           },
           onTap: () {
-            Get.to(() => WorkoutLogDetailsScreen(workoutIndex: workout.index,));
+            Get.to(() => WorkoutLogDetailsScreen(workoutLogModel: workout,));
           },
         ));
       }

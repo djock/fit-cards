@@ -121,4 +121,6 @@ class AppTheme {
   static void setTheme(ThemeMode themeMode) {
     Get.changeThemeMode(themeMode);
   }
+
+  static Color countDownTimerColor() => Theme.of(Get.context).primaryColorDark.withOpacity(Get.isDarkMode ? 0.6 : 0.85);
 }

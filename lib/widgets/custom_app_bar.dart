@@ -33,7 +33,7 @@ class CustomAppBar {
           bool hideLeading = false}) =>
       AppBar(
         backgroundColor:
-            Theme.of(Get.context).primaryColorDark.withOpacity(0.7),
+        AppTheme.countDownTimerColor(),
         elevation: elevation,
         actions: actions,
         leading: new Container(),

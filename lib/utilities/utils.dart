@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class Utils {
   static String formatTimeShort(int time) {
@@ -61,5 +62,12 @@ class Utils {
     var seconds = (secs % 60).toString().padLeft(2, '0');
 
     return "$hours:$minutes:$seconds";
+  }
+
+  static String formatDate(DateTime dateTime) {
+    var formatter = DateFormat('dd MMM, yyyy').add_jm();
+    var formattedDate = formatter.format(dateTime).toUpperCase();
+
+    return formattedDate;
   }
 }
