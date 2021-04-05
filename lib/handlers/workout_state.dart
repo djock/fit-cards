@@ -1,5 +1,5 @@
 class WorkoutState {
-  static bool canSkipExercise = false;
+  static bool canSkipExercise = true;
   static int restTime = 10;
   static int trainingSessionMilliseconds = 0;
 

@@ -1,5 +1,6 @@
 import 'package:fitcards/handlers/app_state.dart';
 import 'package:fitcards/handlers/app_theme.dart';
+import 'package:fitcards/handlers/hive_handler.dart';
 import 'package:fitcards/screens/workout_log_details_screen.dart';
 import 'package:fitcards/utilities/app_localizations.dart';
 import 'package:fitcards/utilities/utils.dart';
@@ -26,6 +27,7 @@ class _WorkoutsLogScreenState extends State<WorkoutsLogScreen> {
           rightValue: Utils.formatTimeShort(workout.duration ~/ 1000),
           deleteAction: () {
             AppState.loggedWorkouts.remove(workout);
+            HiveHandler.saveWorkoutToBox();
             setState(() {
 
             });

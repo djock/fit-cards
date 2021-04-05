@@ -17,7 +17,7 @@ class AppLocalizations {
   static String tutorialExerciseCardTitle = 'Exercise card';
   static String tutorialExerciseCardDescription = 'The exercise is revealed when you start the workout';
   static String tutorialSchemeCardTitle = 'Scheme card';
-  static String tutorialSchemeCardDescription = 'The number of reps you need to to do complete the round. Also hidden until the workouts starts';
+  static String tutorialSchemeCardDescription = 'The number of reps you need to do complete the round. Also hidden until the workouts starts';
   static String tutorialStartButtonDescription = 'Swipe on the exercise card to start the workout';
   static String tutorialStartTimerDescription = 'A countdown timer to allow you to prepare.';
   static String tutorialNextCardButtonDescription = 'When finished with the current exercise, tap Next to move on to the next one.';

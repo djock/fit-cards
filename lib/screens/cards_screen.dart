@@ -168,7 +168,7 @@ class _CardsScreenState extends State<CardsScreen>
                           list: AppState.schemes,
                           color: AppColors.schemeCardColor,
                           cardController: _schemeController,
-                          isBlocked: _state == workoutState.rest ? true : false,
+                          isBlocked: _state == workoutState.rest || _state == workoutState.idle ? true : false,
                           type: cardType.scheme,
                           onCallback: () {
                             _onSwipeSchemeCard();
