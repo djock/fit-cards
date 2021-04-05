@@ -109,6 +109,12 @@ class AppTheme {
             : AppColors.canvasColorDark);
   }
 
+  static Color dynamicColor() {
+    return Get.isDarkMode
+        ? Theme.of(Get.context).accentColor
+        : Theme.of(Get.context).primaryColor;
+  }
+
   static TextStyle _textStyle(
       double fontSize, FontWeight fontWeight, Color color) {
     return TextStyle(

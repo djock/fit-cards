@@ -1,7 +1,10 @@
+import 'dart:async';
+
 import 'package:fitcards/handlers/app_state.dart';
 import 'package:fitcards/handlers/app_state_handler.dart';
 import 'package:fitcards/handlers/app_theme.dart';
 import 'package:fitcards/screens/cards_screen.dart';
+import 'package:fitcards/screens/settings_screen.dart';
 import 'package:fitcards/screens/workouts_log_screen.dart';
 import 'package:fitcards/utilities/app_localizations.dart';
 import 'package:fitcards/widgets/custom_app_bar.dart';
@@ -19,17 +22,16 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-
   Future<bool> _onBackPressed() {
     return showDialog(
-        context: context,
-        builder: (context) => GeneralModal(
-          subTitle: AppLocalizations.closeAppSubtitle,
-          okAction: () => SystemNavigator.pop(),
-          cancelAction: () => Navigator.pop(context),
-          okActionText: AppLocalizations.close,
-          cancelActionText: AppLocalizations.cancel,
-        )) ??
+            context: context,
+            builder: (context) => GeneralModal(
+                  subTitle: AppLocalizations.closeAppSubtitle,
+                  okAction: () => SystemNavigator.pop(),
+                  cancelAction: () => Navigator.pop(context),
+                  okActionText: AppLocalizations.close,
+                  cancelActionText: AppLocalizations.cancel,
+                )) ??
         false;
   }
 
@@ -39,11 +41,16 @@ class _HomeScreenState extends State<HomeScreen> {
       onWillPop: _onBackPressed,
       child: SafeScreen(
         topSafe: false,
-        appBar: CustomAppBar.buildWithActions(
-            [IconButton(icon: FaIcon(Get.isDarkMode ? FontAwesomeIcons.toggleOn : FontAwesomeIcons.toggleOff), color: Theme.of(Get.context).accentColor , onPressed: () {
-              AppTheme.changeTheme();
-        })],
-            elevation: 0, text: ''),
+        appBar: CustomAppBar.buildWithActions([
+          IconButton(
+              icon: FaIcon(FontAwesomeIcons.cog),
+              color: Theme.of(Get.context).accentColor,
+              onPressed: () {
+                Get.to(() => SettingsScreen()).then((value) {
+                  setState(() {});
+                });
+              })
+        ], elevation: 0, text: ''),
         body: Padding(
           padding: const EdgeInsets.all(10),
           child: Stack(
@@ -85,9 +92,11 @@ class _HomeScreenState extends State<HomeScreen> {
                         '${AppLocalizations.hello} ${AppState.userName},',
                         style: AppTheme.textAccentBold30(),
                       ),
-                      SizedBox(height: 5,),
+                      SizedBox(
+                        height: 5,
+                      ),
                       Text(
-                        'Are you ready for today?',
+                        AppLocalizations.areYouReady,
                         style: AppTheme.textAccentNormal15(),
                       )
                     ],
@@ -97,7 +106,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ],
           ),
         ),
-      ),
+      )
     );
   }
 }

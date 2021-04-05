@@ -20,4 +20,7 @@ class AppState {
 
   static String userName = '';
   static bool isDarkTheme = false;
+
+  static String appVersion;
+  static int appBuildNumber;
 }

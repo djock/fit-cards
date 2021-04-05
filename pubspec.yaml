@@ -38,6 +38,8 @@ dependencies:
   confetti: ^0.5.5
   font_awesome_flutter: ^9.0.0
   numberpicker: ^2.0.1
+  share: ^2.0.1
+  package_info: ^2.0.0
 
 dev_dependencies:
   flutter_test:

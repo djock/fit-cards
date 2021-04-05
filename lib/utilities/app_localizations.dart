@@ -51,4 +51,8 @@ class AppLocalizations {
   static String chooseRestTime = 'Chose rest duration (seconds)';
   static String customize = 'Customize';
   static String apply = 'Apply';
+  static String settings = 'Settings';
+
+  static String areYouReady = 'Are you ready for today?';
+  static String nightMode = 'Night mode';
 }
