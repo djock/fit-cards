@@ -1,7 +1,5 @@
 import 'dart:async';
 
-import 'package:assets_audio_player/assets_audio_player.dart';
-import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:fitcards/handlers/app_state.dart';
 import 'package:fitcards/handlers/app_state_handler.dart';
 import 'package:fitcards/handlers/app_theme.dart';
@@ -13,6 +11,7 @@ import 'package:fitcards/screens/workout_end_screen.dart';
 import 'package:fitcards/utilities/app_colors.dart';
 import 'package:fitcards/utilities/app_localizations.dart';
 import 'package:fitcards/utilities/key_value_pair_model.dart';
+import 'package:fitcards/widgets/circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:fitcards/widgets/custom_app_bar.dart';
 import 'package:fitcards/widgets/customize_workout_modal.dart';
 import 'package:fitcards/widgets/fit_card.dart';
@@ -279,12 +278,6 @@ class _CardsScreenState extends State<CardsScreen>
                 _delayTutorialNext();
               },
               onComplete: () {
-                AssetsAudioPlayer.newPlayer().open(
-                  Audio("assets/tick.flac"),
-                  autoStart: true,
-                  showNotification: true,
-                );
-
                 if (_state == workoutState.countdown)
                   changeState(workoutState.active);
 

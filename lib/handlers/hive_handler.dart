@@ -9,7 +9,6 @@ import 'package:path_provider/path_provider.dart';
 class HiveHandler {
   static Box exercisesBox;
   static Box workoutsBox;
-  static Box tutorialBox;
 
   static void init() {
     Hive.registerAdapter(WorkoutExerciseModelAdapter());
@@ -60,5 +59,10 @@ class HiveHandler {
 
   static void saveWorkoutToBox() {
     workoutsBox.put('workouts', AppState.loggedWorkouts);
+  }
+
+  static void clearAllData() {
+    workoutsBox.clear();
+    exercisesBox.clear();
   }
 }

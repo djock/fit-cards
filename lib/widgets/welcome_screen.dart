@@ -2,7 +2,9 @@ import 'package:fitcards/handlers/user_preferences_handler.dart';
 import 'package:fitcards/screens/home_screen.dart';
 import 'package:fitcards/utilities/app_localizations.dart';
 import 'package:fitcards/widgets/custom_button.dart';
+import 'package:fitcards/widgets/general_modal.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 import 'input_decoration.dart';
@@ -17,6 +19,19 @@ class WelcomeScreen extends StatefulWidget {
 class _WelcomeScreenState extends State<WelcomeScreen> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _textController = TextEditingController();
+
+  Future<bool> _onBackPressed() {
+    return showDialog(
+        context: context,
+        builder: (context) => GeneralModal(
+          subTitle: AppLocalizations.closeAppSubtitle,
+          okAction: () => SystemNavigator.pop(),
+          cancelAction: () => Navigator.pop(context),
+          okActionText: AppLocalizations.close,
+          cancelActionText: AppLocalizations.cancel,
+        )) ??
+        false;
+  }
 
   Widget _entryField(String defaultText) {
     return Center(
@@ -67,50 +82,53 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   }
 
   Widget _buildScreen() {
-    return Container(
-      child: SafeArea(
-        top: false,
-        child: Scaffold(
-            resizeToAvoidBottomInset: false,
-            body: Container(
-              color: Theme.of(context).canvasColor.withOpacity(0.2),
-              padding: EdgeInsets.symmetric(horizontal: 20),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  SizedBox(height: 200),
-                  Text(
-                    AppLocalizations.chooseName,
-                    style: TextStyle(fontFamily: 'Lora', fontSize: 28, color: Theme.of(context).accentColor),
-                  ),
-                  SizedBox(
-                    height: 50,
-                  ),
-                  _formWidget(),
-                  SizedBox(
-                    height: 50,
-                  ),
-                  CustomButton(
-                    buttonColor: Theme.of(context).accentColor,
-                    textColor: Theme.of(Get.context).textTheme.bodyText1.color,
-                    isOutline: false,
-                    buttonText: AppLocalizations.start,
-                    onPressed: () {
-                    if (_formKey.currentState.validate()) {
-                      UserPreferencesHandler.saveUserName(_textController.text);
+    return WillPopScope(
+      onWillPop: _onBackPressed,
+      child: Container(
+        child: SafeArea(
+          top: false,
+          child: Scaffold(
+              resizeToAvoidBottomInset: false,
+              body: Container(
+                color: Theme.of(context).canvasColor.withOpacity(0.2),
+                padding: EdgeInsets.symmetric(horizontal: 20),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    SizedBox(height: 200),
+                    Text(
+                      AppLocalizations.chooseName,
+                      style: TextStyle(fontFamily: 'Lora', fontSize: 28, color: Theme.of(context).accentColor),
+                    ),
+                    SizedBox(
+                      height: 50,
+                    ),
+                    _formWidget(),
+                    SizedBox(
+                      height: 50,
+                    ),
+                    CustomButton(
+                      buttonColor: Theme.of(context).accentColor,
+                      textColor: Theme.of(Get.context).textTheme.bodyText1.color,
+                      isOutline: false,
+                      buttonText: AppLocalizations.start,
+                      onPressed: () {
+                      if (_formKey.currentState.validate()) {
+                        UserPreferencesHandler.saveUserName(_textController.text);
 
-                      Get.off(() => HomeScreen());
-                    }
-                    },
-                  ),
-                  Expanded(
-                    flex: 2,
-                    child: SizedBox(),
-                  ),
-                ],
-              ),
-            )),
+                        Get.off(() => HomeScreen());
+                      }
+                      },
+                    ),
+                    Expanded(
+                      flex: 2,
+                      child: SizedBox(),
+                    ),
+                  ],
+                ),
+              )),
+        ),
       ),
     );
   }

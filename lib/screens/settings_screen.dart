@@ -1,8 +1,12 @@
 import 'package:fitcards/handlers/app_state.dart';
 import 'package:fitcards/handlers/app_theme.dart';
+import 'package:fitcards/handlers/hive_handler.dart';
+import 'package:fitcards/handlers/user_preferences_handler.dart';
 import 'package:fitcards/utilities/app_localizations.dart';
 import 'package:fitcards/widgets/custom_app_bar.dart';
+import 'package:fitcards/widgets/general_modal.dart';
 import 'package:fitcards/widgets/safe_screen.dart';
+import 'package:fitcards/widgets/welcome_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
@@ -36,13 +40,33 @@ class _SettingsScreenState extends State<SettingsScreen> {
                             FontAwesomeIcons.adjust,
                             Get.isDarkMode
                                 ? FontAwesomeIcons.toggleOn
-                                : FontAwesomeIcons.toggleOff,
-                                () {
-                              AppTheme.changeTheme();
-                            }),
+                                : FontAwesomeIcons.toggleOff, () {
+                          AppTheme.changeTheme();
+                        }),
                         Divider(
                           height: 3,
                         ),
+                        _buildSectionListItem(
+                            AppLocalizations.audio,
+                            FontAwesomeIcons.volumeUp,
+                            AppState.audioEnabled
+                                ? FontAwesomeIcons.toggleOn
+                                : FontAwesomeIcons.toggleOff, () {
+                          setState(() {
+                            UserPreferencesHandler.saveAudioEnabled(
+                                !AppState.audioEnabled);
+                          });
+                        }),
+                        Divider(
+                          height: 3,
+                        ),
+                        _buildSectionListItem(
+                            AppLocalizations.clearAllData,
+                            FontAwesomeIcons.exclamationTriangle,
+                            FontAwesomeIcons.trash,
+                            () {
+                              _clearAllData();
+                            }),
                       ],
                     ),
                   ),
@@ -64,7 +88,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             alignment: Alignment.centerLeft,
             child: Text(title,
                 style: TextStyle(
-                  color: AppTheme.dynamicColor(),
+                    color: AppTheme.dynamicColor(),
                     fontFamily: 'Roboto',
                     fontSize: 20,
                     letterSpacing: 1,
@@ -113,5 +137,21 @@ class _SettingsScreenState extends State<SettingsScreen> {
         ),
       ),
     );
+  }
+
+  void _clearAllData() {
+    showDialog(
+        context: context,
+        builder: (context) => GeneralModal(
+          subTitle: AppLocalizations.clearAllDataSubtitle,
+          okAction: () {
+            Get.off(() => WelcomeScreen());
+            Get.changeThemeMode(ThemeMode.system);
+            AppState.clearAllData();
+          },
+          cancelAction: () => Navigator.pop(context),
+          okActionText: AppLocalizations.close,
+          cancelActionText: AppLocalizations.cancel,
+        ));
   }
 }

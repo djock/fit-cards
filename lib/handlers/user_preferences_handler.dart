@@ -18,6 +18,7 @@ class UserPreferencesHandler {
 
     loadWorkoutExerciseSkip();
     loadWorkoutRestTime();
+    loadAudioEnabled();
   }
 
   static Future<void> markTutorialAsFinished() async {
@@ -103,4 +104,27 @@ class UserPreferencesHandler {
 
     WorkoutState.setSkip(canSkip);
   }
-}
+
+  static Future<void> saveAudioEnabled(bool value) async {
+    final SharedPreferences prefs = await _sharedPreferences;
+
+    AppState.audioEnabled = value;
+    prefs.setBool('audioEnabled', value);
+  }
+
+  static Future loadAudioEnabled() async {
+    final SharedPreferences prefs = await _sharedPreferences;
+    bool audioEnabled = true;
+
+    if(prefs.getBool('audioEnabled') != null) {
+      audioEnabled = prefs.getBool('audioEnabled');
+    }
+
+    AppState.audioEnabled = audioEnabled;
+  }
+
+  static Future clearAllData() async {
+    final SharedPreferences prefs = await _sharedPreferences;
+    await prefs.clear();
+  }
+ }
