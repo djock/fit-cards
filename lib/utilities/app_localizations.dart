@@ -25,6 +25,7 @@ class AppLocalizations {
   static String tutorialSwipeExerciseCard = 'Swipe on the card to move on to the next round';
 
   static String tutorialTimerDescription = 'The total time of the workout';
+  static String tutorialPointsDescription = 'Collect points by doing each exercise';
   static String tutorialFinishDescription = 'Congrats on learning how to use FitCards. Happy workouts!';
   static String workoutFinished = 'Great job!';
 

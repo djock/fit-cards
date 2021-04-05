@@ -19,6 +19,7 @@ class FitCard extends StatelessWidget {
   final cardType type;
   final Function onCallback;
   final Function onSkip;
+  final GlobalKey pointsKey;
 
   const FitCard({
     Key key,
@@ -29,6 +30,7 @@ class FitCard extends StatelessWidget {
     this.type,
     this.onCallback,
     this.onSkip,
+    this.pointsKey,
   }) : super(key: key);
 
   @override
@@ -62,6 +64,8 @@ class FitCard extends StatelessWidget {
 
         if (type == cardType.exercise) {
           var exerciseModel = list[index] as ExerciseModel;
+          cardController.setPoints(exerciseModel.points);
+
           return _buildCard(
               exerciseModel.name, AppColors.exerciseCardColors[colorIndex],
               points: exerciseModel.points,
@@ -82,8 +86,7 @@ class FitCard extends StatelessWidget {
         /// Get orientation & index of swiped card!
         if (orientation == CardSwipeOrientation.LEFT ||
             orientation == CardSwipeOrientation.RIGHT) {
-
-          if(cardController.cancelCallback) {
+          if (cardController.cancelCallback) {
             cardController.cancelCallback = false;
           } else {
             onCallback();
@@ -241,7 +244,9 @@ class FitCard extends StatelessWidget {
   }
 
   Widget _buildSkipExerciseButton(int points) {
-    if (type == cardType.exercise && !(points == 0) && WorkoutState.canSkipExercise) {
+    if (type == cardType.exercise &&
+        !(points == 0) &&
+        WorkoutState.canSkipExercise) {
       return Align(
         alignment: Alignment.bottomRight,
         child: IconButton(

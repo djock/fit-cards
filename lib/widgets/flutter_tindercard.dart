@@ -380,9 +380,14 @@ class CardController {
   int index = 0;
   bool hasSkipped = false;
   bool cancelCallback = false;
+  int points = 0;
 
   void setIndex(int value) {
     index = value;
+  }
+
+  void setPoints(int value) {
+    points = value;
   }
 
   void triggerLeft() {

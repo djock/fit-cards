@@ -1,7 +1,9 @@
+import 'package:fitcards/handlers/user_preferences_handler.dart';
 import 'package:fitcards/models/exercise_model.dart';
 import 'package:fitcards/models/scheme_model.dart';
 import 'package:fitcards/models/workout_log_model.dart';
 import 'package:fitcards/utilities/app_localizations.dart';
+import 'package:flutter/foundation.dart';
 
 import 'app_state.dart';
 import 'hive_handler.dart';
@@ -34,5 +36,24 @@ class AppStateHandler {
     AppState.loggedWorkouts.add(workoutLogModel);
 
     HiveHandler.saveWorkoutToBox();
+  }
+
+  static void savePoints(int value) {
+    AppState.points += value;
+    debugPrint('points ' + AppState.points.toString());
+
+    UserPreferencesHandler.savePoints();
+  }
+
+  static void clearAllData() {
+    AppState.points = 0;
+    AppState.audioEnabled = true;
+    AppState.tutorialFinished = false;
+
+    AppState.loggedWorkouts.clear();
+    AppState.loggedExercisesList.clear();
+
+    UserPreferencesHandler.clearAllData();
+    HiveHandler.clearAllData();
   }
 }

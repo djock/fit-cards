@@ -144,6 +144,7 @@ class _CardsScreenState extends State<CardsScreen>
                         flex: 4,
                         child: FitCard(
                           key: _exerciseKey,
+                          pointsKey: _pointsKey,
                           list: AppState.exercises,
                           color: AppColors.exerciseCardColor,
                           cardController: _exerciseController,
@@ -296,7 +297,11 @@ class _CardsScreenState extends State<CardsScreen>
   }
 
   void _onStopWorkout() {
-    if (AppState.tutorialActive) _tutorialCoachMark.finish();
+    if (AppState.tutorialActive) {
+      _tutorialCoachMark.finish();
+      changeState(workoutState.finish);
+      return;
+    }
 
     if (_state == workoutState.countdown) {
       AppStateHandler.shuffleJson();
@@ -307,13 +312,8 @@ class _CardsScreenState extends State<CardsScreen>
 
     if (_state == workoutState.countdown) return;
 
-    var currentExercise = new KeyValuePair(
-        AppState.exercises[_exerciseController.index].name,
-        AppState.schemes[_schemeController.index].name);
-    AppState.activeExercisesList.add(new WorkoutExerciseModel(
-        AppState.loggedWorkouts.length,
-        currentExercise.key,
-        currentExercise.value));
+    if(_state != workoutState.rest)
+      _onLogExercise();
 
     var now = DateTime.now();
     var currentWorkout = new WorkoutLogModel(AppState.loggedWorkouts.length,
@@ -363,6 +363,12 @@ class _CardsScreenState extends State<CardsScreen>
         AppState.loggedWorkouts.length,
         currentExercise.key,
         currentExercise.value));
+
+    _onAddPoints();
+  }
+
+  void _onAddPoints() {
+    AppStateHandler.savePoints(_exerciseController.points);
   }
 
   void _onSkipExercise() {
@@ -485,6 +491,7 @@ class _CardsScreenState extends State<CardsScreen>
   GlobalKey _startCountDownKey = GlobalKey();
   GlobalKey _timerKey = GlobalKey();
   GlobalKey _stopKey = GlobalKey();
+  GlobalKey _pointsKey = GlobalKey();
 
   List<TargetFocus> _activeTargets = [];
   List<TargetFocus> _idleTargets = [];
@@ -493,6 +500,12 @@ class _CardsScreenState extends State<CardsScreen>
     _activeTargets.add(
       _targetFocusBuilder(_timerKey, ContentAlign.bottom, ShapeLightFocus.RRect,
           '', AppLocalizations.tutorialTimerDescription,
+          textAlign: TextAlign.center),
+    );
+
+    _activeTargets.add(
+      _targetFocusBuilder(_pointsKey, ContentAlign.bottom, ShapeLightFocus.RRect,
+          '', AppLocalizations.tutorialPointsDescription,
           textAlign: TextAlign.center),
     );
 

@@ -1,4 +1,5 @@
 import 'package:fitcards/handlers/app_state.dart';
+import 'package:fitcards/handlers/app_state_handler.dart';
 import 'package:fitcards/handlers/app_theme.dart';
 import 'package:fitcards/handlers/hive_handler.dart';
 import 'package:fitcards/handlers/user_preferences_handler.dart';
@@ -147,7 +148,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           okAction: () {
             Get.off(() => WelcomeScreen());
             Get.changeThemeMode(ThemeMode.system);
-            AppState.clearAllData();
+            AppStateHandler.clearAllData();
           },
           cancelAction: () => Navigator.pop(context),
           okActionText: AppLocalizations.close,

@@ -123,6 +123,22 @@ class UserPreferencesHandler {
     AppState.audioEnabled = audioEnabled;
   }
 
+  static Future<void> savePoints() async {
+    final SharedPreferences prefs = await _sharedPreferences;
+    prefs.setInt('points', AppState.points);
+  }
+
+  static Future loadPoints() async {
+    final SharedPreferences prefs = await _sharedPreferences;
+    int points = 0;
+
+    if(prefs.getInt('points') != null) {
+      points = prefs.getInt('points');
+    }
+
+    AppState.points = points;
+  }
+
   static Future clearAllData() async {
     final SharedPreferences prefs = await _sharedPreferences;
     await prefs.clear();

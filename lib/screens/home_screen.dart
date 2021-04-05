@@ -93,7 +93,15 @@ class _HomeScreenState extends State<HomeScreen> {
                         style: AppTheme.textAccentBold30(),
                       ),
                       SizedBox(
-                        height: 5,
+                        height: AppState.points != 0 ? 5 : 0,
+                      ),
+                      AppState.points != 0 ?
+                      Text(
+                        '+${AppState.points} points',
+                        style: AppTheme.textAccentBold30(),
+                      ) : SizedBox(),
+                      SizedBox(
+                        height: AppState.points != 0 ? 5 : 0,
                       ),
                       Text(
                         AppLocalizations.areYouReady,

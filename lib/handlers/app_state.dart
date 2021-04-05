@@ -1,5 +1,3 @@
-import 'package:fitcards/handlers/hive_handler.dart';
-import 'package:fitcards/handlers/user_preferences_handler.dart';
 import 'package:fitcards/models/exercise_model.dart';
 import 'package:fitcards/models/scheme_model.dart';
 import 'package:fitcards/models/workout_exercise_model.dart';
@@ -27,13 +25,5 @@ class AppState {
 
   static bool audioEnabled = true;
 
-  static void clearAllData() {
-    audioEnabled = true;
-
-    loggedWorkouts.clear();
-    loggedExercisesList.clear();
-
-    UserPreferencesHandler.clearAllData();
-    HiveHandler.clearAllData();
-  }
+  static int points = 0;
 }
