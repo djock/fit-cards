@@ -356,15 +356,20 @@ class _CardsScreenState extends State<CardsScreen>
   }
 
   void _onLogExercise() {
-    var currentExercise = new KeyValuePair(
-        AppState.exercises[_exerciseController.index].name,
-        AppState.schemes[_schemeController.index].name);
-    AppState.activeExercisesList.add(new WorkoutExerciseModel(
-        AppState.loggedWorkouts.length,
-        currentExercise.key,
-        currentExercise.value));
+    debugPrint('State $_state');
+    debugPrint('Log ${AppState.exercises[_exerciseController.index].name} ::: ${AppState.schemes[_schemeController.index].name}');
 
-    _onAddPoints();
+    if(!AppState.tutorialActive) {
+      var currentExercise = new KeyValuePair(
+          AppState.exercises[_exerciseController.index].name,
+          AppState.schemes[_schemeController.index].name);
+      AppState.activeExercisesList.add(new WorkoutExerciseModel(
+          AppState.loggedWorkouts.length,
+          currentExercise.key,
+          currentExercise.value));
+
+      _onAddPoints();
+    }
   }
 
   void _onAddPoints() {
@@ -500,12 +505,6 @@ class _CardsScreenState extends State<CardsScreen>
     _activeTargets.add(
       _targetFocusBuilder(_timerKey, ContentAlign.bottom, ShapeLightFocus.RRect,
           '', AppLocalizations.tutorialTimerDescription,
-          textAlign: TextAlign.center),
-    );
-
-    _activeTargets.add(
-      _targetFocusBuilder(_pointsKey, ContentAlign.bottom, ShapeLightFocus.RRect,
-          '', AppLocalizations.tutorialPointsDescription,
           textAlign: TextAlign.center),
     );
 

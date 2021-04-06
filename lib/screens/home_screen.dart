@@ -74,7 +74,11 @@ class _HomeScreenState extends State<HomeScreen> {
                       CustomGradientButton(
                         text: AppLocalizations.workoutsLog,
                         action: () {
-                          Get.to(() => WorkoutsLogScreen());
+                          Get.to(() => WorkoutsLogScreen()).then((value) {
+                            setState(() {
+
+                            });
+                          });
                         },
                       ),
                     ],
