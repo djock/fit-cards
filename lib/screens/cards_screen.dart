@@ -312,9 +312,6 @@ class _CardsScreenState extends State<CardsScreen>
 
     if (_state == workoutState.countdown) return;
 
-    if(_state != workoutState.rest)
-      _onLogExercise();
-
     var now = DateTime.now();
     var currentWorkout = new WorkoutLogModel(AppState.loggedWorkouts.length,
         now, WorkoutState.trainingSessionMilliseconds);
@@ -356,9 +353,6 @@ class _CardsScreenState extends State<CardsScreen>
   }
 
   void _onLogExercise() {
-    debugPrint('State $_state');
-    debugPrint('Log ${AppState.exercises[_exerciseController.index].name} ::: ${AppState.schemes[_schemeController.index].name}');
-
     if(!AppState.tutorialActive) {
       var currentExercise = new KeyValuePair(
           AppState.exercises[_exerciseController.index].name,
@@ -439,6 +433,7 @@ class _CardsScreenState extends State<CardsScreen>
 
         if (target.identify == 'swipeCard') {
           _exerciseController.triggerLeft();
+          _schemeController.triggerLeft();
         }
       },
       onSkip: () {

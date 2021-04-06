@@ -19,6 +19,7 @@ class UserPreferencesHandler {
     loadWorkoutExerciseSkip();
     loadWorkoutRestTime();
     loadAudioEnabled();
+    loadPoints();
   }
 
   static Future<void> markTutorialAsFinished() async {

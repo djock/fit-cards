@@ -65,7 +65,11 @@ class _HomeScreenState extends State<HomeScreen> {
                         text: AppLocalizations.startAWorkout,
                         action: () {
                           AppStateHandler.shuffleJson();
-                          Get.to(() => CardsScreen());
+                          Get.to(() => CardsScreen()).then((value) {
+                            setState(() {
+
+                            });
+                          });
                         },
                       ),
                       SizedBox(
@@ -74,11 +78,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       CustomGradientButton(
                         text: AppLocalizations.workoutsLog,
                         action: () {
-                          Get.to(() => WorkoutsLogScreen()).then((value) {
-                            setState(() {
-
-                            });
-                          });
+                          Get.to(() => WorkoutsLogScreen());
                         },
                       ),
                     ],
@@ -94,7 +94,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     children: [
                       Text(
                         '${AppLocalizations.hello} ${AppState.userName},',
-                        style: AppTheme.textAccentBold30(),
+                        style: AppTheme.textAccentBold30(), maxLines: 2,
                       ),
                       SizedBox(
                         height: AppState.points != 0 ? 5 : 0,
