@@ -1,7 +1,6 @@
 import 'package:fitcards/handlers/app_state.dart';
 import 'package:fitcards/handlers/app_state_handler.dart';
 import 'package:fitcards/handlers/app_theme.dart';
-import 'package:fitcards/handlers/hive_handler.dart';
 import 'package:fitcards/handlers/user_preferences_handler.dart';
 import 'package:fitcards/utilities/app_localizations.dart';
 import 'package:fitcards/widgets/custom_app_bar.dart';

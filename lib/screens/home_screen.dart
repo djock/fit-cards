@@ -4,7 +4,7 @@ import 'package:fitcards/handlers/app_state.dart';
 import 'package:fitcards/handlers/app_state_handler.dart';
 import 'package:fitcards/handlers/app_theme.dart';
 import 'package:fitcards/screens/cards_screen.dart';
-import 'package:fitcards/screens/settings_screen.dart';
+import 'package:fitcards/screens/leaderboard_screen.dart';
 import 'package:fitcards/screens/workouts_log_screen.dart';
 import 'package:fitcards/utilities/app_localizations.dart';
 import 'package:fitcards/widgets/custom_app_bar.dart';
@@ -46,9 +46,10 @@ class _HomeScreenState extends State<HomeScreen> {
               icon: FaIcon(FontAwesomeIcons.cog),
               color: Theme.of(Get.context).accentColor,
               onPressed: () {
-                Get.to(() => SettingsScreen()).then((value) {
-                  setState(() {});
-                });
+                Get.to(() => LeaderBoardScreen());
+//                Get.to(() => SettingsScreen()).then((value) {
+//                  setState(() {});
+//                });
               })
         ], elevation: 0, text: ''),
         body: Padding(

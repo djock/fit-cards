@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:fitcards/handlers/app_state.dart';
 import 'package:fitcards/handlers/app_state_handler.dart';
 import 'package:fitcards/handlers/app_theme.dart';
+import 'package:fitcards/handlers/firebase_database_handler.dart';
 import 'package:fitcards/handlers/user_preferences_handler.dart';
 import 'package:fitcards/handlers/workout_state.dart';
 import 'package:fitcards/models/workout_exercise_model.dart';
@@ -452,6 +453,8 @@ class _CardsScreenState extends State<CardsScreen>
   }
 
   void _onOpenFilters() {
+    FirebaseDatabaseHandler.updateLeaderBoard();
+
     showDialog(
         context: context,
         builder: (BuildContext context) {

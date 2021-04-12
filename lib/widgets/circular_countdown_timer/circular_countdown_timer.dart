@@ -3,6 +3,7 @@ library circular_countdown_timer;
 import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:fitcards/handlers/app_state.dart';
 import 'package:flutter/material.dart';
+
 import 'custom_timer_painter.dart';
 
 /// Create a Circular Countdown Timer.

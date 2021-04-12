@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "131510391407",
+    "firebase_url": "https://fit-cards-app-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "fit-cards-app",
+    "storage_bucket": "fit-cards-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:131510391407:android:d7224aad76554343d1739a",
+        "android_client_info": {
+          "package_name": "com.heredeerapps.fitcards"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "131510391407-9hluh3tr0qvfhn8nnae2gvqg3r1oie2n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCqeNaxUpwY-aDNkgYH9M8RFS5dJZYJHsY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "131510391407-9hluh3tr0qvfhn8nnae2gvqg3r1oie2n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

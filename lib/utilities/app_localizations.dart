@@ -59,5 +59,6 @@ class AppLocalizations {
   static String audio = 'Audio (timer)';
   static String clearAllData = 'Clear all data';
   static String clearAllDataSubtitle = 'Are you sure you want clear all app data, including workouts logs?';
-
+  static String leaderBoard = 'LEADERBOARD';
+  static String nothingHere = 'Nothing here';
 }

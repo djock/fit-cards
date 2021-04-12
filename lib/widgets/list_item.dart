@@ -9,8 +9,9 @@ class ListItem extends StatelessWidget {
   final GestureTapCallback onTap;
   final Function deleteAction;
   final Function shareAction;
+  final Color backgroundColor;
 
-  const ListItem({Key key, this.leftValue, this.centerValue, this.rightValue, this.onTap, this.deleteAction, this.shareAction}) : super(key: key);
+  const ListItem({Key key, this.leftValue, this.centerValue, this.rightValue, this.onTap, this.deleteAction, this.shareAction, this.backgroundColor}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -31,10 +32,10 @@ class ListItem extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 8.0),
                     child: CircleAvatar(
-                      backgroundColor: Colors.grey.withOpacity(0.1),
+                      backgroundColor: backgroundColor != null ? backgroundColor : Colors.grey.withOpacity(0.1),
                       child: Text(
                         leftValue.toString(),
-                        style: AppTheme.textThemeBold15(),
+                        style: backgroundColor != null ? AppTheme.customDarkText(FontWeight.bold, 15  ) : AppTheme.textThemeBold15(),
                       ),
                     ),
                   ) : SizedBox(width: 0,),

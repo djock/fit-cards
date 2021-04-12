@@ -41,6 +41,10 @@ dependencies:
   package_info: ^2.0.0
   assets_audio_player: ^3.0.3+2
 
+  firebase_core: ^1.0.3
+  firebase_database: ^6.1.2
+  firebase_auth: ^1.0.3
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

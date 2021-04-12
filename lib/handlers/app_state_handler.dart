@@ -6,6 +6,7 @@ import 'package:fitcards/utilities/app_localizations.dart';
 import 'package:flutter/foundation.dart';
 
 import 'app_state.dart';
+import 'firebase_database_handler.dart';
 import 'hive_handler.dart';
 
 class AppStateHandler {
@@ -43,6 +44,7 @@ class AppStateHandler {
     debugPrint('points ' + AppState.points.toString());
 
     UserPreferencesHandler.savePoints();
+    FirebaseDatabaseHandler.updateLeaderBoard();
   }
 
   static void clearAllData() {

@@ -26,4 +26,6 @@ class AppState {
   static bool audioEnabled = true;
 
   static int points = 0;
+
+  static String deviceId;
 }
