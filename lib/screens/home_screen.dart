@@ -5,6 +5,7 @@ import 'package:fitcards/handlers/app_state_handler.dart';
 import 'package:fitcards/handlers/app_theme.dart';
 import 'package:fitcards/screens/cards_screen.dart';
 import 'package:fitcards/screens/leaderboard_screen.dart';
+import 'package:fitcards/screens/settings_screen.dart';
 import 'package:fitcards/screens/workouts_log_screen.dart';
 import 'package:fitcards/utilities/app_localizations.dart';
 import 'package:fitcards/widgets/custom_app_bar.dart';
@@ -38,88 +39,110 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      onWillPop: _onBackPressed,
-      child: SafeScreen(
-        topSafe: false,
-        appBar: CustomAppBar.buildWithActions([
-          IconButton(
-              icon: FaIcon(FontAwesomeIcons.cog),
-              color: Theme.of(Get.context).accentColor,
-              onPressed: () {
-                Get.to(() => LeaderBoardScreen());
-//                Get.to(() => SettingsScreen()).then((value) {
-//                  setState(() {});
-//                });
-              })
-        ], elevation: 0, text: ''),
-        body: Padding(
-          padding: const EdgeInsets.all(10),
-          child: Stack(
-            children: [
-              Container(
-                child: Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      CustomGradientButton(
-                        text: AppLocalizations.startAWorkout,
-                        action: () {
-                          AppStateHandler.shuffleJson();
-                          Get.to(() => CardsScreen()).then((value) {
-                            setState(() {
+        onWillPop: _onBackPressed,
+        child: SafeScreen(
+          topSafe: false,
+          appBar: CustomAppBar.buildWithActions([
+            IconButton(
+                icon: FaIcon(FontAwesomeIcons.cog),
+                color: Theme.of(Get.context).accentColor,
+                onPressed: () {
+                  Get.to(() => SettingsScreen()).then((value) {
+                    setState(() {});
+                  });
+                })
+          ], elevation: 0, text: ''),
+          body: Padding(
+            padding: const EdgeInsets.all(10),
+            child: Column(
+              children: [
+                _buildHeader(),
+                Expanded(child: _buildButtons()),
+              ],
+            ),
+          ),
+        ));
+  }
 
-                            });
-                          });
-                        },
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      CustomGradientButton(
-                        text: AppLocalizations.workoutsLog,
-                        action: () {
-                          Get.to(() => WorkoutsLogScreen());
-                        },
-                      ),
-                    ],
-                  ),
+  Widget _buildHeader() {
+    return Row(
+      children: [
+        Container(
+          child: Padding(
+            padding: const EdgeInsets.all(10),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  '${AppLocalizations.hello} ${AppState.userName},',
+                  style: AppTheme.textAccentBold30(),
+                  maxLines: 2,
                 ),
-              ),
-              Align(
-                alignment: Alignment.topLeft,
-                child: Padding(
-                  padding: const EdgeInsets.all(10),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        '${AppLocalizations.hello} ${AppState.userName},',
-                        style: AppTheme.textAccentBold30(), maxLines: 2,
-                      ),
-                      SizedBox(
-                        height: AppState.points != 0 ? 5 : 0,
-                      ),
-                      AppState.points != 0 ?
-                      Text(
+                SizedBox(
+                  height: AppState.points != 0 ? 5 : 0,
+                ),
+                AppState.points != 0
+                    ? Text(
                         '+${AppState.points} points',
                         style: AppTheme.textAccentBold30(),
-                      ) : SizedBox(),
-                      SizedBox(
-                        height: AppState.points != 0 ? 5 : 0,
-                      ),
-                      Text(
-                        AppLocalizations.areYouReady,
-                        style: AppTheme.textAccentNormal15(),
                       )
-                    ],
-                  ),
+                    : SizedBox(),
+                SizedBox(
+                  height: AppState.points != 0 ? 5 : 0,
                 ),
-              )
-            ],
+                Text(
+                  AppLocalizations.areYouReady,
+                  style: AppTheme.textAccentNormal15(),
+                )
+              ],
+            ),
           ),
         ),
-      )
+      ],
+    );
+  }
+
+  Widget _buildButtons() {
+    return Container(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          SizedBox(
+            height: 20,
+          ),
+          CustomGradientButton(
+            text: AppLocalizations.startAWorkout,
+            icon: FontAwesomeIcons.running,
+            action: () {
+              AppStateHandler.shuffleJson();
+              Get.to(() => CardsScreen()).then((value) {
+                setState(() {});
+              });
+            },
+          ),
+          SizedBox(
+            height: 20,
+          ),
+          CustomGradientButton(
+            text: AppLocalizations.workoutsLog,
+            icon: FontAwesomeIcons.calendarAlt,
+            action: () {
+              Get.to(() => WorkoutsLogScreen());
+            },
+          ),
+          SizedBox(
+            height: 20,
+          ),
+          CustomGradientButton(
+            text: AppLocalizations.leaderBoard,
+            icon: FontAwesomeIcons.trophy,
+            action: () {
+              Get.to(() => LeaderBoardScreen());
+            },
+          ),
+        ],
+      ),
     );
   }
 }

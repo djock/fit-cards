@@ -18,8 +18,6 @@ class _LeaderBoardScreenState extends State<LeaderBoardScreen> {
   @override
   void initState() {
     FirebaseDatabaseHandler.getLeaderBoard().then((value) {
-      debugPrint(
-          'test ' + FirebaseDatabaseHandler.leaderBoard.length.toString());
       setState(() {
         _hasLoaded = true;
       });
