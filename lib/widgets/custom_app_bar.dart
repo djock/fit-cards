@@ -25,7 +25,6 @@ class CustomAppBar {
     );
   }
 
-
   static PreferredSizeWidget buildRest(List<Widget> actions,
           {double elevation = 0.0,
           String text = '',

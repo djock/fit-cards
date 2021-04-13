@@ -1,6 +1,7 @@
 import 'package:fitcards/handlers/user_preferences_handler.dart';
 import 'package:fitcards/screens/home_screen.dart';
 import 'package:fitcards/utilities/app_localizations.dart';
+import 'package:fitcards/utilities/profanity_filter.dart';
 import 'package:fitcards/widgets/custom_button.dart';
 import 'package:fitcards/widgets/general_modal.dart';
 import 'package:flutter/material.dart';
@@ -51,6 +52,11 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 if (!fieldValid) {
                   return AppLocalizations.errorNoName;
                 }
+
+                if(ProfanityFilter.check(_textController.text)) {
+                  return AppLocalizations.errorProfanity;
+                }
+
                 return null;
               },
               obscureText: false,

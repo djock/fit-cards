@@ -35,6 +35,7 @@ class AppLocalizations {
 
   static String chooseName = 'What\'s your username?';
   static String errorNoName = 'Please set a name!';
+  static String errorProfanity = 'The name you chose is not allowed!';
   static String username = 'name...';
   static String hello = 'Hello';
   static String close = 'Close';
