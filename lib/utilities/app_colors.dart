@@ -18,6 +18,7 @@ class AppColors {
   static const goldColor = Color(0xffFFD700);
   static const silverColor = Color(0xffC0C0C0);
   static const bronzeColor = Color(0xffCD7F32);
+  static const inactiveGrey = Color(0xffD3D3D3);
 
   static Map<Color, Color> cardColors = {
     Color(0xff3FA7D6): Color(0xffA790A5),

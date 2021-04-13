@@ -21,7 +21,7 @@ class CustomGradientButton extends StatelessWidget {
       },
       child: Container(
         width: MediaQuery.of(context).size.width,
-        height: 75,
+        height: 65,
         margin: EdgeInsets.only(left: 10, right: 10, top: 13),
         padding: EdgeInsets.all(8.0),
         clipBehavior: Clip.antiAliasWithSaveLayer,
