@@ -7,6 +7,9 @@ class AppLocalizations {
   static String next = 'Next';
   static String startAWorkout = 'Start A Workout';
   static String workoutsLog = 'Workouts Log';
+  static String shuffleCards = 'Shuffle Cards';
+  static String tabata = 'Tabata';
+  static String forTime = 'For Time';
 
   static String exercise = 'Exercise';
   static String scheme = 'Scheme';
@@ -57,6 +60,7 @@ class AppLocalizations {
 
   static String areYouReady = 'Are you ready for today?';
   static String nightMode = 'Night mode';
+  static String appTheme = 'Change app theme';
   static String audio = 'Audio (timer)';
   static String clearAllData = 'Clear all data';
   static String clearAllDataSubtitle = 'Are you sure you want clear all app data, including workouts logs?';

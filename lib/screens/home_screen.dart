@@ -42,16 +42,17 @@ class _HomeScreenState extends State<HomeScreen> {
         onWillPop: _onBackPressed,
         child: SafeScreen(
           topSafe: false,
-          appBar: CustomAppBar.buildWithActions([
-            IconButton(
-                icon: FaIcon(FontAwesomeIcons.cog),
-                color: Theme.of(Get.context).accentColor,
-                onPressed: () {
-                  Get.to(() => SettingsScreen()).then((value) {
-                    setState(() {});
-                  });
-                })
-          ], elevation: 0, text: ''),
+            appBar: CustomAppBar.buildEmpty(),
+//          appBar: CustomAppBar.buildWithActions([
+//            IconButton(
+//                icon: FaIcon(FontAwesomeIcons.cog),
+//                color: Theme.of(Get.context).accentColor,
+//                onPressed: () {
+//                  Get.to(() => SettingsScreen()).then((value) {
+//                    setState(() {});
+//                  });
+//                })
+//          ], elevation: 0, text: ''),
           body: Padding(
             padding: const EdgeInsets.all(10),
             child: Column(
@@ -112,8 +113,8 @@ class _HomeScreenState extends State<HomeScreen> {
             height: 20,
           ),
           CustomGradientButton(
-            text: AppLocalizations.startAWorkout,
-            icon: FontAwesomeIcons.running,
+            text: AppLocalizations.shuffleCards,
+            icon: FontAwesomeIcons.random,
             action: () {
               AppStateHandler.shuffleJson();
               Get.to(() => CardsScreen()).then((value) {
@@ -125,22 +126,48 @@ class _HomeScreenState extends State<HomeScreen> {
             height: 20,
           ),
           CustomGradientButton(
-            text: AppLocalizations.workoutsLog,
-            icon: FontAwesomeIcons.calendarAlt,
+            text: AppLocalizations.tabata,
+            icon: FontAwesomeIcons.clock,
             action: () {
-              Get.to(() => WorkoutsLogScreen());
+              AppStateHandler.shuffleJson();
+              Get.to(() => CardsScreen()).then((value) {
+                setState(() {});
+              });
             },
           ),
           SizedBox(
             height: 20,
           ),
           CustomGradientButton(
-            text: AppLocalizations.leaderBoard,
-            icon: FontAwesomeIcons.trophy,
+            text: AppLocalizations.forTime,
+            icon: FontAwesomeIcons.hourglassHalf,
             action: () {
-              Get.to(() => LeaderBoardScreen());
+              AppStateHandler.shuffleJson();
+              Get.to(() => CardsScreen()).then((value) {
+                setState(() {});
+              });
             },
           ),
+//          SizedBox(
+//            height: 20,
+//          ),
+//          CustomGradientButton(
+//            text: AppLocalizations.workoutsLog,
+//            icon: FontAwesomeIcons.calendarAlt,
+//            action: () {
+//              Get.to(() => WorkoutsLogScreen());
+//            },
+//          ),
+//          SizedBox(
+//            height: 20,
+//          ),
+//          CustomGradientButton(
+//            text: AppLocalizations.leaderBoard,
+//            icon: FontAwesomeIcons.trophy,
+//            action: () {
+//              Get.to(() => LeaderBoardScreen());
+//            },
+//          ),
         ],
       ),
     );

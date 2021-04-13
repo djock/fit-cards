@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:fitcards/handlers/app_theme.dart';
 import 'package:fitcards/handlers/hive_handler.dart';
-import 'package:fitcards/screens/home_screen.dart';
+import 'package:fitcards/screens/app_screen.dart';
 import 'package:fitcards/screens/loading_screen.dart';
 import 'package:fitcards/utilities/json_data_handler.dart';
 import 'package:fitcards/widgets/welcome_screen.dart';
@@ -65,7 +65,7 @@ class _AppState extends State<App> {
   @override
   Widget build(BuildContext context) {
     return _hasLoadedData && _themeSet && !_isAppLoading
-        ? _userNameSet ? HomeScreen() : WelcomeScreen()
+        ? _userNameSet ? AppScreen() : WelcomeScreen()
         : LoadingScreen();
   }
 }

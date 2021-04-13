@@ -39,5 +39,7 @@ class FirebaseDatabaseHandler {
 
       return true;
     });
+
+    return false;
   }
 }

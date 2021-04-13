@@ -1,4 +1,5 @@
 import 'package:fitcards/handlers/user_preferences_handler.dart';
+import 'package:fitcards/screens/app_screen.dart';
 import 'package:fitcards/screens/home_screen.dart';
 import 'package:fitcards/utilities/app_localizations.dart';
 import 'package:fitcards/utilities/profanity_filter.dart';
@@ -123,7 +124,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                       if (_formKey.currentState.validate()) {
                         UserPreferencesHandler.saveUserName(_textController.text);
 
-                        Get.off(() => HomeScreen());
+                        Get.off(() => AppScreen());
                       }
                       },
                     ),
