@@ -158,6 +158,7 @@ class _CardsScreenState extends State<CardsScreen>
                           onSkip: () {
                             _onSkipExercise();
                           },
+                          isFake: false,
                         ),
                       ),
                       SizedBox(
@@ -175,6 +176,7 @@ class _CardsScreenState extends State<CardsScreen>
                           onCallback: () {
                             _onSwipeSchemeCard();
                           },
+                          isFake: false,
                         ),
                       ),
                       SizedBox(

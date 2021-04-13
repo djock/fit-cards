@@ -65,6 +65,7 @@ class _SettingsThemeScreenState extends State<SettingsThemeScreen> {
                 type: cardType.exercise,
                 onCallback: () {},
                 onSkip: () {},
+                isFake: true,
               ),
             ),
             SizedBox(
@@ -80,6 +81,7 @@ class _SettingsThemeScreenState extends State<SettingsThemeScreen> {
                 isBlocked: true,
                 type: cardType.scheme,
                 onCallback: () {},
+                isFake: false,
               ),
             ),
             SizedBox(

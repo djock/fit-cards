@@ -20,6 +20,7 @@ class FitCard extends StatelessWidget {
   final Function onCallback;
   final Function onSkip;
   final GlobalKey pointsKey;
+  final bool isFake;
 
   const FitCard({
     Key key,
@@ -30,7 +31,7 @@ class FitCard extends StatelessWidget {
     this.type,
     this.onCallback,
     this.onSkip,
-    this.pointsKey,
+    this.pointsKey, this.isFake,
   }) : super(key: key);
 
   @override
@@ -157,6 +158,12 @@ class FitCard extends StatelessWidget {
 
   List<Widget> _buildExeciseCardText(String text, bool isFirstCard) {
     List<Widget> result = [];
+
+    if(isFake) {
+      result.add(SizedBox());
+
+      return result;
+    }
 
     if (isFirstCard) {
       result.add(Expanded(
