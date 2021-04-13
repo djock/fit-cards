@@ -119,7 +119,7 @@ class AppTheme {
       double fontSize, FontWeight fontWeight, Color color) {
     return TextStyle(
         color: color,
-        letterSpacing: 1,
+        letterSpacing: 1.3 ,
         fontWeight: fontWeight,
         fontSize: fontSize);
   }

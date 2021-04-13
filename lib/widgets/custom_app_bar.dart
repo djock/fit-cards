@@ -18,7 +18,7 @@ class CustomAppBar {
           size: iconSize),
       actions: actions,
       title: Text(
-        text,
+        text.toUpperCase(),
         style: AppTheme.appBarStyle(),
       ),
       centerTitle: true,
@@ -37,7 +37,7 @@ class CustomAppBar {
         actions: actions,
         leading: new Container(),
         title: Text(
-          text,
+          text.toUpperCase(),
           style: TextStyle(
               fontWeight: FontWeight.bold, fontSize: 34, color: Colors.red),
         ),
@@ -55,7 +55,7 @@ class CustomAppBar {
         elevation: elevation,
         iconTheme: IconThemeData(color: Colors.red),
         title: Text(
-          text,
+          text.toUpperCase(),
           style: TextStyle(
               fontWeight: FontWeight.bold, fontSize: 34, color: Colors.red),
         ),
@@ -73,7 +73,7 @@ class CustomAppBar {
               : Theme.of(Get.context).primaryColorDark,
         ),
         title: Text(
-          text,
+          text.toUpperCase(),
           style: AppTheme.appBarStyle(),
         ),
         centerTitle: true,

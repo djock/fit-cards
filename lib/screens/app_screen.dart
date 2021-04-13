@@ -1,6 +1,7 @@
 import 'package:fitcards/screens/home_screen.dart';
 import 'package:fitcards/screens/settings_screen.dart';
-import 'package:fitcards/screens/workouts_log_screen.dart';
+import 'package:fitcards/screens/stats_screen.dart';
+import 'package:fitcards/utilities/app_colors.dart';
 import 'package:fitcards/widgets/safe_screen.dart';
 
 import 'package:flutter/material.dart';
@@ -21,7 +22,7 @@ class _AppScreenState extends State<AppScreen> {
   @override
   void initState() {
     _screens = [
-      WorkoutsLogScreen(),
+      StatsScreen(),
       HomeScreen(),
       SettingsScreen(
         callback: () {
@@ -50,7 +51,7 @@ class _AppScreenState extends State<AppScreen> {
           floatingActionButton: FloatingActionButton(
               backgroundColor: _selectedIndex == 1
                   ? Theme.of(Get.context).accentColor
-                  : Colors.grey,
+                  : AppColors.inactiveGrey,
               child: FaIcon(
                 FontAwesomeIcons.running,
                 color: Theme.of(Get.context).canvasColor,
@@ -73,13 +74,13 @@ class _AppScreenState extends State<AppScreen> {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget>[
               Padding(
-                padding: const EdgeInsets.only(right: 20),
+                padding: const EdgeInsets.only(right: 40),
                 child: IconButton(
                   icon: FaIcon(
                     FontAwesomeIcons.chartBar,
                     color: _selectedIndex == 0
                         ? Theme.of(Get.context).accentColor
-                        : Colors.grey,
+                        : AppColors.inactiveGrey,
                   ),
                   onPressed: () {
                     _onItemTapped(0);
@@ -87,12 +88,12 @@ class _AppScreenState extends State<AppScreen> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(left: 20),
+                padding: const EdgeInsets.only(left: 40),
                 child: IconButton(
                   icon: FaIcon(FontAwesomeIcons.cog,
                       color: _selectedIndex == 2
                           ? Theme.of(Get.context).accentColor
-                          : Colors.grey),
+                          : AppColors.inactiveGrey),
                   onPressed: () {
                     _onItemTapped(2);
                   },

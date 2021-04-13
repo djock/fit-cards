@@ -315,7 +315,7 @@ class _CardsScreenState extends State<CardsScreen>
 
     var now = DateTime.now();
     var currentWorkout = new WorkoutLogModel(AppState.loggedWorkouts.length,
-        now, WorkoutState.trainingSessionMilliseconds);
+        now, WorkoutState.trainingSessionMilliseconds, WorkoutState.exercisesCount, WorkoutState.points);
 
     AppStateHandler.logExercise();
     AppStateHandler.logWorkout(currentWorkout);
@@ -363,11 +363,15 @@ class _CardsScreenState extends State<CardsScreen>
           currentExercise.key,
           currentExercise.value));
 
+
+      WorkoutState.exercisesCount++;
       _onAddPoints();
     }
   }
 
   void _onAddPoints() {
+    WorkoutState.points += _exerciseController.points;
+
     AppStateHandler.savePoints(_exerciseController.points);
   }
 

@@ -4,10 +4,10 @@ import 'package:fitcards/models/workout_exercise_model.dart';
 import 'package:fitcards/models/workout_log_model.dart';
 
 class AppState {
-  static List<WorkoutExerciseModel> loggedExercisesList;
-  static List<WorkoutExerciseModel> activeExercisesList;
+  static List<WorkoutExerciseModel> loggedExercisesList = [];
+  static List<WorkoutExerciseModel> activeExercisesList = [];
 
-  static List<WorkoutLogModel> loggedWorkouts;
+  static List<WorkoutLogModel> loggedWorkouts = [];
 
   static List<ExerciseModel> exercises = [];
   static List<SchemeModel> schemes = [];

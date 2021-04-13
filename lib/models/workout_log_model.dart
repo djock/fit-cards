@@ -8,8 +8,14 @@ class WorkoutLogModel {
   @HiveField(1)
   DateTime date;
 
-  @HiveField(1)
+  @HiveField(2)
   int duration;
 
-  WorkoutLogModel(this.index, this.date, this.duration);
+  @HiveField(3)
+  int exercises;
+
+  @HiveField(4)
+  int points;
+
+  WorkoutLogModel(this.index, this.date, this.duration, this.exercises, this.points);
 }

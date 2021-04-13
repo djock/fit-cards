@@ -8,8 +8,8 @@ class AppLocalizations {
   static String startAWorkout = 'Start A Workout';
   static String workoutsLog = 'Workouts Log';
   static String shuffleCards = 'Shuffle Cards';
-  static String tabata = 'Tabata';
-  static String forTime = 'For Time';
+  static String tabata = 'Tabata (wip)';
+  static String forTime = 'For Time (wip)';
 
   static String exercise = 'Exercise';
   static String scheme = 'Scheme';
@@ -66,4 +66,12 @@ class AppLocalizations {
   static String clearAllDataSubtitle = 'Are you sure you want clear all app data, including workouts logs?';
   static String leaderBoard = 'Leaderboard';
   static String nothingHere = 'Nothing here';
+  static String statistics = 'Statistics';
+
+  static String sessionsDone = 'Sessions';
+  static String exercisesDone = 'Unique exercises';
+  static String averageDuration = 'Avg. workout duration';
+  static String averagePoints = 'Avg. points / workout';
+
+
 }
