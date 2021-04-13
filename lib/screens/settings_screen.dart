@@ -25,7 +25,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   @override
   Widget build(BuildContext context) {
     return SafeScreen(
-      appBar: CustomAppBar.buildEmpty(),
+      appBar: CustomAppBar.buildNormal(AppLocalizations.settings),
       body: Stack(
         children: [
           Padding(
@@ -40,7 +40,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          _buildSectionHeader(AppLocalizations.settings),
+//                          _buildSectionHeader(AppLocalizations.settings),
 //                          _buildSectionListItem(
 //                              AppLocalizations.nightMode,
 //                              FontAwesomeIcons.adjust,
@@ -55,10 +55,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
 //                              });
 //                            });
 //                          }),
-                          _buildSectionListItem(
-                              AppLocalizations.appTheme,
-                              FontAwesomeIcons.adjust,
-                              null, () {
+                          _buildSectionListItem(AppLocalizations.appTheme,
+                              FontAwesomeIcons.adjust, null, () {
                             Get.to(() => SettingsThemeScreen()).then((value) {
                               debugPrint('test');
                               widget.callback();
@@ -133,7 +131,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
           style: AppTheme.customDynamicText(FontWeight.normal, 15),
         ),
         leading: _buildIcon(leftIcon, AppTheme.dynamicColor()),
-        trailing: rightIcon != null ? _buildIcon(rightIcon, AppTheme.dynamicColor()) : SizedBox(),
+        trailing: rightIcon != null
+            ? _buildIcon(rightIcon, AppTheme.dynamicColor())
+            : SizedBox(),
       ),
     );
   }
@@ -154,8 +154,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
       child: Padding(
         padding: const EdgeInsets.all(50.0),
         child: Text(
-          'v${AppState.appVersion}+${AppState.appBuildNumber}',
-          style: TextStyle(fontSize: 11, color: AppTheme.dynamicColor()),
+          'FitCards v${AppState.appVersion}+${AppState.appBuildNumber}',
+          style: TextStyle(fontSize: 11, color: AppTheme.dynamicColor(), letterSpacing: 1),
         ),
       ),
     );

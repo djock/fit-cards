@@ -42,7 +42,7 @@ class _HomeScreenState extends State<HomeScreen> {
         onWillPop: _onBackPressed,
         child: SafeScreen(
           topSafe: false,
-            appBar: CustomAppBar.buildEmpty(),
+          appBar: CustomAppBar.buildEmpty(),
 //          appBar: CustomAppBar.buildWithActions([
 //            IconButton(
 //                icon: FaIcon(FontAwesomeIcons.cog),
@@ -56,98 +56,111 @@ class _HomeScreenState extends State<HomeScreen> {
           body: Padding(
             padding: const EdgeInsets.all(10),
             child: Column(
-              children: [
-                _buildHeader(),
-                Expanded(child: _buildButtons()),
-              ],
+              children: [_buildHeader(), _buildButtons()],
             ),
           ),
         ));
   }
 
   Widget _buildHeader() {
-    return Row(
-      children: [
-        Container(
-          child: Padding(
-            padding: const EdgeInsets.all(10),
+
+    return Padding(
+      padding: const EdgeInsets.all(10.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            '${AppLocalizations.hello} ${AppState.userName},',
+            style: AppTheme.customDynamicText(FontWeight.bold, 30),
+            maxLines: 2,
+          ),
+          SizedBox(
+            height: AppState.points != 0 ? 5 : 0,
+          ),
+          Text(
+            '${AppState.points} points',
+            style: AppTheme.customDynamicText(FontWeight.bold, 30),
+          ),
+          SizedBox(
+            height: 10,
+          ),
+          Container(
+            height: 40,
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  '${AppLocalizations.hello} ${AppState.userName},',
-                  style: AppTheme.textAccentBold30(),
-                  maxLines: 2,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text('', style: AppTheme.customDynamicText(FontWeight.normal, 12),),
+                    Text('Lvl. 1', style: AppTheme.customDynamicText(FontWeight.normal, 12),),
+                  ],
                 ),
-                SizedBox(
-                  height: AppState.points != 0 ? 5 : 0,
+                SizedBox(height: 10,),
+                LinearProgressIndicator(
+                  minHeight: 7,
+                  value: 0.5,
+                  backgroundColor: Theme.of(Get.context).accentColor.withOpacity(0.5),
+                  semanticsLabel: 'Linear progress indicator',
                 ),
-                AppState.points != 0
-                    ? Text(
-                        '+${AppState.points} points',
-                        style: AppTheme.textAccentBold30(),
-                      )
-                    : SizedBox(),
-                SizedBox(
-                  height: AppState.points != 0 ? 5 : 0,
-                ),
-                Text(
-                  AppLocalizations.areYouReady,
-                  style: AppTheme.textAccentNormal15(),
-                )
               ],
             ),
           ),
-        ),
-      ],
+          SizedBox(
+            height: 40,
+          ),
+//          Text(
+//            AppLocalizations.areYouReady,
+//            style: AppTheme.customDynamicText(FontWeight.normal, 15),
+//          ),
+        ],
+      ),
     );
   }
 
   Widget _buildButtons() {
-    return Container(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          SizedBox(
-            height: 20,
-          ),
-          CustomGradientButton(
-            text: AppLocalizations.shuffleCards,
-            icon: FontAwesomeIcons.random,
-            action: () {
-              AppStateHandler.shuffleJson();
-              Get.to(() => CardsScreen()).then((value) {
-                setState(() {});
-              });
-            },
-          ),
-          SizedBox(
-            height: 20,
-          ),
-          CustomGradientButton(
-            text: AppLocalizations.tabata,
-            icon: FontAwesomeIcons.clock,
-            action: () {
-              AppStateHandler.shuffleJson();
-              Get.to(() => CardsScreen()).then((value) {
-                setState(() {});
-              });
-            },
-          ),
-          SizedBox(
-            height: 20,
-          ),
-          CustomGradientButton(
-            text: AppLocalizations.forTime,
-            icon: FontAwesomeIcons.hourglassHalf,
-            action: () {
-              AppStateHandler.shuffleJson();
-              Get.to(() => CardsScreen()).then((value) {
-                setState(() {});
-              });
-            },
-          ),
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        SizedBox(
+          height: 20,
+        ),
+        CustomGradientButton(
+          text: AppLocalizations.shuffleCards,
+          icon: FontAwesomeIcons.random,
+          action: () {
+            AppStateHandler.shuffleJson();
+            Get.to(() => CardsScreen()).then((value) {
+              setState(() {});
+            });
+          },
+        ),
+        SizedBox(
+          height: 20,
+        ),
+        CustomGradientButton(
+          text: AppLocalizations.tabata,
+          icon: FontAwesomeIcons.clock,
+          action: () {
+            AppStateHandler.shuffleJson();
+            Get.to(() => CardsScreen()).then((value) {
+              setState(() {});
+            });
+          },
+        ),
+        SizedBox(
+          height: 20,
+        ),
+        CustomGradientButton(
+          text: AppLocalizations.forTime,
+          icon: FontAwesomeIcons.hourglassHalf,
+          action: () {
+            AppStateHandler.shuffleJson();
+            Get.to(() => CardsScreen()).then((value) {
+              setState(() {});
+            });
+          },
+        ),
 //          SizedBox(
 //            height: 20,
 //          ),
@@ -168,8 +181,7 @@ class _HomeScreenState extends State<HomeScreen> {
 //              Get.to(() => LeaderBoardScreen());
 //            },
 //          ),
-        ],
-      ),
+      ],
     );
   }
 }
