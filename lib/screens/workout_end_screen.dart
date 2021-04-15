@@ -87,7 +87,7 @@ class _WorkoutEndScreenState extends State<WorkoutEndScreen> {
                       Text(
                         AppLocalizations.workoutFinished,
                         textAlign: TextAlign.center,
-                        style: AppTheme.textThemeBold30(),
+                        style: AppTheme.textAccentBold30(),
                       ),
                       SizedBox(
                         height: 30,
@@ -95,7 +95,7 @@ class _WorkoutEndScreenState extends State<WorkoutEndScreen> {
                       Text(
                         AppLocalizations.tapToClose,
                         textAlign: TextAlign.center,
-                        style: AppTheme.textThemeBold15(),
+                        style: AppTheme.textAccentBold15(),
                       ),
                     ],
                   ),

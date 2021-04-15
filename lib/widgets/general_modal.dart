@@ -1,4 +1,3 @@
-import 'package:fitcards/utilities/app_colors.dart';
 import 'package:fitcards/utilities/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -39,7 +38,7 @@ class GeneralModal extends StatelessWidget {
         Container(
           padding: EdgeInsets.all(10),
           decoration: new BoxDecoration(
-            color: AppColors.canvasColorLight,
+            color: Theme.of(Get.context).canvasColor,
             shape: BoxShape.rectangle,
             borderRadius: BorderRadius.circular(10),
             boxShadow: [
@@ -72,7 +71,7 @@ class GeneralModal extends StatelessWidget {
                 subTitle,
                 style: TextStyle(
                     fontSize: 16.0,
-                    color: Theme.of(Get.context).primaryColorDark),
+                    color: Theme.of(Get.context).accentColor),
                 textAlign: TextAlign.center,
               ),
               SizedBox(height: 3.0),
@@ -100,7 +99,7 @@ class GeneralModal extends StatelessWidget {
                     child: Text(
                       AppLocalizations.continueText,
                       style: TextStyle(
-                          color: Theme.of(Get.context).primaryColorDark,
+                          color: Theme.of(Get.context).accentColor,
                           fontSize: 16.0,
                           fontWeight: FontWeight.bold),
                     ),

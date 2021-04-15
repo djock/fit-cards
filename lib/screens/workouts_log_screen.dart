@@ -41,7 +41,7 @@ class _WorkoutsLogScreenState extends State<WorkoutsLogScreen> {
       _tempList.add(
         Center(child: Padding(
           padding: const EdgeInsets.only(top: 15.0, left: 20, right: 20),
-          child: Text(AppLocalizations.noWorkoutsText, style: AppTheme.customDynamicText(FontWeight.normal, 16), textAlign: TextAlign.center,) ,
+          child: Text(AppLocalizations.noWorkoutsText, style: AppTheme.customAccentText(FontWeight.normal, 16), textAlign: TextAlign.center,) ,
         ))
       );
     }

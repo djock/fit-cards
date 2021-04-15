@@ -58,7 +58,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
                           _buildSectionListItem(AppLocalizations.appTheme,
                               FontAwesomeIcons.adjust, null, () {
                             Get.to(() => SettingsThemeScreen()).then((value) {
-                              debugPrint('test');
                               widget.callback();
                               setState(() {});
                             });
@@ -128,7 +127,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
         contentPadding: EdgeInsets.only(left: 20, right: 20),
         title: Text(
           text,
-          style: AppTheme.customDynamicText(FontWeight.normal, 15),
+          style: AppTheme.textAccentNormal15(),
         ),
         leading: _buildIcon(leftIcon, AppTheme.dynamicColor()),
         trailing: rightIcon != null

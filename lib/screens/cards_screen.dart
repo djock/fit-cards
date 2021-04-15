@@ -413,7 +413,6 @@ class _CardsScreenState extends State<CardsScreen>
         UserPreferencesHandler.markTutorialAsFinished();
       },
       onClickOverlay: (target) {
-        debugPrint('overlay');
         _tutorialCoachMark.next();
       },
     )..show();
@@ -448,7 +447,6 @@ class _CardsScreenState extends State<CardsScreen>
         _onEndWorkout();
       },
       onClickOverlay: (target) {
-        debugPrint('overlay');
         _tutorialCoachMark.next();
       },
     )..show();

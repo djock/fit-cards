@@ -23,26 +23,11 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  Future<bool> _onBackPressed() {
-    return showDialog(
-            context: context,
-            builder: (context) => GeneralModal(
-                  subTitle: AppLocalizations.closeAppSubtitle,
-                  okAction: () => SystemNavigator.pop(),
-                  cancelAction: () => Navigator.pop(context),
-                  okActionText: AppLocalizations.close,
-                  cancelActionText: AppLocalizations.cancel,
-                )) ??
-        false;
-  }
-
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-        onWillPop: _onBackPressed,
-        child: SafeScreen(
-          topSafe: false,
-          appBar: CustomAppBar.buildEmpty(),
+    return SafeScreen(
+      topSafe: false,
+      appBar: CustomAppBar.buildEmpty(),
 //          appBar: CustomAppBar.buildWithActions([
 //            IconButton(
 //                icon: FaIcon(FontAwesomeIcons.cog),
@@ -53,13 +38,13 @@ class _HomeScreenState extends State<HomeScreen> {
 //                  });
 //                })
 //          ], elevation: 0, text: ''),
-          body: Padding(
-            padding: const EdgeInsets.all(10),
-            child: Column(
-              children: [_buildHeader(), _buildButtons()],
-            ),
-          ),
-        ));
+      body: Padding(
+        padding: const EdgeInsets.all(10),
+        child: Column(
+          children: [_buildHeader(), _buildButtons()],
+        ),
+      ),
+    );
   }
 
   Widget _buildHeader() {
@@ -71,7 +56,7 @@ class _HomeScreenState extends State<HomeScreen> {
         children: [
           Text(
             '${AppLocalizations.hello} ${AppState.userName},',
-            style: AppTheme.customDynamicText(FontWeight.bold, 30),
+            style: AppTheme.textAccentBold30(),
             maxLines: 2,
           ),
           SizedBox(
@@ -79,7 +64,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           Text(
             '${AppState.points} points',
-            style: AppTheme.customDynamicText(FontWeight.bold, 30),
+            style: AppTheme.textAccentBold30(),
           ),
           SizedBox(
             height: 10,
@@ -91,8 +76,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text('', style: AppTheme.customDynamicText(FontWeight.normal, 12),),
-                    Text('Lvl. 1', style: AppTheme.customDynamicText(FontWeight.normal, 12),),
+                    Text('', style: AppTheme.customAccentText(FontWeight.normal, 12),),
+                    Text('Lvl. 1', style: AppTheme.customAccentText(FontWeight.normal, 12),),
                   ],
                 ),
                 SizedBox(height: 10,),
@@ -110,7 +95,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
 //          Text(
 //            AppLocalizations.areYouReady,
-//            style: AppTheme.customDynamicText(FontWeight.normal, 15),
+//            style: AppTheme.customAccentText(FontWeight.normal, 15),
 //          ),
         ],
       ),

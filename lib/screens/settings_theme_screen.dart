@@ -106,7 +106,7 @@ class _SettingsThemeScreenState extends State<SettingsThemeScreen> {
         contentPadding: EdgeInsets.only(left: 20, right: 20),
         title: Text(
           text,
-          style: AppTheme.customDynamicText(FontWeight.normal, 15),
+          style: AppTheme.textAccentNormal15(),
         ),
         leading: leftIcon != null
             ? _buildIcon(leftIcon, AppTheme.dynamicColor())

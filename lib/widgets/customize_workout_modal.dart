@@ -1,7 +1,6 @@
 import 'package:fitcards/handlers/app_theme.dart';
 import 'package:fitcards/handlers/user_preferences_handler.dart';
 import 'package:fitcards/handlers/workout_state.dart';
-import 'package:fitcards/utilities/app_colors.dart';
 import 'package:fitcards/utilities/app_localizations.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -29,11 +28,12 @@ class _CustomizeWorkoutModal extends State<CustomizeWorkoutModal> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      backgroundColor: AppColors.canvasColorLight,
+
+      backgroundColor: Theme.of(context).canvasColor,
       title: Text(
         AppLocalizations.customize,
         textAlign: TextAlign.center,
-        style: AppTheme.customDarkText(FontWeight.bold, 20),
+        style: AppTheme.customAccentText(FontWeight.bold, 20),
       ),
       content: Column(
         mainAxisSize: MainAxisSize.min,
@@ -45,11 +45,11 @@ class _CustomizeWorkoutModal extends State<CustomizeWorkoutModal> {
             child: CheckboxListTile(
               contentPadding: EdgeInsets.only(left: 0, right: 0),
               activeColor: Theme.of(context).accentColor,
-              checkColor: AppColors.canvasColorLight,
+              checkColor: Theme.of(context).canvasColor,
               selectedTileColor: Theme.of(context).accentColor,
               title: Text(
                 AppLocalizations.skipExercise,
-                style: AppTheme.customDarkText(FontWeight.normal, 14),
+                style: AppTheme.customAccentText(FontWeight.normal, 14),
               ),
               value: _canSkip,
               onChanged: (bool value) {
@@ -68,7 +68,7 @@ class _CustomizeWorkoutModal extends State<CustomizeWorkoutModal> {
               Expanded(
                 child: Text(
                   AppLocalizations.chooseRestTime,
-                  style: AppTheme.customDarkText(FontWeight.normal, 14),
+                  style: AppTheme.customAccentText(FontWeight.normal, 14),
                   overflow: TextOverflow.clip,
                 ),
               ),
@@ -84,9 +84,9 @@ class _CustomizeWorkoutModal extends State<CustomizeWorkoutModal> {
                 step: 5,
                 itemHeight: 30,
                 itemWidth: 30,
-                textStyle: AppTheme.customDarkText(FontWeight.normal, 13),
+                textStyle: AppTheme.customAccentText(FontWeight.normal, 13),
                 selectedTextStyle:
-                    AppTheme.customAccentText(FontWeight.bold, 15),
+                    AppTheme.textAccentBold15(),
                 axis: Axis.horizontal,
                 onChanged: (value) => setState(() {
                   _changeOccurred = true;
@@ -110,7 +110,7 @@ class _CustomizeWorkoutModal extends State<CustomizeWorkoutModal> {
           },
           child: Text(
             AppLocalizations.close,
-            style: AppTheme.customDarkText(FontWeight.bold, 15),
+            style: AppTheme.textAccentBold15(),
           ),
         ),
       ],

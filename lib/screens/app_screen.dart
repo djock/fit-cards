@@ -2,9 +2,12 @@ import 'package:fitcards/screens/home_screen.dart';
 import 'package:fitcards/screens/settings_screen.dart';
 import 'package:fitcards/screens/stats_screen.dart';
 import 'package:fitcards/utilities/app_colors.dart';
+import 'package:fitcards/utilities/app_localizations.dart';
+import 'package:fitcards/widgets/general_modal.dart';
 import 'package:fitcards/widgets/safe_screen.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 
@@ -16,6 +19,19 @@ class AppScreen extends StatefulWidget {
 }
 
 class _AppScreenState extends State<AppScreen> {
+  Future<bool> _onBackPressed() {
+    return showDialog(
+        context: context,
+        builder: (context) => GeneralModal(
+          subTitle: AppLocalizations.closeAppSubtitle,
+          okAction: () => SystemNavigator.pop(),
+          cancelAction: () => Navigator.pop(context),
+          okActionText: AppLocalizations.close,
+          cancelActionText: AppLocalizations.cancel,
+        )) ??
+        false;
+  }
+
   int _selectedIndex = 1;
   List<Widget> _screens = [];
 
@@ -26,7 +42,6 @@ class _AppScreenState extends State<AppScreen> {
       HomeScreen(),
       SettingsScreen(
         callback: () {
-          debugPrint('test');
           setState(() {});
         },
       ),
@@ -43,24 +58,27 @@ class _AppScreenState extends State<AppScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeScreen(
-      topSafe: true,
-      body: Scaffold(
-          body: _screens.elementAt(_selectedIndex),
-          bottomNavigationBar: _navigationDrawer,
-          floatingActionButton: FloatingActionButton(
-              backgroundColor: _selectedIndex == 1
-                  ? Theme.of(Get.context).accentColor
-                  : AppColors.inactiveGrey,
-              child: FaIcon(
-                FontAwesomeIcons.running,
-                color: Theme.of(Get.context).canvasColor,
-              ),
-              onPressed: () {
-                _onItemTapped(1);
-              }),
-          floatingActionButtonLocation:
-              FloatingActionButtonLocation.centerDocked),
+    return WillPopScope(
+      onWillPop: _onBackPressed,
+      child: SafeScreen(
+        topSafe: true,
+        body: Scaffold(
+            body: _screens.elementAt(_selectedIndex),
+            bottomNavigationBar: _navigationDrawer,
+            floatingActionButton: FloatingActionButton(
+                backgroundColor: _selectedIndex == 1
+                    ? Theme.of(Get.context).accentColor
+                    : AppColors.inactiveGrey,
+                child: FaIcon(
+                  FontAwesomeIcons.running,
+                  color: Theme.of(Get.context).canvasColor,
+                ),
+                onPressed: () {
+                  _onItemTapped(1);
+                }),
+            floatingActionButtonLocation:
+                FloatingActionButtonLocation.centerDocked),
+      ),
     );
   }
 

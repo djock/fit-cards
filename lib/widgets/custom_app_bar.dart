@@ -12,9 +12,7 @@ class CustomAppBar {
       backgroundColor: Theme.of(Get.context).canvasColor,
       elevation: elevation,
       iconTheme: IconThemeData(
-          color: Get.isDarkMode
-              ? Theme.of(Get.context).accentColor
-              : Theme.of(Get.context).primaryColorDark,
+          color: Theme.of(Get.context).accentColor,
           size: iconSize),
       actions: actions,
       title: Text(
@@ -68,9 +66,7 @@ class CustomAppBar {
         backgroundColor: Theme.of(Get.context).canvasColor,
         elevation: elevation,
         iconTheme: IconThemeData(
-          color: Get.isDarkMode
-              ? Theme.of(Get.context).accentColor
-              : Theme.of(Get.context).primaryColorDark,
+          color: Theme.of(Get.context).accentColor,
         ),
         title: Text(
           text.toUpperCase(),
@@ -83,9 +79,7 @@ class CustomAppBar {
         backgroundColor: Theme.of(Get.context).canvasColor,
         elevation: 0,
         iconTheme: IconThemeData(
-          color: Get.isDarkMode
-              ? Theme.of(Get.context).accentColor
-              : Theme.of(Get.context).primaryColorDark,
+          color: Theme.of(Get.context).accentColor,
         ),
         centerTitle: false,
       );
@@ -94,9 +88,7 @@ class CustomAppBar {
         backgroundColor: Theme.of(Get.context).canvasColor,
         elevation: 0,
         iconTheme: IconThemeData(
-          color: Get.isDarkMode
-              ? Theme.of(Get.context).accentColor
-              : Theme.of(Get.context).primaryColorDark,
+          color: Theme.of(Get.context).accentColor,
         ),
         actions: [
           IconButton(icon: Icon(Icons.dashboard_customize), onPressed: null)

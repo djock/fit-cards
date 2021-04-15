@@ -80,7 +80,7 @@ class _LeaderBoardScreenState extends State<LeaderBoardScreen> {
         padding: const EdgeInsets.only(top: 15.0, left: 20, right: 20),
         child: Text(
           AppLocalizations.nothingHere,
-          style: AppTheme.customDynamicText(FontWeight.normal, 16),
+          style: AppTheme.customAccentText(FontWeight.normal, 16),
           textAlign: TextAlign.center,
         ),
       )));

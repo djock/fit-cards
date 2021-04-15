@@ -7,7 +7,7 @@ import '../utilities/app_colors.dart';
 ThemeData appThemeDark() => ThemeData(
       brightness: Brightness.dark,
       primaryColor: AppColors.primaryColorDark,
-      accentColor: AppColors.accentColor,
+      accentColor: AppColors.accentColorDark,
       canvasColor: AppColors.canvasColorDark,
       primaryColorDark: AppColors.canvasColorDark,
   floatingActionButtonTheme: FloatingActionButtonThemeData(),
@@ -26,7 +26,7 @@ ThemeData appThemeDark() => ThemeData(
 ThemeData appThemeLight() => ThemeData(
       brightness: Brightness.light,
       primaryColor: AppColors.primaryColorLight,
-      accentColor: AppColors.accentColor,
+      accentColor: AppColors.accentColorLight,
       canvasColor: AppColors.canvasColorLight,
       primaryColorDark: AppColors.canvasColorDark,
       floatingActionButtonTheme: FloatingActionButtonThemeData(),
@@ -47,9 +47,7 @@ class AppTheme {
     return _textStyle(
         22,
         FontWeight.bold,
-        Get.isDarkMode
-            ? Theme.of(Get.context).accentColor
-            : AppColors.canvasColorDark);
+        Theme.of(Get.context).accentColor);
   }
 
   static TextStyle textWhiteBold24() {
@@ -57,39 +55,16 @@ class AppTheme {
         24, FontWeight.bold, Theme.of(Get.context).textTheme.bodyText1.color);
   }
 
-  static TextStyle textAccentBold30() {
-    return _textStyle(30, FontWeight.bold, Theme.of(Get.context).accentColor);
-  }
-
   static TextStyle textAccentNormal15() {
     return _textStyle(15, FontWeight.normal, Theme.of(Get.context).accentColor);
   }
 
-  static TextStyle textThemeBold15() {
-    return _textStyle(
-        15,
-        FontWeight.bold,
-        Get.isDarkMode
-            ? Theme.of(Get.context).accentColor
-            : AppColors.canvasColorDark);
+  static TextStyle textAccentBold15() {
+    return _textStyle(15, FontWeight.bold, Theme.of(Get.context).accentColor);
   }
 
-  static TextStyle textThemeBold30() {
-    return _textStyle(
-        30,
-        FontWeight.bold,
-        Get.isDarkMode
-            ? Theme.of(Get.context).accentColor
-            : AppColors.canvasColorDark);
-  }
-
-  static TextStyle textBlueBold3() {
-    return _textStyle(
-        30,
-        FontWeight.bold,
-        Get.isDarkMode
-            ? Theme.of(Get.context).accentColor
-            : AppColors.canvasColorDark);
+  static TextStyle textAccentBold30() {
+    return _textStyle(30, FontWeight.bold, Theme.of(Get.context).accentColor);
   }
 
   static TextStyle customAccentText(FontWeight fontWeight, double fontSize) {
@@ -100,19 +75,8 @@ class AppTheme {
     return _textStyle(fontSize, fontWeight, AppColors.canvasColorDark);
   }
 
-  static TextStyle customDynamicText(FontWeight fontWeight, double fontSize) {
-    return _textStyle(
-        fontSize,
-        fontWeight,
-        Get.isDarkMode
-            ? Theme.of(Get.context).accentColor
-            : AppColors.canvasColorDark);
-  }
-
   static Color dynamicColor() {
-    return Get.isDarkMode
-        ? Theme.of(Get.context).accentColor
-        : Theme.of(Get.context).primaryColor;
+    return Theme.of(Get.context).accentColor;
   }
 
   static TextStyle _textStyle(

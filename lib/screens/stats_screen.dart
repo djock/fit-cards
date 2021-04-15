@@ -58,7 +58,7 @@ class StatsScreen extends StatelessWidget {
             padding: EdgeInsets.all(8),
             child: Table(
               border: TableBorder.symmetric(
-                  inside: BorderSide(color: AppTheme.dynamicColor())),
+                  inside: BorderSide(color: Theme.of(Get.context).accentColor)),
               columnWidths: const <int, TableColumnWidth>{
                 0: FlexColumnWidth(),
                 1: FlexColumnWidth(),
@@ -103,14 +103,14 @@ class StatsScreen extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10),
             child: Text(title,
-                style: AppTheme.customDynamicText(FontWeight.normal, 14),
+                style: AppTheme.customAccentText(FontWeight.normal, 14),
                 textAlign: TextAlign.center),
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10),
             child: Text(
               value,
-              style: AppTheme.customDynamicText(FontWeight.bold, 30),
+              style: AppTheme.textAccentBold30(),
               textAlign: TextAlign.center,
             ),
           ),
@@ -152,7 +152,7 @@ class StatsScreen extends StatelessWidget {
         contentPadding: EdgeInsets.only(left: 20, right: 20),
         title: Text(
           text,
-          style: AppTheme.customDynamicText(FontWeight.bold, 16),
+          style: AppTheme.customAccentText(FontWeight.bold, 16),
         ),
         leading: _buildIcon(leftIcon, AppTheme.dynamicColor()),
         trailing: rightIcon != null
