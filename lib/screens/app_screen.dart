@@ -3,6 +3,7 @@ import 'package:fitcards/screens/settings_screen.dart';
 import 'package:fitcards/screens/stats_screen.dart';
 import 'package:fitcards/utilities/app_colors.dart';
 import 'package:fitcards/utilities/app_localizations.dart';
+import 'package:fitcards/widgets/expandable_fab.dart';
 import 'package:fitcards/widgets/general_modal.dart';
 import 'package:fitcards/widgets/safe_screen.dart';
 
@@ -89,7 +90,7 @@ class _AppScreenState extends State<AppScreen> {
           elevation: 15,
           shape: CircularNotchedRectangle(),
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
               Padding(
                 padding: const EdgeInsets.only(right: 40),

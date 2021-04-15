@@ -4,16 +4,12 @@ import 'package:fitcards/handlers/app_state.dart';
 import 'package:fitcards/handlers/app_state_handler.dart';
 import 'package:fitcards/handlers/app_theme.dart';
 import 'package:fitcards/screens/cards_screen.dart';
-import 'package:fitcards/screens/leaderboard_screen.dart';
-import 'package:fitcards/screens/settings_screen.dart';
-import 'package:fitcards/screens/workouts_log_screen.dart';
 import 'package:fitcards/utilities/app_localizations.dart';
 import 'package:fitcards/widgets/custom_app_bar.dart';
 import 'package:fitcards/widgets/custom_gradient_button.dart';
-import 'package:fitcards/widgets/general_modal.dart';
 import 'package:fitcards/widgets/safe_screen.dart';
+import 'package:fitcards/widgets/stats_table.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 
@@ -28,16 +24,6 @@ class _HomeScreenState extends State<HomeScreen> {
     return SafeScreen(
       topSafe: false,
       appBar: CustomAppBar.buildEmpty(),
-//          appBar: CustomAppBar.buildWithActions([
-//            IconButton(
-//                icon: FaIcon(FontAwesomeIcons.cog),
-//                color: Theme.of(Get.context).accentColor,
-//                onPressed: () {
-//                  Get.to(() => SettingsScreen()).then((value) {
-//                    setState(() {});
-//                  });
-//                })
-//          ], elevation: 0, text: ''),
       body: Padding(
         padding: const EdgeInsets.all(10),
         child: Column(
