@@ -97,7 +97,7 @@ class CustomAppBar {
       );
 
   static PreferredSizeWidget buildTimer(
-          int elapsedMilliseconds, Function callback, GlobalKey buttonKey, bool isInRest) =>
+          int elapsedMilliseconds, Function callback, bool isInRest) =>
       AppBar(
         title: Text(Utils.formatTime(elapsedMilliseconds),
             style: TextStyle(
@@ -112,7 +112,6 @@ class CustomAppBar {
         elevation: 0,
         actions: [
           IconButton(
-              key: buttonKey,
               icon: FaIcon(
                 FontAwesomeIcons.times,
                 color: Colors.red,

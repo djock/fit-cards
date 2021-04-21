@@ -8,7 +8,7 @@ import 'package:fitcards/handlers/user_preferences_handler.dart';
 import 'package:fitcards/handlers/workout_state.dart';
 import 'package:fitcards/models/workout_exercise_model.dart';
 import 'package:fitcards/models/workout_log_model.dart';
-import 'package:fitcards/screens/workout_end_screen.dart';
+import 'package:fitcards/screens/workout_screens/workout_end_screen.dart';
 import 'package:fitcards/utilities/app_colors.dart';
 import 'package:fitcards/utilities/app_localizations.dart';
 import 'package:fitcards/utilities/key_value_pair_model.dart';
@@ -22,7 +22,6 @@ import 'package:fitcards/widgets/timer_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
-import 'package:tutorial_coach_mark/tutorial_coach_mark.dart';
 
 enum workoutState {
   countdown,
@@ -32,12 +31,12 @@ enum workoutState {
   rest,
 }
 
-class CardsScreen extends StatefulWidget {
+class WorkoutScreen extends StatefulWidget {
   @override
-  _CardsScreenState createState() => _CardsScreenState();
+  _WorkoutScreenState createState() => _WorkoutScreenState();
 }
 
-class _CardsScreenState extends State<CardsScreen>
+class _WorkoutScreenState extends State<WorkoutScreen>
     with TickerProviderStateMixin {
   CardController _exerciseController = new CardController();
   CardController _schemeController = new CardController();
@@ -46,47 +45,13 @@ class _CardsScreenState extends State<CardsScreen>
 
   workoutState _state = workoutState.idle;
 
-  TutorialCoachMark _tutorialCoachMark;
-
-  @override
-  void initState() {
-    if (!AppState.tutorialFinished && !AppState.tutorialActive) {
-      _initializeIdleTargets();
-      _initializeActiveTargets();
-
-      _startTutorial();
-    }
-
-    super.initState();
-  }
-
-  Future<Null> _startTutorial() async {
-    const timeOut = const Duration(milliseconds: 500);
-    new Timer(timeOut, () {
-      setState(() {
-        _showIdleTutorial();
-      });
-    });
-  }
-
-  Future<Null> _delayTutorialNext() async {
-    if (AppState.tutorialActive) {
-      const timeOut = const Duration(seconds: 4);
-      new Timer(timeOut, () {
-        if (AppState.tutorialActive && _tutorialCoachMark != null)
-          _tutorialCoachMark.finish();
-      });
-    }
-  }
 
   PreferredSizeWidget _buildAppBar() {
     if (_state == workoutState.active ||
         _state == workoutState.rest ||
         _state == workoutState.rest && AppState.tutorialActive) {
       return TimerAppBar(
-        key: _timerKey,
         callback: _onStopWorkout,
-        buttonKey: _stopKey,
         isInRest: _state == workoutState.rest,
       );
     }
@@ -127,6 +92,7 @@ class _CardsScreenState extends State<CardsScreen>
 
   @override
   Widget build(BuildContext context) {
+    debugPrint('state ' + _state.toString());
     return _state == workoutState.finish
         ? WorkoutEndScreen(
             callback: _onEndWorkout,
@@ -144,8 +110,6 @@ class _CardsScreenState extends State<CardsScreen>
                       Expanded(
                         flex: 4,
                         child: FitCard(
-                          key: _exerciseKey,
-                          pointsKey: _pointsKey,
                           list: AppState.exercises,
                           color: AppColors.exerciseCardColor,
                           cardController: _exerciseController,
@@ -167,7 +131,6 @@ class _CardsScreenState extends State<CardsScreen>
                       Expanded(
                         flex: 4,
                         child: FitCard(
-                          key: _schemeKey,
                           list: AppState.schemes,
                           color: AppColors.schemeCardColor,
                           cardController: _schemeController,
@@ -182,22 +145,6 @@ class _CardsScreenState extends State<CardsScreen>
                       SizedBox(
                         height: 20,
                       ),
-//                      Expanded(
-//                        flex: 1,
-//                        child: Row(
-//                          mainAxisAlignment: _state == workoutState.active
-//                              ? MainAxisAlignment.spaceEvenly
-//                              : MainAxisAlignment.center,
-//                          children: [
-//                            _buildStartButton(),
-////                            _state == workoutState.active
-////                                ? _buildNextButton()
-////                                : SizedBox(
-////                                    width: 0,
-////                                  )
-//                          ],
-//                        ),
-//                      ),
                     ],
                   ),
                 ),
@@ -255,7 +202,6 @@ class _CardsScreenState extends State<CardsScreen>
               }
             },
             child: CircularCountDownTimer(
-              key: _startCountDownKey,
               duration: timerDuration,
               initialDuration: 0,
               controller: _countDownController,
@@ -279,7 +225,6 @@ class _CardsScreenState extends State<CardsScreen>
               isTimerTextShown: true,
               autoStart: true,
               onStart: () {
-                _delayTutorialNext();
               },
               onComplete: () {
                 if (_state == workoutState.countdown)
@@ -301,7 +246,6 @@ class _CardsScreenState extends State<CardsScreen>
 
   void _onStopWorkout() {
     if (AppState.tutorialActive) {
-      _tutorialCoachMark.finish();
       changeState(workoutState.finish);
       return;
     }
@@ -382,74 +326,9 @@ class _CardsScreenState extends State<CardsScreen>
   }
 
   void changeState(workoutState state) {
-    if (AppState.tutorialActive && state == workoutState.active) {
-      _showActiveTutorial();
-    }
-
     setState(() {
       _state = state;
     });
-  }
-
-  void _showIdleTutorial() {
-    AppState.tutorialActive = true;
-
-    _tutorialCoachMark = TutorialCoachMark(
-      context,
-      targets: _idleTargets,
-      colorShadow: Colors.red,
-      textSkip: AppLocalizations.skip,
-      textStyleSkip: AppTheme.customAccentText(FontWeight.bold, 18),
-      paddingFocus: 10,
-      opacityShadow: 0.8,
-      onFinish: () {},
-      onClickTarget: (target) {
-        if (target.identify == 'startButton') {
-          _exerciseController.triggerLeft();
-          _onStartWorkout();
-        }
-      },
-      onSkip: () {
-        UserPreferencesHandler.markTutorialAsFinished();
-      },
-      onClickOverlay: (target) {
-        _tutorialCoachMark.next();
-      },
-    )..show();
-  }
-
-  void _showActiveTutorial() {
-    if (!AppState.tutorialActive) AppState.tutorialActive = false;
-
-    _tutorialCoachMark = TutorialCoachMark(
-      context,
-      targets: _activeTargets,
-      colorShadow: Colors.red,
-      textSkip: AppLocalizations.skip,
-      textStyleSkip: AppTheme.customAccentText(FontWeight.bold, 18),
-      paddingFocus: 10,
-      opacityShadow: 0.8,
-      onFinish: () {},
-      onClickTarget: (target) {
-        _tutorialCoachMark.next();
-        if (target.identify == 'stopButton') {
-          _onEndWorkout();
-          _onStopWorkout();
-        }
-
-        if (target.identify == 'swipeCard') {
-          _exerciseController.triggerLeft();
-          _schemeController.triggerLeft();
-        }
-      },
-      onSkip: () {
-        UserPreferencesHandler.markTutorialAsFinished();
-        _onEndWorkout();
-      },
-      onClickOverlay: (target) {
-        _tutorialCoachMark.next();
-      },
-    )..show();
   }
 
   void _onEndWorkout() {
@@ -487,133 +366,5 @@ class _CardsScreenState extends State<CardsScreen>
 //        );
 //      },
 //    );
-  }
-
-  ///::::::::::::::::::::::::::::::::::::::\\\
-  ///:::::::::::::: TUTORIAL ::::::::::::::\\\
-  ///::::::::::::::::::::::::::::::::::::::\\\
-
-  GlobalKey _exerciseKey = GlobalKey();
-  GlobalKey _schemeKey = GlobalKey();
-  GlobalKey _startCountDownKey = GlobalKey();
-  GlobalKey _timerKey = GlobalKey();
-  GlobalKey _stopKey = GlobalKey();
-  GlobalKey _pointsKey = GlobalKey();
-
-  List<TargetFocus> _activeTargets = [];
-  List<TargetFocus> _idleTargets = [];
-
-  void _initializeActiveTargets() {
-    _activeTargets.add(
-      _targetFocusBuilder(_timerKey, ContentAlign.bottom, ShapeLightFocus.RRect,
-          '', AppLocalizations.tutorialTimerDescription,
-          textAlign: TextAlign.center),
-    );
-
-    _activeTargets.add(
-      _targetFocusBuilder(_exerciseKey, ContentAlign.bottom,
-          ShapeLightFocus.RRect, '', AppLocalizations.tutorialSwipeExerciseCard,
-          identity: 'swipeCard'),
-    );
-
-    _activeTargets.add(
-      _targetFocusBuilder(_stopKey, ContentAlign.bottom, ShapeLightFocus.RRect,
-          '', AppLocalizations.tutorialStopButtonDescription,
-          identity: 'stopButton'),
-    );
-  }
-
-  _initializeIdleTargets() {
-    _idleTargets.add(
-      _targetFocusBuilder(
-          _exerciseKey,
-          ContentAlign.bottom,
-          ShapeLightFocus.RRect,
-          AppLocalizations.tutorialExerciseCardTitle,
-          AppLocalizations.tutorialExerciseCardDescription),
-    );
-
-    _idleTargets.add(
-      _targetFocusBuilder(
-          _schemeKey,
-          ContentAlign.top,
-          ShapeLightFocus.RRect,
-          AppLocalizations.tutorialSchemeCardTitle,
-          AppLocalizations.tutorialSchemeCardDescription),
-    );
-
-    _idleTargets.add(
-      _targetFocusBuilder(
-          _exerciseKey,
-          ContentAlign.bottom,
-          ShapeLightFocus.RRect,
-          '',
-          AppLocalizations.tutorialStartButtonDescription,
-          identity: 'startButton',
-          textAlign: TextAlign.center),
-    );
-
-    _idleTargets.add(
-      _targetFocusBuilder(
-          _startCountDownKey,
-          ContentAlign.bottom,
-          ShapeLightFocus.Circle,
-          '',
-          AppLocalizations.tutorialStartTimerDescription,
-          textAlign: TextAlign.center),
-    );
-
-    _idleTargets.add(
-      _targetFocusBuilder(_startCountDownKey, ContentAlign.bottom,
-          ShapeLightFocus.RRect, '', AppLocalizations.tutorialTimerDescription,
-          textAlign: TextAlign.center),
-    );
-  }
-
-  TargetFocus _targetFocusBuilder(GlobalKey key, ContentAlign align,
-      ShapeLightFocus shape, String title, String description,
-      {String identity = '', TextAlign textAlign = TextAlign.left}) {
-    return TargetFocus(
-      identify: identity.isNotEmpty ? identity : key.toString(),
-      keyTarget: key,
-      color: AppColors.canvasColorDark,
-      contents: [
-        TargetContent(
-          align: align,
-          child: Container(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                title.isNotEmpty
-                    ? Text(
-                        title,
-                        textAlign: textAlign,
-                        style: AppTheme.customAccentText(FontWeight.bold, 26),
-                      )
-                    : SizedBox(
-                        height: 0,
-                      ),
-                description.isNotEmpty
-                    ? Padding(
-                        padding: const EdgeInsets.only(top: 10.0),
-                        child: Text(
-                          description,
-                          textAlign: textAlign,
-                          style:
-                              AppTheme.customAccentText(FontWeight.normal, 20),
-                        ),
-                      )
-                    : SizedBox(
-                        height: 0,
-                      )
-              ],
-            ),
-          ),
-        )
-      ],
-      shape: shape,
-      radius: 5,
-    );
   }
 }

@@ -1,9 +1,6 @@
-import 'package:fitcards/handlers/app_state.dart';
 import 'package:fitcards/handlers/app_theme.dart';
-import 'package:fitcards/models/base_model.dart';
 import 'package:fitcards/models/exercise_model.dart';
 import 'package:fitcards/models/scheme_model.dart';
-import 'package:fitcards/screens/cards_screen.dart';
 import 'package:fitcards/utilities/app_colors.dart';
 import 'package:fitcards/utilities/app_localizations.dart';
 import 'package:fitcards/widgets/custom_app_bar.dart';
@@ -56,8 +53,6 @@ class _SettingsThemeScreenState extends State<SettingsThemeScreen> {
             Expanded(
               flex: 4,
               child: FitCard(
-                key: new GlobalKey(),
-                pointsKey: new GlobalKey(),
                 cardController: new CardController(),
                 list: _exercises,
                 color: AppColors.exerciseCardColor,

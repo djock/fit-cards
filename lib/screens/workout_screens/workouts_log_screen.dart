@@ -1,7 +1,7 @@
 import 'package:fitcards/handlers/app_state.dart';
 import 'package:fitcards/handlers/app_theme.dart';
 import 'package:fitcards/handlers/hive_handler.dart';
-import 'package:fitcards/screens/workout_log_details_screen.dart';
+import 'package:fitcards/screens/workout_screens/workout_log_details_screen.dart';
 import 'package:fitcards/utilities/app_localizations.dart';
 import 'package:fitcards/utilities/utils.dart';
 import 'package:fitcards/widgets/custom_app_bar.dart';

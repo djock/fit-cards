@@ -19,7 +19,6 @@ class FitCard extends StatelessWidget {
   final cardType type;
   final Function onCallback;
   final Function onSkip;
-  final GlobalKey pointsKey;
   final bool isFake;
 
   const FitCard({
@@ -30,8 +29,7 @@ class FitCard extends StatelessWidget {
     this.isBlocked,
     this.type,
     this.onCallback,
-    this.onSkip,
-    this.pointsKey, this.isFake,
+    this.onSkip, this.isFake,
   }) : super(key: key);
 
   @override

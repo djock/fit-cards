@@ -3,12 +3,12 @@ import 'dart:async';
 import 'package:fitcards/handlers/app_state.dart';
 import 'package:fitcards/handlers/app_state_handler.dart';
 import 'package:fitcards/handlers/app_theme.dart';
-import 'package:fitcards/screens/cards_screen.dart';
+import 'package:fitcards/screens/workout_screens/workout_screen.dart';
+import 'package:fitcards/screens/workout_screens/workout_tabata_screen.dart';
 import 'package:fitcards/utilities/app_localizations.dart';
 import 'package:fitcards/widgets/custom_app_bar.dart';
 import 'package:fitcards/widgets/custom_gradient_button.dart';
 import 'package:fitcards/widgets/safe_screen.dart';
-import 'package:fitcards/widgets/stats_table.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
@@ -101,7 +101,7 @@ class _HomeScreenState extends State<HomeScreen> {
           icon: FontAwesomeIcons.random,
           action: () {
             AppStateHandler.shuffleJson();
-            Get.to(() => CardsScreen()).then((value) {
+            Get.to(() => WorkoutScreen()).then((value) {
               setState(() {});
             });
           },
@@ -114,44 +114,11 @@ class _HomeScreenState extends State<HomeScreen> {
           icon: FontAwesomeIcons.clock,
           action: () {
             AppStateHandler.shuffleJson();
-            Get.to(() => CardsScreen()).then((value) {
+            Get.to(() => WorkoutTabataScreen()).then((value) {
               setState(() {});
             });
           },
         ),
-        SizedBox(
-          height: 20,
-        ),
-        CustomGradientButton(
-          text: AppLocalizations.forTime,
-          icon: FontAwesomeIcons.hourglassHalf,
-          action: () {
-            AppStateHandler.shuffleJson();
-            Get.to(() => CardsScreen()).then((value) {
-              setState(() {});
-            });
-          },
-        ),
-//          SizedBox(
-//            height: 20,
-//          ),
-//          CustomGradientButton(
-//            text: AppLocalizations.workoutsLog,
-//            icon: FontAwesomeIcons.calendarAlt,
-//            action: () {
-//              Get.to(() => WorkoutsLogScreen());
-//            },
-//          ),
-//          SizedBox(
-//            height: 20,
-//          ),
-//          CustomGradientButton(
-//            text: AppLocalizations.leaderBoard,
-//            icon: FontAwesomeIcons.trophy,
-//            action: () {
-//              Get.to(() => LeaderBoardScreen());
-//            },
-//          ),
       ],
     );
   }
