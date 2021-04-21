@@ -3,7 +3,7 @@ import 'package:hive/hive.dart';
 
 class WorkoutSettingsModelAdapter extends TypeAdapter<WorkoutSettingsModel> {
   @override
-  final typeId = 1;
+  final typeId = 2;
 
   @override
   WorkoutSettingsModel read(BinaryReader reader) {

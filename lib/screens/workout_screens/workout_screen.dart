@@ -31,6 +31,8 @@ class _WorkoutScreenState extends State<WorkoutScreen>
   CardController _exerciseController = new CardController();
   CardController _schemeController = new CardController();
 
+  WorkoutController _workoutController = new WorkoutController(workoutType.hiit, AppState.hiitSettings);
+
   CountDownController _countDownController = new CountDownController();
 
   workoutState _state = workoutState.idle;
@@ -82,7 +84,8 @@ class _WorkoutScreenState extends State<WorkoutScreen>
 
   @override
   Widget build(BuildContext context) {
-    debugPrint('state ' + _state.toString());
+    debugPrint('build workout_screen ' + AppState.hiitSettings.restTime.toString());
+
     return _state == workoutState.finish
         ? WorkoutEndScreen(
             callback: _onEndWorkout,
@@ -165,10 +168,10 @@ class _WorkoutScreenState extends State<WorkoutScreen>
     var timerDuration = AppState.tutorialActive
         ? _state == workoutState.rest
             ? 0
-            : WorkoutState.restTime
+            : _workoutController.settings.restTime
         : _state == workoutState.countdown
             ? 10
-            : WorkoutState.restTime;
+            : _workoutController.settings.restTime;
 
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -331,30 +334,7 @@ class _WorkoutScreenState extends State<WorkoutScreen>
     showDialog(
         context: context,
         builder: (BuildContext context) {
-          return CustomizeWorkoutModal();
+          return CustomizeWorkoutModal(workoutController: _workoutController,);
         });
-
-//    showModalBottomSheet<void>(
-//      context: context,
-//      builder: (BuildContext context) {
-//        return Container(
-//          height: 200,
-//          color: Colors.amber,
-//          child: Center(
-//            child: Column(
-//              mainAxisAlignment: MainAxisAlignment.center,
-//              mainAxisSize: MainAxisSize.min,
-//              children: <Widget>[
-//                const Text('Modal BottomSheet'),
-//                ElevatedButton(
-//                  child: const Text('Close BottomSheet'),
-//                  onPressed: () => Navigator.pop(context),
-//                )
-//              ],
-//            ),
-//          ),
-//        );
-//      },
-//    );
   }
 }

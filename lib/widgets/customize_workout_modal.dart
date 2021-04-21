@@ -16,11 +16,8 @@ class CustomizeWorkoutModal extends StatefulWidget {
 }
 
 class _CustomizeWorkoutModal extends State<CustomizeWorkoutModal> {
-
-
-  int _restTime = widget.workoutController.settings.restTime;
-  int _workTime = 10;
-
+  int _restTime = 10;
+  int _workTime = 20;
   int _rounds = 8;
   int _maxDuration = 0;
 
@@ -29,8 +26,12 @@ class _CustomizeWorkoutModal extends State<CustomizeWorkoutModal> {
 
   @override
   void initState() {
-    _restTime = WorkoutState.restTime;
-    _canSkip = WorkoutState.canSkipExercise;
+    _restTime = widget.workoutController.settings.restTime;
+    _canSkip = widget.workoutController.settings.canSkipExercise;
+    _rounds = widget.workoutController.settings.rounds;
+    _maxDuration = widget.workoutController.settings.maxDuration;
+    _workTime = widget.workoutController.settings.workTime;
+
     _changeOccurred = false;
 
     super.initState();
@@ -64,8 +65,6 @@ class _CustomizeWorkoutModal extends State<CustomizeWorkoutModal> {
               value: _canSkip,
               onChanged: (bool value) {
                 setState(() {
-                  widget.workoutController.setState(workoutState.active);
-
                   _changeOccurred = true;
                   _canSkip = value;
                 });

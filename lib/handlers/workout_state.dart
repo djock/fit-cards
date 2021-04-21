@@ -1,6 +1,7 @@
 import 'package:fitcards/handlers/app_state.dart';
 import 'package:fitcards/handlers/hive_handler.dart';
 import 'package:fitcards/models/workout_settings_model.dart';
+import 'package:flutter/material.dart';
 
 import 'app_state_handler.dart';
 
@@ -13,25 +14,15 @@ enum workoutState {
 }
 
 enum workoutType {
-  hiitShuffle,
+  hiit,
   tabata
 }
 
 class WorkoutState {
-  static bool canSkipExercise = true;
-  static int restTime = 10;
   static int trainingSessionMilliseconds = 0;
 
   static int exercisesCount = 0;
   static int points = 0;
-
-  static void setRestTime(int value) {
-    restTime = value;
-  }
-
-  static void setSkip(bool value) {
-    canSkipExercise = value;
-  }
 }
 
 class WorkoutSettings {
@@ -51,17 +42,14 @@ class WorkoutController {
 
   WorkoutController(this.type, this.settings);
 
-  void setState(workoutState _state) {
-    state = _state;
-  }
-
   void setSettings(WorkoutSettingsModel _settings) {
-
     if(type == workoutType.tabata) {
       AppState.tabataSettings = settings;
       HiveHandler.saveTabataSettings();
     } else {
       AppState.hiitSettings = settings;
+      debugPrint('test2 ' + AppState.hiitSettings.restTime.toString());
+
       HiveHandler.saveHiitSettings();
     }
 

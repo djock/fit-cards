@@ -251,7 +251,7 @@ class FitCard extends StatelessWidget {
   Widget _buildSkipExerciseButton(int points) {
     if (type == cardType.exercise &&
         !(points == 0) &&
-        WorkoutState.canSkipExercise) {
+        true) {
       return Align(
         alignment: Alignment.bottomRight,
         child: IconButton(

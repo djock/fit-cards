@@ -36,7 +36,6 @@ class _WorkoutTabataScreenState extends State<WorkoutTabataScreen>
 
   workoutState _state = workoutState.idle;
 
-
   PreferredSizeWidget _buildAppBar() {
     if (_state == workoutState.active ||
         _state == workoutState.rest ||
@@ -83,8 +82,6 @@ class _WorkoutTabataScreenState extends State<WorkoutTabataScreen>
 
   @override
   Widget build(BuildContext context) {
-    _workoutController.setState(workoutState.idle);
-
     return _state == workoutState.finish
         ? WorkoutEndScreen(
       callback: _onEndWorkout,
@@ -157,10 +154,10 @@ class _WorkoutTabataScreenState extends State<WorkoutTabataScreen>
     var timerDuration = AppState.tutorialActive
         ? _state == workoutState.rest
         ? 0
-        : WorkoutState.restTime
+        : _workoutController.settings.restTime
         : _state == workoutState.countdown
         ? 10
-        : WorkoutState.restTime;
+        : _workoutController.settings.restTime;
 
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -274,7 +271,7 @@ class _WorkoutTabataScreenState extends State<WorkoutTabataScreen>
     if(!AppState.tutorialActive) {
       var currentExercise = new KeyValuePair(
           AppState.exercises[_exerciseController.index].name,
-          WorkoutState.restTime.toString());
+          _workoutController.settings.restTime.toString());
       AppState.activeExercisesList.add(new WorkoutExerciseModel(
           AppState.loggedWorkouts.length,
           currentExercise.key,

@@ -3,6 +3,8 @@ import 'package:fitcards/models/workout_exercise_adapter.dart';
 import 'package:fitcards/models/workout_exercise_model.dart';
 import 'package:fitcards/models/workout_log_adapter.dart';
 import 'package:fitcards/models/workout_log_model.dart';
+import 'package:fitcards/models/workout_settings_adapter.dart';
+import 'package:fitcards/models/workout_settings_model.dart';
 import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart';
 
@@ -15,6 +17,7 @@ class HiveHandler {
   static void init() {
     Hive.registerAdapter(WorkoutExerciseModelAdapter());
     Hive.registerAdapter(WorkoutLogModelAdapter());
+    Hive.registerAdapter(WorkoutSettingsModelAdapter());
   }
 
   static Future<bool> openHiveBoxes() async {
@@ -40,11 +43,15 @@ class HiveHandler {
 
     if (hiitSettingsBox.isNotEmpty) {
       loadHiitSettings();
+    } else {
+      AppState.hiitSettings = new WorkoutSettingsModel(8, 10, 20, true, 0);
     }
     tabataSettingsBox = await Hive.openBox('tabataSettings');
 
     if (tabataSettingsBox.isNotEmpty) {
       loadTabataSettings();
+    } else {
+      AppState.tabataSettings = new WorkoutSettingsModel(8, 10, 20, true, 0);
     }
 
     return true;
@@ -69,12 +76,12 @@ class HiveHandler {
   }
 
   static void loadHiitSettings() {
-    var _box = workoutsBox.get('hiitSettings');
+    var _box = hiitSettingsBox.get('hiitSettings');
     AppState.hiitSettings = _box;
   }
 
   static void loadTabataSettings() {
-    var _box = workoutsBox.get('tabataSettings');
+    var _box = tabataSettingsBox.get('tabataSettings');
     AppState.tabataSettings = _box;
   }
 
