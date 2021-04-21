@@ -1,3 +1,16 @@
+enum workoutState {
+  countdown,
+  active,
+  idle,
+  finish,
+  rest,
+}
+
+enum workoutType {
+  freeRun,
+  tabata
+}
+
 class WorkoutState {
   static bool canSkipExercise = true;
   static int restTime = 10;

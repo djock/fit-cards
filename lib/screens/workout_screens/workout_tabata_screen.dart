@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:fitcards/handlers/app_state.dart';
 import 'package:fitcards/handlers/app_state_handler.dart';
 import 'package:fitcards/handlers/app_theme.dart';
@@ -22,14 +20,6 @@ import 'package:fitcards/widgets/timer_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
-
-enum workoutState {
-  countdown,
-  active,
-  idle,
-  finish,
-  rest,
-}
 
 class WorkoutTabataScreen extends StatefulWidget {
   @override
@@ -107,7 +97,9 @@ class _WorkoutTabataScreenState extends State<WorkoutTabataScreen>
               children: [
                 Expanded(
                   flex: 1,
-                  child: Container(),
+                  child: Container(
+                    child: Text('round 1 / 8'),
+                  ),
                 ),
                 Expanded(
                   flex: 6,
