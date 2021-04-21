@@ -29,7 +29,7 @@ class WorkoutTabataScreen extends StatefulWidget {
 class _WorkoutTabataScreenState extends State<WorkoutTabataScreen>
     with TickerProviderStateMixin {
 
-  WorkoutController _workoutController = new WorkoutController(workoutType.tabata);
+  WorkoutController _workoutController = new WorkoutController(workoutType.tabata, AppState.tabataSettings);
 
   CardController _exerciseController = new CardController();
   CountDownController _countDownController = new CountDownController();

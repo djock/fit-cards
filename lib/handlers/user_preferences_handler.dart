@@ -16,8 +16,6 @@ class UserPreferencesHandler {
 
     loadTutorialFinishedPrefs();
 
-    loadWorkoutExerciseSkip();
-    loadWorkoutRestTime();
     loadAudioEnabled();
     loadPoints();
   }
@@ -68,42 +66,6 @@ class UserPreferencesHandler {
     } else {
       return ThemeMode.system;
     }
-  }
-
-  static Future<void> saveWorkoutRestTime(int rest) async {
-    final SharedPreferences prefs = await _sharedPreferences;
-
-    WorkoutState.setRestTime(rest);
-    prefs.setInt('workoutRest', rest);
-  }
-
-  static Future loadWorkoutRestTime() async {
-    final SharedPreferences prefs = await _sharedPreferences;
-    int restTime = 10;
-
-    if(prefs.getInt('workoutRest') != null) {
-      restTime = prefs.getInt('workoutRest');
-    }
-
-    WorkoutState.setRestTime(restTime);
-  }
-
-  static Future<void> saveWorkoutExerciseSkip(bool value) async {
-    final SharedPreferences prefs = await _sharedPreferences;
-
-    WorkoutState.setSkip(value);
-    prefs.setBool('workoutExerciseSkip', value);
-  }
-
-  static Future loadWorkoutExerciseSkip() async {
-    final SharedPreferences prefs = await _sharedPreferences;
-    bool canSkip = false;
-
-    if(prefs.getBool('workoutExerciseSkip') != null) {
-      canSkip = prefs.getBool('workoutExerciseSkip');
-    }
-
-    WorkoutState.setSkip(canSkip);
   }
 
   static Future<void> saveAudioEnabled(bool value) async {

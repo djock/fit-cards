@@ -1,5 +1,4 @@
 import 'package:fitcards/handlers/app_theme.dart';
-import 'package:fitcards/handlers/user_preferences_handler.dart';
 import 'package:fitcards/handlers/workout_state.dart';
 import 'package:fitcards/models/workout_settings_model.dart';
 import 'package:fitcards/utilities/app_localizations.dart';
@@ -17,7 +16,9 @@ class CustomizeWorkoutModal extends StatefulWidget {
 }
 
 class _CustomizeWorkoutModal extends State<CustomizeWorkoutModal> {
-  int _restTime = 10;
+
+
+  int _restTime = widget.workoutController.settings.restTime;
   int _workTime = 10;
 
   int _rounds = 8;
@@ -115,9 +116,6 @@ class _CustomizeWorkoutModal extends State<CustomizeWorkoutModal> {
       actions: <Widget>[
         new FlatButton(
           onPressed: () {
-            UserPreferencesHandler.saveWorkoutRestTime(_restTime);
-            UserPreferencesHandler.saveWorkoutExerciseSkip(_canSkip);
-
             var settings = new WorkoutSettingsModel(_rounds, _restTime, _workTime, _canSkip, _maxDuration);
             widget.workoutController.setSettings(settings);
 

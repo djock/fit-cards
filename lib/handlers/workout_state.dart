@@ -49,7 +49,7 @@ class WorkoutController {
 
   int points;
 
-  WorkoutController(this.type);
+  WorkoutController(this.type, this.settings);
 
   void setState(workoutState _state) {
     state = _state;
