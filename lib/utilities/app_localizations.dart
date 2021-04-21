@@ -8,7 +8,8 @@ class AppLocalizations {
   static String startAWorkout = 'Start A Workout';
   static String workoutsLog = 'Workouts Log';
   static String shuffleCards = 'Shuffle Cards';
-  static String tabata = 'Tabata (wip)';
+  static String tabata = 'Tabata';
+  static String hiit = 'HIIT Shuffle';
   static String forTime = 'For Time (wip)';
 
   static String exercise = 'Exercise';

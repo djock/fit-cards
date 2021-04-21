@@ -1,18 +1,28 @@
 import 'package:fitcards/handlers/app_theme.dart';
 import 'package:fitcards/handlers/user_preferences_handler.dart';
 import 'package:fitcards/handlers/workout_state.dart';
+import 'package:fitcards/models/workout_settings_model.dart';
 import 'package:fitcards/utilities/app_localizations.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:numberpicker/numberpicker.dart';
 
 class CustomizeWorkoutModal extends StatefulWidget {
+  final WorkoutController workoutController;
+
+  const CustomizeWorkoutModal({Key key, this.workoutController}) : super(key: key);
+
   @override
   _CustomizeWorkoutModal createState() => _CustomizeWorkoutModal();
 }
 
 class _CustomizeWorkoutModal extends State<CustomizeWorkoutModal> {
   int _restTime = 10;
+  int _workTime = 10;
+
+  int _rounds = 8;
+  int _maxDuration = 0;
+
   bool _canSkip = false;
   bool _changeOccurred = false;
 
@@ -28,7 +38,6 @@ class _CustomizeWorkoutModal extends State<CustomizeWorkoutModal> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-
       backgroundColor: Theme.of(context).canvasColor,
       title: Text(
         AppLocalizations.customize,
@@ -54,6 +63,8 @@ class _CustomizeWorkoutModal extends State<CustomizeWorkoutModal> {
               value: _canSkip,
               onChanged: (bool value) {
                 setState(() {
+                  widget.workoutController.setState(workoutState.active);
+
                   _changeOccurred = true;
                   _canSkip = value;
                 });
@@ -106,6 +117,10 @@ class _CustomizeWorkoutModal extends State<CustomizeWorkoutModal> {
           onPressed: () {
             UserPreferencesHandler.saveWorkoutRestTime(_restTime);
             UserPreferencesHandler.saveWorkoutExerciseSkip(_canSkip);
+
+            var settings = new WorkoutSettingsModel(_rounds, _restTime, _workTime, _canSkip, _maxDuration);
+            widget.workoutController.setSettings(settings);
+
             Navigator.of(context).pop();
           },
           child: Text(

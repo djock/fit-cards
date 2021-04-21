@@ -9,6 +9,8 @@ import 'package:path_provider/path_provider.dart';
 class HiveHandler {
   static Box exercisesBox;
   static Box workoutsBox;
+  static Box hiitSettingsBox;
+  static Box tabataSettingsBox;
 
   static void init() {
     Hive.registerAdapter(WorkoutExerciseModelAdapter());
@@ -34,8 +36,21 @@ class HiveHandler {
       loadLoggedExercises();
     }
 
+    hiitSettingsBox = await Hive.openBox('hiitSettings');
+
+    if (hiitSettingsBox.isNotEmpty) {
+      loadHiitSettings();
+    }
+    tabataSettingsBox = await Hive.openBox('tabataSettings');
+
+    if (tabataSettingsBox.isNotEmpty) {
+      loadTabataSettings();
+    }
+
     return true;
   }
+
+  /// LOAD
 
   static void loadLoggedExercises() {
     var _box = exercisesBox.get('exercises');
@@ -53,12 +68,32 @@ class HiveHandler {
     }
   }
 
+  static void loadHiitSettings() {
+    var _box = workoutsBox.get('hiitSettings');
+    AppState.hiitSettings = _box;
+  }
+
+  static void loadTabataSettings() {
+    var _box = workoutsBox.get('tabataSettings');
+    AppState.tabataSettings = _box;
+  }
+
+  /// SAVE
+
   static void saveExerciseToBox() {
     exercisesBox.put('exercises', AppState.loggedExercisesList);
   }
 
   static void saveWorkoutToBox() {
     workoutsBox.put('workouts', AppState.loggedWorkouts);
+  }
+
+  static void saveHiitSettings() {
+    hiitSettingsBox.put('hiitSettings', AppState.hiitSettings);
+  }
+
+  static void saveTabataSettings() {
+    tabataSettingsBox.put('tabataSettings', AppState.tabataSettings);
   }
 
   static void clearAllData() {

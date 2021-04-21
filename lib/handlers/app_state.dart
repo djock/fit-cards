@@ -2,6 +2,7 @@ import 'package:fitcards/models/exercise_model.dart';
 import 'package:fitcards/models/scheme_model.dart';
 import 'package:fitcards/models/workout_exercise_model.dart';
 import 'package:fitcards/models/workout_log_model.dart';
+import 'package:fitcards/models/workout_settings_model.dart';
 
 class AppState {
   static List<WorkoutExerciseModel> loggedExercisesList = [];
@@ -28,4 +29,7 @@ class AppState {
   static int points = 0;
 
   static String deviceId;
+
+  static WorkoutSettingsModel hiitSettings =  new WorkoutSettingsModel(8, 10, 20, true, 0);
+  static WorkoutSettingsModel tabataSettings = new WorkoutSettingsModel(8, 10, 20, true, 0);
 }

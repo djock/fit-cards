@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:fitcards/handlers/app_state.dart';
 import 'package:fitcards/handlers/app_state_handler.dart';
 import 'package:fitcards/handlers/app_theme.dart';
@@ -79,10 +77,6 @@ class _HomeScreenState extends State<HomeScreen> {
           SizedBox(
             height: 40,
           ),
-//          Text(
-//            AppLocalizations.areYouReady,
-//            style: AppTheme.customAccentText(FontWeight.normal, 15),
-//          ),
         ],
       ),
     );
@@ -97,7 +91,7 @@ class _HomeScreenState extends State<HomeScreen> {
           height: 20,
         ),
         CustomGradientButton(
-          text: AppLocalizations.shuffleCards,
+          text: AppLocalizations.hiit,
           icon: FontAwesomeIcons.random,
           action: () {
             AppStateHandler.shuffleJson();

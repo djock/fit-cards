@@ -28,8 +28,10 @@ class WorkoutTabataScreen extends StatefulWidget {
 
 class _WorkoutTabataScreenState extends State<WorkoutTabataScreen>
     with TickerProviderStateMixin {
-  CardController _exerciseController = new CardController();
 
+  WorkoutController _workoutController = new WorkoutController(workoutType.tabata);
+
+  CardController _exerciseController = new CardController();
   CountDownController _countDownController = new CountDownController();
 
   workoutState _state = workoutState.idle;
@@ -81,6 +83,8 @@ class _WorkoutTabataScreenState extends State<WorkoutTabataScreen>
 
   @override
   Widget build(BuildContext context) {
+    _workoutController.setState(workoutState.idle);
+
     return _state == workoutState.finish
         ? WorkoutEndScreen(
       callback: _onEndWorkout,
@@ -251,8 +255,9 @@ class _WorkoutTabataScreenState extends State<WorkoutTabataScreen>
         _exerciseController.hasSkipped = false;
       } else {
       }
-    }
 
+      _onSwipeSuccess();
+    }
     if (_state == workoutState.active ||
         _state == workoutState.countdown ||
         _state == workoutState.rest) return;
@@ -260,16 +265,8 @@ class _WorkoutTabataScreenState extends State<WorkoutTabataScreen>
     _onStartWorkout();
   }
 
-  void _onSwipeSchemeCard() {
-    if (_state == workoutState.active) {
-      _onSwipeSuccess(_exerciseController);
-    }
-  }
-
-  void _onSwipeSuccess(CardController otherController) {
+  void _onSwipeSuccess() {
     _onLogExercise();
-    otherController.cancelCallback = true;
-    otherController.triggerLeft();
     changeState(workoutState.rest);
   }
 
@@ -285,14 +282,8 @@ class _WorkoutTabataScreenState extends State<WorkoutTabataScreen>
 
 
       WorkoutState.exercisesCount++;
-      _onAddPoints();
+      _workoutController.addPoints(_exerciseController.points);
     }
-  }
-
-  void _onAddPoints() {
-    WorkoutState.points += _exerciseController.points;
-
-    AppStateHandler.savePoints(_exerciseController.points);
   }
 
   void _onSkipExercise() {
@@ -315,7 +306,7 @@ class _WorkoutTabataScreenState extends State<WorkoutTabataScreen>
     showDialog(
         context: context,
         builder: (BuildContext context) {
-          return CustomizeWorkoutModal();
+          return CustomizeWorkoutModal(workoutController: _workoutController,);
         });
   }
 }

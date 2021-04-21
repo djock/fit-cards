@@ -20,8 +20,10 @@ class AppStateHandler {
     AppState.schemes.shuffle();
     AppState.exercises.shuffle();
 
-    var dummyExercise = new ExerciseModel(name: AppLocalizations.exercise, id: -1, points: 0);
-    var dummyScheme = new SchemeModel(name: AppLocalizations.scheme, id: -1, type: schemeType.reps );
+    var dummyExercise =
+        new ExerciseModel(name: AppLocalizations.exercise, id: -1, points: 0);
+    var dummyScheme = new SchemeModel(
+        name: AppLocalizations.scheme, id: -1, type: schemeType.reps);
 
     AppState.schemes.insert(0, dummyScheme);
     AppState.exercises.insert(0, dummyExercise);
