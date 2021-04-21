@@ -9,7 +9,8 @@ import 'package:numberpicker/numberpicker.dart';
 class CustomizeWorkoutModal extends StatefulWidget {
   final WorkoutController workoutController;
 
-  const CustomizeWorkoutModal({Key key, this.workoutController}) : super(key: key);
+  const CustomizeWorkoutModal({Key key, this.workoutController})
+      : super(key: key);
 
   @override
   _CustomizeWorkoutModal createState() => _CustomizeWorkoutModal();
@@ -40,6 +41,7 @@ class _CustomizeWorkoutModal extends State<CustomizeWorkoutModal> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
+      insetPadding: EdgeInsets.symmetric(horizontal: 50),
       backgroundColor: Theme.of(context).canvasColor,
       title: Text(
         AppLocalizations.customize,
@@ -74,6 +76,86 @@ class _CustomizeWorkoutModal extends State<CustomizeWorkoutModal> {
           SizedBox(
             height: 20,
           ),
+          widget.workoutController.type == workoutType.tabata
+              ? Row(
+                  children: [
+                    Expanded(
+                      child: Text(
+                        AppLocalizations.chooseRounds,
+                        style: AppTheme.customAccentText(FontWeight.normal, 14),
+                        overflow: TextOverflow.clip,
+                      ),
+                    ),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    NumberPicker(
+                      value: _rounds,
+                      haptics: true,
+                      minValue: 5,
+                      maxValue: 30,
+                      itemCount: 3,
+                      step: 1,
+                      itemHeight: 30,
+                      itemWidth: 30,
+                      textStyle:
+                          AppTheme.customAccentText(FontWeight.normal, 13),
+                      selectedTextStyle: AppTheme.textAccentBold15(),
+                      axis: Axis.horizontal,
+                      onChanged: (value) => setState(() {
+                        _changeOccurred = true;
+                        _rounds = value;
+                      }),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(16),
+                        border:
+                            Border.all(color: Theme.of(context).accentColor),
+                      ),
+                    ),
+                  ],
+                )
+              : SizedBox(),
+          _buildDynamicSpace(),
+          widget.workoutController.type == workoutType.tabata
+              ? Row(
+            children: [
+              Expanded(
+                child: Text(
+                  AppLocalizations.chooseWorkTime,
+                  style: AppTheme.customAccentText(FontWeight.normal, 14),
+                  overflow: TextOverflow.clip,
+                ),
+              ),
+              SizedBox(
+                width: 10,
+              ),
+              NumberPicker(
+                value: _workTime,
+                haptics: true,
+                minValue: 5,
+                maxValue: 90,
+                itemCount: 3,
+                step: 5,
+                itemHeight: 30,
+                itemWidth: 30,
+                textStyle:
+                AppTheme.customAccentText(FontWeight.normal, 13),
+                selectedTextStyle: AppTheme.textAccentBold15(),
+                axis: Axis.horizontal,
+                onChanged: (value) => setState(() {
+                  _changeOccurred = true;
+                  _restTime = value;
+                }),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(16),
+                  border:
+                  Border.all(color: Theme.of(context).accentColor),
+                ),
+              ),
+            ],
+          )
+              : SizedBox(),
+          _buildDynamicSpace(),
           Row(
             children: [
               Expanded(
@@ -96,8 +178,7 @@ class _CustomizeWorkoutModal extends State<CustomizeWorkoutModal> {
                 itemHeight: 30,
                 itemWidth: 30,
                 textStyle: AppTheme.customAccentText(FontWeight.normal, 13),
-                selectedTextStyle:
-                    AppTheme.textAccentBold15(),
+                selectedTextStyle: AppTheme.textAccentBold15(),
                 axis: Axis.horizontal,
                 onChanged: (value) => setState(() {
                   _changeOccurred = true;
@@ -109,13 +190,14 @@ class _CustomizeWorkoutModal extends State<CustomizeWorkoutModal> {
                 ),
               ),
             ],
-          )
+          ),
         ],
       ),
       actions: <Widget>[
         new FlatButton(
           onPressed: () {
-            var settings = new WorkoutSettingsModel(_rounds, _restTime, _workTime, _canSkip, _maxDuration);
+            var settings = new WorkoutSettingsModel(
+                _rounds, _restTime, _workTime, _canSkip, _maxDuration);
             widget.workoutController.setSettings(settings);
 
             Navigator.of(context).pop();
@@ -127,5 +209,13 @@ class _CustomizeWorkoutModal extends State<CustomizeWorkoutModal> {
         ),
       ],
     );
+  }
+
+  Widget _buildDynamicSpace() {
+    return widget.workoutController.type == workoutType.tabata
+        ? SizedBox(
+            height: 20,
+          )
+        : SizedBox();
   }
 }
