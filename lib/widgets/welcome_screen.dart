@@ -1,6 +1,5 @@
 import 'package:fitcards/handlers/user_preferences_handler.dart';
 import 'package:fitcards/screens/app_screen.dart';
-import 'package:fitcards/screens/home_screen.dart';
 import 'package:fitcards/utilities/app_localizations.dart';
 import 'package:fitcards/utilities/profanity_filter.dart';
 import 'package:fitcards/widgets/custom_button.dart';

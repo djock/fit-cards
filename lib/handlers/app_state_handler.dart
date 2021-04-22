@@ -1,5 +1,4 @@
 import 'package:fitcards/handlers/user_preferences_handler.dart';
-import 'package:fitcards/handlers/workout_state.dart';
 import 'package:fitcards/models/exercise_model.dart';
 import 'package:fitcards/models/scheme_model.dart';
 import 'package:fitcards/models/workout_log_model.dart';
@@ -37,8 +36,6 @@ class AppStateHandler {
 
   static void logWorkout(WorkoutLogModel workoutLogModel) {
     AppState.loggedWorkouts.add(workoutLogModel);
-    WorkoutState.exercisesCount = 0;
-    WorkoutState.points = 0;
 
     HiveHandler.saveWorkoutToBox();
   }

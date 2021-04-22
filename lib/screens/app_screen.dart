@@ -3,10 +3,8 @@ import 'package:fitcards/screens/settings_screen.dart';
 import 'package:fitcards/screens/stats_screen.dart';
 import 'package:fitcards/utilities/app_colors.dart';
 import 'package:fitcards/utilities/app_localizations.dart';
-import 'package:fitcards/widgets/expandable_fab.dart';
 import 'package:fitcards/widgets/general_modal.dart';
 import 'package:fitcards/widgets/safe_screen.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';

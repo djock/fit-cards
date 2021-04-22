@@ -1,4 +1,4 @@
-//import 'package:fitcards/handlers/workout_state.dart';
+//import 'package:fitcards/handlers/workout_controller.dart';
 //import 'package:fitcards/models/base_model.dart';
 //import 'package:fitcards/models/exercise_model.dart';
 //import 'package:fitcards/utilities/app_colors.dart';

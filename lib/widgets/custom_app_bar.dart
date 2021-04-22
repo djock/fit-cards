@@ -42,23 +42,6 @@ class CustomAppBar {
         centerTitle: true,
       );
 
-  static PreferredSizeWidget buildCountDown(
-      {double elevation = 0.0,
-        String text = '',
-        double iconSize = 24,
-        bool hideLeading = false}) =>
-      AppBar(
-        backgroundColor:
-        AppTheme.countDownTimerColor(),
-        elevation: elevation,
-        iconTheme: IconThemeData(color: Colors.red),
-        title: Text(
-          text.toUpperCase(),
-          style: TextStyle(
-              fontWeight: FontWeight.bold, fontSize: 34, color: Colors.red),
-        ),
-        centerTitle: true,
-      );
 
   static PreferredSizeWidget buildNormal(String text,
           {double elevation = 0.0}) =>
@@ -75,24 +58,51 @@ class CustomAppBar {
         centerTitle: true,
       );
 
+  static PreferredSizeWidget buildWorkout(String text,
+      {double elevation = 0.0}) =>
+      AppBar(
+        backgroundColor:
+        AppTheme.countDownTimerColor(),
+        elevation: 0.0,
+        iconTheme: IconThemeData(color: Colors.red),
+        title: Text(
+          text.toUpperCase(),
+          style: TextStyle(
+              fontWeight: FontWeight.bold, fontSize: 34, color: Colors.red),
+        ),
+        centerTitle: true,
+      );
+
+  static PreferredSizeWidget buildWorkoutWithActions(String text, Function callback) =>
+      AppBar(
+        backgroundColor:
+        AppTheme.countDownTimerColor(),
+        elevation: 0.0,
+        iconTheme: IconThemeData(color: Colors.red),
+        title: Text(
+          text.toUpperCase(),
+          style: TextStyle(
+              fontWeight: FontWeight.bold, fontSize: 34, color: Colors.red),
+        ),
+        leading: Container(),
+        actions: [
+          IconButton(
+              icon: FaIcon(
+                FontAwesomeIcons.times,
+                color: Colors.red,
+                size: 40,
+              ),
+              onPressed: callback)
+        ],
+        centerTitle: true,
+      );
+
   static PreferredSizeWidget buildEmpty() => AppBar(
         backgroundColor: Theme.of(Get.context).canvasColor,
         elevation: 0,
         iconTheme: IconThemeData(
           color: Theme.of(Get.context).accentColor,
         ),
-        centerTitle: false,
-      );
-
-  static PreferredSizeWidget buildCardsScreen() => AppBar(
-        backgroundColor: Theme.of(Get.context).canvasColor,
-        elevation: 0,
-        iconTheme: IconThemeData(
-          color: Theme.of(Get.context).accentColor,
-        ),
-        actions: [
-          IconButton(icon: Icon(Icons.dashboard_customize), onPressed: null)
-        ],
         centerTitle: false,
       );
 

@@ -2,8 +2,7 @@ import 'package:fitcards/handlers/app_state.dart';
 import 'package:fitcards/handlers/app_state_handler.dart';
 import 'package:fitcards/handlers/app_theme.dart';
 import 'package:fitcards/handlers/firebase_database_handler.dart';
-import 'package:fitcards/handlers/user_preferences_handler.dart';
-import 'package:fitcards/handlers/workout_state.dart';
+import 'package:fitcards/handlers/workout_controller.dart';
 import 'package:fitcards/models/workout_exercise_model.dart';
 import 'package:fitcards/models/workout_log_model.dart';
 import 'package:fitcards/screens/workout_screens/workout_end_screen.dart';
@@ -63,8 +62,7 @@ class _WorkoutScreenState extends State<WorkoutScreen>
     }
 
     if (_state == workoutState.countdown) {
-      return CustomAppBar.buildCountDown(
-          text: AppLocalizations.getReady, iconSize: 40);
+      return CustomAppBar.buildWorkout(AppLocalizations.getReady);
     }
 
     return CustomAppBar.buildWithActions([
@@ -84,12 +82,8 @@ class _WorkoutScreenState extends State<WorkoutScreen>
 
   @override
   Widget build(BuildContext context) {
-    debugPrint('build workout_screen ' + AppState.hiitSettings.restTime.toString());
-
     return _state == workoutState.finish
-        ? WorkoutEndScreen(
-            callback: _onEndWorkout,
-          )
+        ? WorkoutEndScreen()
         : SafeScreen(
             appBar: _buildAppBar(),
             body: Stack(
@@ -254,7 +248,7 @@ class _WorkoutScreenState extends State<WorkoutScreen>
 
     var now = DateTime.now();
     var currentWorkout = new WorkoutLogModel(AppState.loggedWorkouts.length,
-        now, WorkoutState.trainingSessionMilliseconds, WorkoutState.exercisesCount, WorkoutState.points);
+        now, WorkoutState.trainingSessionMilliseconds, _workoutController.exercisesCount, _workoutController.points);
 
     AppStateHandler.logExercise();
     AppStateHandler.logWorkout(currentWorkout);
@@ -303,15 +297,9 @@ class _WorkoutScreenState extends State<WorkoutScreen>
           currentExercise.value));
 
 
-      WorkoutState.exercisesCount++;
-      _onAddPoints();
+      _workoutController.countExercise();
+      _workoutController.addPoints(_exerciseController.points);
     }
-  }
-
-  void _onAddPoints() {
-    WorkoutState.points += _exerciseController.points;
-
-    AppStateHandler.savePoints(_exerciseController.points);
   }
 
   void _onSkipExercise() {
@@ -322,10 +310,6 @@ class _WorkoutScreenState extends State<WorkoutScreen>
     setState(() {
       _state = state;
     });
-  }
-
-  void _onEndWorkout() {
-    UserPreferencesHandler.markTutorialAsFinished();
   }
 
   void _onOpenFilters() {

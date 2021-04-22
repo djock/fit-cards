@@ -1,39 +1,30 @@
+import 'package:fitcards/widgets/timer_widget.dart';
 import 'package:flutter/material.dart';
 
 /// This is the stateless widget that the main application instantiates.
-class MyStatelessWidget extends StatelessWidget {
-  const MyStatelessWidget({Key key}) : super(key: key);
+class TestScreen extends StatefulWidget {
+  @override
+  _TestScreenState createState() => _TestScreenState();
+}
+
+
+class _TestScreenState extends State<TestScreen> {
+  var work = 10;
+
+  void _setState() async {
+    await Future.delayed(Duration(seconds: 1));
+    setState(() {
+      debugPrint('_setState');
+      work = 7;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: ElevatedButton(
-        child: const Text('showModalBottomSheet'),
-        onPressed: () {
-          showModalBottomSheet<void>(
-            context: context,
-            builder: (BuildContext context) {
-              return Container(
-                height: 200,
-                color: Colors.amber,
-                child: Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    mainAxisSize: MainAxisSize.min,
-                    children: <Widget>[
-                      const Text('Modal BottomSheet'),
-                      ElevatedButton(
-                        child: const Text('Close BottomSheet'),
-                        onPressed: () => Navigator.pop(context),
-                      )
-                    ],
-                  ),
-                ),
-              );
-            },
-          );
-        },
-      ),
+      child: TimerWidget(timer: work, callback: () {
+        _setState();
+      },)
     );
   }
 }

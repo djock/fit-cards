@@ -7,6 +7,7 @@ import 'package:fitcards/utilities/app_localizations.dart';
 import 'package:fitcards/widgets/custom_app_bar.dart';
 import 'package:fitcards/widgets/custom_gradient_button.dart';
 import 'package:fitcards/widgets/safe_screen.dart';
+import 'package:fitcards/widgets/test_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
@@ -32,7 +33,6 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget _buildHeader() {
-
     return Padding(
       padding: const EdgeInsets.all(10.0),
       child: Column(
@@ -60,15 +60,24 @@ class _HomeScreenState extends State<HomeScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text('', style: AppTheme.customAccentText(FontWeight.normal, 12),),
-                    Text('Lvl. 1', style: AppTheme.customAccentText(FontWeight.normal, 12),),
+                    Text(
+                      '',
+                      style: AppTheme.customAccentText(FontWeight.normal, 12),
+                    ),
+                    Text(
+                      'Lvl. 1',
+                      style: AppTheme.customAccentText(FontWeight.normal, 12),
+                    ),
                   ],
                 ),
-                SizedBox(height: 10,),
+                SizedBox(
+                  height: 10,
+                ),
                 LinearProgressIndicator(
                   minHeight: 7,
                   value: 0.5,
-                  backgroundColor: Theme.of(Get.context).accentColor.withOpacity(0.5),
+                  backgroundColor:
+                      Theme.of(Get.context).accentColor.withOpacity(0.5),
                   semanticsLabel: 'Linear progress indicator',
                 ),
               ],

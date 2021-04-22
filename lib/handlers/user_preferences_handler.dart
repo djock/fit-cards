@@ -1,5 +1,4 @@
 import 'package:fitcards/handlers/app_state.dart';
-import 'package:fitcards/handlers/workout_state.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

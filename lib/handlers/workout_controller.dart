@@ -20,9 +20,6 @@ enum workoutType {
 
 class WorkoutState {
   static int trainingSessionMilliseconds = 0;
-
-  static int exercisesCount = 0;
-  static int points = 0;
 }
 
 class WorkoutSettings {
@@ -38,22 +35,24 @@ class WorkoutController {
 
   WorkoutSettingsModel settings;
 
-  int points;
+  int points = 0;
+  int exercisesCount = 0;
 
   WorkoutController(this.type, this.settings);
 
   void setSettings(WorkoutSettingsModel _settings) {
     if(type == workoutType.tabata) {
-      AppState.tabataSettings = settings;
       HiveHandler.saveTabataSettings();
     } else {
       AppState.hiitSettings = settings;
-      debugPrint('test2 ' + AppState.hiitSettings.restTime.toString());
-
       HiveHandler.saveHiitSettings();
     }
 
     settings = _settings;
+  }
+
+  void countExercise() {
+    exercisesCount++;
   }
 
   void addPoints(int value) {

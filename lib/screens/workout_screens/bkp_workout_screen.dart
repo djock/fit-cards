@@ -5,7 +5,7 @@
 //import 'package:fitcards/handlers/app_theme.dart';
 //import 'package:fitcards/handlers/firebase_database_handler.dart';
 //import 'package:fitcards/handlers/user_preferences_handler.dart';
-//import 'package:fitcards/handlers/workout_state.dart';
+//import 'package:fitcards/handlers/workout_controller.dart';
 //import 'package:fitcards/models/workout_exercise_model.dart';
 //import 'package:fitcards/models/workout_log_model.dart';
 //import 'package:fitcards/screens/workout_screens/workout_end_screen.dart';

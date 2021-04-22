@@ -8,9 +8,7 @@ import 'package:fitcards/widgets/safe_screen.dart';
 import 'package:flutter/material.dart';
 
 class WorkoutEndScreen extends StatefulWidget {
-  final Function callback;
-
-  const WorkoutEndScreen({Key key, this.callback}) : super(key: key);
+  const WorkoutEndScreen({Key key, }) : super(key: key);
 
   @override
   _WorkoutEndScreenState createState() => _WorkoutEndScreenState();
@@ -75,7 +73,6 @@ class _WorkoutEndScreenState extends State<WorkoutEndScreen> {
           Container(
             child: InkWell(
               onTap: () {
-                widget.callback() != null ? widget.callback() : debugPrint('no callback');
                 Navigator.pop(context);
               },
               child: Container(

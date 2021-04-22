@@ -64,6 +64,17 @@ class Utils {
     return "$hours:$minutes:$seconds";
   }
 
+  static String formatTimeSeconds(int secs) {
+    var hours = (secs ~/ 3600).toString().padLeft(2, '0');
+    var minutes = ((secs % 3600) ~/ 60).toString().padLeft(2, '0');
+    var seconds = (secs % 60).toString().padLeft(2, '0');
+
+    var hoursString = hours != '00' ? '$hours:' : '';
+
+    return "$hoursString$minutes:$seconds";
+  }
+
+
   static String formatDate(DateTime dateTime) {
     var formatter = DateFormat('dd MMM, yyyy').add_jm();
     var formattedDate = formatter.format(dateTime).toUpperCase();

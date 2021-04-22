@@ -46,6 +46,7 @@ class HiveHandler {
     } else {
       AppState.hiitSettings = new WorkoutSettingsModel(8, 10, 20, true, 0);
     }
+
     tabataSettingsBox = await Hive.openBox('tabataSettings');
 
     if (tabataSettingsBox.isNotEmpty) {

@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:fitcards/handlers/workout_state.dart';
+import 'package:fitcards/handlers/workout_controller.dart';
 import 'package:fitcards/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 
