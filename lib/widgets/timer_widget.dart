@@ -1,11 +1,14 @@
 import 'package:fitcards/utilities/utils.dart';
 import 'package:flutter/material.dart';
 
-class TimerWidget extends StatefulWidget {
-  final int timer;
-  final Function callback;
+enum timerType { timer, countdown }
 
-  const TimerWidget({Key key, this.callback, this.timer})
+class TimerWidget extends StatefulWidget {
+  final int duration;
+  final Function callback;
+  final timerType type;
+
+  const TimerWidget({Key key, this.callback, this.duration, this.type})
       : super(key: key);
 
   @override
@@ -18,7 +21,7 @@ class _TimerWidgetState extends State<TimerWidget> {
 
   @override
   void initState() {
-    _timeInSec.value = widget.timer;
+    _timeInSec.value = widget.duration;
     super.initState();
   }
 
@@ -29,7 +32,7 @@ class _TimerWidgetState extends State<TimerWidget> {
     _disposed = true;
   }
 
-  void startTimer(int time) async {
+  void startCountDown(int time) async {
     _timeInSec.value = time;
 
     while (_timeInSec.value >= 0) {
@@ -45,9 +48,22 @@ class _TimerWidgetState extends State<TimerWidget> {
     }
   }
 
+  void startTimer() async {
+    _timeInSec.value = 0;
+
+    while (this.mounted) {
+      await Future.delayed(Duration(seconds: 1));
+      if(!_disposed)
+        _timeInSec.value++;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    startTimer(widget.timer);
+    if(widget.type == timerType.timer)
+      startTimer();
+    else
+      startCountDown(widget.duration);
 
     return ValueListenableBuilder(
         valueListenable: _timeInSec,

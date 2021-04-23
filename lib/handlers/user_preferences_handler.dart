@@ -13,26 +13,26 @@ class UserPreferencesHandler {
   static void initSharedPreferences() {
     _sharedPreferences = SharedPreferences.getInstance();
 
-    loadTutorialFinishedPrefs();
+//    loadTutorialFinishedPrefs();
 
     loadAudioEnabled();
     loadPoints();
   }
-
-  static Future<void> markTutorialAsFinished() async {
-    final SharedPreferences prefs = await _sharedPreferences;
-    prefs.setBool('tutorialFinished', true);
-
-    AppState.tutorialActive = false;
-    AppState.tutorialFinished = true;
-  }
-
-  static Future<void> loadTutorialFinishedPrefs() async {
-    final SharedPreferences prefs = await _sharedPreferences;
-    AppState.tutorialFinished = prefs.getBool('tutorialFinished') != null
-        ? prefs.getBool('tutorialFinished')
-        : false;
-  }
+//
+//  static Future<void> markTutorialAsFinished() async {
+//    final SharedPreferences prefs = await _sharedPreferences;
+//    prefs.setBool('tutorialFinished', true);
+//
+//    AppState.tutorialActive = false;
+//    AppState.tutorialFinished = true;
+//  }
+//
+//  static Future<void> loadTutorialFinishedPrefs() async {
+//    final SharedPreferences prefs = await _sharedPreferences;
+//    AppState.tutorialFinished = prefs.getBool('tutorialFinished') != null
+//        ? prefs.getBool('tutorialFinished')
+//        : false;
+//  }
 
   static Future<void> saveUserName(String userName) async {
     final SharedPreferences prefs = await _sharedPreferences;

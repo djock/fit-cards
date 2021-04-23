@@ -50,7 +50,7 @@ class AppStateHandler {
   static void clearAllData() {
     AppState.points = 0;
     AppState.audioEnabled = true;
-    AppState.tutorialFinished = false;
+//    AppState.tutorialFinished = false;
 
     AppState.loggedWorkouts.clear();
     AppState.loggedExercisesList.clear();

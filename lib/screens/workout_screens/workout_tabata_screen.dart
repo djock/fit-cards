@@ -1,7 +1,6 @@
 import 'package:fitcards/handlers/app_state.dart';
 import 'package:fitcards/handlers/app_state_handler.dart';
 import 'package:fitcards/handlers/app_theme.dart';
-import 'package:fitcards/handlers/firebase_database_handler.dart';
 import 'package:fitcards/handlers/workout_controller.dart';
 import 'package:fitcards/models/workout_exercise_model.dart';
 import 'package:fitcards/models/workout_log_model.dart';
@@ -37,15 +36,18 @@ class _WorkoutTabataScreenState extends State<WorkoutTabataScreen>
 
   PreferredSizeWidget _buildAppBar() {
     if (_state == workoutState.countdown) {
-      return CustomAppBar.buildWorkout(AppLocalizations.getReady);
+      return CustomAppBar.buildWorkoutIdle(AppLocalizations.getReady);
     }
 
-    if (_state == workoutState.active) {
-      return CustomAppBar.buildWorkoutWithActions('Work', () => _onStopWorkout());
-    }
-
-    if (_state == workoutState.rest) {
-      return CustomAppBar.buildWorkoutWithActions('Rest', () => _onStopWorkout());
+    if (_state == workoutState.active || _state == workoutState.rest) {
+      return CustomAppBar.buildWorkout(
+        _state == workoutState.active
+            ? _workoutController.settings.workTime
+            : _workoutController.settings.restTime,
+        timerType.countdown,
+        () => _setState(),
+        () => _onStopWorkout(),
+      );
     }
 
     return CustomAppBar.buildWithActions([
@@ -93,20 +95,6 @@ class _WorkoutTabataScreenState extends State<WorkoutTabataScreen>
                   height: MediaQuery.of(context).size.height * 0.91,
                   child: Column(
                     children: [
-                      _state == workoutState.active ||
-                              _state == workoutState.rest
-                          ? Expanded(
-                              flex: 1,
-                              child: Container(
-                                child: TimerWidget(
-                                  timer: _state == workoutState.active ? _workoutController.settings.workTime : _workoutController.settings.restTime,
-                                  callback: () {
-                                    _setState();
-                                  },
-                                ),
-                              ),
-                            )
-                          : SizedBox(),
                       Expanded(
                         flex: 1,
                         child: Container(
@@ -120,8 +108,7 @@ class _WorkoutTabataScreenState extends State<WorkoutTabataScreen>
                           list: AppState.exercises,
                           color: AppColors.exerciseCardColor,
                           cardController: _exerciseController,
-                          isBlocked:
-                              _state == workoutState.countdown ? true : false,
+                          isBlocked: _state == workoutState.idle ? false : true,
                           type: cardType.exercise,
                           onCallback: () {
                             _onSwipeExerciseCard();
@@ -162,13 +149,9 @@ class _WorkoutTabataScreenState extends State<WorkoutTabataScreen>
   bool _countDownPaused = false;
 
   Widget _buildCountDownTimer() {
-    var timerDuration = AppState.tutorialActive
-        ? _state == workoutState.rest
-            ? 0
-            : _workoutController.settings.restTime
-        : _state == workoutState.countdown
-            ? 10
-            : _workoutController.settings.restTime;
+    var timerDuration = _state == workoutState.countdown
+        ? 10
+        : _workoutController.settings.restTime;
 
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -234,11 +217,6 @@ class _WorkoutTabataScreenState extends State<WorkoutTabataScreen>
   }
 
   void _onStopWorkout() {
-    if (AppState.tutorialActive) {
-      changeState(workoutState.finish);
-      return;
-    }
-
     if (_state == workoutState.countdown) {
       AppStateHandler.shuffleJson();
       changeState(workoutState.idle);
@@ -282,18 +260,16 @@ class _WorkoutTabataScreenState extends State<WorkoutTabataScreen>
   }
 
   void _onLogExercise() {
-    if (!AppState.tutorialActive) {
-      var currentExercise = new KeyValuePair(
-          AppState.exercises[_exerciseController.index].name,
-          _workoutController.settings.restTime.toString());
-      AppState.activeExercisesList.add(new WorkoutExerciseModel(
-          AppState.loggedWorkouts.length,
-          currentExercise.key,
-          currentExercise.value));
+    var currentExercise = new KeyValuePair(
+        AppState.exercises[_exerciseController.index].name,
+        _workoutController.settings.restTime.toString());
+    AppState.activeExercisesList.add(new WorkoutExerciseModel(
+        AppState.loggedWorkouts.length,
+        currentExercise.key,
+        currentExercise.value));
 
-      _workoutController.countExercise();
-      _workoutController.addPoints(_exerciseController.points);
-    }
+    _workoutController.countExercise();
+    _workoutController.addPoints(_exerciseController.points);
   }
 
   void _onSkipExercise() {
@@ -307,8 +283,6 @@ class _WorkoutTabataScreenState extends State<WorkoutTabataScreen>
   }
 
   void _onOpenFilters() {
-    FirebaseDatabaseHandler.updateLeaderBoard();
-
     showDialog(
         context: context,
         builder: (BuildContext context) {

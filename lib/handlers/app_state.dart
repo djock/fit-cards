@@ -16,8 +16,8 @@ class AppState {
   static List<ExerciseModel> cachedExercises = [];
   static List<SchemeModel> cachedSchemes = [];
 
-  static bool tutorialFinished = false;
-  static bool tutorialActive = false;
+//  static bool tutorialFinished = false;
+//  static bool tutorialActive = false;
 
   static String userName = '';
 

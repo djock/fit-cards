@@ -38,6 +38,8 @@ class WorkoutController {
   int points = 0;
   int exercisesCount = 0;
 
+  int duration;
+
   WorkoutController(this.type, this.settings);
 
   void setSettings(WorkoutSettingsModel _settings) {
@@ -59,5 +61,9 @@ class WorkoutController {
     points += value;
 
     AppStateHandler.savePoints(value);
+  }
+
+  void setDuration(int value) {
+    duration += value;
   }
 }

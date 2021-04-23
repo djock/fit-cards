@@ -22,7 +22,7 @@ class _TestScreenState extends State<TestScreen> {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: TimerWidget(timer: work, callback: () {
+      child: TimerWidget(duration: work, callback: () {
         _setState();
       },)
     );
