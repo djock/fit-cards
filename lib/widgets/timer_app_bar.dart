@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:fitcards/handlers/workout_controller.dart';
 import 'package:fitcards/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 
@@ -55,7 +54,6 @@ class _TimerAppBarState extends State<TimerAppBar> {
 
   @override
   Widget build(BuildContext context) {
-    WorkoutState.trainingSessionMilliseconds = _stopwatch.elapsedMilliseconds;
     return CustomAppBar.buildTimer(
         _stopwatch.elapsedMilliseconds, widget.callback, widget.isInRest);
   }

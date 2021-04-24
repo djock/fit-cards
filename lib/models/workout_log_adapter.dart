@@ -17,13 +17,14 @@ class WorkoutLogModelAdapter extends TypeAdapter<WorkoutLogModel> {
       fields[2] as int,
       fields[3] as int,
       fields[4] as int,
+      fields[5] as String,
     );
   }
 
   @override
   void write(BinaryWriter writer, WorkoutLogModel obj) {
     writer
-      ..writeByte(5)
+      ..writeByte(6)
       ..writeByte(0)
       ..write(obj.index)
       ..writeByte(1)
@@ -33,6 +34,8 @@ class WorkoutLogModelAdapter extends TypeAdapter<WorkoutLogModel> {
       ..writeByte(3)
       ..write(obj.exercises)
       ..writeByte(4)
-      ..write(obj.points);
+      ..write(obj.points)
+      ..writeByte(5)
+      ..write(obj.name);
   }
 }

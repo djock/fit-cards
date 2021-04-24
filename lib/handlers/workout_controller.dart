@@ -1,6 +1,7 @@
 import 'package:fitcards/handlers/app_state.dart';
 import 'package:fitcards/handlers/hive_handler.dart';
 import 'package:fitcards/models/workout_settings_model.dart';
+import 'package:flutter/material.dart';
 
 import 'app_state_handler.dart';
 
@@ -13,10 +14,6 @@ enum workoutState {
 }
 
 enum workoutType { hiit, tabata }
-
-class WorkoutState {
-  static int trainingSessionMilliseconds = 0;
-}
 
 class WorkoutSettings {
   int rounds = 8;
@@ -34,7 +31,7 @@ class WorkoutController {
   int points = 0;
   int exercisesCount = 0;
 
-  int duration;
+  int duration = 0;
 
   WorkoutController(this.type, this.settings);
 
@@ -59,7 +56,8 @@ class WorkoutController {
     AppStateHandler.savePoints(value);
   }
 
-  void setDuration(int value) {
+  void addDuration(int value) {
     duration += value;
+    debugPrint('durations ' + duration.toString());
   }
 }

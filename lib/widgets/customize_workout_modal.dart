@@ -82,7 +82,7 @@ class _CustomizeWorkoutModal extends State<CustomizeWorkoutModal> {
                   children: [
                     Expanded(
                       child: Text(
-                        AppLocalizations.chooseRounds,
+                        AppLocalizations.rounds,
                         style: AppTheme.customAccentText(FontWeight.normal, 14),
                         overflow: TextOverflow.clip,
                       ),

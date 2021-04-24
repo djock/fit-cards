@@ -65,7 +65,7 @@ class AppLocalizations {
 
   static String skipExercise = 'Skip exercise?';
   static String chooseRestTime = 'Rest (seconds)';
-  static String chooseRounds = 'Rounds';
+  static String rounds = 'Rounds';
   static String round = 'Round';
   static String chooseWorkTime = 'Work (seconds)';
   static String customize = 'Customize';
@@ -87,4 +87,7 @@ class AppLocalizations {
   static String exercisesDone = 'Unique exercises';
   static String averageDuration = 'Avg. workout duration';
   static String averagePoints = 'Avg. points / workout';
+
+  static String duration = 'Duration';
+  static String date = 'Date';
 }

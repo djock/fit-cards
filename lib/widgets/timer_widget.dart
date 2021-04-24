@@ -79,7 +79,7 @@ class _TimerWidgetState extends State<TimerWidget> {
   }
 
   void _playAudio() {
-    if (AppState.audioEnabled) {
+    if (AppState.audioEnabled && widget.type == timerType.countdown) {
       if (_timeInSec.value == 3) {
         AssetsAudioPlayer.newPlayer().open(
           Audio("assets/tick.flac"),

@@ -22,7 +22,6 @@ class StatsTable extends StatelessWidget {
       for (var workout in AppState.loggedWorkouts) {
         if (workout.points != null) {
           index++;
-          debugPrint('workout ' + workout.points.toString());
           totalDuration += workout.duration;
           totalPoints += workout.points;
 

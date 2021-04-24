@@ -8,7 +8,6 @@ import 'package:fitcards/screens/workout_screens/workout_end_screen.dart';
 import 'package:fitcards/utilities/app_colors.dart';
 import 'package:fitcards/utilities/app_localizations.dart';
 import 'package:fitcards/utilities/key_value_pair_model.dart';
-import 'package:fitcards/widgets/circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:fitcards/widgets/custom_app_bar.dart';
 import 'package:fitcards/widgets/customize_workout_modal.dart';
 import 'package:fitcards/widgets/fit_card.dart';
@@ -30,16 +29,24 @@ class _WorkoutTabataScreenState extends State<WorkoutTabataScreen>
       new WorkoutController(workoutType.tabata, AppState.tabataSettings);
 
   CardController _exerciseController = new CardController();
-  CountDownController _countDownController = new CountDownController();
 
   workoutState _state = workoutState.idle;
 
   PreferredSizeWidget _buildAppBar() {
     if (_state == workoutState.countdown) {
-      return CustomAppBar.buildWorkoutIdle(AppLocalizations.getReady);
+      return CustomAppBar.buildWorkout(
+        10,
+        timerType.countdown,
+        () => _setState(),
+        () => Get.back(),
+      );
     }
 
     if (_state == workoutState.active || _state == workoutState.rest) {
+      _workoutController.addDuration(_state == workoutState.active
+          ? _workoutController.settings.workTime
+          : _workoutController.settings.restTime);
+
       return CustomAppBar.buildWorkout(
         _state == workoutState.active
             ? _workoutController.settings.workTime
@@ -68,8 +75,14 @@ class _WorkoutTabataScreenState extends State<WorkoutTabataScreen>
   void _setState() async {
     await Future.delayed(Duration(seconds: 1));
     setState(() {
+      if (_state == workoutState.countdown) {
+        changeState(workoutState.active);
+        return;
+      }
+
       if (_state == workoutState.active) {
-        if(_workoutController.exercisesCount +1 == _workoutController.settings.rounds) {
+        if (_workoutController.exercisesCount + 1 ==
+            _workoutController.settings.rounds) {
           _onStopWorkout();
           return;
         }
@@ -100,16 +113,40 @@ class _WorkoutTabataScreenState extends State<WorkoutTabataScreen>
                   height: MediaQuery.of(context).size.height * 0.91,
                   child: Column(
                     children: [
-                      _state == workoutState.active || _state == workoutState.rest ?
-                      Expanded(
-                        flex: 1,
-                        child: Container(
-                          child: Text(
-                            '${AppLocalizations.round} ${_workoutController.exercisesCount + 1} / ${_workoutController.settings.rounds}',
-                            style: AppTheme.textAccentBold30(),
-                          ),
-                        ),
-                      ) : SizedBox(),
+                      _state == workoutState.active ||
+                              _state == workoutState.rest
+                          ? Expanded(
+                              flex: 1,
+                              child: Container(
+                                child: Text(
+                                  '${AppLocalizations.round} ${_workoutController.exercisesCount + 1} / ${_workoutController.settings.rounds}',
+                                  style: AppTheme.textAccentBold30(),
+                                ),
+                              ),
+                            )
+                          : Expanded(
+                              flex: 1,
+                              child: Container(
+                                child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      '${_workoutController.settings.rounds}x',
+                                      style: AppTheme.textAccentBold30(),
+                                    ),
+                                    Text(
+                                      '${_workoutController.settings.workTime}/',
+                                      style: AppTheme.textAccentBold30(),
+                                    ),
+                                    Text(
+                                      '${_workoutController.settings.restTime}',
+                                      style: AppTheme.textAccentBold30(),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
                       Expanded(
                         flex: 6,
                         child: FitCard(
@@ -134,90 +171,9 @@ class _WorkoutTabataScreenState extends State<WorkoutTabataScreen>
                     ],
                   ),
                 ),
-                _state == workoutState.countdown
-                    ? Align(
-                        alignment: Alignment.center,
-                        child: Container(
-                          color: AppTheme.countDownTimerColor(),
-                          width: MediaQuery.of(context).size.width,
-                          height: MediaQuery.of(context).size.height,
-                          child: Center(
-                            child: _buildCountDownTimer(),
-                          ),
-                        ),
-                      )
-                    : SizedBox(
-                        height: 0,
-                      )
               ],
             ),
           );
-  }
-
-  bool _countDownPaused = false;
-
-  Widget _buildCountDownTimer() {
-    var timerDuration = _state == workoutState.countdown
-        ? 10
-        : _workoutController.settings.restTime;
-
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Padding(
-          padding: const EdgeInsets.only(bottom: 18.0),
-          child: InkWell(
-            onTap: () {
-              if (_state == workoutState.countdown) {
-                if (_countDownPaused) {
-                  _countDownController.resume();
-                  setState(() {
-                    _countDownPaused = false;
-                  });
-                } else {
-                  _countDownController.pause();
-                  setState(() {
-                    _countDownPaused = true;
-                  });
-                }
-              }
-            },
-            child: CircularCountDownTimer(
-              duration: timerDuration,
-              initialDuration: 0,
-              controller: _countDownController,
-              width: MediaQuery.of(context).size.width / 3,
-              height: MediaQuery.of(context).size.height / 3,
-              ringColor: Colors.red.withOpacity(0.65),
-              ringGradient: null,
-              fillColor: Colors.red,
-              fillGradient: null,
-              backgroundColor: Colors.purple[500].withOpacity(0),
-              backgroundGradient: null,
-              strokeWidth: 12.0,
-              strokeCap: StrokeCap.round,
-              textStyle: TextStyle(
-                  fontSize: 50.0,
-                  color: Colors.red,
-                  fontWeight: FontWeight.bold),
-              textFormat: CountdownTextFormat.S,
-              isReverse: true,
-              isReverseAnimation: false,
-              isTimerTextShown: true,
-              autoStart: true,
-              onStart: () {},
-              onComplete: () {
-                if (_state == workoutState.countdown)
-                  changeState(workoutState.active);
-
-                if (_state == workoutState.rest)
-                  changeState(workoutState.active);
-              },
-            ),
-          ),
-        ),
-      ],
-    );
   }
 
   void _onStartWorkout() {
@@ -235,12 +191,14 @@ class _WorkoutTabataScreenState extends State<WorkoutTabataScreen>
     if (_state == workoutState.countdown) return;
 
     var now = DateTime.now();
+    debugPrint('save ' + _workoutController.duration.toString());
     var currentWorkout = new WorkoutLogModel(
         AppState.loggedWorkouts.length,
         now,
-        WorkoutState.trainingSessionMilliseconds,
+        _workoutController.duration,
         _workoutController.exercisesCount,
-        _workoutController.points);
+        _workoutController.points,
+        AppLocalizations.tabata);
 
     AppStateHandler.logExercise();
     AppStateHandler.logWorkout(currentWorkout);

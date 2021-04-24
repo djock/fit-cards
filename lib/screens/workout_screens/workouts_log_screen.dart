@@ -23,8 +23,10 @@ class _WorkoutsLogScreenState extends State<WorkoutsLogScreen> {
       for (var workout in AppState.loggedWorkouts) {
         _tempList.add(ListItem(
           leftValue: '',
-          centerValue: Utils.formatDate(workout.date),
-          rightValue: Utils.formatTimeShort(workout.duration ~/ 1000),
+          centerValue: workout.name,
+          // Utils.formatDate(workout.date),
+          rightValue: Utils.formatDateShort(workout.date),
+          // Utils.formatTimeShort(workout.duration),
           deleteAction: () {
             AppState.loggedWorkouts.remove(workout);
             HiveHandler.saveWorkoutToBox();

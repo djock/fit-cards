@@ -80,4 +80,11 @@ class Utils {
 
     return formattedDate;
   }
+
+  static String formatDateShort(DateTime dateTime) {
+    var formatter = DateFormat('dd/MM/yy');
+    var formattedDate = formatter.format(dateTime).toUpperCase();
+
+    return formattedDate;
+  }
 }
