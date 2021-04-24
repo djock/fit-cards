@@ -154,7 +154,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
         padding: const EdgeInsets.all(50.0),
         child: Text(
           'FitCards v${AppState.appVersion}+${AppState.appBuildNumber}',
-          style: TextStyle(fontSize: 11, color: AppTheme.dynamicColor(), letterSpacing: 1),
+          style: TextStyle(
+              fontSize: 11, color: AppTheme.dynamicColor(), letterSpacing: 1),
         ),
       ),
     );

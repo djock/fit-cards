@@ -129,7 +129,7 @@ class CircularCountDownTimerState extends State<CircularCountDownTimer>
       Duration duration = _controller.duration * _controller.value;
       var timeString = _getTime(duration);
 
-      if(timeString == '0') {
+      if (timeString == '0') {
         return 'GO';
       }
       return _getTime(duration);
@@ -191,7 +191,7 @@ class CircularCountDownTimerState extends State<CircularCountDownTimer>
     }
     // For s format
     else if (widget.textFormat == CountdownTextFormat.S) {
-      if(AppState.audioEnabled) {
+      if (AppState.audioEnabled) {
         if (duration.inSeconds == 3 && !_count3) {
           _count3 = true;
           AssetsAudioPlayer.newPlayer().open(

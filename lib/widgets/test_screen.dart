@@ -7,7 +7,6 @@ class TestScreen extends StatefulWidget {
   _TestScreenState createState() => _TestScreenState();
 }
 
-
 class _TestScreenState extends State<TestScreen> {
   var work = 10;
 
@@ -22,9 +21,11 @@ class _TestScreenState extends State<TestScreen> {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: TimerWidget(duration: work, callback: () {
+        child: TimerWidget(
+      duration: work,
+      callback: () {
         _setState();
-      },)
-    );
+      },
+    ));
   }
 }

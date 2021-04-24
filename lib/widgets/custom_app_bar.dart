@@ -1,5 +1,4 @@
 import 'package:fitcards/handlers/app_theme.dart';
-import 'package:fitcards/handlers/workout_controller.dart';
 import 'package:fitcards/utilities/utils.dart';
 import 'package:fitcards/widgets/timer_widget.dart';
 import 'package:flutter/material.dart';
@@ -131,8 +130,8 @@ class CustomAppBar {
         automaticallyImplyLeading: true,
       );
 
-
-  static PreferredSizeWidget buildWorkout(int duration, timerType timerType, Function timerCallback, Function buttonCallback) =>
+  static PreferredSizeWidget buildWorkout(int duration, timerType timerType,
+          Function timerCallback, Function buttonCallback) =>
       AppBar(
         elevation: 0.0,
         backgroundColor: Theme.of(Get.context).canvasColor,

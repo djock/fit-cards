@@ -30,6 +30,8 @@ class AppState {
 
   static String deviceId;
 
-  static WorkoutSettingsModel hiitSettings =  new WorkoutSettingsModel(8, 10, 20, true, 0);
-  static WorkoutSettingsModel tabataSettings = new WorkoutSettingsModel(8, 10, 20, true, 0);
+  static WorkoutSettingsModel hiitSettings =
+      new WorkoutSettingsModel(8, 10, 20, true, 0);
+  static WorkoutSettingsModel tabataSettings =
+      new WorkoutSettingsModel(8, 10, 20, true, 0);
 }

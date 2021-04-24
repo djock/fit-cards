@@ -14,13 +14,14 @@ class SchemeModel extends BaseModel {
     var baseModel = BaseModel.fromJson(json);
     var schemeType = convertToEnum(json['type']);
 
-    return SchemeModel(name: getName(baseModel.name, schemeType ), type: schemeType);
+    return SchemeModel(
+        name: getName(baseModel.name, schemeType), type: schemeType);
   }
 
   static List<SchemeModel> fromJsonList(json) {
     var tempList = List<SchemeModel>(); // ignore: deprecated_member_use
 
-    for(var item in json) {
+    for (var item in json) {
       tempList.add(new SchemeModel.fromJson(item));
     }
 
@@ -34,7 +35,8 @@ class SchemeModel extends BaseModel {
   }
 
   static schemeType convertToEnum(String json) {
-    var scheme = schemeType.values.firstWhere((e) => e.toString().replaceAll('schemeType.',  '') == json);
+    var scheme = schemeType.values
+        .firstWhere((e) => e.toString().replaceAll('schemeType.', '') == json);
 
     return scheme;
   }

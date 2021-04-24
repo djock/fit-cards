@@ -1,3 +1,5 @@
+import 'package:assets_audio_player/assets_audio_player.dart';
+import 'package:fitcards/handlers/app_state.dart';
 import 'package:fitcards/utilities/utils.dart';
 import 'package:flutter/material.dart';
 
@@ -36,15 +38,13 @@ class _TimerWidgetState extends State<TimerWidget> {
     _timeInSec.value = time;
 
     while (_timeInSec.value >= 0) {
-
-      if(_timeInSec.value == 0) {
+      if (_timeInSec.value == 0) {
         widget.callback();
         return;
       }
 
       await Future.delayed(Duration(seconds: 1));
-      if(!_disposed)
-        _timeInSec.value--;
+      if (!_disposed) _timeInSec.value--;
     }
   }
 
@@ -53,14 +53,13 @@ class _TimerWidgetState extends State<TimerWidget> {
 
     while (this.mounted) {
       await Future.delayed(Duration(seconds: 1));
-      if(!_disposed)
-        _timeInSec.value++;
+      if (!_disposed) _timeInSec.value++;
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    if(widget.type == timerType.timer)
+    if (widget.type == timerType.timer)
       startTimer();
     else
       startCountDown(widget.duration);
@@ -68,6 +67,7 @@ class _TimerWidgetState extends State<TimerWidget> {
     return ValueListenableBuilder(
         valueListenable: _timeInSec,
         builder: (context, value, child) {
+          _playAudio();
           return Text(Utils.formatTimeSeconds(value),
               style: TextStyle(
                 color: Colors.red,
@@ -76,5 +76,41 @@ class _TimerWidgetState extends State<TimerWidget> {
               ),
               textAlign: TextAlign.center);
         });
+  }
+
+  void _playAudio() {
+    if (AppState.audioEnabled) {
+      if (_timeInSec.value == 3) {
+        AssetsAudioPlayer.newPlayer().open(
+          Audio("assets/tick.flac"),
+          autoStart: true,
+          showNotification: true,
+        );
+      }
+
+      if (_timeInSec.value == 2) {
+        AssetsAudioPlayer.newPlayer().open(
+          Audio("assets/tick.flac"),
+          autoStart: true,
+          showNotification: true,
+        );
+      }
+
+      if (_timeInSec.value == 1) {
+        AssetsAudioPlayer.newPlayer().open(
+          Audio("assets/tick.flac"),
+          autoStart: true,
+          showNotification: true,
+        );
+      }
+
+      if (_timeInSec.value == 0) {
+        AssetsAudioPlayer.newPlayer().open(
+          Audio("assets/start.flac"),
+          autoStart: true,
+          showNotification: true,
+        );
+      }
+    }
   }
 }

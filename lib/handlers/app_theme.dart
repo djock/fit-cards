@@ -10,7 +10,7 @@ ThemeData appThemeDark() => ThemeData(
       accentColor: AppColors.accentColorDark,
       canvasColor: AppColors.canvasColorDark,
       primaryColorDark: AppColors.canvasColorDark,
-  floatingActionButtonTheme: FloatingActionButtonThemeData(),
+      floatingActionButtonTheme: FloatingActionButtonThemeData(),
       fontFamily: 'Roboto',
       highlightColor: Colors.transparent,
       splashColor: Colors.transparent,
@@ -44,10 +44,7 @@ ThemeData appThemeLight() => ThemeData(
 
 class AppTheme {
   static TextStyle appBarStyle() {
-    return _textStyle(
-        22,
-        FontWeight.bold,
-        Theme.of(Get.context).accentColor);
+    return _textStyle(22, FontWeight.bold, Theme.of(Get.context).accentColor);
   }
 
   static TextStyle textWhiteBold24() {
@@ -83,7 +80,7 @@ class AppTheme {
       double fontSize, FontWeight fontWeight, Color color) {
     return TextStyle(
         color: color,
-        letterSpacing: 1.3 ,
+        letterSpacing: 1.3,
         fontWeight: fontWeight,
         fontSize: fontSize);
   }
@@ -105,5 +102,7 @@ class AppTheme {
     Get.changeThemeMode(themeMode);
   }
 
-  static Color countDownTimerColor() => Theme.of(Get.context).primaryColorDark.withOpacity(Get.isDarkMode ? 0.6 : 0.85);
+  static Color countDownTimerColor() => Theme.of(Get.context)
+      .primaryColorDark
+      .withOpacity(Get.isDarkMode ? 0.6 : 0.85);
 }

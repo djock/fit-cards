@@ -50,7 +50,10 @@ class CustomGradientButton extends StatelessWidget {
               child: Transform.rotate(
                 angle: pi / 12,
                 child: IconButton(
-                  icon: FaIcon(icon, color: Theme.of(Get.context).canvasColor,),
+                  icon: FaIcon(
+                    icon,
+                    color: Theme.of(Get.context).canvasColor,
+                  ),
                   iconSize: 65,
                   padding: EdgeInsets.zero,
                 ),

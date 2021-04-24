@@ -21,14 +21,14 @@ class StatsScreen extends StatelessWidget {
             padding: EdgeInsets.all(8),
             child: StatsTable(),
           ),
-          SizedBox(height: 20,),
+          SizedBox(
+            height: 20,
+          ),
           _buildButtons()
         ],
       ),
     );
   }
-
-
 
   Widget _buildButtons() {
     return Padding(
@@ -40,11 +40,17 @@ class StatsScreen extends StatelessWidget {
           SizedBox(
             height: 20,
           ),
-          _buildSectionListItem(AppLocalizations.workoutsLog, FontAwesomeIcons.calendarAlt, FontAwesomeIcons.chevronRight, () {Get.to(() => WorkoutsLogScreen());}),
+          _buildSectionListItem(AppLocalizations.workoutsLog,
+              FontAwesomeIcons.calendarAlt, FontAwesomeIcons.chevronRight, () {
+            Get.to(() => WorkoutsLogScreen());
+          }),
           SizedBox(
             height: 20,
           ),
-          _buildSectionListItem(AppLocalizations.leaderBoard, FontAwesomeIcons.trophy, FontAwesomeIcons.chevronRight, () {Get.to(() => LeaderBoardScreen());}),
+          _buildSectionListItem(AppLocalizations.leaderBoard,
+              FontAwesomeIcons.trophy, FontAwesomeIcons.chevronRight, () {
+            Get.to(() => LeaderBoardScreen());
+          }),
         ],
       ),
     );

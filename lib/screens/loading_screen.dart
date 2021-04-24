@@ -7,7 +7,9 @@ class LoadingScreen extends StatefulWidget {
   @override
   _LoadingScreenState createState() => _LoadingScreenState();
 }
-class _LoadingScreenState extends State<LoadingScreen> with TickerProviderStateMixin {
+
+class _LoadingScreenState extends State<LoadingScreen>
+    with TickerProviderStateMixin {
   AnimationController _controller;
   String _loadingText = '';
 
@@ -18,8 +20,8 @@ class _LoadingScreenState extends State<LoadingScreen> with TickerProviderStateM
       vsync: this,
       duration: const Duration(seconds: 3),
     )..addListener(() {
-      setState(() {});
-    });
+        setState(() {});
+      });
     _controller.repeat(reverse: false);
 
     super.initState();
@@ -42,7 +44,8 @@ class _LoadingScreenState extends State<LoadingScreen> with TickerProviderStateM
             children: <Widget>[
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Text(_loadingText, style: AppTheme.customAccentText(FontWeight.normal, 18)),
+                child: Text(_loadingText,
+                    style: AppTheme.customAccentText(FontWeight.normal, 18)),
               ),
               LinearProgressIndicator(
                 value: _controller.value,

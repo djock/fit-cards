@@ -28,7 +28,8 @@ class FitCard extends StatelessWidget {
     this.isBlocked,
     this.type,
     this.onCallback,
-    this.onSkip, this.isFake,
+    this.onSkip,
+    this.isFake,
   }) : super(key: key);
 
   @override
@@ -156,7 +157,7 @@ class FitCard extends StatelessWidget {
   List<Widget> _buildExeciseCardText(String text, bool isFirstCard) {
     List<Widget> result = [];
 
-    if(isFake) {
+    if (isFake) {
       result.add(SizedBox());
 
       return result;
@@ -248,9 +249,7 @@ class FitCard extends StatelessWidget {
   }
 
   Widget _buildSkipExerciseButton(int points) {
-    if (type == cardType.exercise &&
-        !(points == 0) &&
-        true) {
+    if (type == cardType.exercise && !(points == 0) && true) {
       return Align(
         alignment: Alignment.bottomRight,
         child: IconButton(

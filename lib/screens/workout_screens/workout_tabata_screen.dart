@@ -69,8 +69,13 @@ class _WorkoutTabataScreenState extends State<WorkoutTabataScreen>
     await Future.delayed(Duration(seconds: 1));
     setState(() {
       if (_state == workoutState.active) {
-        changeState(workoutState.rest);
+        if(_workoutController.exercisesCount +1 == _workoutController.settings.rounds) {
+          _onStopWorkout();
+          return;
+        }
+
         _exerciseController.triggerLeft();
+        _onSwipeSuccess();
         return;
       }
 
@@ -95,13 +100,16 @@ class _WorkoutTabataScreenState extends State<WorkoutTabataScreen>
                   height: MediaQuery.of(context).size.height * 0.91,
                   child: Column(
                     children: [
+                      _state == workoutState.active || _state == workoutState.rest ?
                       Expanded(
                         flex: 1,
                         child: Container(
                           child: Text(
-                              'round ${_workoutController.exercisesCount + 1} / ${_workoutController.settings.rounds}'),
+                            '${AppLocalizations.round} ${_workoutController.exercisesCount + 1} / ${_workoutController.settings.rounds}',
+                            style: AppTheme.textAccentBold30(),
+                          ),
                         ),
-                      ),
+                      ) : SizedBox(),
                       Expanded(
                         flex: 6,
                         child: FitCard(

@@ -10,14 +10,21 @@ class CustomButton extends StatefulWidget {
   final bool isRequest;
   final Color buttonColor;
 
-  const CustomButton({Key key, this.buttonText, this.onPressed, this.textColor, this.isOutline, this.isRequest = false, this.buttonColor}) : super(key: key);
+  const CustomButton(
+      {Key key,
+      this.buttonText,
+      this.onPressed,
+      this.textColor,
+      this.isOutline,
+      this.isRequest = false,
+      this.buttonColor})
+      : super(key: key);
 
   @override
-  _CustomButtonState createState() =>_CustomButtonState();
-
+  _CustomButtonState createState() => _CustomButtonState();
 }
-class _CustomButtonState extends State<CustomButton> {
 
+class _CustomButtonState extends State<CustomButton> {
   TextStyle _textStyle() {
     return TextStyle(
         color: widget.textColor,
@@ -60,7 +67,8 @@ class _CustomButtonState extends State<CustomButton> {
 
   Widget _buildOutlineButton() {
     return OutlineButton(
-      borderSide: BorderSide(color: Theme.of(Get.context).textTheme.bodyText1.color, width: 2),
+      borderSide: BorderSide(
+          color: Theme.of(Get.context).textTheme.bodyText1.color, width: 2),
       shape: _shape(),
       onPressed: widget.onPressed,
       color: widget.buttonColor,

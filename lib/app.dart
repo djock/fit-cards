@@ -33,17 +33,18 @@ class _AppState extends State<App> {
   void initState() {
     _startLoadingCountdown();
     JsonDataHandler.loadAppData().then((value) => {
-      if(this.mounted) {
-        setState(() {
-          _hasLoadedData = true;
-        })
-      }
-    });
+          if (this.mounted)
+            {
+              setState(() {
+                _hasLoadedData = true;
+              })
+            }
+        });
 
     HiveHandler.openHiveBoxes();
     UserPreferencesHandler.initSharedPreferences();
     UserPreferencesHandler.loadUserName().then((value) {
-      if(value) {
+      if (value) {
         setState(() {
           _userNameSet = value;
         });
@@ -51,7 +52,7 @@ class _AppState extends State<App> {
     });
 
     UserPreferencesHandler.loadPreferredTheme().then((value) {
-      if(this.mounted) {
+      if (this.mounted) {
         setState(() {
           AppTheme.setTheme(value);
           _themeSet = true;
@@ -65,7 +66,9 @@ class _AppState extends State<App> {
   @override
   Widget build(BuildContext context) {
     return _hasLoadedData && _themeSet && !_isAppLoading
-        ? _userNameSet ? AppScreen() : WelcomeScreen()
+        ? _userNameSet
+            ? AppScreen()
+            : WelcomeScreen()
         : LoadingScreen();
   }
 }

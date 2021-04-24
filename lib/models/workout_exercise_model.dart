@@ -13,4 +13,3 @@ class WorkoutExerciseModel extends HiveObject {
 
   WorkoutExerciseModel(this.index, this.exercise, this.scheme);
 }
-

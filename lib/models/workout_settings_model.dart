@@ -17,5 +17,6 @@ class WorkoutSettingsModel {
   @HiveField(3)
   int maxDuration;
 
-  WorkoutSettingsModel(this.rounds, this.restTime, this.workTime, this.canSkipExercise, this.maxDuration);
+  WorkoutSettingsModel(this.rounds, this.restTime, this.workTime,
+      this.canSkipExercise, this.maxDuration);
 }

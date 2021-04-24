@@ -11,10 +11,8 @@ import 'package:get/get.dart';
 import 'input_decoration.dart';
 
 class WelcomeScreen extends StatefulWidget {
-
   @override
-  _WelcomeScreenState createState() =>
-      _WelcomeScreenState();
+  _WelcomeScreenState createState() => _WelcomeScreenState();
 }
 
 class _WelcomeScreenState extends State<WelcomeScreen> {
@@ -23,14 +21,14 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
 
   Future<bool> _onBackPressed() {
     return showDialog(
-        context: context,
-        builder: (context) => GeneralModal(
-          subTitle: AppLocalizations.closeAppSubtitle,
-          okAction: () => SystemNavigator.pop(),
-          cancelAction: () => Navigator.pop(context),
-          okActionText: AppLocalizations.close,
-          cancelActionText: AppLocalizations.cancel,
-        )) ??
+            context: context,
+            builder: (context) => GeneralModal(
+                  subTitle: AppLocalizations.closeAppSubtitle,
+                  okAction: () => SystemNavigator.pop(),
+                  cancelAction: () => Navigator.pop(context),
+                  okActionText: AppLocalizations.close,
+                  cancelActionText: AppLocalizations.cancel,
+                )) ??
         false;
   }
 
@@ -53,7 +51,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   return AppLocalizations.errorNoName;
                 }
 
-                if(ProfanityFilter.check(_textController.text)) {
+                if (ProfanityFilter.check(_textController.text)) {
                   return AppLocalizations.errorProfanity;
                 }
 
@@ -61,9 +59,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               },
               obscureText: false,
               decoration: CustomInputDecoration.build(defaultText),
-              style: TextStyle(
-                  color: Theme.of(context).accentColor,
-                  fontSize: 20),
+              style:
+                  TextStyle(color: Theme.of(context).accentColor, fontSize: 20),
             )
           ],
         ),
@@ -84,7 +81,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-      return _buildScreen();
+    return _buildScreen();
   }
 
   Widget _buildScreen() {
@@ -105,7 +102,10 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     SizedBox(height: 200),
                     Text(
                       AppLocalizations.chooseName,
-                      style: TextStyle(fontFamily: 'Lora', fontSize: 28, color: Theme.of(context).accentColor),
+                      style: TextStyle(
+                          fontFamily: 'Lora',
+                          fontSize: 28,
+                          color: Theme.of(context).accentColor),
                     ),
                     SizedBox(
                       height: 50,
@@ -116,15 +116,17 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     ),
                     CustomButton(
                       buttonColor: Theme.of(context).accentColor,
-                      textColor: Theme.of(Get.context).textTheme.bodyText1.color,
+                      textColor:
+                          Theme.of(Get.context).textTheme.bodyText1.color,
                       isOutline: false,
                       buttonText: AppLocalizations.start,
                       onPressed: () {
-                      if (_formKey.currentState.validate()) {
-                        UserPreferencesHandler.saveUserName(_textController.text);
+                        if (_formKey.currentState.validate()) {
+                          UserPreferencesHandler.saveUserName(
+                              _textController.text);
 
-                        Get.off(() => AppScreen());
-                      }
+                          Get.off(() => AppScreen());
+                        }
                       },
                     ),
                     Expanded(

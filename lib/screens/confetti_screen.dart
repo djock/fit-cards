@@ -58,17 +58,18 @@ class _ConfettiScreentate extends State<ConfettiScreen> {
           alignment: Alignment.center,
           child: ConfettiWidget(
             confettiController: _controllerCenter,
-            blastDirectionality: BlastDirectionality
-                .explosive, // don't specify a direction, blast randomly
-            shouldLoop:
-            true, // start again as soon as the animation is finished
+            blastDirectionality: BlastDirectionality.explosive,
+            // don't specify a direction, blast randomly
+            shouldLoop: true,
+            // start again as soon as the animation is finished
             colors: const [
               Colors.green,
               Colors.blue,
               Colors.pink,
               Colors.orange,
               Colors.purple
-            ], // manually specify the colors to be used
+            ],
+            // manually specify the colors to be used
             createParticlePath: drawStar, // define a custom shape/path.
           ),
         ),
@@ -87,7 +88,8 @@ class _ConfettiScreentate extends State<ConfettiScreen> {
   Text _display(String text) {
     return Text(
       text,
-      style: TextStyle(color: Theme.of(Get.context).textTheme.bodyText1.color, fontSize: 20),
+      style: TextStyle(
+          color: Theme.of(Get.context).textTheme.bodyText1.color, fontSize: 20),
     );
   }
 }

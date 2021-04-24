@@ -21,7 +21,6 @@ class FirebaseDatabaseHandler {
   }
 
   static Future<bool> getLeaderBoard() async {
-
     final dbRef = FirebaseDatabase.instance.reference().child("leaderboard");
     await dbRef.once().then((DataSnapshot snapshot) {
       Map<dynamic, dynamic> snapshotValues = snapshot.value;
@@ -33,7 +32,7 @@ class FirebaseDatabaseHandler {
         leaderBoard.add(entry);
       });
 
-      leaderBoard.sort((b,a) {
+      leaderBoard.sort((b, a) {
         return a.points.compareTo(b.points);
       });
 

@@ -12,9 +12,9 @@ class KeyValuePair {
 
   KeyValuePair(this.key, this.value);
 
-  KeyValuePair.fromData(String key, dynamic value) :
-      this.key = unescape(key),
-      this.value = value;
+  KeyValuePair.fromData(String key, dynamic value)
+      : this.key = unescape(key),
+        this.value = value;
 
   static String unescape(String string) {
     var unescape = new HtmlUnescape();

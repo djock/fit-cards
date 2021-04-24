@@ -19,18 +19,27 @@ class AppLocalizations {
   //-------------
   // tutorial
   static String tutorialExerciseCardTitle = 'Exercise card';
-  static String tutorialExerciseCardDescription = 'The exercise is revealed when you start the workout';
+  static String tutorialExerciseCardDescription =
+      'The exercise is revealed when you start the workout';
   static String tutorialSchemeCardTitle = 'Scheme card';
-  static String tutorialSchemeCardDescription = 'The number of reps you need to do complete the round. Also hidden until the workouts starts';
-  static String tutorialStartButtonDescription = 'Swipe on the exercise card to start the workout';
-  static String tutorialStartTimerDescription = 'A countdown timer to allow you to prepare.';
-  static String tutorialNextCardButtonDescription = 'When finished with the current exercise, tap Next to move on to the next one.';
-  static String tutorialStopButtonDescription = 'Tap to Stop the current workout.';
-  static String tutorialSwipeExerciseCard = 'Swipe on the card to move on to the next round';
+  static String tutorialSchemeCardDescription =
+      'The number of reps you need to do complete the round. Also hidden until the workouts starts';
+  static String tutorialStartButtonDescription =
+      'Swipe on the exercise card to start the workout';
+  static String tutorialStartTimerDescription =
+      'A countdown timer to allow you to prepare.';
+  static String tutorialNextCardButtonDescription =
+      'When finished with the current exercise, tap Next to move on to the next one.';
+  static String tutorialStopButtonDescription =
+      'Tap to Stop the current workout.';
+  static String tutorialSwipeExerciseCard =
+      'Swipe on the card to move on to the next round';
 
   static String tutorialTimerDescription = 'The total time of the workout';
-  static String tutorialPointsDescription = 'Collect points by doing each exercise';
-  static String tutorialFinishDescription = 'Congrats on learning how to use FitCards. Happy workouts!';
+  static String tutorialPointsDescription =
+      'Collect points by doing each exercise';
+  static String tutorialFinishDescription =
+      'Congrats on learning how to use FitCards. Happy workouts!';
   static String workoutFinished = 'Great job!';
 
   static String tapToClose = 'Tap to close.';
@@ -57,6 +66,7 @@ class AppLocalizations {
   static String skipExercise = 'Skip exercise?';
   static String chooseRestTime = 'Rest (seconds)';
   static String chooseRounds = 'Rounds';
+  static String round = 'Round';
   static String chooseWorkTime = 'Work (seconds)';
   static String customize = 'Customize';
   static String apply = 'Apply';
@@ -67,7 +77,8 @@ class AppLocalizations {
   static String appTheme = 'Change app theme';
   static String audio = 'Audio (timer)';
   static String clearAllData = 'Clear all data';
-  static String clearAllDataSubtitle = 'Are you sure you want clear all app data, including workouts logs?';
+  static String clearAllDataSubtitle =
+      'Are you sure you want clear all app data, including workouts logs?';
   static String leaderBoard = 'Leaderboard';
   static String nothingHere = 'Nothing here';
   static String statistics = 'Statistics';
@@ -76,6 +87,4 @@ class AppLocalizations {
   static String exercisesDone = 'Unique exercises';
   static String averageDuration = 'Avg. workout duration';
   static String averagePoints = 'Avg. points / workout';
-
-
 }

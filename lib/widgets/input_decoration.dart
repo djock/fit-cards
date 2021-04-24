@@ -14,19 +14,25 @@ class CustomInputDecoration {
         ),
       ),
       border: new OutlineInputBorder(
-        borderSide: BorderSide(color: Theme.of(Get.context).accentColor.withOpacity(0.7), width: 2),
+        borderSide: BorderSide(
+            color: Theme.of(Get.context).accentColor.withOpacity(0.7),
+            width: 2),
         borderRadius: const BorderRadius.all(
           const Radius.circular(8),
         ),
       ),
       enabledBorder: new OutlineInputBorder(
-        borderSide: BorderSide(color: Theme.of(Get.context).accentColor.withOpacity(0.7), width: 2),
+        borderSide: BorderSide(
+            color: Theme.of(Get.context).accentColor.withOpacity(0.7),
+            width: 2),
         borderRadius: const BorderRadius.all(
           const Radius.circular(8),
         ),
       ),
       focusedBorder: new OutlineInputBorder(
-        borderSide: BorderSide(color: Theme.of(Get.context).accentColor.withOpacity(0.7), width: 2),
+        borderSide: BorderSide(
+            color: Theme.of(Get.context).accentColor.withOpacity(0.7),
+            width: 2),
         borderRadius: const BorderRadius.all(
           const Radius.circular(8),
         ),

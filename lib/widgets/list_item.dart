@@ -11,11 +11,19 @@ class ListItem extends StatelessWidget {
   final Function shareAction;
   final Color backgroundColor;
 
-  const ListItem({Key key, this.leftValue, this.centerValue, this.rightValue, this.onTap, this.deleteAction, this.shareAction, this.backgroundColor}) : super(key: key);
+  const ListItem(
+      {Key key,
+      this.leftValue,
+      this.centerValue,
+      this.rightValue,
+      this.onTap,
+      this.deleteAction,
+      this.shareAction,
+      this.backgroundColor})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-
     return InkWell(
       onTap: onTap,
       child: Slidable(
@@ -28,17 +36,24 @@ class ListItem extends StatelessWidget {
             children: <Widget>[
               Row(
                 children: [
-                  leftValue.isNotEmpty ?
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                    child: CircleAvatar(
-                      backgroundColor: backgroundColor != null ? backgroundColor : Colors.grey.withOpacity(0.1),
-                      child: Text(
-                        leftValue.toString(),
-                        style: backgroundColor != null ? AppTheme.customDarkText(FontWeight.bold, 15  ) : AppTheme.textAccentBold15(),
-                      ),
-                    ),
-                  ) : SizedBox(width: 0,),
+                  leftValue.isNotEmpty
+                      ? Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                          child: CircleAvatar(
+                            backgroundColor: backgroundColor != null
+                                ? backgroundColor
+                                : Colors.grey.withOpacity(0.1),
+                            child: Text(
+                              leftValue.toString(),
+                              style: backgroundColor != null
+                                  ? AppTheme.customDarkText(FontWeight.bold, 15)
+                                  : AppTheme.textAccentBold15(),
+                            ),
+                          ),
+                        )
+                      : SizedBox(
+                          width: 0,
+                        ),
                   Expanded(
                     child: Column(
                       children: <Widget>[
@@ -59,14 +74,17 @@ class ListItem extends StatelessWidget {
                       ],
                     ),
                   ),
-                  rightValue.isNotEmpty ?
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text(
-                      rightValue,
-                      style: AppTheme.textAccentBold15(),
-                    ),
-                  ) : SizedBox(width: 0,),
+                  rightValue.isNotEmpty
+                      ? Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            rightValue,
+                            style: AppTheme.textAccentBold15(),
+                          ),
+                        )
+                      : SizedBox(
+                          width: 0,
+                        ),
                 ],
               ),
             ],
@@ -76,12 +94,12 @@ class ListItem extends StatelessWidget {
       ),
     );
   }
-  
+
   List<Widget> _buildActions() {
     List<Widget> result = [];
 
-    if(deleteAction != null || shareAction != null) {
-      if(deleteAction != null) {
+    if (deleteAction != null || shareAction != null) {
+      if (deleteAction != null) {
         result.add(IconSlideAction(
           caption: 'Delete',
           color: Colors.red,
@@ -89,7 +107,7 @@ class ListItem extends StatelessWidget {
           onTap: () => _delete(),
         ));
       }
-      if(shareAction != null) {
+      if (shareAction != null) {
         result.add(IconSlideAction(
           caption: 'Share',
           color: Colors.indigo,

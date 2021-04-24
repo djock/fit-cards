@@ -8,7 +8,9 @@ import 'package:fitcards/widgets/safe_screen.dart';
 import 'package:flutter/material.dart';
 
 class WorkoutEndScreen extends StatefulWidget {
-  const WorkoutEndScreen({Key key, }) : super(key: key);
+  const WorkoutEndScreen({
+    Key key,
+  }) : super(key: key);
 
   @override
   _WorkoutEndScreenState createState() => _WorkoutEndScreenState();
@@ -104,17 +106,18 @@ class _WorkoutEndScreenState extends State<WorkoutEndScreen> {
             alignment: Alignment.topCenter,
             child: ConfettiWidget(
               confettiController: _confettiController,
-              blastDirectionality: BlastDirectionality
-                  .explosive, // don't specify a direction, blast randomly
-              shouldLoop:
-                  true, // start again as soon as the animation is finished
+              blastDirectionality: BlastDirectionality.explosive,
+              // don't specify a direction, blast randomly
+              shouldLoop: true,
+              // start again as soon as the animation is finished
               colors: const [
                 Colors.green,
                 Colors.blue,
                 Colors.pink,
                 Colors.orange,
                 Colors.purple
-              ], // manually specify the colors to be used
+              ],
+              // manually specify the colors to be used
               createParticlePath: _drawStar, // define a custom shape/path.
             ),
           ),

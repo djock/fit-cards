@@ -9,10 +9,13 @@ class ExerciseModel extends BaseModel {
     var baseModel = BaseModel.fromJson(json);
     var points = json['points'];
 
-    return ExerciseModel(name: baseModel.name, id: baseModel.id, points: points);
+    return ExerciseModel(
+        name: baseModel.name, id: baseModel.id, points: points);
   }
 
   static List<ExerciseModel> fromJsonList(json) {
-    return json.map<ExerciseModel>((obj) => ExerciseModel.fromJson(obj)).toList();
+    return json
+        .map<ExerciseModel>((obj) => ExerciseModel.fromJson(obj))
+        .toList();
   }
 }

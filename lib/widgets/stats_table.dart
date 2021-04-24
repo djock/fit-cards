@@ -20,16 +20,18 @@ class StatsTable extends StatelessWidget {
       List<String> exercises = [];
 
       for (var workout in AppState.loggedWorkouts) {
-        if(workout.points != null) {
+        if (workout.points != null) {
           index++;
           debugPrint('workout ' + workout.points.toString());
           totalDuration += workout.duration;
           totalPoints += workout.points;
 
-          var exercisesList = AppState.loggedExercisesList.where((element) => element.index == workout.index).toList();
+          var exercisesList = AppState.loggedExercisesList
+              .where((element) => element.index == workout.index)
+              .toList();
 
           for (var exercise in exercisesList) {
-            if(!exercises.contains(exercise)) {
+            if (!exercises.contains(exercise)) {
               exercises.add(exercise.exercise);
             }
           }
@@ -47,25 +49,27 @@ class StatsTable extends StatelessWidget {
   Widget build(BuildContext context) {
     _getStats();
 
-   return Table(
-     border: TableBorder.symmetric(
-         inside: BorderSide(color: Theme.of(Get.context).accentColor)),
-     columnWidths: const <int, TableColumnWidth>{
-       0: FlexColumnWidth(),
-       1: FlexColumnWidth(),
-     },
-     defaultVerticalAlignment: TableCellVerticalAlignment.middle,
-     children: <TableRow>[
-       _buildHeaderRow(
-           _buildHeaderTile(
-               AppLocalizations.sessionsDone, _sessionsDone.toString()),
-           _buildHeaderTile(AppLocalizations.exercisesDone, _uniqueExercises.toString())),
-       _buildHeaderRow(
-           _buildHeaderTile(AppLocalizations.averagePoints, _averagePoints.toString()),
-           _buildHeaderTile(AppLocalizations.averageDuration,
-               Utils.formatTimeShort(_averageDuration ~/ 1000))),
-     ],
-   );
+    return Table(
+      border: TableBorder.symmetric(
+          inside: BorderSide(color: Theme.of(Get.context).accentColor)),
+      columnWidths: const <int, TableColumnWidth>{
+        0: FlexColumnWidth(),
+        1: FlexColumnWidth(),
+      },
+      defaultVerticalAlignment: TableCellVerticalAlignment.middle,
+      children: <TableRow>[
+        _buildHeaderRow(
+            _buildHeaderTile(
+                AppLocalizations.sessionsDone, _sessionsDone.toString()),
+            _buildHeaderTile(
+                AppLocalizations.exercisesDone, _uniqueExercises.toString())),
+        _buildHeaderRow(
+            _buildHeaderTile(
+                AppLocalizations.averagePoints, _averagePoints.toString()),
+            _buildHeaderTile(AppLocalizations.averageDuration,
+                Utils.formatTimeShort(_averageDuration ~/ 1000))),
+      ],
+    );
   }
 
   TableRow _buildHeaderRow(Widget firstTile, Widget secondTile) {
@@ -103,5 +107,4 @@ class StatsTable extends StatelessWidget {
       ),
     );
   }
-
 }

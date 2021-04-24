@@ -18,6 +18,7 @@ class UserPreferencesHandler {
     loadAudioEnabled();
     loadPoints();
   }
+
 //
 //  static Future<void> markTutorialAsFinished() async {
 //    final SharedPreferences prefs = await _sharedPreferences;
@@ -44,13 +45,11 @@ class UserPreferencesHandler {
   static Future<bool> loadUserName() async {
     final SharedPreferences prefs = await _sharedPreferences;
 
-    AppState.userName = prefs.getString('userName') != null
-        ? prefs.getString('userName')
-        : '';
+    AppState.userName =
+        prefs.getString('userName') != null ? prefs.getString('userName') : '';
 
     return AppState.userName.isNotEmpty;
   }
-
 
   static Future<void> savePreferredTheme(bool isDarkMode) async {
     final SharedPreferences prefs = await _sharedPreferences;
@@ -60,7 +59,7 @@ class UserPreferencesHandler {
   static Future<ThemeMode> loadPreferredTheme() async {
     final SharedPreferences prefs = await _sharedPreferences;
 
-    if(prefs.getBool('theme') != null) {
+    if (prefs.getBool('theme') != null) {
       return prefs.getBool('theme') ? ThemeMode.dark : ThemeMode.light;
     } else {
       return ThemeMode.system;
@@ -78,7 +77,7 @@ class UserPreferencesHandler {
     final SharedPreferences prefs = await _sharedPreferences;
     bool audioEnabled = true;
 
-    if(prefs.getBool('audioEnabled') != null) {
+    if (prefs.getBool('audioEnabled') != null) {
       audioEnabled = prefs.getBool('audioEnabled');
     }
 
@@ -94,7 +93,7 @@ class UserPreferencesHandler {
     final SharedPreferences prefs = await _sharedPreferences;
     int points = 0;
 
-    if(prefs.getInt('points') != null) {
+    if (prefs.getInt('points') != null) {
       points = prefs.getInt('points');
     }
 
@@ -105,4 +104,4 @@ class UserPreferencesHandler {
     final SharedPreferences prefs = await _sharedPreferences;
     await prefs.clear();
   }
- }
+}

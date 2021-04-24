@@ -74,7 +74,6 @@ class Utils {
     return "$hoursString$minutes:$seconds";
   }
 
-
   static String formatDate(DateTime dateTime) {
     var formatter = DateFormat('dd MMM, yyyy').add_jm();
     var formattedDate = formatter.format(dateTime).toUpperCase();

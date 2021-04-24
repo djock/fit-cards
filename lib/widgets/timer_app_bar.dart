@@ -4,11 +4,15 @@ import 'package:fitcards/handlers/workout_controller.dart';
 import 'package:fitcards/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 
-class TimerAppBar extends StatefulWidget with PreferredSizeWidget{
+class TimerAppBar extends StatefulWidget with PreferredSizeWidget {
   final Function callback;
   final bool isInRest;
 
-  const TimerAppBar({Key key, this.callback, this.isInRest,}) : super(key: key);
+  const TimerAppBar({
+    Key key,
+    this.callback,
+    this.isInRest,
+  }) : super(key: key);
 
   @override
   _TimerAppBarState createState() => _TimerAppBarState();
@@ -52,6 +56,7 @@ class _TimerAppBarState extends State<TimerAppBar> {
   @override
   Widget build(BuildContext context) {
     WorkoutState.trainingSessionMilliseconds = _stopwatch.elapsedMilliseconds;
-    return CustomAppBar.buildTimer(_stopwatch.elapsedMilliseconds, widget.callback, widget.isInRest);
+    return CustomAppBar.buildTimer(
+        _stopwatch.elapsedMilliseconds, widget.callback, widget.isInRest);
   }
 }

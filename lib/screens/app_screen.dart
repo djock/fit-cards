@@ -20,14 +20,14 @@ class AppScreen extends StatefulWidget {
 class _AppScreenState extends State<AppScreen> {
   Future<bool> _onBackPressed() {
     return showDialog(
-        context: context,
-        builder: (context) => GeneralModal(
-          subTitle: AppLocalizations.closeAppSubtitle,
-          okAction: () => SystemNavigator.pop(),
-          cancelAction: () => Navigator.pop(context),
-          okActionText: AppLocalizations.close,
-          cancelActionText: AppLocalizations.cancel,
-        )) ??
+            context: context,
+            builder: (context) => GeneralModal(
+                  subTitle: AppLocalizations.closeAppSubtitle,
+                  okAction: () => SystemNavigator.pop(),
+                  cancelAction: () => Navigator.pop(context),
+                  okActionText: AppLocalizations.close,
+                  cancelActionText: AppLocalizations.cancel,
+                )) ??
         false;
   }
 

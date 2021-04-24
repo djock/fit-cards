@@ -17,5 +17,6 @@ class WorkoutLogModel {
   @HiveField(4)
   int points;
 
-  WorkoutLogModel(this.index, this.date, this.duration, this.exercises, this.points);
+  WorkoutLogModel(
+      this.index, this.date, this.duration, this.exercises, this.points);
 }

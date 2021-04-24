@@ -19,7 +19,7 @@ class _WorkoutsLogScreenState extends State<WorkoutsLogScreen> {
   List<Widget> _buildWorkoutsLog(BuildContext context) {
     List<Widget> _tempList = <Widget>[];
 
-    if(AppState.loggedWorkouts.length > 0) {
+    if (AppState.loggedWorkouts.length > 0) {
       for (var workout in AppState.loggedWorkouts) {
         _tempList.add(ListItem(
           leftValue: '',
@@ -28,22 +28,25 @@ class _WorkoutsLogScreenState extends State<WorkoutsLogScreen> {
           deleteAction: () {
             AppState.loggedWorkouts.remove(workout);
             HiveHandler.saveWorkoutToBox();
-            setState(() {
-
-            });
+            setState(() {});
           },
           onTap: () {
-            Get.to(() => WorkoutLogDetailsScreen(workoutLogModel: workout,));
+            Get.to(() => WorkoutLogDetailsScreen(
+                  workoutLogModel: workout,
+                ));
           },
         ));
       }
     } else {
-      _tempList.add(
-        Center(child: Padding(
-          padding: const EdgeInsets.only(top: 15.0, left: 20, right: 20),
-          child: Text(AppLocalizations.noWorkoutsText, style: AppTheme.customAccentText(FontWeight.normal, 16), textAlign: TextAlign.center,) ,
-        ))
-      );
+      _tempList.add(Center(
+          child: Padding(
+        padding: const EdgeInsets.only(top: 15.0, left: 20, right: 20),
+        child: Text(
+          AppLocalizations.noWorkoutsText,
+          style: AppTheme.customAccentText(FontWeight.normal, 16),
+          textAlign: TextAlign.center,
+        ),
+      )));
     }
 
     return _tempList;

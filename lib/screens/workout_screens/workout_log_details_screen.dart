@@ -9,22 +9,24 @@ import 'package:flutter/material.dart';
 class WorkoutLogDetailsScreen extends StatelessWidget {
   final WorkoutLogModel workoutLogModel;
 
-  const WorkoutLogDetailsScreen({Key key, this.workoutLogModel}) : super(key: key);
+  const WorkoutLogDetailsScreen({Key key, this.workoutLogModel})
+      : super(key: key);
 
   List<Widget> _buildExercisesList() {
-    var exercisesList = AppState.loggedExercisesList.where((element) => element.index == workoutLogModel.index).toList();
-    
+    var exercisesList = AppState.loggedExercisesList
+        .where((element) => element.index == workoutLogModel.index)
+        .toList();
+
     List<Widget> _tempList = <Widget>[];
 
     var index = 1;
 
     for (var exercise in exercisesList) {
       _tempList.add(ListItem(
-        leftValue: index.toString(),
-        centerValue: exercise.exercise,
-        rightValue: exercise.scheme,
-        onTap: null
-      ));
+          leftValue: index.toString(),
+          centerValue: exercise.exercise,
+          rightValue: exercise.scheme,
+          onTap: null));
       index++;
     }
 
@@ -33,18 +35,17 @@ class WorkoutLogDetailsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    
     return SafeScreen(
       topSafe: false,
       appBar: CustomAppBar.buildNormal(Utils.formatDate(workoutLogModel.date)),
       body: SingleChildScrollView(
           child: Container(
-            padding: EdgeInsets.symmetric(horizontal: 10),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: _buildExercisesList(),
-            ),
-          )),
+        padding: EdgeInsets.symmetric(horizontal: 10),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: _buildExercisesList(),
+        ),
+      )),
     );
   }
 }

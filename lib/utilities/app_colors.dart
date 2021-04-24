@@ -3,13 +3,15 @@ import 'package:flutter/material.dart';
 class AppColors {
   // main app color (eg: appbar)
 //  static const primaryColorLight =  Color(0xff2F2C52);
-  static const primaryColorLight =  Color(0xff2F2C52);
+  static const primaryColorLight = Color(0xff2F2C52);
+
 //  static const primaryColorDark =  Color(0xff2F2C52);
-  static const primaryColorDark =  Color(0xff2F2C52);
+  static const primaryColorDark = Color(0xff2F2C52);
 
   // main app color (eg: appbar)
   static const canvasColorLight = Color(0xffFBFFF1);
   static const canvasColorDark = Color(0xff2F2C52);
+
 //  static const canvasColorDark = Color(0xff1D1B35);
 
   static const accentColorDark = Color(0xff79E7BD);

@@ -18,12 +18,13 @@ class SettingsThemeScreen extends StatefulWidget {
 }
 
 class _SettingsThemeScreenState extends State<SettingsThemeScreen> {
-
   List<ExerciseModel> _exercises = [];
   List<SchemeModel> _schemes = [];
 
-  var _dummyExercise = new ExerciseModel(name: AppLocalizations.exercise, id: -1, points: 0);
-  var _dummyScheme = new SchemeModel(name: AppLocalizations.scheme, id: -1, type: schemeType.reps );
+  var _dummyExercise =
+      new ExerciseModel(name: AppLocalizations.exercise, id: -1, points: 0);
+  var _dummyScheme = new SchemeModel(
+      name: AppLocalizations.scheme, id: -1, type: schemeType.reps);
 
   @override
   Widget build(BuildContext context) {
@@ -123,4 +124,3 @@ class _SettingsThemeScreenState extends State<SettingsThemeScreen> {
     );
   }
 }
-

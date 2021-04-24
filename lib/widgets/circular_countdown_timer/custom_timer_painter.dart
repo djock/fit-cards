@@ -3,15 +3,16 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 
 class CustomTimerPainter extends CustomPainter {
-  CustomTimerPainter({this.animation,
-    this.fillColor,
-    this.fillGradient,
-    this.ringColor,
-    this.ringGradient,
-    this.strokeWidth,
-    this.strokeCap,
-    this.backgroundColor,
-    this.backgroundGradient})
+  CustomTimerPainter(
+      {this.animation,
+      this.fillColor,
+      this.fillGradient,
+      this.ringColor,
+      this.ringGradient,
+      this.strokeWidth,
+      this.strokeCap,
+      this.backgroundColor,
+      this.backgroundGradient})
       : super(repaint: animation);
 
   final Animation<double> animation;

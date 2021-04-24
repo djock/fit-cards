@@ -52,17 +52,16 @@ class _LeaderBoardScreenState extends State<LeaderBoardScreen> {
       var index = 1;
 
       for (var entry in FirebaseDatabaseHandler.leaderBoard) {
-
         var deviceId = RegExp(r'^[^_]*_').stringMatch(entry.name);
         var userName = entry.name.replaceAll(deviceId, '');
 
         Color backgroundColor;
 
-        if(index == 1) {
+        if (index == 1) {
           backgroundColor = AppColors.goldColor.withOpacity(0.8);
-        }else if(index ==2) {
+        } else if (index == 2) {
           backgroundColor = AppColors.silverColor.withOpacity(0.8);
-        } else if(index ==3) {
+        } else if (index == 3) {
           backgroundColor = AppColors.bronzeColor.withOpacity(0.8);
         }
 
