@@ -1,4 +1,5 @@
 import 'package:fitcards/handlers/app_theme.dart';
+import 'package:fitcards/handlers/workout_controller.dart';
 import 'package:fitcards/utilities/utils.dart';
 import 'package:fitcards/widgets/timer_widget.dart';
 import 'package:flutter/material.dart';
@@ -102,6 +103,15 @@ class CustomAppBar {
         centerTitle: false,
       );
 
+  static PreferredSizeWidget buildCountDown() => AppBar(
+    backgroundColor: Colors.black.withOpacity(0.3),
+    elevation: 0,
+    iconTheme: IconThemeData(
+      color: Theme.of(Get.context).accentColor,
+    ),
+    centerTitle: false,
+  );
+
   static PreferredSizeWidget buildTimer(
           int elapsedMilliseconds, Function callback, bool isInRest) =>
       AppBar(
@@ -131,7 +141,7 @@ class CustomAppBar {
       );
 
   static PreferredSizeWidget buildWorkout(int duration, timerType timerType,
-          Function timerCallback, Function buttonCallback) =>
+          Function timerCallback, Function buttonCallback, WorkoutController workoutController) =>
       AppBar(
         elevation: 0.0,
         backgroundColor: Theme.of(Get.context).canvasColor,
@@ -158,6 +168,7 @@ class CustomAppBar {
                     timerCallback();
                   },
                   type: timerType,
+                  workoutController: workoutController,
                 ),
               ),
             ],

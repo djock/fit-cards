@@ -34,23 +34,13 @@ class _WorkoutScreenState extends State<WorkoutScreen>
   workoutState _state = workoutState.idle;
 
   PreferredSizeWidget _buildAppBar() {
-    if (_state == workoutState.countdown) {
-      _workoutController.addDuration(10);
-
-      return CustomAppBar.buildWorkout(
-        10,
-        timerType.countdown,
-        () => changeState(workoutState.active),
-        () => Get.back(),
-      );
-    }
-
     if (_state == workoutState.active || _state == workoutState.rest) {
       return CustomAppBar.buildWorkout(
-        0,
+        _workoutController.duration,
         timerType.timer,
         null,
         () => _onStopWorkout(),
+        _workoutController
       );
     }
 
@@ -132,6 +122,7 @@ class _WorkoutScreenState extends State<WorkoutScreen>
 
   void _onStartWorkout() {
     changeState(workoutState.countdown);
+    _buildCountDownTimer();
   }
 
   void _onStopWorkout() {
@@ -186,7 +177,9 @@ class _WorkoutScreenState extends State<WorkoutScreen>
     _onLogExercise();
     otherController.cancelCallback = true;
     otherController.triggerLeft();
+
     changeState(workoutState.rest);
+    _buildCountDownTimer();
   }
 
   void _onLogExercise() {
@@ -222,5 +215,66 @@ class _WorkoutScreenState extends State<WorkoutScreen>
             workoutController: _workoutController,
           );
         });
+  }
+
+  void _buildCountDownTimer() {
+    showGeneralDialog(
+        context: context,
+        pageBuilder: (BuildContext buildContext, Animation<double> animation,
+            Animation<double> secondaryAnimation) {
+          return SafeArea(
+            top: false,
+            child: Builder(builder: (context) {
+              return Material(
+                  color: Colors.black.withOpacity(0.3),
+                  child: Scaffold(
+                    appBar: CustomAppBar.buildCountDown(),
+                    backgroundColor: Colors.black.withOpacity(0.3),
+                    body: InkWell(
+                      onTap: () {
+                        debugPrint('test');
+                      },
+                      child: Align(
+                          alignment: Alignment.center,
+                          child: Container(
+                              height: 200.0,
+                              width: 250.0,
+                              color: Colors.transparent,
+                              child: Center(
+                                  child: Column(
+                                children: [
+                                  Text(
+                                    _state == workoutState.countdown
+                                        ? AppLocalizations.getReady
+                                        : AppLocalizations.rest,
+                                    style: TextStyle(
+                                      color: Colors.red,
+                                      fontSize: 50,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 20,
+                                  ),
+                                  TimerWidget(
+                                    duration: _state == workoutState.countdown
+                                        ? 10
+                                        : _workoutController.settings.restTime,
+                                    callback: () {
+                                      changeState(workoutState.active);
+                                      Get.back();
+                                    },
+                                    type: timerType.countdown,
+                                  ),
+                                ],
+                              )))),
+                    ),
+                  ));
+            }),
+          );
+        },
+        barrierDismissible: true,
+        barrierLabel:
+            MaterialLocalizations.of(context).modalBarrierDismissLabel,
+        transitionDuration: const Duration(milliseconds: 150));
   }
 }

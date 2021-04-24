@@ -1,16 +1,22 @@
 import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:fitcards/handlers/app_state.dart';
+import 'package:fitcards/handlers/workout_controller.dart';
 import 'package:fitcards/utilities/utils.dart';
 import 'package:flutter/material.dart';
 
 enum timerType { timer, countdown }
 
+class TimerWidgetController {
+  int duration;
+}
+
 class TimerWidget extends StatefulWidget {
   final int duration;
   final Function callback;
   final timerType type;
+  final WorkoutController workoutController;
 
-  const TimerWidget({Key key, this.callback, this.duration, this.type})
+  const TimerWidget({Key key, this.callback, this.duration, this.type, this.workoutController})
       : super(key: key);
 
   @override
@@ -24,6 +30,7 @@ class _TimerWidgetState extends State<TimerWidget> {
   @override
   void initState() {
     _timeInSec.value = widget.duration;
+
     super.initState();
   }
 
@@ -49,11 +56,14 @@ class _TimerWidgetState extends State<TimerWidget> {
   }
 
   void startTimer() async {
-    _timeInSec.value = 0;
+    _timeInSec.value = widget.duration;
 
     while (this.mounted) {
       await Future.delayed(Duration(seconds: 1));
-      if (!_disposed) _timeInSec.value++;
+      if (!_disposed) {
+        _timeInSec.value++;
+        if(widget.workoutController != null) widget.workoutController.setDuration(_timeInSec.value);
+      }
     }
   }
 

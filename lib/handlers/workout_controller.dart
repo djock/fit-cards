@@ -1,7 +1,6 @@
 import 'package:fitcards/handlers/app_state.dart';
 import 'package:fitcards/handlers/hive_handler.dart';
 import 'package:fitcards/models/workout_settings_model.dart';
-import 'package:flutter/material.dart';
 
 import 'app_state_handler.dart';
 
@@ -58,6 +57,9 @@ class WorkoutController {
 
   void addDuration(int value) {
     duration += value;
-    debugPrint('durations ' + duration.toString());
+  }
+
+  void setDuration(int value) {
+    duration = value;
   }
 }

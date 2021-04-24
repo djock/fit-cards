@@ -39,6 +39,7 @@ class _WorkoutTabataScreenState extends State<WorkoutTabataScreen>
         timerType.countdown,
         () => _setState(),
         () => Get.back(),
+        _workoutController,
       );
     }
 
@@ -54,6 +55,7 @@ class _WorkoutTabataScreenState extends State<WorkoutTabataScreen>
         timerType.countdown,
         () => _setState(),
         () => _onStopWorkout(),
+        _workoutController
       );
     }
 
@@ -158,9 +160,7 @@ class _WorkoutTabataScreenState extends State<WorkoutTabataScreen>
                           onCallback: () {
                             _onSwipeExerciseCard();
                           },
-                          onSkip: () {
-                            _onSkipExercise();
-                          },
+                          onSkip: null,
                           isFake: false,
                         ),
                       ),
@@ -238,9 +238,6 @@ class _WorkoutTabataScreenState extends State<WorkoutTabataScreen>
     _workoutController.addPoints(_exerciseController.points);
   }
 
-  void _onSkipExercise() {
-    _exerciseController.triggerLeft();
-  }
 
   void changeState(workoutState state) {
     setState(() {
