@@ -1,8 +1,12 @@
+import 'package:fitcards/handlers/app_state_handler.dart';
 import 'package:fitcards/screens/home_screen.dart';
 import 'package:fitcards/screens/settings_screen.dart';
 import 'package:fitcards/screens/stats_screen.dart';
+import 'package:fitcards/screens/workout_screens/workout_screen.dart';
+import 'package:fitcards/screens/workout_screens/workout_tabata_screen.dart';
 import 'package:fitcards/utilities/app_colors.dart';
 import 'package:fitcards/utilities/app_localizations.dart';
+import 'package:fitcards/widgets/custom_gradient_button.dart';
 import 'package:fitcards/widgets/general_modal.dart';
 import 'package:fitcards/widgets/safe_screen.dart';
 import 'package:flutter/material.dart';
@@ -31,13 +35,13 @@ class _AppScreenState extends State<AppScreen> {
         false;
   }
 
-  int _selectedIndex = 1;
+  int _selectedIndex = 0;
   List<Widget> _screens = [];
 
   @override
   void initState() {
     _screens = [
-      StatsScreen(),
+//      StatsScreen(),
       HomeScreen(),
       SettingsScreen(
         callback: () {
@@ -65,15 +69,13 @@ class _AppScreenState extends State<AppScreen> {
             body: _screens.elementAt(_selectedIndex),
             bottomNavigationBar: _navigationDrawer,
             floatingActionButton: FloatingActionButton(
-                backgroundColor: _selectedIndex == 1
-                    ? Theme.of(Get.context).accentColor
-                    : AppColors.inactiveGrey,
+                backgroundColor: AppColors.inactiveGrey,
                 child: FaIcon(
                   FontAwesomeIcons.running,
                   color: Theme.of(Get.context).canvasColor,
                 ),
                 onPressed: () {
-                  _onItemTapped(1);
+                  _openBottomSheet();
                 }),
             floatingActionButtonLocation:
                 FloatingActionButtonLocation.centerDocked),
@@ -108,16 +110,61 @@ class _AppScreenState extends State<AppScreen> {
                 padding: const EdgeInsets.only(left: 40),
                 child: IconButton(
                   icon: FaIcon(FontAwesomeIcons.cog,
-                      color: _selectedIndex == 2
+                      color: _selectedIndex == 1
                           ? Theme.of(Get.context).accentColor
                           : AppColors.inactiveGrey),
                   onPressed: () {
-                    _onItemTapped(2);
+                    _onItemTapped(1);
                   },
                 ),
               ),
             ],
           )),
+    );
+  }
+
+  void _openBottomSheet() {
+    showModalBottomSheet<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return _buildButtons();
+      },
+    );
+  }
+
+  Widget _buildButtons() {
+    return Padding(
+      padding: const EdgeInsets.all(24.0),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          CustomGradientButton(
+            text: AppLocalizations.hiit,
+            icon: FontAwesomeIcons.random,
+            action: () {
+              AppStateHandler.shuffleJson();
+              Get.to(() => WorkoutScreen()).then((value) {
+                setState(() {});
+              });
+            },
+          ),
+          SizedBox(
+            height: 8,
+          ),
+          CustomGradientButton(
+            text: AppLocalizations.tabata,
+            icon: FontAwesomeIcons.clock,
+            action: () {
+              AppStateHandler.shuffleJson();
+              Get.to(() => WorkoutTabataScreen()).then((value) {
+                setState(() {});
+              });
+            },
+          ),
+        ],
+      ),
     );
   }
 }

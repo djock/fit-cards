@@ -21,10 +21,10 @@ class StatsScreen extends StatelessWidget {
             padding: EdgeInsets.all(8),
             child: StatsTable(),
           ),
-          SizedBox(
-            height: 20,
-          ),
-          _buildButtons()
+//          SizedBox(
+//            height: 20,
+//          ),
+//          _buildButtons()
         ],
       ),
     );
