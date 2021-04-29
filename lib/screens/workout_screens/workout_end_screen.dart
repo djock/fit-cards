@@ -6,6 +6,7 @@ import 'package:fitcards/handlers/app_theme.dart';
 import 'package:fitcards/utilities/app_localizations.dart';
 import 'package:fitcards/widgets/safe_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class WorkoutEndScreen extends StatefulWidget {
   const WorkoutEndScreen({
@@ -75,7 +76,7 @@ class _WorkoutEndScreenState extends State<WorkoutEndScreen> {
           Container(
             child: InkWell(
               onTap: () {
-                Navigator.pop(context);
+                Get.back();
               },
               child: Container(
                 color: Theme.of(context).canvasColor,

@@ -3,7 +3,7 @@ import 'package:fitcards/models/workout_log_model.dart';
 import 'package:fitcards/utilities/app_localizations.dart';
 import 'package:fitcards/utilities/utils.dart';
 import 'package:fitcards/widgets/custom_app_bar.dart';
-import 'package:fitcards/widgets/list_item.dart';
+import 'package:fitcards/widgets/slidable_list_item.dart';
 import 'package:fitcards/widgets/safe_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -22,13 +22,13 @@ class WorkoutLogDetailsScreen extends StatelessWidget {
 
     var index = 1;
 
-    _tempList.add(ListItem(
+    _tempList.add(SlidableListItem(
         leftValue: '',
         centerValue: AppLocalizations.date,
         rightValue: Utils.formatDate(workoutLogModel.date),
         onTap: null));
 
-    _tempList.add(ListItem(
+    _tempList.add(SlidableListItem(
         leftValue: '',
         centerValue: AppLocalizations.duration,
         rightValue: Utils.formatTimeShort(workoutLogModel.duration),
@@ -39,7 +39,7 @@ class WorkoutLogDetailsScreen extends StatelessWidget {
     ));
 
     for (var exercise in exercisesList) {
-      _tempList.add(ListItem(
+      _tempList.add(SlidableListItem(
           leftValue: index.toString(),
           centerValue: exercise.exercise,
           rightValue: exercise.scheme,

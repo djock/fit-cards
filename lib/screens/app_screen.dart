@@ -24,7 +24,7 @@ class _AppScreenState extends State<AppScreen> {
             builder: (context) => GeneralModal(
                   subTitle: AppLocalizations.closeAppSubtitle,
                   okAction: () => SystemNavigator.pop(),
-                  cancelAction: () => Navigator.pop(context),
+                  cancelAction: () => Get.back(),
                   okActionText: AppLocalizations.close,
                   cancelActionText: AppLocalizations.cancel,
                 )) ??

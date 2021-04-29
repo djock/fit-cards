@@ -171,7 +171,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 Get.changeThemeMode(ThemeMode.system);
                 AppStateHandler.clearAllData();
               },
-              cancelAction: () => Navigator.pop(context),
+              cancelAction: () => Get.back(),
               okActionText: AppLocalizations.close,
               cancelActionText: AppLocalizations.cancel,
             ));

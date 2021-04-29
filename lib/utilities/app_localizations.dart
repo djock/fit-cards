@@ -13,6 +13,7 @@ class AppLocalizations {
   static String forTime = 'For Time (wip)';
 
   static String exercise = 'Exercise';
+  static String exercisesOrder = 'Exercises order';
   static String scheme = 'Scheme';
   static String swipeToStart = 'Swipe to start';
 
@@ -55,6 +56,7 @@ class AppLocalizations {
   static String cancel = 'Cancel';
   static String continueText = 'Continue';
   static String closeAppSubtitle = 'Are you sure you want to close the app?';
+  static String closeWorkoutSubtitle = 'Are you sure you want to close the app?';
 
   static String noWorkoutsText = 'You currently did not complete any workout';
   static String refresh = 'REFRESH';

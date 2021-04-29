@@ -3,7 +3,7 @@ import 'package:fitcards/handlers/firebase_database_handler.dart';
 import 'package:fitcards/utilities/app_colors.dart';
 import 'package:fitcards/utilities/app_localizations.dart';
 import 'package:fitcards/widgets/custom_app_bar.dart';
-import 'package:fitcards/widgets/list_item.dart';
+import 'package:fitcards/widgets/slidable_list_item.dart';
 import 'package:fitcards/widgets/safe_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -65,7 +65,7 @@ class _LeaderBoardScreenState extends State<LeaderBoardScreen> {
           backgroundColor = AppColors.bronzeColor.withOpacity(0.8);
         }
 
-        _tempList.add(ListItem(
+        _tempList.add(SlidableListItem(
           leftValue: index.toString(),
           centerValue: userName,
           rightValue: entry.points.toString(),

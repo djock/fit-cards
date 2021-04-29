@@ -31,6 +31,11 @@ class _TimerWidgetState extends State<TimerWidget> {
   void initState() {
     _timeInSec.value = widget.duration;
 
+    if (widget.type == timerType.timer)
+      startTimer();
+    else
+      startCountDown(widget.duration);
+
     super.initState();
   }
 
@@ -43,7 +48,6 @@ class _TimerWidgetState extends State<TimerWidget> {
 
   void startCountDown(int time) async {
     _timeInSec.value = time;
-
     while (_timeInSec.value >= 0) {
       if (_timeInSec.value == 0) {
         widget.callback();
@@ -69,11 +73,6 @@ class _TimerWidgetState extends State<TimerWidget> {
 
   @override
   Widget build(BuildContext context) {
-    if (widget.type == timerType.timer)
-      startTimer();
-    else
-      startCountDown(widget.duration);
-
     return ValueListenableBuilder(
         valueListenable: _timeInSec,
         builder: (context, value, child) {

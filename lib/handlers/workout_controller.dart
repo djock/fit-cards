@@ -1,5 +1,6 @@
 import 'package:fitcards/handlers/app_state.dart';
 import 'package:fitcards/handlers/hive_handler.dart';
+import 'package:fitcards/models/exercise_model.dart';
 import 'package:fitcards/models/workout_settings_model.dart';
 
 import 'app_state_handler.dart';
@@ -22,6 +23,8 @@ class WorkoutSettings {
 }
 
 class WorkoutController {
+  List<ExerciseModel> exercises;
+
   workoutType type;
   workoutState state;
 
@@ -43,6 +46,10 @@ class WorkoutController {
     }
 
     settings = _settings;
+  }
+
+  void setExercises(List<ExerciseModel> _exercises) {
+    exercises = _exercises;
   }
 
   void countExercise() {

@@ -10,8 +10,10 @@ import 'package:fitcards/utilities/app_localizations.dart';
 import 'package:fitcards/utilities/key_value_pair_model.dart';
 import 'package:fitcards/widgets/custom_app_bar.dart';
 import 'package:fitcards/widgets/customize_workout_modal.dart';
+import 'package:fitcards/widgets/exercises_list_modal.dart';
 import 'package:fitcards/widgets/fit_card.dart';
 import 'package:fitcards/widgets/flutter_tindercard.dart';
+import 'package:fitcards/widgets/general_modal.dart';
 import 'package:fitcards/widgets/safe_screen.dart';
 import 'package:fitcards/widgets/timer_widget.dart';
 import 'package:flutter/material.dart';
@@ -33,15 +35,31 @@ class _WorkoutScreenState extends State<WorkoutScreen>
 
   workoutState _state = workoutState.idle;
 
+  Future<bool> _onBackPressed() {
+    if (_state == workoutState.active || _state == workoutState.rest) {
+      return showDialog(
+              context: context,
+              builder: (context) => GeneralModal(
+                    subTitle: AppLocalizations.closeWorkoutSubtitle,
+                    okAction: () {
+                      _onStopWorkout();
+                      Get.back();
+                    },
+                    cancelAction: () => Get.back(),
+                    okActionText: AppLocalizations.close,
+                    cancelActionText: AppLocalizations.cancel,
+                  )) ??
+          false;
+    } else {
+      Get.back();
+      Get.back();
+    }
+  }
+
   PreferredSizeWidget _buildAppBar() {
     if (_state == workoutState.active || _state == workoutState.rest) {
-      return CustomAppBar.buildWorkout(
-        _workoutController.duration,
-        timerType.timer,
-        null,
-        () => _onStopWorkout(),
-        _workoutController
-      );
+      return CustomAppBar.buildWorkout(_workoutController.duration,
+          timerType.timer, null, () => _onStopWorkout(), _workoutController);
     }
 
     return CustomAppBar.buildWithActions([
@@ -63,59 +81,62 @@ class _WorkoutScreenState extends State<WorkoutScreen>
   Widget build(BuildContext context) {
     return _state == workoutState.finish
         ? WorkoutEndScreen()
-        : SafeScreen(
-            appBar: _buildAppBar(),
-            body: Stack(
-              children: [
-                Container(
-                  padding: EdgeInsets.only(top: 10, bottom: 10),
-                  width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.height * 0.91,
-                  child: Column(
-                    children: [
-                      Expanded(
-                        flex: 4,
-                        child: FitCard(
-                          list: AppState.exercises,
-                          color: AppColors.exerciseCardColor,
-                          cardController: _exerciseController,
-                          isBlocked:
-                              _state == workoutState.countdown ? true : false,
-                          type: cardType.exercise,
-                          onCallback: () {
-                            _onSwipeExerciseCard();
-                          },
-                          onSkip: () {
-                            _onSkipExercise();
-                          },
-                          isFake: false,
+        : WillPopScope(
+            onWillPop: _onBackPressed,
+            child: SafeScreen(
+              appBar: _buildAppBar(),
+              body: Stack(
+                children: [
+                  Container(
+                    padding: EdgeInsets.only(top: 10, bottom: 10),
+                    width: MediaQuery.of(context).size.width,
+                    height: MediaQuery.of(context).size.height * 0.91,
+                    child: Column(
+                      children: [
+                        Expanded(
+                          flex: 4,
+                          child: FitCard(
+                            list: AppState.exercises,
+                            color: AppColors.exerciseCardColor,
+                            cardController: _exerciseController,
+                            isBlocked:
+                                _state == workoutState.countdown ? true : false,
+                            type: cardType.exercise,
+                            onCallback: () {
+                              _onSwipeExerciseCard();
+                            },
+                            onSkip: () {
+                              _onSkipExercise();
+                            },
+                            isFake: false,
+                          ),
                         ),
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      Expanded(
-                        flex: 4,
-                        child: FitCard(
-                          list: AppState.schemes,
-                          color: AppColors.schemeCardColor,
-                          cardController: _schemeController,
-                          isBlocked:
-                              _state == workoutState.countdown ? true : false,
-                          type: cardType.scheme,
-                          onCallback: () {
-                            _onSwipeSchemeCard();
-                          },
-                          isFake: false,
+                        SizedBox(
+                          height: 20,
                         ),
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                    ],
+                        Expanded(
+                          flex: 4,
+                          child: FitCard(
+                            list: AppState.schemes,
+                            color: AppColors.schemeCardColor,
+                            cardController: _schemeController,
+                            isBlocked:
+                                _state == workoutState.countdown ? true : false,
+                            type: cardType.scheme,
+                            onCallback: () {
+                              _onSwipeSchemeCard();
+                            },
+                            isFake: false,
+                          ),
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           );
   }
@@ -225,23 +246,21 @@ class _WorkoutScreenState extends State<WorkoutScreen>
           return SafeArea(
             top: false,
             child: Builder(builder: (context) {
-              return Material(
-                  color: Colors.black.withOpacity(0.3),
-                  child: Scaffold(
-                    appBar: CustomAppBar.buildCountDown(),
-                    backgroundColor: Colors.black.withOpacity(0.3),
-                    body: InkWell(
-                      onTap: () {
-                        debugPrint('test');
-                      },
-                      child: Align(
-                          alignment: Alignment.center,
-                          child: Container(
-                              height: 200.0,
-                              width: 250.0,
-                              color: Colors.transparent,
-                              child: Center(
-                                  child: Column(
+              return Scaffold(
+                appBar: CustomAppBar.buildCountDown(),
+                backgroundColor: Colors.black.withOpacity(0.3),
+                body: InkWell(
+                  onTap: () {
+                    debugPrint('tap clock overlay');
+                  },
+                  child: Align(
+                      alignment: Alignment.center,
+                      child: Container(
+                          height: 200.0,
+                          width: 250.0,
+                          color: Colors.transparent,
+                          child: Center(
+                              child: Column(
                                 children: [
                                   Text(
                                     _state == workoutState.countdown
@@ -267,8 +286,8 @@ class _WorkoutScreenState extends State<WorkoutScreen>
                                   ),
                                 ],
                               )))),
-                    ),
-                  ));
+                ),
+              );
             }),
           );
         },
@@ -276,5 +295,19 @@ class _WorkoutScreenState extends State<WorkoutScreen>
         barrierLabel:
             MaterialLocalizations.of(context).modalBarrierDismissLabel,
         transitionDuration: const Duration(milliseconds: 150));
+  }
+
+  void _openExercisesList() {
+    showGeneralDialog(
+        context: Get.context,
+        barrierDismissible: true,
+        barrierLabel:
+        MaterialLocalizations.of(context).modalBarrierDismissLabel,
+        barrierColor: Colors.black45,
+        transitionDuration: const Duration(milliseconds: 200),
+        pageBuilder: (BuildContext buildContext, Animation animation,
+            Animation secondaryAnimation) {
+          return ExercisesListModal();
+        });
   }
 }
