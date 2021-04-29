@@ -33,7 +33,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget _buildHeader() {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.grey.withOpacity(0.1),
+        color: AppTheme.grey(),
         borderRadius: BorderRadius.circular(8.0),
       ),
       child: Padding(

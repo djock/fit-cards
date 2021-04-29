@@ -104,4 +104,6 @@ class AppTheme {
 
   static Color dynamicColor() =>
       Get.isDarkMode ? AppColors.colorWhite : Colors.black;
+
+  static Color grey() => Colors.grey.withOpacity(0.1);
 }

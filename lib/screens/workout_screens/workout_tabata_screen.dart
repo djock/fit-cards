@@ -286,6 +286,7 @@ class _WorkoutTabataScreenState extends State<WorkoutTabataScreen>
         builder: (BuildContext context) {
           return CustomizeWorkoutModal(
             workoutController: _workoutController,
+            callback: () => setState(() {}),
           );
         });
   }

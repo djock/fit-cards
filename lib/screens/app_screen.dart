@@ -134,37 +134,40 @@ class _AppScreenState extends State<AppScreen> {
   }
 
   Widget _buildButtons() {
-    return Padding(
-      padding: const EdgeInsets.all(24.0),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          CustomGradientButton(
-            text: AppLocalizations.hiit,
-            icon: FontAwesomeIcons.random,
-            action: () {
-              AppStateHandler.shuffleJson();
-              Get.to(() => WorkoutScreen()).then((value) {
-                setState(() {});
-              });
-            },
-          ),
-          SizedBox(
-            height: 8,
-          ),
-          CustomGradientButton(
-            text: AppLocalizations.tabata,
-            icon: FontAwesomeIcons.clock,
-            action: () {
-              AppStateHandler.shuffleJson();
-              Get.to(() => WorkoutTabataScreen()).then((value) {
-                setState(() {});
-              });
-            },
-          ),
-        ],
+    return Container(
+      color: AppTheme.grey(),
+      child: Padding(
+        padding: const EdgeInsets.all(24.0),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            CustomGradientButton(
+              text: AppLocalizations.hiit,
+              icon: FontAwesomeIcons.random,
+              action: () {
+                AppStateHandler.shuffleJson();
+                Get.to(() => WorkoutScreen()).then((value) {
+                  setState(() {});
+                });
+              },
+            ),
+            SizedBox(
+              height: 8,
+            ),
+            CustomGradientButton(
+              text: AppLocalizations.tabata,
+              icon: FontAwesomeIcons.clock,
+              action: () {
+                AppStateHandler.shuffleJson();
+                Get.to(() => WorkoutTabataScreen()).then((value) {
+                  setState(() {});
+                });
+              },
+            ),
+          ],
+        ),
       ),
     );
   }

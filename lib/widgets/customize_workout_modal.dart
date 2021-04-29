@@ -9,8 +9,9 @@ import 'package:numberpicker/numberpicker.dart';
 
 class CustomizeWorkoutModal extends StatefulWidget {
   final WorkoutController workoutController;
+  final Function callback;
 
-  const CustomizeWorkoutModal({Key key, this.workoutController})
+  const CustomizeWorkoutModal({Key key, this.workoutController, this.callback})
       : super(key: key);
 
   @override
@@ -209,11 +210,12 @@ class _CustomizeWorkoutModal extends State<CustomizeWorkoutModal> {
             }
 
             widget.workoutController.setSettings(settings);
+            if(widget.callback != null) widget.callback();
 
             Navigator.of(context).pop();
           },
           child: Text(
-            AppLocalizations.close,
+            _changeOccurred ? AppLocalizations.apply : AppLocalizations.close,
             style: AppTheme.textAccentBold15(),
           ),
         ),
