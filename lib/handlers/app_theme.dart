@@ -44,7 +44,7 @@ ThemeData appThemeLight() => ThemeData(
 
 class AppTheme {
   static TextStyle appBarStyle() {
-    return _textStyle(22, FontWeight.bold, Theme.of(Get.context).accentColor);
+    return _textStyle(22, FontWeight.bold, dynamicColor());
   }
 
   static TextStyle textWhiteBold24() {
@@ -53,27 +53,23 @@ class AppTheme {
   }
 
   static TextStyle textAccentNormal15() {
-    return _textStyle(15, FontWeight.normal, Theme.of(Get.context).accentColor);
+    return _textStyle(15, FontWeight.normal, dynamicColor());
   }
 
   static TextStyle textAccentBold15() {
-    return _textStyle(15, FontWeight.bold, Theme.of(Get.context).accentColor);
+    return _textStyle(15, FontWeight.bold, dynamicColor());
   }
 
   static TextStyle textAccentBold30() {
-    return _textStyle(30, FontWeight.bold, Theme.of(Get.context).accentColor);
+    return _textStyle(30, FontWeight.bold, dynamicColor());
   }
 
   static TextStyle customAccentText(FontWeight fontWeight, double fontSize) {
-    return _textStyle(fontSize, fontWeight, Theme.of(Get.context).accentColor);
+    return _textStyle(fontSize, fontWeight, dynamicColor());
   }
 
   static TextStyle customDarkText(FontWeight fontWeight, double fontSize) {
     return _textStyle(fontSize, fontWeight, AppColors.canvasColorDark);
-  }
-
-  static Color dynamicColor() {
-    return Theme.of(Get.context).accentColor;
   }
 
   static TextStyle _textStyle(
@@ -105,4 +101,7 @@ class AppTheme {
   static Color countDownTimerColor() => Theme.of(Get.context)
       .primaryColorDark
       .withOpacity(Get.isDarkMode ? 0.6 : 0.85);
+
+  static Color dynamicColor() =>
+      Get.isDarkMode ? AppColors.colorWhite : Colors.black;
 }

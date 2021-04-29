@@ -25,7 +25,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   @override
   Widget build(BuildContext context) {
     return SafeScreen(
-      appBar: CustomAppBar.buildNormal(AppLocalizations.settings),
+      appBar: CustomAppBar.buildEmpty(),
       body: Stack(
         children: [
           Padding(
@@ -40,7 +40,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-//                          _buildSectionHeader(AppLocalizations.settings),
+                          _buildSectionHeader(AppLocalizations.settings),
 //                          _buildSectionListItem(
 //                              AppLocalizations.nightMode,
 //                              FontAwesomeIcons.adjust,

@@ -13,7 +13,7 @@ class CustomAppBar {
       backgroundColor: Theme.of(Get.context).canvasColor,
       elevation: elevation,
       iconTheme: IconThemeData(
-          color: Theme.of(Get.context).accentColor, size: iconSize),
+          color: AppTheme.dynamicColor(), size: iconSize),
       actions: actions,
       title: Text(
         text.toUpperCase(),
@@ -47,7 +47,7 @@ class CustomAppBar {
         backgroundColor: Theme.of(Get.context).canvasColor,
         elevation: elevation,
         iconTheme: IconThemeData(
-          color: Theme.of(Get.context).accentColor,
+          color: AppTheme.dynamicColor(),
         ),
         title: Text(
           text.toUpperCase(),
@@ -98,19 +98,19 @@ class CustomAppBar {
         backgroundColor: Theme.of(Get.context).canvasColor,
         elevation: 0,
         iconTheme: IconThemeData(
-          color: Theme.of(Get.context).accentColor,
+          color: AppTheme.dynamicColor(),
         ),
         centerTitle: false,
       );
 
   static PreferredSizeWidget buildCountDown() => AppBar(
-    backgroundColor: Colors.black.withOpacity(0.3),
-    elevation: 0,
-    iconTheme: IconThemeData(
-      color: Theme.of(Get.context).accentColor,
-    ),
-    centerTitle: false,
-  );
+        backgroundColor: Colors.black.withOpacity(0.3),
+        elevation: 0,
+        iconTheme: IconThemeData(
+          color: AppTheme.dynamicColor(),
+        ),
+        centerTitle: false,
+      );
 
   static PreferredSizeWidget buildTimer(
           int elapsedMilliseconds, Function callback, bool isInRest) =>
@@ -140,8 +140,12 @@ class CustomAppBar {
         automaticallyImplyLeading: true,
       );
 
-  static PreferredSizeWidget buildWorkout(int duration, timerType timerType,
-          Function timerCallback, Function buttonCallback, WorkoutController workoutController) =>
+  static PreferredSizeWidget buildWorkout(
+          int duration,
+          timerType timerType,
+          Function timerCallback,
+          Function buttonCallback,
+          WorkoutController workoutController) =>
       AppBar(
         elevation: 0.0,
         backgroundColor: Theme.of(Get.context).canvasColor,

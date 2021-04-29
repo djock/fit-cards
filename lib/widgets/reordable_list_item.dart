@@ -13,13 +13,13 @@ class ReorderableListItem extends StatelessWidget {
 
   const ReorderableListItem(
       {Key key,
-        this.leftValue,
-        this.centerValue,
-        this.rightValue,
-        this.onTap,
-        this.deleteAction,
-        this.shareAction,
-        this.backgroundColor})
+      this.leftValue,
+      this.centerValue,
+      this.rightValue,
+      this.onTap,
+      this.deleteAction,
+      this.shareAction,
+      this.backgroundColor})
       : super(key: key);
 
   @override

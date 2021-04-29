@@ -261,31 +261,31 @@ class _WorkoutScreenState extends State<WorkoutScreen>
                           color: Colors.transparent,
                           child: Center(
                               child: Column(
-                                children: [
-                                  Text(
-                                    _state == workoutState.countdown
-                                        ? AppLocalizations.getReady
-                                        : AppLocalizations.rest,
-                                    style: TextStyle(
-                                      color: Colors.red,
-                                      fontSize: 50,
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    height: 20,
-                                  ),
-                                  TimerWidget(
-                                    duration: _state == workoutState.countdown
-                                        ? 10
-                                        : _workoutController.settings.restTime,
-                                    callback: () {
-                                      changeState(workoutState.active);
-                                      Get.back();
-                                    },
-                                    type: timerType.countdown,
-                                  ),
-                                ],
-                              )))),
+                            children: [
+                              Text(
+                                _state == workoutState.countdown
+                                    ? AppLocalizations.getReady
+                                    : AppLocalizations.rest,
+                                style: TextStyle(
+                                  color: Colors.red,
+                                  fontSize: 50,
+                                ),
+                              ),
+                              SizedBox(
+                                height: 20,
+                              ),
+                              TimerWidget(
+                                duration: _state == workoutState.countdown
+                                    ? 10
+                                    : _workoutController.settings.restTime,
+                                callback: () {
+                                  changeState(workoutState.active);
+                                  Get.back();
+                                },
+                                type: timerType.countdown,
+                              ),
+                            ],
+                          )))),
                 ),
               );
             }),
@@ -302,7 +302,7 @@ class _WorkoutScreenState extends State<WorkoutScreen>
         context: Get.context,
         barrierDismissible: true,
         barrierLabel:
-        MaterialLocalizations.of(context).modalBarrierDismissLabel,
+            MaterialLocalizations.of(context).modalBarrierDismissLabel,
         barrierColor: Colors.black45,
         transitionDuration: const Duration(milliseconds: 200),
         pageBuilder: (BuildContext buildContext, Animation animation,

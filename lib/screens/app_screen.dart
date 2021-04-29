@@ -1,7 +1,7 @@
 import 'package:fitcards/handlers/app_state_handler.dart';
+import 'package:fitcards/handlers/app_theme.dart';
 import 'package:fitcards/screens/home_screen.dart';
 import 'package:fitcards/screens/settings_screen.dart';
-import 'package:fitcards/screens/stats_screen.dart';
 import 'package:fitcards/screens/workout_screens/workout_screen.dart';
 import 'package:fitcards/screens/workout_screens/workout_tabata_screen.dart';
 import 'package:fitcards/utilities/app_colors.dart';
@@ -69,7 +69,7 @@ class _AppScreenState extends State<AppScreen> {
             body: _screens.elementAt(_selectedIndex),
             bottomNavigationBar: _navigationDrawer,
             floatingActionButton: FloatingActionButton(
-                backgroundColor: AppColors.inactiveGrey,
+                backgroundColor: Theme.of(Get.context).accentColor,
                 child: FaIcon(
                   FontAwesomeIcons.running,
                   color: Theme.of(Get.context).canvasColor,
@@ -86,6 +86,7 @@ class _AppScreenState extends State<AppScreen> {
   Widget get _navigationDrawer {
     return Container(
       child: BottomAppBar(
+
           color: Theme.of(Get.context).canvasColor,
           elevation: 15,
           shape: CircularNotchedRectangle(),
@@ -98,7 +99,7 @@ class _AppScreenState extends State<AppScreen> {
                   icon: FaIcon(
                     FontAwesomeIcons.chartBar,
                     color: _selectedIndex == 0
-                        ? Theme.of(Get.context).accentColor
+                        ? AppTheme.dynamicColor()
                         : AppColors.inactiveGrey,
                   ),
                   onPressed: () {
@@ -111,7 +112,7 @@ class _AppScreenState extends State<AppScreen> {
                 child: IconButton(
                   icon: FaIcon(FontAwesomeIcons.cog,
                       color: _selectedIndex == 1
-                          ? Theme.of(Get.context).accentColor
+                          ? AppTheme.dynamicColor()
                           : AppColors.inactiveGrey),
                   onPressed: () {
                     _onItemTapped(1);

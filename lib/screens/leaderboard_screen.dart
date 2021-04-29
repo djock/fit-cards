@@ -3,8 +3,8 @@ import 'package:fitcards/handlers/firebase_database_handler.dart';
 import 'package:fitcards/utilities/app_colors.dart';
 import 'package:fitcards/utilities/app_localizations.dart';
 import 'package:fitcards/widgets/custom_app_bar.dart';
-import 'package:fitcards/widgets/slidable_list_item.dart';
 import 'package:fitcards/widgets/safe_screen.dart';
+import 'package:fitcards/widgets/slidable_list_item.dart';
 import 'package:flutter/material.dart';
 
 class LeaderBoardScreen extends StatefulWidget {

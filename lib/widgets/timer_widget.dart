@@ -16,7 +16,12 @@ class TimerWidget extends StatefulWidget {
   final timerType type;
   final WorkoutController workoutController;
 
-  const TimerWidget({Key key, this.callback, this.duration, this.type, this.workoutController})
+  const TimerWidget(
+      {Key key,
+      this.callback,
+      this.duration,
+      this.type,
+      this.workoutController})
       : super(key: key);
 
   @override
@@ -66,7 +71,8 @@ class _TimerWidgetState extends State<TimerWidget> {
       await Future.delayed(Duration(seconds: 1));
       if (!_disposed) {
         _timeInSec.value++;
-        if(widget.workoutController != null) widget.workoutController.setDuration(_timeInSec.value);
+        if (widget.workoutController != null)
+          widget.workoutController.setDuration(_timeInSec.value);
       }
     }
   }

@@ -32,10 +32,10 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget _buildHeader() {
     return Container(
-        decoration: BoxDecoration(
-          color: Theme.of(Get.context).canvasColor,
-          borderRadius: BorderRadius.circular(8.0),
-        ),
+      decoration: BoxDecoration(
+        color: Colors.grey.withOpacity(0.1),
+        borderRadius: BorderRadius.circular(8.0),
+      ),
       child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -107,22 +107,22 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           _buildSectionListItem(AppLocalizations.workoutsLog,
               FontAwesomeIcons.calendarAlt, FontAwesomeIcons.chevronRight, () {
-                Get.to(() => WorkoutsLogScreen());
-              }),
+            Get.to(() => WorkoutsLogScreen());
+          }),
           SizedBox(
             height: 20,
           ),
           _buildSectionListItem(AppLocalizations.leaderBoard,
               FontAwesomeIcons.trophy, FontAwesomeIcons.chevronRight, () {
-                Get.to(() => LeaderBoardScreen());
-              }),
+            Get.to(() => LeaderBoardScreen());
+          }),
           SizedBox(
             height: 20,
           ),
           _buildSectionListItem(AppLocalizations.statistics,
               FontAwesomeIcons.trophy, FontAwesomeIcons.chevronRight, () {
-                Get.to(() => StatsScreen());
-              }),
+            Get.to(() => StatsScreen());
+          }),
         ],
       ),
     );

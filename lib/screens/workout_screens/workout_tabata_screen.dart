@@ -281,9 +281,6 @@ class _WorkoutTabataScreenState extends State<WorkoutTabataScreen>
   }
 
   void _onOpenFilters() {
-    _openExercisesList();
-    return;
-
     showDialog(
         context: context,
         builder: (BuildContext context) {
@@ -306,7 +303,8 @@ class _WorkoutTabataScreenState extends State<WorkoutTabataScreen>
           return ExercisesListModal(
             workoutController: _workoutController,
             callback: () => setState(() {
-              var dummyExercise = new ExerciseModel(name: AppLocalizations.exercise, id: -1, points: 0);
+              var dummyExercise = new ExerciseModel(
+                  name: AppLocalizations.exercise, id: -1, points: 0);
               _workoutController.exercises.insert(0, dummyExercise);
             }),
           );

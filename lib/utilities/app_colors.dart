@@ -10,12 +10,17 @@ class AppColors {
 
   // main app color (eg: appbar)
   static const canvasColorLight = Color(0xffFBFFF1);
-  static const canvasColorDark = Color(0xff2F2C52);
+  static const colorWhite = Color(0xffEBEBEB);
 
+//  static const canvasColorDark = Color(0xff2F2C52);
+  static const canvasColorDark = Color(0xff0A0A0A);
 //  static const canvasColorDark = Color(0xff1D1B35);
 
-  static const accentColorDark = Color(0xff79E7BD);
-  static const accentColorLight = Color(0xff07494B);
+//  static const accentColorDark = Color(0xff79E7BD);
+//  static const accentColorLight = Color(0xff07494B);
+
+  static const accentColorDark = Color(0xff4B88A2);
+  static const accentColorLight = Color(0xff4B88A2);
 
   static const exerciseCardColor = Color(0xff659B5E);
   static const schemeCardColor = Color(0xffCE4257);

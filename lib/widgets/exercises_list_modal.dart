@@ -9,7 +9,8 @@ class ExercisesListModal extends StatefulWidget {
   final WorkoutController workoutController;
   final Function callback;
 
-  const ExercisesListModal({Key key, this.workoutController, this.callback}) : super(key: key);
+  const ExercisesListModal({Key key, this.workoutController, this.callback})
+      : super(key: key);
 
   @override
   _ExercisesListModalState createState() => _ExercisesListModalState();
@@ -38,29 +39,31 @@ class _ExercisesListModalState extends State<ExercisesListModal> {
     );
   }
 
-
   Widget _buildList() {
-    widget.workoutController.exercises.removeWhere((element) => element.name == AppLocalizations.exercise);
+    widget.workoutController.exercises
+        .removeWhere((element) => element.name == AppLocalizations.exercise);
 
     return Expanded(
       child: ReorderableListView(
 //        padding: const EdgeInsets.symmetric(horizontal: 20),
         children: <Widget>[
-          for (int index = 0; index < widget.workoutController.settings.rounds; index++)
-          ReorderableListItem(
-            key: Key('${widget.workoutController.exercises[index].name}'),
-            leftValue: (index+1).toString(),
-            centerValue: '${widget.workoutController.exercises[index].name}',
-            rightValue: '═',
-
-    ),
+          for (int index = 0;
+              index < widget.workoutController.settings.rounds;
+              index++)
+            ReorderableListItem(
+              key: Key('${widget.workoutController.exercises[index].name}'),
+              leftValue: (index + 1).toString(),
+              centerValue: '${widget.workoutController.exercises[index].name}',
+              rightValue: '═',
+            ),
         ],
         onReorder: (int oldIndex, int newIndex) {
           setState(() {
             if (oldIndex < newIndex) {
               newIndex -= 1;
             }
-            var movedExercise = widget.workoutController.exercises.removeAt(oldIndex);
+            var movedExercise =
+                widget.workoutController.exercises.removeAt(oldIndex);
             widget.workoutController.exercises.insert(newIndex, movedExercise);
           });
         },
