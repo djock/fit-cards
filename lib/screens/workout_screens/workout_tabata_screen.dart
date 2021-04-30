@@ -135,7 +135,7 @@ class _WorkoutTabataScreenState extends State<WorkoutTabataScreen>
   @override
   Widget build(BuildContext context) {
     return _state == workoutState.finish
-        ? WorkoutEndScreen()
+        ? WorkoutEndScreen(workoutController: _workoutController)
         : WillPopScope(
             onWillPop: _onBackPressed,
             child: SafeScreen(

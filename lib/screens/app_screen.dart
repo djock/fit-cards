@@ -147,6 +147,7 @@ class _AppScreenState extends State<AppScreen> {
               icon: FontAwesomeIcons.random,
               action: () {
                 AppStateHandler.shuffleJson();
+                Get.back();
                 Get.to(() => WorkoutScreen()).then((value) {
                   setState(() {});
                 });
@@ -160,6 +161,7 @@ class _AppScreenState extends State<AppScreen> {
               icon: FontAwesomeIcons.clock,
               action: () {
                 AppStateHandler.shuffleJson();
+                Get.back();
                 Get.to(() => WorkoutTabataScreen()).then((value) {
                   setState(() {});
                 });

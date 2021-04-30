@@ -80,7 +80,7 @@ class _WorkoutScreenState extends State<WorkoutScreen>
   @override
   Widget build(BuildContext context) {
     return _state == workoutState.finish
-        ? WorkoutEndScreen()
+        ? WorkoutEndScreen(workoutController: _workoutController,)
         : WillPopScope(
             onWillPop: _onBackPressed,
             child: SafeScreen(
@@ -247,45 +247,40 @@ class _WorkoutScreenState extends State<WorkoutScreen>
             top: false,
             child: Builder(builder: (context) {
               return Scaffold(
-                appBar: CustomAppBar.buildCountDown(),
-                backgroundColor: Colors.black.withOpacity(0.3),
+                backgroundColor: Colors.black.withOpacity(0.5),
                 body: InkWell(
                   onTap: () {
                     debugPrint('tap clock overlay');
                   },
-                  child: Align(
-                      alignment: Alignment.center,
-                      child: Container(
-                          height: 200.0,
-                          width: 250.0,
-                          color: Colors.transparent,
-                          child: Center(
-                              child: Column(
-                            children: [
-                              Text(
-                                _state == workoutState.countdown
-                                    ? AppLocalizations.getReady
-                                    : AppLocalizations.rest,
-                                style: TextStyle(
-                                  color: Colors.red,
-                                  fontSize: 50,
-                                ),
-                              ),
-                              SizedBox(
-                                height: 20,
-                              ),
-                              TimerWidget(
-                                duration: _state == workoutState.countdown
-                                    ? 10
-                                    : _workoutController.settings.restTime,
-                                callback: () {
-                                  changeState(workoutState.active);
-                                  Get.back();
-                                },
-                                type: timerType.countdown,
-                              ),
-                            ],
-                          )))),
+                  child: Center(
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            _state == workoutState.countdown
+                                ? AppLocalizations.getReady
+                                : AppLocalizations.rest,
+                            style: TextStyle(
+                              color: Colors.red,
+                              fontSize: 30,
+                            ),
+                          ),
+                          SizedBox(
+                            height: 20,
+                          ),
+                          TimerWidget(
+                            duration: _state == workoutState.countdown
+                                ? 10
+                                : _workoutController.settings.restTime,
+                            callback: () {
+                              changeState(workoutState.active);
+                              Get.back();
+                            },
+                            type: timerType.countdown,
+                          ),
+                        ],
+                      )),
                 ),
               );
             }),
