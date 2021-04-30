@@ -105,5 +105,7 @@ class AppTheme {
   static Color dynamicColor() =>
       Get.isDarkMode ? AppColors.colorWhite : Colors.black;
 
-  static Color grey() => Colors.grey.withOpacity(0.1);
+  static Color grey = Colors.grey.withOpacity(0.1);
+
+  static Color navBarColor() =>  Get.isDarkMode ? Colors.grey.withOpacity(0.1) : Theme.of(Get.context).canvasColor;
 }

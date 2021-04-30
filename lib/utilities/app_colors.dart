@@ -19,8 +19,8 @@ class AppColors {
 //  static const accentColorDark = Color(0xff79E7BD);
 //  static const accentColorLight = Color(0xff07494B);
 
-  static const accentColorDark = Color(0xff4B88A2);
-  static const accentColorLight = Color(0xff4B88A2);
+  static const accentColorDark = Color(0xff1481BA);
+  static const accentColorLight = Color(0xff1481BA);
 
   static const exerciseCardColor = Color(0xff659B5E);
   static const schemeCardColor = Color(0xffCE4257);

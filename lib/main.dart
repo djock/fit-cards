@@ -7,11 +7,15 @@ import 'package:fitcards/handlers/firebase_database_handler.dart';
 import 'package:fitcards/handlers/hive_handler.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_statusbarcolor/flutter_statusbarcolor.dart';
 import 'package:get/get.dart';
 import 'package:package_info/package_info.dart';
 
 void main() async {
   HiveHandler.init();
+  FlutterStatusbarcolor.setStatusBarColor(Colors.transparent, animate: true);
+
+
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   await FirebaseAuth.instance.signInAnonymously().then((value) {

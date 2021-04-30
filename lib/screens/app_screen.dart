@@ -69,7 +69,7 @@ class _AppScreenState extends State<AppScreen> {
             body: _screens.elementAt(_selectedIndex),
             bottomNavigationBar: _navigationDrawer,
             floatingActionButton: FloatingActionButton(
-                backgroundColor: Theme.of(Get.context).accentColor,
+                backgroundColor: AppColors.inactiveGrey,
                 child: FaIcon(
                   FontAwesomeIcons.running,
                   color: Theme.of(Get.context).canvasColor,
@@ -86,9 +86,8 @@ class _AppScreenState extends State<AppScreen> {
   Widget get _navigationDrawer {
     return Container(
       child: BottomAppBar(
-
-          color: Theme.of(Get.context).canvasColor,
-          elevation: 15,
+          color: AppTheme.navBarColor(),
+          elevation: 20,
           shape: CircularNotchedRectangle(),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -99,7 +98,7 @@ class _AppScreenState extends State<AppScreen> {
                   icon: FaIcon(
                     FontAwesomeIcons.chartBar,
                     color: _selectedIndex == 0
-                        ? AppTheme.dynamicColor()
+                        ? Theme.of(Get.context).accentColor
                         : AppColors.inactiveGrey,
                   ),
                   onPressed: () {
@@ -112,7 +111,7 @@ class _AppScreenState extends State<AppScreen> {
                 child: IconButton(
                   icon: FaIcon(FontAwesomeIcons.cog,
                       color: _selectedIndex == 1
-                          ? AppTheme.dynamicColor()
+                          ? Theme.of(Get.context).accentColor
                           : AppColors.inactiveGrey),
                   onPressed: () {
                     _onItemTapped(1);
@@ -135,7 +134,7 @@ class _AppScreenState extends State<AppScreen> {
 
   Widget _buildButtons() {
     return Container(
-      color: AppTheme.grey(),
+      color: AppTheme.grey,
       child: Padding(
         padding: const EdgeInsets.all(24.0),
         child: Column(

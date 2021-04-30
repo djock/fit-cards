@@ -45,6 +45,8 @@ dependencies:
   firebase_database: ^6.1.2
   firebase_auth: ^1.0.3
 
+  flutter_statusbarcolor: ^0.2.3
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

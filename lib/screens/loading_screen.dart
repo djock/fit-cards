@@ -2,6 +2,7 @@ import 'package:fitcards/handlers/app_theme.dart';
 import 'package:fitcards/utilities/app_colors.dart';
 import 'package:fitcards/utilities/utils.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class LoadingScreen extends StatefulWidget {
   @override
@@ -38,7 +39,7 @@ class _LoadingScreenState extends State<LoadingScreen>
     return Scaffold(
       body: SizedBox.expand(
         child: Container(
-          color: AppColors.canvasColorDark,
+          color: Theme.of(Get.context).canvasColor,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.end,
             children: <Widget>[
@@ -49,7 +50,7 @@ class _LoadingScreenState extends State<LoadingScreen>
               ),
               LinearProgressIndicator(
                 value: _controller.value,
-                backgroundColor: AppColors.canvasColorDark,
+                backgroundColor: Theme.of(Get.context).canvasColor,
                 semanticsLabel: 'Linear progress indicator',
               )
             ],
