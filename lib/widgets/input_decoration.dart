@@ -40,7 +40,7 @@ class CustomInputDecoration {
       fillColor: Theme.of(Get.context).canvasColor.withOpacity(0.5),
       filled: true,
       hintText: defaultText,
-      contentPadding: EdgeInsets.symmetric(vertical: 18, horizontal: 20),
+      contentPadding: EdgeInsets.symmetric(vertical: 16, horizontal: 24),
       hintStyle: TextStyle(
           color: Theme.of(Get.context).accentColor.withOpacity(0.7),
           fontSize: 18,

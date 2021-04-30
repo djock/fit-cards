@@ -88,7 +88,7 @@ class _WorkoutScreenState extends State<WorkoutScreen>
               body: Stack(
                 children: [
                   Container(
-                    padding: EdgeInsets.only(top: 10, bottom: 10),
+                    padding: EdgeInsets.only(top: 8, bottom: 8),
                     width: MediaQuery.of(context).size.width,
                     height: MediaQuery.of(context).size.height * 0.91,
                     child: Column(

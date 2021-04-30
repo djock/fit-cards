@@ -28,7 +28,7 @@ class CustomGradientButton extends StatelessWidget {
         padding: EdgeInsets.all(8.0),
         clipBehavior: Clip.antiAliasWithSaveLayer,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10.0),
+          borderRadius: BorderRadius.circular(8.0),
           color: Theme.of(Get.context).accentColor,
         ),
         child: Stack(

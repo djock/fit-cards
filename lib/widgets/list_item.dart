@@ -18,7 +18,7 @@ class ListItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(bottom: 10),
+      margin: EdgeInsets.only(bottom: 8),
       decoration: BoxDecoration(
         color: AppTheme.grey,
         borderRadius: BorderRadius.circular(8.0),
@@ -50,7 +50,7 @@ class ListItem extends StatelessWidget {
                 child: Column(
                   children: <Widget>[
                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      padding: const EdgeInsets.symmetric(horizontal: 16),
                       child: Row(
                         children: <Widget>[
                           Expanded(

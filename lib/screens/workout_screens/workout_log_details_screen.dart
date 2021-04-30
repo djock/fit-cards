@@ -57,7 +57,7 @@ class WorkoutLogDetailsScreen extends StatelessWidget {
       appBar: CustomAppBar.buildNormal(workoutLogModel.name),
       body: SingleChildScrollView(
           child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 10),
+        padding: EdgeInsets.symmetric(horizontal: 8),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: _buildExercisesList(),

@@ -99,7 +99,7 @@ class FitCard extends StatelessWidget {
       {int points = 0, bool isFirstCard = false}) {
     return Card(
       shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10.0),
+          borderRadius: BorderRadius.circular(8.0),
           side: BorderSide(
             color: Colors.black.withOpacity(0.1),
             width: 0.7,
@@ -112,7 +112,7 @@ class FitCard extends StatelessWidget {
           Align(
             alignment: Alignment.center,
             child: Padding(
-              padding: const EdgeInsets.all(6.0),
+              padding: const EdgeInsets.all(8.0),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: type == cardType.exercise
@@ -232,7 +232,7 @@ class FitCard extends StatelessWidget {
       return Align(
         alignment: Alignment.topRight,
         child: Padding(
-          padding: const EdgeInsets.all(12.0),
+          padding: const EdgeInsets.all(16.0),
           child: Text(
             '+$points',
             style: TextStyle(

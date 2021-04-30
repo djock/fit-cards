@@ -93,7 +93,7 @@ class _AppScreenState extends State<AppScreen> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
               Padding(
-                padding: const EdgeInsets.only(right: 40),
+                padding: const EdgeInsets.only(right: 42),
                 child: IconButton(
                   icon: FaIcon(
                     FontAwesomeIcons.chartBar,
@@ -107,7 +107,7 @@ class _AppScreenState extends State<AppScreen> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(left: 40),
+                padding: const EdgeInsets.only(left: 42),
                 child: IconButton(
                   icon: FaIcon(FontAwesomeIcons.cog,
                       color: _selectedIndex == 1

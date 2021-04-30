@@ -99,7 +99,7 @@ class _SettingsThemeScreenState extends State<SettingsThemeScreen> {
             function();
           }
         },
-        contentPadding: EdgeInsets.only(left: 20, right: 20),
+        contentPadding: EdgeInsets.only(left: 24, right: 24),
         title: Text(
           text,
           style: AppTheme.textAccentNormal15(),

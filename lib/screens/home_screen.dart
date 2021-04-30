@@ -22,7 +22,7 @@ class _HomeScreenState extends State<HomeScreen> {
       topSafe: false,
       appBar: CustomAppBar.buildEmpty(),
       body: Padding(
-        padding: const EdgeInsets.all(20),
+        padding: const EdgeInsets.all(16),
         child: SingleChildScrollView(
           child: Column(
             children: [_buildHeader(), _buildButtons()],
@@ -88,9 +88,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 ],
               ),
             ),
-            SizedBox(
-              height: 10,
-            ),
           ],
         ),
       ),
@@ -140,7 +137,7 @@ class _HomeScreenState extends State<HomeScreen> {
             function();
           }
         },
-        contentPadding: EdgeInsets.only(left: 20, right: 20),
+//        contentPadding: EdgeInsets.only(left: 16, right: 16),
         title: Text(
           text,
           style: AppTheme.customAccentText(FontWeight.bold, 16),

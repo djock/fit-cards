@@ -29,7 +29,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
       body: Stack(
         children: [
           Padding(
-            padding: const EdgeInsets.only(bottom: 50),
+            padding: const EdgeInsets.only(bottom: 48),
             child: Container(
                 width: MediaQuery.of(context).size.width,
                 height: MediaQuery.of(context).size.height,
@@ -101,7 +101,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
   Widget _buildSectionHeader(String title) {
     return Container(
-        padding: EdgeInsets.only(left: 20, top: 13),
+        padding: EdgeInsets.only(left: 24, top: 16),
         height: 60,
         child: Align(
             alignment: Alignment.centerLeft,
