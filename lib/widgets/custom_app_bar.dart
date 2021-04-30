@@ -10,6 +10,7 @@ class CustomAppBar {
   static PreferredSizeWidget buildWithActions(List<Widget> actions,
       {double elevation = 0.0, String text = '', double iconSize = 24}) {
     return AppBar(
+      brightness: Get.isDarkMode ? Brightness.dark : Brightness.light,
       backgroundColor: Theme.of(Get.context).canvasColor,
       elevation: elevation,
       iconTheme: IconThemeData(
@@ -29,6 +30,7 @@ class CustomAppBar {
           double iconSize = 24,
           bool hideLeading = false}) =>
       AppBar(
+        brightness: Get.isDarkMode ? Brightness.dark : Brightness.light,
         backgroundColor: AppTheme.countDownTimerColor(),
         elevation: elevation,
         actions: actions,
@@ -44,6 +46,7 @@ class CustomAppBar {
   static PreferredSizeWidget buildNormal(String text,
           {double elevation = 0.0}) =>
       AppBar(
+        brightness: Get.isDarkMode ? Brightness.dark : Brightness.light,
         backgroundColor: Theme.of(Get.context).canvasColor,
         elevation: elevation,
         iconTheme: IconThemeData(
@@ -59,6 +62,7 @@ class CustomAppBar {
   static PreferredSizeWidget buildWorkoutIdle(String text,
           {double elevation = 0.0}) =>
       AppBar(
+        brightness: Get.isDarkMode ? Brightness.dark : Brightness.light,
         backgroundColor: Theme.of(Get.context).canvasColor,
         elevation: 0.0,
         iconTheme: IconThemeData(color: Colors.red),
@@ -73,6 +77,7 @@ class CustomAppBar {
   static PreferredSizeWidget buildWorkoutActive(
           String text, Function callback) =>
       AppBar(
+        brightness: Get.isDarkMode ? Brightness.dark : Brightness.light,
         backgroundColor: Theme.of(Get.context).canvasColor,
         elevation: 0.0,
         iconTheme: IconThemeData(color: Colors.red),
@@ -96,7 +101,8 @@ class CustomAppBar {
 
   static PreferredSizeWidget buildEmpty() => AppBar(
         backgroundColor: Theme.of(Get.context).canvasColor,
-        elevation: 0,
+    brightness: Get.isDarkMode ? Brightness.dark : Brightness.light,
+    elevation: 0,
         iconTheme: IconThemeData(
           color: AppTheme.dynamicColor(),
         ),
@@ -105,7 +111,8 @@ class CustomAppBar {
 
   static PreferredSizeWidget buildCountDown() => AppBar(
         backgroundColor: Colors.black.withOpacity(0.3),
-        elevation: 0,
+    brightness: Get.isDarkMode ? Brightness.dark : Brightness.light,
+    elevation: 0,
         iconTheme: IconThemeData(
           color: AppTheme.dynamicColor(),
         ),
@@ -115,6 +122,7 @@ class CustomAppBar {
   static PreferredSizeWidget buildTimer(
           int elapsedMilliseconds, Function callback, bool isInRest) =>
       AppBar(
+        brightness: Get.isDarkMode ? Brightness.dark : Brightness.light,
         title: Text(Utils.formatTime(elapsedMilliseconds),
             style: TextStyle(
               color: Colors.red,
@@ -147,6 +155,7 @@ class CustomAppBar {
           Function buttonCallback,
           WorkoutController workoutController) =>
       AppBar(
+        brightness: Get.isDarkMode ? Brightness.dark : Brightness.light,
         elevation: 0.0,
         backgroundColor: Theme.of(Get.context).canvasColor,
         centerTitle: true,

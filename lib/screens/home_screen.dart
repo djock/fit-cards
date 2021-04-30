@@ -23,8 +23,10 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: CustomAppBar.buildEmpty(),
       body: Padding(
         padding: const EdgeInsets.all(20),
-        child: Column(
-          children: [_buildHeader(), _buildButtons()],
+        child: SingleChildScrollView(
+          child: Column(
+            children: [_buildHeader(), _buildButtons()],
+          ),
         ),
       ),
     );
@@ -87,7 +89,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
             SizedBox(
-              height: 40,
+              height: 10,
             ),
           ],
         ),
