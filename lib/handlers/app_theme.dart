@@ -6,8 +6,8 @@ import '../utilities/app_colors.dart';
 
 ThemeData appThemeDark() => ThemeData(
       brightness: Brightness.dark,
-      primaryColor: AppColors.primaryColorDark,
-      accentColor: AppColors.accentColorDark,
+      primaryColor: AppColors.accentColor,
+      accentColor: AppColors.accentColor,
       canvasColor: AppColors.canvasColorDark,
       primaryColorDark: AppColors.canvasColorDark,
       floatingActionButtonTheme: FloatingActionButtonThemeData(),
@@ -25,8 +25,8 @@ ThemeData appThemeDark() => ThemeData(
 
 ThemeData appThemeLight() => ThemeData(
       brightness: Brightness.light,
-      primaryColor: AppColors.primaryColorLight,
-      accentColor: AppColors.accentColorLight,
+      primaryColor: AppColors.accentColor,
+      accentColor: AppColors.accentColor,
       canvasColor: AppColors.canvasColorLight,
       primaryColorDark: AppColors.canvasColorDark,
       floatingActionButtonTheme: FloatingActionButtonThemeData(),
@@ -68,10 +68,6 @@ class AppTheme {
     return _textStyle(fontSize, fontWeight, dynamicColor());
   }
 
-  static TextStyle customDarkText(FontWeight fontWeight, double fontSize) {
-    return _textStyle(fontSize, fontWeight, AppColors.canvasColorDark);
-  }
-
   static TextStyle _textStyle(
       double fontSize, FontWeight fontWeight, Color color) {
     return TextStyle(
@@ -98,14 +94,10 @@ class AppTheme {
     Get.changeThemeMode(themeMode);
   }
 
-  static Color countDownTimerColor() => Theme.of(Get.context)
-      .primaryColorDark
-      .withOpacity(Get.isDarkMode ? 0.6 : 0.85);
-
   static Color dynamicColor() =>
-      Get.isDarkMode ? AppColors.colorWhite : Colors.black;
+      Get.isDarkMode ? Colors.white : Colors.black;
 
-  static Color grey = Colors.grey.withOpacity(0.1);
+  static Color appBarColor() =>  Get.context.isDarkMode ? AppColors.barColorDark : AppColors.barColorLight;
 
-  static Color navBarColor() =>  Get.isDarkMode ? Colors.grey.withOpacity(0.1) : Theme.of(Get.context).canvasColor;
+  static Color widgetBackground() =>  Get.isDarkMode ? AppColors.widgetColorDark : AppColors.widgetColorLight;
 }

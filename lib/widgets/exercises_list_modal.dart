@@ -85,7 +85,7 @@ class _ExercisesListModalState extends State<ExercisesListModal> {
             child: Text(
               AppLocalizations.exercisesOrder,
               style: TextStyle(
-                  color: AppColors.accentColorLight,
+                  color: Theme.of(Get.context).accentColor,
                   fontFamily: 'Lora',
                   fontSize: 22,
                   decoration: TextDecoration.none,

@@ -20,7 +20,7 @@ class ListItem extends StatelessWidget {
     return Container(
       margin: EdgeInsets.only(bottom: 8),
       decoration: BoxDecoration(
-        color: AppTheme.grey,
+        color: AppTheme.widgetBackground(),
         borderRadius: BorderRadius.circular(8.0),
       ),
       padding: const EdgeInsets.all(8.0),
@@ -34,12 +34,10 @@ class ListItem extends StatelessWidget {
                       child: CircleAvatar(
                         backgroundColor: backgroundColor != null
                             ? backgroundColor
-                            : AppTheme.grey,
+                            : AppTheme.widgetBackground(),
                         child: Text(
                           leftValue.toString(),
-                          style: backgroundColor != null
-                              ? AppTheme.customDarkText(FontWeight.bold, 15)
-                              : AppTheme.textAccentBold15(),
+                          style: AppTheme.textAccentBold15(),
                         ),
                       ),
                     )

@@ -6,6 +6,7 @@ import 'package:fitcards/screens/workout_screens/workout_screen.dart';
 import 'package:fitcards/screens/workout_screens/workout_tabata_screen.dart';
 import 'package:fitcards/utilities/app_colors.dart';
 import 'package:fitcards/utilities/app_localizations.dart';
+import 'package:fitcards/widgets/custom_app_bar.dart';
 import 'package:fitcards/widgets/custom_gradient_button.dart';
 import 'package:fitcards/widgets/general_modal.dart';
 import 'package:fitcards/widgets/safe_screen.dart';
@@ -69,7 +70,8 @@ class _AppScreenState extends State<AppScreen> {
             body: _screens.elementAt(_selectedIndex),
             bottomNavigationBar: _navigationDrawer,
             floatingActionButton: FloatingActionButton(
-                backgroundColor: AppColors.inactiveGrey,
+              elevation: 0,
+                backgroundColor: AppColors.inactiveButtonGrey,
                 child: FaIcon(
                   FontAwesomeIcons.running,
                   color: Theme.of(Get.context).canvasColor,
@@ -86,8 +88,8 @@ class _AppScreenState extends State<AppScreen> {
   Widget get _navigationDrawer {
     return Container(
       child: BottomAppBar(
-          color: AppTheme.navBarColor(),
-          elevation: 20,
+          color: AppTheme.appBarColor(),
+          elevation: 10,
           shape: CircularNotchedRectangle(),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -99,7 +101,7 @@ class _AppScreenState extends State<AppScreen> {
                     FontAwesomeIcons.chartBar,
                     color: _selectedIndex == 0
                         ? Theme.of(Get.context).accentColor
-                        : AppColors.inactiveGrey,
+                        : AppColors.inactiveButtonGrey,
                   ),
                   onPressed: () {
                     _onItemTapped(0);
@@ -112,7 +114,7 @@ class _AppScreenState extends State<AppScreen> {
                   icon: FaIcon(FontAwesomeIcons.cog,
                       color: _selectedIndex == 1
                           ? Theme.of(Get.context).accentColor
-                          : AppColors.inactiveGrey),
+                          : AppColors.inactiveButtonGrey),
                   onPressed: () {
                     _onItemTapped(1);
                   },
@@ -134,7 +136,7 @@ class _AppScreenState extends State<AppScreen> {
 
   Widget _buildButtons() {
     return Container(
-      color: AppTheme.grey,
+      color: AppTheme.widgetBackground(),
       child: Padding(
         padding: const EdgeInsets.all(24.0),
         child: Column(

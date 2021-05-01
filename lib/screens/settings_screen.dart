@@ -56,7 +56,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
 //                            });
 //                          }),
                           _buildSectionListItem(AppLocalizations.appTheme,
-                              FontAwesomeIcons.adjust, null, () {
+                              FontAwesomeIcons.adjust, FontAwesomeIcons.chevronRight, () {
                             Get.to(() => SettingsThemeScreen()).then((value) {
                               widget.callback();
                               setState(() {});

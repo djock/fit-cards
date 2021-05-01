@@ -146,7 +146,7 @@ class FitCard extends StatelessWidget {
             style: TextStyle(
                 fontSize: 70,
                 fontWeight: FontWeight.bold,
-                color: AppColors.primaryColorLight),
+                color: AppColors.canvasColorLight),
             textAlign: TextAlign.center,
           ),
         ),

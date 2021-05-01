@@ -1,36 +1,25 @@
 import 'package:flutter/material.dart';
 
 class AppColors {
-  // main app color (eg: appbar)
-//  static const primaryColorLight =  Color(0xff2F2C52);
-  static const primaryColorLight = Color(0xff2F2C52);
+  static const canvasColorLight = Color(0xffF2F2F7);
+  static const canvasColorDark = Color(0xff000000);
 
-//  static const primaryColorDark =  Color(0xff2F2C52);
-  static const primaryColorDark = Color(0xff2F2C52);
+  static const barColorDark = Color(0xff131313);
+  static const barColorLight = Color(0xffF7F7F8);
+  
+  static const widgetColorDark = Color(0xff1D1D1E);
+  static const widgetColorLight = Color(0xffFFFFFF);
 
-  // main app color (eg: appbar)
-  static const canvasColorLight = Color(0xffFBFFF1);
-  static const colorWhite = Color(0xffEBEBEB);
-
-//  static const canvasColorDark = Color(0xff2F2C52);
-  static const canvasColorDark = Color(0xff0A0A0A);
-//  static const canvasColorDark = Color(0xff1D1B35);
-
-//  static const accentColorDark = Color(0xff79E7BD);
-//  static const accentColorLight = Color(0xff07494B);
-
-  static const accentColorDark = Color(0xff1481BA);
-  static const accentColorLight = Color(0xff1481BA);
+  static const accentColor = Color(0xff1481BA);
 
   static const exerciseCardColor = Color(0xff659B5E);
   static const schemeCardColor = Color(0xffCE4257);
 
-  static const testColor = Color(0xff263b2c);
   static const goldColor = Color(0xffFFD700);
   static const silverColor = Color(0xffC0C0C0);
   static const bronzeColor = Color(0xffCD7F32);
 
-  static const inactiveGrey = Color(0xff7D8491);
+  static const inactiveButtonGrey = Color(0xff7D7D7E);
 
   static Map<Color, Color> cardColors = {
     Color(0xff3FA7D6): Color(0xffA790A5),
