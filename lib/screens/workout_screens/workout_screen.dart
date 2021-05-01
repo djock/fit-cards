@@ -229,7 +229,7 @@ class _WorkoutScreenState extends State<WorkoutScreen>
   void _onOpenFilters() {
     FirebaseDatabaseHandler.updateLeaderBoard();
 
-    showDialog(
+    showModalBottomSheet(
         context: context,
         builder: (BuildContext context) {
           return CustomizeWorkoutModal(

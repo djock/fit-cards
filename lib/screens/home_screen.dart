@@ -143,9 +143,9 @@ class _HomeScreenState extends State<HomeScreen> {
           text,
           style: AppTheme.customAccentText(FontWeight.bold, 16),
         ),
-        leading: _buildIcon(leftIcon, AppTheme.dynamicColor()),
+        leading: _buildIcon(leftIcon, Theme.of(Get.context).accentColor),
         trailing: rightIcon != null
-            ? _buildIcon(rightIcon, AppTheme.dynamicColor())
+            ? _buildIcon(rightIcon, AppColors.inactiveButtonGrey)
             : SizedBox(),
       ),
     );

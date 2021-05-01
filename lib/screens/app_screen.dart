@@ -6,7 +6,6 @@ import 'package:fitcards/screens/workout_screens/workout_screen.dart';
 import 'package:fitcards/screens/workout_screens/workout_tabata_screen.dart';
 import 'package:fitcards/utilities/app_colors.dart';
 import 'package:fitcards/utilities/app_localizations.dart';
-import 'package:fitcards/widgets/custom_app_bar.dart';
 import 'package:fitcards/widgets/custom_gradient_button.dart';
 import 'package:fitcards/widgets/general_modal.dart';
 import 'package:fitcards/widgets/safe_screen.dart';

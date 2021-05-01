@@ -43,7 +43,7 @@ class CustomAppBar {
           {double elevation = 0.0}) =>
       AppBar(
         brightness: Get.context.isDarkMode ? Brightness.dark : Brightness.light,
-        backgroundColor: AppTheme.appBarColor(),
+        backgroundColor: Colors.transparent,
         elevation: 0.0,
         iconTheme: IconThemeData(color: Colors.red),
         title: Text(
@@ -58,7 +58,7 @@ class CustomAppBar {
           String text, Function callback) =>
       AppBar(
         brightness: Get.context.isDarkMode ? Brightness.dark : Brightness.light,
-        backgroundColor: AppTheme.appBarColor(),
+        backgroundColor: Colors.transparent,
         elevation: 0.0,
         iconTheme: IconThemeData(color: Colors.red),
         title: Text(
@@ -89,16 +89,6 @@ class CustomAppBar {
         centerTitle: false,
       );
 
-  static PreferredSizeWidget buildCountDown() => AppBar(
-        backgroundColor: Colors.black.withOpacity(0.3),
-    brightness: Get.context.isDarkMode ? Brightness.dark : Brightness.light,
-    elevation: 0,
-        iconTheme: IconThemeData(
-          color: AppTheme.dynamicColor(),
-        ),
-        centerTitle: false,
-      );
-
   static PreferredSizeWidget buildWorkout(
           int duration,
           timerType timerType,
@@ -108,7 +98,7 @@ class CustomAppBar {
       AppBar(
         brightness: Get.context.isDarkMode ? Brightness.dark : Brightness.light,
         elevation: 0.0,
-        backgroundColor: AppTheme.appBarColor(),
+        backgroundColor: Colors.transparent,
         centerTitle: true,
         leading: new Container(),
         actions: [

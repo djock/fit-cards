@@ -19,6 +19,12 @@ class ExercisesListModal extends StatefulWidget {
 class _ExercisesListModalState extends State<ExercisesListModal> {
   @override
   Widget build(BuildContext context) {
+    return Column(
+      children: [
+//        _buildHeader(),
+        _buildList(),
+      ],
+    );
     return Scaffold(
       body: Center(
         child: Container(
@@ -30,7 +36,7 @@ class _ExercisesListModalState extends State<ExercisesListModal> {
           height: MediaQuery.of(context).size.height - 200,
           child: Column(
             children: [
-              _buildHeader(),
+//              _buildHeader(),
               _buildList(),
             ],
           ),
@@ -71,47 +77,47 @@ class _ExercisesListModalState extends State<ExercisesListModal> {
     );
   }
 
-  Widget _buildHeader() {
-    return Stack(
-      children: <Widget>[
-        Container(
-          decoration: BoxDecoration(
-            border: Border(bottom: BorderSide(color: Colors.grey)),
-          ),
-          height: 70,
-          width: MediaQuery.of(context).size.width,
-          child: Align(
-            alignment: Alignment.center,
-            child: Text(
-              AppLocalizations.exercisesOrder,
-              style: TextStyle(
-                  color: Theme.of(Get.context).accentColor,
-                  fontFamily: 'Lora',
-                  fontSize: 22,
-                  decoration: TextDecoration.none,
-                  fontWeight: FontWeight.normal),
-            ),
-          ),
-        ),
-        Positioned(
-          child: Container(
-            color: Colors.white,
-            child: InkWell(
-              onTap: () {
-                widget.callback();
-                Get.back();
-              },
-              child: Icon(
-                Icons.close,
-                size: 25,
-                color: Colors.black,
-              ),
-            ),
-          ),
-          right: 22,
-          top: 22,
-        ),
-      ],
-    );
-  }
+//  Widget _buildHeader() {
+//    return Stack(
+//      children: <Widget>[
+//        Container(
+//          decoration: BoxDecoration(
+//            border: Border(bottom: BorderSide(color: Colors.grey)),
+//          ),
+//          height: 70,
+//          width: MediaQuery.of(context).size.width,
+//          child: Align(
+//            alignment: Alignment.center,
+//            child: Text(
+//              AppLocalizations.exercisesOrder,
+//              style: TextStyle(
+//                  color: Theme.of(Get.context).accentColor,
+//                  fontFamily: 'Lora',
+//                  fontSize: 22,
+//                  decoration: TextDecoration.none,
+//                  fontWeight: FontWeight.normal),
+//            ),
+//          ),
+//        ),
+//        Positioned(
+//          child: Container(
+//            color: Colors.white,
+//            child: InkWell(
+//              onTap: () {
+//                widget.callback();
+//                Get.back();
+//              },
+//              child: Icon(
+//                Icons.close,
+//                size: 25,
+//                color: Colors.black,
+//              ),
+//            ),
+//          ),
+//          right: 22,
+//          top: 22,
+//        ),
+//      ],
+//    );
+//  }
 }

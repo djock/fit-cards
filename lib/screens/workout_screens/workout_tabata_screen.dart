@@ -281,12 +281,15 @@ class _WorkoutTabataScreenState extends State<WorkoutTabataScreen>
   }
 
   void _onOpenFilters() {
-    showDialog(
+    showModalBottomSheet(
         context: context,
         builder: (BuildContext context) {
-          return CustomizeWorkoutModal(
-            workoutController: _workoutController,
-            callback: () => setState(() {}),
+          return Container(
+            height: MediaQuery.of(Get.context).size.height - MediaQuery.of(Get.context).size.height * 0.1 ,
+            child: CustomizeWorkoutModal(
+              workoutController: _workoutController,
+              callback: () => setState(() {}),
+            ),
           );
         });
   }

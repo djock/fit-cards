@@ -1,8 +1,9 @@
 import 'package:fitcards/handlers/app_state.dart';
 import 'package:fitcards/handlers/app_theme.dart';
 import 'package:fitcards/handlers/workout_controller.dart';
-import 'package:fitcards/models/workout_settings_model.dart';
+import 'package:fitcards/models/exercise_model.dart';
 import 'package:fitcards/utilities/app_localizations.dart';
+import 'package:fitcards/widgets/exercises_list_modal.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:numberpicker/numberpicker.dart';
@@ -42,39 +43,49 @@ class _CustomizeWorkoutModal extends State<CustomizeWorkoutModal> {
 
   @override
   Widget build(BuildContext context) {
-    return AlertDialog(
-      insetPadding: EdgeInsets.symmetric(horizontal: 50),
-      backgroundColor: Theme.of(context).canvasColor,
-      title: Text(
-        AppLocalizations.customize,
-        textAlign: TextAlign.center,
-        style: AppTheme.customAccentText(FontWeight.bold, 20),
-      ),
-      content: Column(
+    return Container(
+      padding: EdgeInsets.all(40),
+      color: AppTheme.widgetBackground(),
+      child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Theme(
-            data:
-                ThemeData(unselectedWidgetColor: Theme.of(context).accentColor),
-            child: CheckboxListTile(
-              contentPadding: EdgeInsets.only(left: 0, right: 0),
-              activeColor: Theme.of(context).accentColor,
-              checkColor: Theme.of(context).canvasColor,
-              selectedTileColor: Theme.of(context).accentColor,
-              title: Text(
-                AppLocalizations.skipExercise,
-                style: AppTheme.customAccentText(FontWeight.normal, 14),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                AppLocalizations.customize,
+                textAlign: TextAlign.center,
+                style: AppTheme.customAccentText(FontWeight.bold, 20),
               ),
-              value: _canSkip,
-              onChanged: (bool value) {
-                setState(() {
-                  _changeOccurred = true;
-                  _canSkip = value;
-                });
-              },
-            ),
+            ],
           ),
+          SizedBox(
+            height: 20,
+          ),
+          widget.workoutController.type == workoutType.hiit
+              ? Theme(
+                  data: ThemeData(
+                      unselectedWidgetColor: Theme.of(context).accentColor),
+                  child: CheckboxListTile(
+                    contentPadding: EdgeInsets.only(left: 0, right: 0),
+                    activeColor: Theme.of(context).accentColor,
+                    checkColor: Theme.of(context).canvasColor,
+                    selectedTileColor: Theme.of(context).accentColor,
+                    title: Text(
+                      AppLocalizations.skipExercise,
+                      style: AppTheme.customAccentText(FontWeight.normal, 14),
+                    ),
+                    value: _canSkip,
+                    onChanged: (bool value) {
+                      setState(() {
+                        _changeOccurred = true;
+                        _canSkip = value;
+                      });
+                    },
+                  ),
+                )
+              : SizedBox(),
           SizedBox(
             height: 20,
           ),
@@ -147,7 +158,7 @@ class _CustomizeWorkoutModal extends State<CustomizeWorkoutModal> {
                       axis: Axis.horizontal,
                       onChanged: (value) => setState(() {
                         _changeOccurred = true;
-                        _restTime = value;
+                        _workTime = value;
                       }),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(16),
@@ -195,31 +206,44 @@ class _CustomizeWorkoutModal extends State<CustomizeWorkoutModal> {
               ),
             ],
           ),
+          widget.workoutController.type == workoutType.tabata
+              ? Expanded(
+                child: ExercisesListModal(
+            workoutController: widget.workoutController,
+            callback: () => setState(() {
+                var dummyExercise = new ExerciseModel(
+                    name: AppLocalizations.exercise, id: -1, points: 0);
+                widget.workoutController.exercises
+                    .insert(0, dummyExercise);
+            }),
+          ),
+              )
+              : SizedBox()
         ],
       ),
-      actions: <Widget>[
-        new FlatButton(
-          onPressed: () {
-            var settings = new WorkoutSettingsModel(
-                _rounds, _restTime, _workTime, _canSkip, _maxDuration);
-
-            if (widget.workoutController.type == workoutType.tabata) {
-              AppState.tabataSettings = settings;
-            } else {
-              AppState.hiitSettings = settings;
-            }
-
-            widget.workoutController.setSettings(settings);
-            if(widget.callback != null) widget.callback();
-
-            Navigator.of(context).pop();
-          },
-          child: Text(
-            _changeOccurred ? AppLocalizations.apply : AppLocalizations.close,
-            style: AppTheme.textAccentBold15(),
-          ),
-        ),
-      ],
+//      actions: <Widget>[
+//        new FlatButton(
+//          onPressed: () {
+//            var settings = new WorkoutSettingsModel(
+//                _rounds, _restTime, _workTime, _canSkip, _maxDuration);
+//
+//            if (widget.workoutController.type == workoutType.tabata) {
+//              AppState.tabataSettings = settings;
+//            } else {
+//              AppState.hiitSettings = settings;
+//            }
+//
+//            widget.workoutController.setSettings(settings);
+//            if(widget.callback != null) widget.callback();
+//
+//            Navigator.of(context).pop();
+//          },
+//          child: Text(
+//            _changeOccurred ? AppLocalizations.apply : AppLocalizations.close,
+//            style: AppTheme.textAccentBold15(),
+//          ),
+//        ),
+//      ],
     );
   }
 
