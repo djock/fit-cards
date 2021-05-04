@@ -3,7 +3,6 @@ import 'package:fitcards/utilities/app_colors.dart';
 import 'package:fitcards/utilities/app_localizations.dart';
 import 'package:fitcards/widgets/reordable_list_item.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class ExercisesListModal extends StatefulWidget {
   final WorkoutController workoutController;
@@ -19,12 +18,19 @@ class ExercisesListModal extends StatefulWidget {
 class _ExercisesListModalState extends State<ExercisesListModal> {
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.max,
-      children: [
+    return Container(
+      padding: EdgeInsets.all(3),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(color: AppColors.inactiveButtonGrey),
+      ),
+      child: Column(
+        mainAxisSize: MainAxisSize.max,
+        children: [
 //        _buildHeader(),
-        _buildList(),
-      ],
+          _buildList(),
+        ],
+      ),
     );
     return Scaffold(
       body: Center(

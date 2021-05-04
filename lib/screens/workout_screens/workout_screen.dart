@@ -234,7 +234,7 @@ class _WorkoutScreenState extends State<WorkoutScreen>
         isScrollControlled: true,
         builder: (BuildContext context) {
           return FractionallySizedBox(
-            heightFactor: 0.4,
+            heightFactor: 0.35,
             child: CustomizeWorkoutModal(
               workoutController: _workoutController,
             ),

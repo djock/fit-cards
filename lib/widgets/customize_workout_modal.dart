@@ -45,12 +45,31 @@ class _CustomizeWorkoutModal extends State<CustomizeWorkoutModal> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(40),
+      padding: EdgeInsets.only(left: 30, right: 30, bottom: 30),
       color: AppTheme.widgetBackground(),
       child: Column(
         mainAxisSize: MainAxisSize.max,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
+          SizedBox(
+            height: 15,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8.0),
+                  color: Colors.white,
+                ),
+                height: 5,
+                width: 100,
+              ),
+            ],
+          ),
+          SizedBox(
+            height: 30,
+          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -69,7 +88,7 @@ class _CustomizeWorkoutModal extends State<CustomizeWorkoutModal> {
             height: 20,
           ),
           Row(
-            mainAxisSize: MainAxisSize.min,
+            mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               _buildRoundsSelector(),
@@ -83,6 +102,7 @@ class _CustomizeWorkoutModal extends State<CustomizeWorkoutModal> {
             ],
           ),
           _buildDynamicSpace(),
+
           _buildExercisesList(),
         ],
       ),
