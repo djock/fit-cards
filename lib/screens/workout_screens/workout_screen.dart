@@ -231,9 +231,13 @@ class _WorkoutScreenState extends State<WorkoutScreen>
 
     showModalBottomSheet(
         context: context,
+        isScrollControlled: true,
         builder: (BuildContext context) {
-          return CustomizeWorkoutModal(
-            workoutController: _workoutController,
+          return FractionallySizedBox(
+            heightFactor: 0.4,
+            child: CustomizeWorkoutModal(
+              workoutController: _workoutController,
+            ),
           );
         });
   }

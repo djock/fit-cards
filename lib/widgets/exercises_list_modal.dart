@@ -20,6 +20,7 @@ class _ExercisesListModalState extends State<ExercisesListModal> {
   @override
   Widget build(BuildContext context) {
     return Column(
+      mainAxisSize: MainAxisSize.max,
       children: [
 //        _buildHeader(),
         _buildList(),

@@ -283,9 +283,10 @@ class _WorkoutTabataScreenState extends State<WorkoutTabataScreen>
   void _onOpenFilters() {
     showModalBottomSheet(
         context: context,
+        isScrollControlled: true,
         builder: (BuildContext context) {
-          return Container(
-            height: MediaQuery.of(Get.context).size.height - MediaQuery.of(Get.context).size.height * 0.1 ,
+          return FractionallySizedBox(
+            heightFactor: 0.9,
             child: CustomizeWorkoutModal(
               workoutController: _workoutController,
               callback: () => setState(() {}),
