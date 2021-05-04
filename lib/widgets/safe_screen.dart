@@ -12,12 +12,15 @@ class SafeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
         color: Theme.of(context).canvasColor,
-        child: SafeArea(
-          top: topSafe != null ? topSafe : false,
-          child: Scaffold(
-            resizeToAvoidBottomInset: false,
-            appBar: appBar != null ? appBar : null,
-            body: body,
+        child: Scaffold(
+          body: SafeArea(
+            top: topSafe != null ? topSafe : false,
+            bottom: false,
+            child: Scaffold(
+              resizeToAvoidBottomInset: false,
+              appBar: appBar != null ? appBar : null,
+              body: body,
+            ),
           ),
         ));
   }

@@ -313,7 +313,7 @@ class _CustomizeWorkoutModal extends State<CustomizeWorkoutModal> {
         ? Center(
             child: Text(
             AppLocalizations.exerciseListHint,
-            style: TextStyle(fontSize: 14, fontStyle: FontStyle.italic, color: AppTheme.dynamicColor()),
+            style: TextStyle(fontSize: 13, fontStyle: FontStyle.italic, color: AppTheme.dynamicColor()),
             textAlign: TextAlign.center,
           ))
         : SizedBox();

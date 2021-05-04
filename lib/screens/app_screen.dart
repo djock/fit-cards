@@ -65,7 +65,7 @@ class _AppScreenState extends State<AppScreen> {
     return WillPopScope(
       onWillPop: _onBackPressed,
       child: SafeScreen(
-        topSafe: true,
+        topSafe: false,
         body: Scaffold(
             body: _screens.elementAt(_selectedIndex),
             bottomNavigationBar: _navigationDrawer,
@@ -89,7 +89,7 @@ class _AppScreenState extends State<AppScreen> {
     return Container(
       child: BottomAppBar(
           color: AppTheme.appBarColor(),
-          elevation: 10,
+          elevation: 0,
           shape: CircularNotchedRectangle(),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -141,7 +141,7 @@ class _AppScreenState extends State<AppScreen> {
       child: Container(
         color: AppTheme.appBarColor().withOpacity(0.3),
         child: Padding(
-          padding: const EdgeInsets.only(left: 24.0, right: 24, bottom: 24, top: 24),
+          padding: const EdgeInsets.only(left: 24.0, right: 24, bottom: 36, top: 24),
           child: Row(
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.center,

@@ -84,6 +84,7 @@ class _WorkoutScreenState extends State<WorkoutScreen>
         : WillPopScope(
             onWillPop: _onBackPressed,
             child: SafeScreen(
+              topSafe: false,
               appBar: _buildAppBar(),
               body: Stack(
                 children: [
