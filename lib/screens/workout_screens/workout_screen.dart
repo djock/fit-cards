@@ -163,7 +163,7 @@ class _WorkoutScreenState extends State<WorkoutScreen>
         _workoutController.duration,
         _workoutController.exercisesCount,
         _workoutController.points,
-        AppLocalizations.shuffleCards);
+        AppLocalizations.hiit);
 
     AppStateHandler.logExercise();
     AppStateHandler.logWorkout(currentWorkout);

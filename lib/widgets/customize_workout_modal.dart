@@ -102,6 +102,7 @@ class _CustomizeWorkoutModal extends State<CustomizeWorkoutModal> {
             ],
           ),
           _buildDynamicSpace(),
+          _buildTooltip(),
           _buildExercisesList(),
         ],
       ),
@@ -307,6 +308,17 @@ class _CustomizeWorkoutModal extends State<CustomizeWorkoutModal> {
         : SizedBox();
   }
 
+  Widget _buildTooltip() {
+    return widget.workoutController.type == workoutType.tabata
+        ? Center(
+            child: Text(
+            AppLocalizations.exerciseListHint,
+            style: TextStyle(fontSize: 14, fontStyle: FontStyle.italic, color: AppTheme.dynamicColor()),
+            textAlign: TextAlign.center,
+          ))
+        : SizedBox();
+  }
+
   Widget _buildPunctuation(String value) {
     return widget.workoutController.type == workoutType.tabata
         ? Text(
@@ -320,7 +332,8 @@ class _CustomizeWorkoutModal extends State<CustomizeWorkoutModal> {
   }
 
   void _setState() {
-    var settings = new WorkoutSettingsModel(_rounds, _restTime, _workTime, _canSkip, _maxDuration);
+    var settings = new WorkoutSettingsModel(
+        _rounds, _restTime, _workTime, _canSkip, _maxDuration);
 
     if (widget.workoutController.type == workoutType.tabata) {
       AppState.tabataSettings = settings;

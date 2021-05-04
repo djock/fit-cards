@@ -9,7 +9,7 @@ class AppLocalizations {
   static String workoutsLog = 'Workouts Log';
   static String shuffleCards = 'Shuffle Cards';
   static String tabata = 'Tabata';
-  static String hiit = 'HIIT Shuffle';
+  static String hiit = 'HIIT';
   static String forTime = 'For Time (wip)';
 
   static String exercise = 'Exercise';
@@ -94,4 +94,6 @@ class AppLocalizations {
 
   static String duration = 'Duration';
   static String date = 'Date';
+
+  static String exerciseListHint = 'Tap and hold on an exercise to reorder';
 }

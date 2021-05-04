@@ -95,7 +95,7 @@ class AppTheme {
   }
 
   static Color dynamicColor() =>
-      Get.isDarkMode ? Colors.white : Colors.black;
+      Get.context.isDarkMode ? Colors.white : Colors.black;
 
   static Color appBarColor() =>  Get.context.isDarkMode ? AppColors.barColorDark : AppColors.barColorLight;
 

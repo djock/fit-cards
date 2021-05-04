@@ -9,6 +9,7 @@ import 'package:fitcards/utilities/app_localizations.dart';
 import 'package:fitcards/widgets/custom_gradient_button.dart';
 import 'package:fitcards/widgets/general_modal.dart';
 import 'package:fitcards/widgets/safe_screen.dart';
+import 'package:fitcards/widgets/workout_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -127,6 +128,7 @@ class _AppScreenState extends State<AppScreen> {
   void _openBottomSheet() {
     showModalBottomSheet<void>(
       context: context,
+      backgroundColor: AppTheme.widgetBackground().withOpacity(0.8),
       builder: (BuildContext context) {
         return _buildButtons();
       },
@@ -134,41 +136,44 @@ class _AppScreenState extends State<AppScreen> {
   }
 
   Widget _buildButtons() {
-    return Container(
-      color: AppTheme.widgetBackground(),
-      child: Padding(
-        padding: const EdgeInsets.all(24.0),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            CustomGradientButton(
-              text: AppLocalizations.hiit,
-              icon: FontAwesomeIcons.random,
-              action: () {
-                AppStateHandler.shuffleJson();
-                Get.back();
-                Get.to(() => WorkoutScreen()).then((value) {
-                  setState(() {});
-                });
-              },
-            ),
-            SizedBox(
-              height: 8,
-            ),
-            CustomGradientButton(
-              text: AppLocalizations.tabata,
-              icon: FontAwesomeIcons.clock,
-              action: () {
-                AppStateHandler.shuffleJson();
-                Get.back();
-                Get.to(() => WorkoutTabataScreen()).then((value) {
-                  setState(() {});
-                });
-              },
-            ),
-          ],
+    return InkWell(
+      onTap: () => Get.back(),
+      child: Container(
+        color: AppTheme.appBarColor().withOpacity(0.3),
+        child: Padding(
+          padding: const EdgeInsets.only(left: 24.0, right: 24, bottom: 24, top: 24),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              WorkoutButton(
+                text: AppLocalizations.hiit,
+                icon: FontAwesomeIcons.random,
+                action: () {
+                  AppStateHandler.shuffleJson();
+                  Get.back();
+                  Get.to(() => WorkoutScreen()).then((value) {
+                    setState(() {});
+                  });
+                },
+              ),
+              SizedBox(
+                width: 20,
+              ),
+              WorkoutButton(
+                text: AppLocalizations.tabata,
+                icon: FontAwesomeIcons.clock,
+                action: () {
+                  AppStateHandler.shuffleJson();
+                  Get.back();
+                  Get.to(() => WorkoutTabataScreen()).then((value) {
+                    setState(() {});
+                  });
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );

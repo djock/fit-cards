@@ -3,6 +3,7 @@ import 'package:fitcards/handlers/app_state_handler.dart';
 import 'package:fitcards/handlers/app_theme.dart';
 import 'package:fitcards/handlers/user_preferences_handler.dart';
 import 'package:fitcards/screens/settings_theme_screen.dart';
+import 'package:fitcards/utilities/app_colors.dart';
 import 'package:fitcards/utilities/app_localizations.dart';
 import 'package:fitcards/widgets/custom_app_bar.dart';
 import 'package:fitcards/widgets/general_modal.dart';
@@ -129,9 +130,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
           text,
           style: AppTheme.textAccentNormal15(),
         ),
-        leading: _buildIcon(leftIcon, AppTheme.dynamicColor()),
+        leading: _buildIcon(leftIcon, Theme.of(Get.context).accentColor),
         trailing: rightIcon != null
-            ? _buildIcon(rightIcon, AppTheme.dynamicColor())
+            ? _buildIcon(rightIcon, AppColors.inactiveButtonGrey)
             : SizedBox(),
       ),
     );
