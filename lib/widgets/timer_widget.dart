@@ -79,6 +79,10 @@ class _TimerWidgetState extends State<TimerWidget> {
 
   @override
   Widget build(BuildContext context) {
+    if(widget.type == timerType.countdown) {
+      startCountDown(widget.duration);
+    }
+
     return ValueListenableBuilder(
         valueListenable: _timeInSec,
         builder: (context, value, child) {

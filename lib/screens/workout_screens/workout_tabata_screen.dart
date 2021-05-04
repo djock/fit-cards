@@ -80,6 +80,8 @@ class _WorkoutTabataScreenState extends State<WorkoutTabataScreen>
           ? _workoutController.settings.workTime
           : _workoutController.settings.restTime);
 
+      debugPrint('_workoutController.settings.workTime ' + _workoutController.settings.workTime.toString());
+      debugPrint('_workoutController.settings.restTime ' + _workoutController.settings.restTime.toString());
       return CustomAppBar.buildWorkout(
           _state == workoutState.active
               ? _workoutController.settings.workTime
@@ -108,6 +110,7 @@ class _WorkoutTabataScreenState extends State<WorkoutTabataScreen>
   void _setState() async {
     await Future.delayed(Duration(seconds: 1));
     setState(() {
+
       if (_state == workoutState.countdown) {
         changeState(workoutState.active);
         return;
