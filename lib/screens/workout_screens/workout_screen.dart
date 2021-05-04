@@ -109,7 +109,7 @@ class _WorkoutScreenState extends State<WorkoutScreen>
                             onSkip: () {
                               _onSkipExercise();
                             },
-                            isFake: false,
+                            workoutController: _workoutController,
                           ),
                         ),
                         SizedBox(
@@ -122,12 +122,12 @@ class _WorkoutScreenState extends State<WorkoutScreen>
                             color: AppColors.schemeCardColor,
                             cardController: _schemeController,
                             isBlocked:
-                                _state == workoutState.countdown ? true : false,
+                                _state == workoutState.countdown || _state == workoutState.idle ? true : false,
                             type: cardType.scheme,
                             onCallback: () {
                               _onSwipeSchemeCard();
                             },
-                            isFake: false,
+                            workoutController: _workoutController,
                           ),
                         ),
                         SizedBox(

@@ -1,3 +1,4 @@
+import 'package:fitcards/handlers/workout_controller.dart';
 import 'package:fitcards/models/base_model.dart';
 import 'package:fitcards/models/exercise_model.dart';
 import 'package:fitcards/utilities/app_colors.dart';
@@ -18,7 +19,7 @@ class FitCard extends StatelessWidget {
   final cardType type;
   final Function onCallback;
   final Function onSkip;
-  final bool isFake;
+  final WorkoutController workoutController;
 
   const FitCard({
     Key key,
@@ -29,7 +30,7 @@ class FitCard extends StatelessWidget {
     this.type,
     this.onCallback,
     this.onSkip,
-    this.isFake,
+    this.workoutController,
   }) : super(key: key);
 
   @override
@@ -157,7 +158,7 @@ class FitCard extends StatelessWidget {
   List<Widget> _buildExeciseCardText(String text, bool isFirstCard) {
     List<Widget> result = [];
 
-    if (isFake) {
+    if (workoutController == null) {
       result.add(SizedBox());
 
       return result;
@@ -249,7 +250,7 @@ class FitCard extends StatelessWidget {
   }
 
   Widget _buildSkipExerciseButton(int points) {
-    if (type == cardType.exercise && !(points == 0) && true) {
+    if (type == cardType.exercise && !(points == 0) && workoutController.settings.canSkipExercise) {
       return Align(
         alignment: Alignment.bottomRight,
         child: IconButton(

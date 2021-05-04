@@ -64,6 +64,19 @@ class _TimerWidgetState extends State<TimerWidget> {
     }
   }
 
+  @override
+  void didUpdateWidget(covariant TimerWidget oldWidget) {
+    if(oldWidget != widget) {
+      debugPrint('update widget');
+      if(oldWidget.duration != widget.duration) {
+        if(widget.type == timerType.countdown) {
+          startCountDown(widget.duration);
+        }
+      }
+    }
+    super.didUpdateWidget(oldWidget);
+  }
+
   void startTimer() async {
     _timeInSec.value = widget.duration;
 
@@ -79,10 +92,6 @@ class _TimerWidgetState extends State<TimerWidget> {
 
   @override
   Widget build(BuildContext context) {
-    if(widget.type == timerType.countdown) {
-      startCountDown(widget.duration);
-    }
-
     return ValueListenableBuilder(
         valueListenable: _timeInSec,
         builder: (context, value, child) {

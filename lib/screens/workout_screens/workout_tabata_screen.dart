@@ -199,7 +199,7 @@ class _WorkoutTabataScreenState extends State<WorkoutTabataScreen>
                               _onSwipeExerciseCard();
                             },
                             onSkip: null,
-                            isFake: false,
+                            workoutController: _workoutController,
                           ),
                         ),
                         Expanded(
