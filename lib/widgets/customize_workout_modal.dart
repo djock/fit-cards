@@ -2,6 +2,7 @@ import 'package:fitcards/handlers/app_state.dart';
 import 'package:fitcards/handlers/app_theme.dart';
 import 'package:fitcards/handlers/workout_controller.dart';
 import 'package:fitcards/models/exercise_model.dart';
+import 'package:fitcards/models/workout_settings_model.dart';
 import 'package:fitcards/utilities/app_localizations.dart';
 import 'package:fitcards/widgets/exercises_list_modal.dart';
 import 'package:flutter/cupertino.dart';
@@ -11,9 +12,8 @@ import 'package:numberpicker/numberpicker.dart';
 
 class CustomizeWorkoutModal extends StatefulWidget {
   final WorkoutController workoutController;
-  final Function callback;
 
-  const CustomizeWorkoutModal({Key key, this.workoutController, this.callback})
+  const CustomizeWorkoutModal({Key key, this.workoutController})
       : super(key: key);
 
   @override
@@ -60,7 +60,7 @@ class _CustomizeWorkoutModal extends State<CustomizeWorkoutModal> {
               Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8.0),
-                  color: Colors.white,
+                  color: _changeOccurred ? Colors.green : Colors.white,
                 ),
                 height: 5,
                 width: 100,
@@ -102,7 +102,6 @@ class _CustomizeWorkoutModal extends State<CustomizeWorkoutModal> {
             ],
           ),
           _buildDynamicSpace(),
-
           _buildExercisesList(),
         ],
       ),
@@ -183,6 +182,8 @@ class _CustomizeWorkoutModal extends State<CustomizeWorkoutModal> {
             onChanged: (value) => setState(() {
               _changeOccurred = true;
               _rounds = value;
+
+              _setState();
             }),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(16),
@@ -195,46 +196,8 @@ class _CustomizeWorkoutModal extends State<CustomizeWorkoutModal> {
   Widget _buildWorkSelector() {
     return widget.workoutController.type == workoutType.tabata
         ? NumberPicker(
-      key: new GlobalKey(),
-      value: _workTime,
-      haptics: true,
-      minValue: 5,
-      maxValue: 90,
-      itemCount: 3,
-      step: 5,
-      itemHeight: 30,
-      itemWidth: 30,
-      textStyle: AppTheme.customAccentText(FontWeight.normal, 13),
-      selectedTextStyle: AppTheme.textAccentBold15(),
-      axis: Axis.vertical,
-      onChanged: (value) => setState(() {
-        _changeOccurred = true;
-        _workTime = value;
-      }),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: Theme.of(context).accentColor),
-      ),
-    )
-        : SizedBox();
-  }
-
-  Widget _buildDynamicRestSelector() {
-  if(widget.workoutController.type == workoutType.tabata) {
-    return _buildRestSelector();
-  } else {
-    return Expanded(
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(
-            AppLocalizations.chooseRestTime,
-            style: AppTheme.customAccentText(FontWeight.normal, 14),
-            overflow: TextOverflow.clip,
-          ),
-          NumberPicker(
             key: new GlobalKey(),
-            value: _restTime,
+            value: _workTime,
             haptics: true,
             minValue: 5,
             maxValue: 90,
@@ -244,20 +207,62 @@ class _CustomizeWorkoutModal extends State<CustomizeWorkoutModal> {
             itemWidth: 30,
             textStyle: AppTheme.customAccentText(FontWeight.normal, 13),
             selectedTextStyle: AppTheme.textAccentBold15(),
-            axis: Axis.horizontal,
+            axis: Axis.vertical,
             onChanged: (value) => setState(() {
               _changeOccurred = true;
-              _restTime = value;
+              _workTime = value;
+
+              _setState();
             }),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(16),
               border: Border.all(color: Theme.of(context).accentColor),
             ),
-          ),
-        ],
-      ),
-    );
+          )
+        : SizedBox();
   }
+
+  Widget _buildDynamicRestSelector() {
+    if (widget.workoutController.type == workoutType.tabata) {
+      return _buildRestSelector();
+    } else {
+      return Expanded(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              AppLocalizations.chooseRestTime,
+              style: AppTheme.customAccentText(FontWeight.normal, 14),
+              overflow: TextOverflow.clip,
+            ),
+            NumberPicker(
+              key: new GlobalKey(),
+              value: _restTime,
+              haptics: true,
+              minValue: 5,
+              maxValue: 90,
+              itemCount: 3,
+              step: 5,
+              itemHeight: 30,
+              itemWidth: 30,
+              textStyle: AppTheme.customAccentText(FontWeight.normal, 13),
+              selectedTextStyle: AppTheme.textAccentBold15(),
+              axis: Axis.horizontal,
+              onChanged: (value) => setState(() {
+                _changeOccurred = true;
+                _restTime = value;
+
+                _setState();
+              }),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(16),
+                border: Border.all(color: Theme.of(context).accentColor),
+              ),
+            ),
+          ],
+        ),
+      );
+    }
   }
 
   Widget _buildRestSelector() {
@@ -277,6 +282,8 @@ class _CustomizeWorkoutModal extends State<CustomizeWorkoutModal> {
       onChanged: (value) => setState(() {
         _changeOccurred = true;
         _restTime = value;
+
+        _setState();
       }),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16),
@@ -288,20 +295,39 @@ class _CustomizeWorkoutModal extends State<CustomizeWorkoutModal> {
   Widget _buildExercisesList() {
     return widget.workoutController.type == workoutType.tabata
         ? Expanded(
-      child: ExercisesListModal(
-        workoutController: widget.workoutController,
-        callback: () => setState(() {
-          var dummyExercise = new ExerciseModel(
-              name: AppLocalizations.exercise, id: -1, points: 0);
-          widget.workoutController.exercises
-              .insert(0, dummyExercise);
-        }),
-      ),
-    )
+            child: ExercisesListModal(
+              workoutController: widget.workoutController,
+              callback: () {
+                setState(() {
+                  _changeOccurred = true;
+                });
+              },
+            ),
+          )
         : SizedBox();
   }
 
   Widget _buildPunctuation(String value) {
-    return widget.workoutController.type == workoutType.tabata ? Text(value, style: TextStyle(color: Theme.of(Get.context).accentColor, fontWeight: FontWeight.bold, fontSize: 20),) : SizedBox();
+    return widget.workoutController.type == workoutType.tabata
+        ? Text(
+            value,
+            style: TextStyle(
+                color: Theme.of(Get.context).accentColor,
+                fontWeight: FontWeight.bold,
+                fontSize: 20),
+          )
+        : SizedBox();
+  }
+
+  void _setState() {
+    var settings = new WorkoutSettingsModel(_rounds, _restTime, _workTime, _canSkip, _maxDuration);
+
+    if (widget.workoutController.type == workoutType.tabata) {
+      AppState.tabataSettings = settings;
+    } else {
+      AppState.hiitSettings = settings;
+    }
+
+    widget.workoutController.setSettings(settings);
   }
 }

@@ -58,7 +58,6 @@ class _ExercisesListModalState extends State<ExercisesListModal> {
 
     return Expanded(
       child: ReorderableListView(
-//        padding: const EdgeInsets.symmetric(horizontal: 20),
         children: <Widget>[
           for (int index = 0;
               index < widget.workoutController.settings.rounds;
@@ -78,6 +77,8 @@ class _ExercisesListModalState extends State<ExercisesListModal> {
             var movedExercise =
                 widget.workoutController.exercises.removeAt(oldIndex);
             widget.workoutController.exercises.insert(newIndex, movedExercise);
+
+            if(widget.callback != null) widget.callback();
           });
         },
       ),

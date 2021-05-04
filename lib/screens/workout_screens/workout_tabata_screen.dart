@@ -289,10 +289,18 @@ class _WorkoutTabataScreenState extends State<WorkoutTabataScreen>
             heightFactor: 0.9,
             child: CustomizeWorkoutModal(
               workoutController: _workoutController,
-              callback: () => setState(() {}),
             ),
           );
-        });
+        }).then((value) {
+      if (_workoutController.exercises.first.name !=
+          AppLocalizations.exercise) {
+        var dummyExercise = new ExerciseModel(
+            name: AppLocalizations.exercise, id: -1, points: 0);
+        _workoutController.exercises.insert(0, dummyExercise);
+
+        setState(() {});
+      }
+    });
   }
 
   void _openExercisesList() {
