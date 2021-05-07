@@ -2,11 +2,10 @@ import 'package:fitcards/handlers/app_state_handler.dart';
 import 'package:fitcards/handlers/app_theme.dart';
 import 'package:fitcards/screens/home_screen.dart';
 import 'package:fitcards/screens/settings_screen.dart';
-import 'package:fitcards/screens/workout_screens/workout_screen.dart';
+import 'package:fitcards/screens/workout_screens/workout_hiit_screen.dart';
 import 'package:fitcards/screens/workout_screens/workout_tabata_screen.dart';
 import 'package:fitcards/utilities/app_colors.dart';
 import 'package:fitcards/utilities/app_localizations.dart';
-import 'package:fitcards/widgets/custom_gradient_button.dart';
 import 'package:fitcards/widgets/general_modal.dart';
 import 'package:fitcards/widgets/safe_screen.dart';
 import 'package:fitcards/widgets/workout_button.dart';
@@ -153,7 +152,7 @@ class _AppScreenState extends State<AppScreen> {
                 action: () {
                   AppStateHandler.shuffleJson();
                   Get.back();
-                  Get.to(() => WorkoutScreen()).then((value) {
+                  Get.to(() => WorkoutHiitScreen()).then((value) {
                     setState(() {});
                   });
                 },

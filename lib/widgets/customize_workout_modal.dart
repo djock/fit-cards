@@ -1,7 +1,6 @@
 import 'package:fitcards/handlers/app_state.dart';
 import 'package:fitcards/handlers/app_theme.dart';
 import 'package:fitcards/handlers/workout_controller.dart';
-import 'package:fitcards/models/exercise_model.dart';
 import 'package:fitcards/models/workout_settings_model.dart';
 import 'package:fitcards/utilities/app_localizations.dart';
 import 'package:fitcards/widgets/exercises_list_modal.dart';

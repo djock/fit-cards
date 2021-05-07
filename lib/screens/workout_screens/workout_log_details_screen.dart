@@ -34,6 +34,12 @@ class WorkoutLogDetailsScreen extends StatelessWidget {
         rightValue: Utils.formatTimeShort(workoutLogModel.duration),
         onTap: null));
 
+    _tempList.add(SlidableListItem(
+        leftValue: '',
+        centerValue: AppLocalizations.points,
+        rightValue: workoutLogModel.points.toString(),
+        onTap: null));
+
     _tempList.add(Divider(
       thickness: 2,
     ));

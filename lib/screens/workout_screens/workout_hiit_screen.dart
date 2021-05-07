@@ -1,16 +1,10 @@
 import 'package:fitcards/handlers/app_state.dart';
-import 'package:fitcards/handlers/app_state_handler.dart';
-import 'package:fitcards/handlers/firebase_database_handler.dart';
 import 'package:fitcards/handlers/workout_controller.dart';
-import 'package:fitcards/models/workout_exercise_model.dart';
-import 'package:fitcards/models/workout_log_model.dart';
 import 'package:fitcards/screens/workout_screens/workout_end_screen.dart';
 import 'package:fitcards/utilities/app_colors.dart';
 import 'package:fitcards/utilities/app_localizations.dart';
-import 'package:fitcards/utilities/key_value_pair_model.dart';
 import 'package:fitcards/widgets/custom_app_bar.dart';
 import 'package:fitcards/widgets/customize_workout_modal.dart';
-import 'package:fitcards/widgets/exercises_list_modal.dart';
 import 'package:fitcards/widgets/fit_card.dart';
 import 'package:fitcards/widgets/flutter_tindercard.dart';
 import 'package:fitcards/widgets/general_modal.dart';
@@ -20,23 +14,29 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 
-class WorkoutScreen extends StatefulWidget {
+class WorkoutHiitScreen extends StatefulWidget {
   @override
-  _WorkoutScreenState createState() => _WorkoutScreenState();
+  _WorkoutHiitScreenState createState() => _WorkoutHiitScreenState();
 }
 
-class _WorkoutScreenState extends State<WorkoutScreen>
+class _WorkoutHiitScreenState extends State<WorkoutHiitScreen>
     with TickerProviderStateMixin {
+  WorkoutController _workoutController;
+
   CardController _exerciseController = new CardController();
   CardController _schemeController = new CardController();
 
-  WorkoutController _workoutController =
-      new WorkoutController(workoutType.hiit, AppState.hiitSettings);
+  @override
+  void initState() {
+    _workoutController = new WorkoutController.initHiit(() {
+      setState(() {});
+    });
 
-  workoutState _state = workoutState.idle;
+    super.initState();
+  }
 
   Future<bool> _onBackPressed() {
-    if (_state == workoutState.active || _state == workoutState.rest) {
+    if (_workoutController.isWorkoutActive()) {
       return showDialog(
               context: context,
               builder: (context) => GeneralModal(
@@ -57,7 +57,7 @@ class _WorkoutScreenState extends State<WorkoutScreen>
   }
 
   PreferredSizeWidget _buildAppBar() {
-    if (_state == workoutState.active || _state == workoutState.rest) {
+    if (_workoutController.isWorkoutActive()) {
       return CustomAppBar.buildWorkout(_workoutController.duration,
           timerType.timer, null, () => _onStopWorkout(), _workoutController);
     }
@@ -79,8 +79,10 @@ class _WorkoutScreenState extends State<WorkoutScreen>
 
   @override
   Widget build(BuildContext context) {
-    return _state == workoutState.finish
-        ? WorkoutEndScreen(workoutController: _workoutController,)
+    return _workoutController.state == workoutState.finish
+        ? WorkoutEndScreen(
+            workoutController: _workoutController,
+          )
         : WillPopScope(
             onWillPop: _onBackPressed,
             child: SafeScreen(
@@ -100,8 +102,10 @@ class _WorkoutScreenState extends State<WorkoutScreen>
                             list: AppState.exercises,
                             color: AppColors.exerciseCardColor,
                             cardController: _exerciseController,
-                            isBlocked:
-                                _state == workoutState.countdown ? true : false,
+                            isBlocked: _workoutController.state ==
+                                    workoutState.countdown
+                                ? true
+                                : false,
                             type: cardType.exercise,
                             onCallback: () {
                               _onSwipeExerciseCard();
@@ -121,8 +125,9 @@ class _WorkoutScreenState extends State<WorkoutScreen>
                             list: AppState.schemes,
                             color: AppColors.schemeCardColor,
                             cardController: _schemeController,
-                            isBlocked:
-                                _state == workoutState.countdown || _state == workoutState.idle ? true : false,
+                            isBlocked: _workoutController.isWorkoutActive()
+                                ? false
+                                : true,
                             type: cardType.scheme,
                             onCallback: () {
                               _onSwipeSchemeCard();
@@ -143,93 +148,55 @@ class _WorkoutScreenState extends State<WorkoutScreen>
   }
 
   void _onStartWorkout() {
-    changeState(workoutState.countdown);
+    _workoutController.startWorkout();
+
     _buildCountDownTimer();
   }
 
   void _onStopWorkout() {
-    if (_state == workoutState.countdown) {
-      AppStateHandler.shuffleJson();
-      changeState(workoutState.idle);
-    } else {
-      changeState(workoutState.finish);
-    }
-
-    if (_state == workoutState.countdown) return;
-
-    var now = DateTime.now();
-    var currentWorkout = new WorkoutLogModel(
-        AppState.loggedWorkouts.length,
-        now,
-        _workoutController.duration,
-        _workoutController.exercisesCount,
-        _workoutController.points,
-        AppLocalizations.hiit);
-
-    AppStateHandler.logExercise();
-    AppStateHandler.logWorkout(currentWorkout);
+    _workoutController.stopWorkout();
   }
 
   void _onSwipeExerciseCard() {
-    if (_state == workoutState.active) {
+    if (_workoutController.state == workoutState.active) {
       if (_exerciseController.hasSkipped) {
         _schemeController.cancelCallback = true;
         _schemeController.triggerLeft();
         _exerciseController.hasSkipped = false;
       } else {
-        _onSwipeSuccess(_schemeController);
+        _onStartRest(_schemeController);
       }
     }
 
-    if (_state == workoutState.active ||
-        _state == workoutState.countdown ||
-        _state == workoutState.rest) return;
+    if (_workoutController.state == workoutState.active ||
+        _workoutController.state == workoutState.countdown ||
+        _workoutController.state == workoutState.rest) return;
 
     _onStartWorkout();
     _schemeController.triggerLeft();
   }
 
   void _onSwipeSchemeCard() {
-    if (_state == workoutState.active) {
-      _onSwipeSuccess(_exerciseController);
+    if (_workoutController.state == workoutState.active) {
+      _onStartRest(_exerciseController);
     }
   }
 
-  void _onSwipeSuccess(CardController otherController) {
-    _onLogExercise();
+  void _onStartRest(CardController otherController) {
     otherController.cancelCallback = true;
     otherController.triggerLeft();
 
-    changeState(workoutState.rest);
+    debugPrint('rest');
+
+    _workoutController.startRest(_exerciseController.index);
     _buildCountDownTimer();
-  }
-
-  void _onLogExercise() {
-    var currentExercise = new KeyValuePair(
-        AppState.exercises[_exerciseController.index].name,
-        AppState.schemes[_schemeController.index].name);
-    AppState.activeExercisesList.add(new WorkoutExerciseModel(
-        AppState.loggedWorkouts.length,
-        currentExercise.key,
-        currentExercise.value));
-
-    _workoutController.countExercise();
-    _workoutController.addPoints(_exerciseController.points);
   }
 
   void _onSkipExercise() {
     _exerciseController.triggerLeft();
   }
 
-  void changeState(workoutState state) {
-    setState(() {
-      _state = state;
-    });
-  }
-
   void _onOpenFilters() {
-    FirebaseDatabaseHandler.updateLeaderBoard();
-
     showModalBottomSheet(
         context: context,
         isScrollControlled: true,
@@ -259,33 +226,34 @@ class _WorkoutScreenState extends State<WorkoutScreen>
                   },
                   child: Center(
                       child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            _state == workoutState.countdown
-                                ? AppLocalizations.getReady
-                                : AppLocalizations.rest,
-                            style: TextStyle(
-                              color: Colors.red,
-                              fontSize: 30,
-                            ),
-                          ),
-                          SizedBox(
-                            height: 20,
-                          ),
-                          TimerWidget(
-                            duration: _state == workoutState.countdown
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        _workoutController.state == workoutState.countdown
+                            ? AppLocalizations.getReady
+                            : AppLocalizations.rest,
+                        style: TextStyle(
+                          color: Colors.red,
+                          fontSize: 30,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      TimerWidget(
+                        duration:
+                            _workoutController.state == workoutState.countdown
                                 ? 10
                                 : _workoutController.settings.restTime,
-                            callback: () {
-                              changeState(workoutState.active);
-                              Get.back();
-                            },
-                            type: timerType.countdown,
-                          ),
-                        ],
-                      )),
+                        callback: () {
+                          _workoutController.setState(workoutState.active);
+                          Get.back();
+                        },
+                        type: timerType.countdown,
+                      ),
+                    ],
+                  )),
                 ),
               );
             }),
@@ -295,19 +263,5 @@ class _WorkoutScreenState extends State<WorkoutScreen>
         barrierLabel:
             MaterialLocalizations.of(context).modalBarrierDismissLabel,
         transitionDuration: const Duration(milliseconds: 150));
-  }
-
-  void _openExercisesList() {
-    showGeneralDialog(
-        context: Get.context,
-        barrierDismissible: true,
-        barrierLabel:
-            MaterialLocalizations.of(context).modalBarrierDismissLabel,
-        barrierColor: Colors.black45,
-        transitionDuration: const Duration(milliseconds: 200),
-        pageBuilder: (BuildContext buildContext, Animation animation,
-            Animation secondaryAnimation) {
-          return ExercisesListModal();
-        });
   }
 }

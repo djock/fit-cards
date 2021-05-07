@@ -41,53 +41,57 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       child: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+        child: Row(
           children: [
-            Text(
-              '${AppLocalizations.hello} ${AppState.userName},',
-              style: AppTheme.textAccentBold30(),
-              maxLines: 2,
-            ),
-            SizedBox(
-              height: AppState.points != 0 ? 5 : 0,
-            ),
-            Text(
-              '${AppState.points} ${AppLocalizations.points}',
-              style: AppTheme.textAccentBold30(),
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            Container(
-              height: 40,
-              child: Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        '',
-                        style: AppTheme.customAccentText(FontWeight.normal, 12),
-                      ),
-                      Text(
-                        'Lvl. 1',
-                        style: AppTheme.customAccentText(FontWeight.normal, 12),
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  LinearProgressIndicator(
-                    minHeight: 7,
-                    value: 0.5,
-                    backgroundColor:
-                        Theme.of(Get.context).accentColor.withOpacity(0.5),
-                    semanticsLabel: 'Linear progress indicator',
-                  ),
-                ],
-              ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  '${AppLocalizations.hello} ${AppState.userName},',
+                  style: AppTheme.textAccentBold30(),
+                  maxLines: 2,
+                ),
+                SizedBox(
+                  height: AppState.points != 0 ? 5 : 0,
+                ),
+                Text(
+                  '${AppState.points} ${AppLocalizations.points}',
+                  style: AppTheme.textAccentBold30(),
+                ),
+                // SizedBox(
+                //   height: 10,
+                // ),
+                // Container(
+                //   height: 40,
+                //   child: Column(
+                //     children: [
+                //       Row(
+                //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //         children: [
+                //           Text(
+                //             '',
+                //             style: AppTheme.customAccentText(FontWeight.normal, 12),
+                //           ),
+                //           Text(
+                //             'Lvl. 1',
+                //             style: AppTheme.customAccentText(FontWeight.normal, 12),
+                //           ),
+                //         ],
+                //       ),
+                //       SizedBox(
+                //         height: 10,
+                //       ),
+                //       LinearProgressIndicator(
+                //         minHeight: 7,
+                //         value: 0.5,
+                //         backgroundColor:
+                //             Theme.of(Get.context).accentColor.withOpacity(0.5),
+                //         semanticsLabel: 'Linear progress indicator',
+                //       ),
+                //     ],
+                //   ),
+                // ),
+              ],
             ),
           ],
         ),

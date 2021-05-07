@@ -44,6 +44,7 @@ dependencies:
   firebase_core: ^1.0.3
   firebase_database: ^6.1.2
   firebase_auth: ^1.0.3
+  firebase_analytics: ^8.0.3
 
   flutter_statusbarcolor: ^0.2.3
 

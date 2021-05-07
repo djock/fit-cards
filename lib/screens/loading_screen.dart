@@ -1,5 +1,4 @@
 import 'package:fitcards/handlers/app_theme.dart';
-import 'package:fitcards/utilities/app_colors.dart';
 import 'package:fitcards/utilities/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

@@ -67,7 +67,6 @@ class _TimerWidgetState extends State<TimerWidget> {
   @override
   void didUpdateWidget(covariant TimerWidget oldWidget) {
     if(oldWidget != widget) {
-      debugPrint('update widget');
       if(oldWidget.duration != widget.duration) {
         if(widget.type == timerType.countdown) {
           startCountDown(widget.duration);
