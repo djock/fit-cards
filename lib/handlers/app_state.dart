@@ -32,8 +32,6 @@ class AppState {
 
   static bool isNightMode = false;
 
-  static WorkoutSettingsModel hiitSettings =
-      new WorkoutSettingsModel(8, 10, 20, true, 0);
-  static WorkoutSettingsModel tabataSettings =
-      new WorkoutSettingsModel(8, 10, 20, true, 0);
+  static WorkoutSettingsModel hiitSettings;
+  static WorkoutSettingsModel tabataSettings;
 }

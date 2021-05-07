@@ -66,12 +66,12 @@ class FitCard extends StatelessWidget {
           var exerciseModel = list[index] as ExerciseModel;
           cardController.setPoints(exerciseModel.points);
 
-          return _buildCard(
+          return _buildCard(index,
               exerciseModel.name, AppColors.exerciseCardColors[colorIndex],
               points: exerciseModel.points,
               isFirstCard: list[index].name == AppLocalizations.exercise);
         } else {
-          return _buildCard(
+          return _buildCard(index,
               list[index].name, AppColors.schemeCardColors[colorIndex],
               isFirstCard: list[index].name == AppLocalizations.scheme);
         }
@@ -96,7 +96,7 @@ class FitCard extends StatelessWidget {
     );
   }
 
-  Widget _buildCard(String text, Color color,
+  Widget _buildCard(int index, String text, Color color,
       {int points = 0, bool isFirstCard = false}) {
     return Card(
       shape: RoundedRectangleBorder(
@@ -123,7 +123,7 @@ class FitCard extends StatelessWidget {
             ),
           ),
           _buildExerciseCardPointsText(points),
-          _buildSkipExerciseButton(points),
+          _buildSkipExerciseButton(index),
           isFirstCard ? _buildFirstCardIcon(points) : SizedBox()
         ],
       ),
@@ -249,20 +249,22 @@ class FitCard extends StatelessWidget {
     return SizedBox();
   }
 
-  Widget _buildSkipExerciseButton(int points) {
-    if (type == cardType.exercise && !(points == 0) && workoutController.settings.canSkipExercise) {
-      return Align(
-        alignment: Alignment.bottomRight,
-        child: IconButton(
-          icon: FaIcon(FontAwesomeIcons.forward),
-          color: AppColors.canvasColorLight.withOpacity(1),
-          onPressed: () {
-            cardController.hasSkipped = true;
-            onSkip();
-          },
-        ),
-      );
-    }
+  Widget _buildSkipExerciseButton(int index) {
+    if(workoutController  == null) return SizedBox();
+
+    if (type == cardType.exercise && index != 0 && workoutController.settings.canSkipExercise) {
+        return Align(
+          alignment: Alignment.bottomRight,
+          child: IconButton(
+            icon: FaIcon(FontAwesomeIcons.forward),
+            color: AppColors.canvasColorLight.withOpacity(1),
+            onPressed: () {
+              cardController.hasSkipped = true;
+              onSkip();
+            },
+          ),
+        );
+      }
 
     return SizedBox();
   }

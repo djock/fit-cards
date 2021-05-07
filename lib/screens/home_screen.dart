@@ -5,6 +5,7 @@ import 'package:fitcards/screens/stats_screen.dart';
 import 'package:fitcards/screens/workout_screens/workouts_log_screen.dart';
 import 'package:fitcards/utilities/app_colors.dart';
 import 'package:fitcards/utilities/app_localizations.dart';
+import 'package:fitcards/widgets/action_list_item.dart';
 import 'package:fitcards/widgets/custom_app_bar.dart';
 import 'package:fitcards/widgets/safe_screen.dart';
 import 'package:flutter/material.dart';
@@ -101,7 +102,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget _buildButtons() {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -109,58 +110,34 @@ class _HomeScreenState extends State<HomeScreen> {
           SizedBox(
             height: 20,
           ),
-          _buildSectionListItem(AppLocalizations.workoutsLog,
-              FontAwesomeIcons.calendarAlt, FontAwesomeIcons.chevronRight, () {
-            Get.to(() => WorkoutsLogScreen());
-          }),
+          IconListItem(
+              text: AppLocalizations.workoutsLog,
+              leftIcon: FontAwesomeIcons.calendarAlt,
+              rightIcon: FontAwesomeIcons.chevronRight,
+              function: () {
+                Get.to(() => WorkoutsLogScreen());
+              }),
           SizedBox(
             height: 20,
           ),
-          _buildSectionListItem(AppLocalizations.leaderBoard,
-              FontAwesomeIcons.trophy, FontAwesomeIcons.chevronRight, () {
-            Get.to(() => LeaderBoardScreen());
-          }),
+          IconListItem(
+              text: AppLocalizations.leaderBoard,
+              leftIcon: FontAwesomeIcons.trophy,
+              rightIcon: FontAwesomeIcons.chevronRight,
+              function: () {
+                Get.to(() => LeaderBoardScreen());
+              }),
           SizedBox(
             height: 20,
           ),
-          _buildSectionListItem(AppLocalizations.statistics,
-              FontAwesomeIcons.trophy, FontAwesomeIcons.chevronRight, () {
-            Get.to(() => StatsScreen());
-          }),
+          IconListItem(
+              text: AppLocalizations.statistics,
+              leftIcon: FontAwesomeIcons.chartBar,
+              rightIcon: FontAwesomeIcons.chevronRight,
+              function: () {
+                Get.to(() => StatsScreen());
+              }),
         ],
-      ),
-    );
-  }
-
-  Widget _buildSectionListItem(
-      String text, IconData leftIcon, IconData rightIcon, Function function) {
-    return Container(
-      color: Theme.of(Get.context).canvasColor,
-      child: ListTile(
-        onTap: () {
-          if (function != null) {
-            function();
-          }
-        },
-//        contentPadding: EdgeInsets.only(left: 16, right: 16),
-        title: Text(
-          text,
-          style: AppTheme.customAccentText(FontWeight.bold, 16),
-        ),
-        leading: _buildIcon(leftIcon, Theme.of(Get.context).accentColor),
-        trailing: rightIcon != null
-            ? _buildIcon(rightIcon, AppColors.inactiveButtonGrey)
-            : SizedBox(),
-      ),
-    );
-  }
-
-  Widget _buildIcon(IconData icon, Color color) {
-    return Padding(
-      padding: EdgeInsets.only(top: 5),
-      child: FaIcon(
-        icon,
-        color: color,
       ),
     );
   }

@@ -5,6 +5,7 @@ import 'package:fitcards/handlers/user_preferences_handler.dart';
 import 'package:fitcards/screens/settings_theme_screen.dart';
 import 'package:fitcards/utilities/app_colors.dart';
 import 'package:fitcards/utilities/app_localizations.dart';
+import 'package:fitcards/widgets/action_list_item.dart';
 import 'package:fitcards/widgets/custom_app_bar.dart';
 import 'package:fitcards/widgets/general_modal.dart';
 import 'package:fitcards/widgets/safe_screen.dart';
@@ -30,7 +31,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
       body: Stack(
         children: [
           Padding(
-            padding: const EdgeInsets.only(bottom: 48),
+            padding: const EdgeInsets.only(bottom: 48, left: 8, right: 8), // EdgeInsets.symmetric(vertical: 8.0)
             child: Container(
                 width: MediaQuery.of(context).size.width,
                 height: MediaQuery.of(context).size.height,
@@ -56,36 +57,41 @@ class _SettingsScreenState extends State<SettingsScreen> {
 //                              });
 //                            });
 //                          }),
-                          _buildSectionListItem(AppLocalizations.appTheme,
-                              FontAwesomeIcons.adjust, FontAwesomeIcons.chevronRight, () {
-                            Get.to(() => SettingsThemeScreen()).then((value) {
-                              widget.callback();
-                              setState(() {});
-                            });
-                          }),
+                          IconListItem(
+                              text: AppLocalizations.appTheme,
+                              leftIcon: FontAwesomeIcons.adjust,
+                              rightIcon: FontAwesomeIcons.chevronRight,
+                              function: () {
+                                Get.to(() => SettingsThemeScreen()).then((value) {
+                                  widget.callback();
+                                  setState(() {});
+                                });
+                              }),
                           Divider(
                             height: 3,
                           ),
-                          _buildSectionListItem(
-                              AppLocalizations.audio,
-                              FontAwesomeIcons.volumeUp,
-                              AppState.audioEnabled
+                          IconListItem(
+                              text: AppLocalizations.audio,
+                              leftIcon: FontAwesomeIcons.trophy,
+                              rightIcon: AppState.audioEnabled
                                   ? FontAwesomeIcons.toggleOn
-                                  : FontAwesomeIcons.toggleOff, () {
-                            setState(() {
-                              UserPreferencesHandler.saveAudioEnabled(
-                                  !AppState.audioEnabled);
-                            });
-                          }),
+                                  : FontAwesomeIcons.toggleOff,
+                              function: () {
+                                setState(() {
+                                  UserPreferencesHandler.saveAudioEnabled(
+                                      !AppState.audioEnabled);
+                                });
+                              }),
                           Divider(
                             height: 3,
                           ),
-                          _buildSectionListItem(
-                              AppLocalizations.clearAllData,
-                              FontAwesomeIcons.exclamationTriangle,
-                              FontAwesomeIcons.trash, () {
-                            _clearAllData();
-                          }),
+                          IconListItem(
+                              text: AppLocalizations.clearAllData,
+                              leftIcon: FontAwesomeIcons.exclamationTriangle,
+                              rightIcon: FontAwesomeIcons.trash,
+                              function: () {
+                                _clearAllData();
+                              }),
                         ],
                       ),
                     ),
@@ -113,39 +119,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     fontSize: 20,
                     letterSpacing: 1,
                     fontWeight: FontWeight.bold))));
-  }
-
-  Widget _buildSectionListItem(
-      String text, IconData leftIcon, IconData rightIcon, Function function) {
-    return Container(
-      color: Theme.of(Get.context).canvasColor,
-      child: ListTile(
-        onTap: () {
-          if (function != null) {
-            function();
-          }
-        },
-        contentPadding: EdgeInsets.only(left: 20, right: 20),
-        title: Text(
-          text,
-          style: AppTheme.textAccentNormal15(),
-        ),
-        leading: _buildIcon(leftIcon, Theme.of(Get.context).accentColor),
-        trailing: rightIcon != null
-            ? _buildIcon(rightIcon, AppColors.inactiveButtonGrey)
-            : SizedBox(),
-      ),
-    );
-  }
-
-  Widget _buildIcon(IconData icon, Color color) {
-    return Padding(
-      padding: EdgeInsets.only(top: 5),
-      child: FaIcon(
-        icon,
-        color: color,
-      ),
-    );
   }
 
   Widget _buildAppInfo() {

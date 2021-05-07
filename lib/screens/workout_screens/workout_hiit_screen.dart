@@ -186,8 +186,6 @@ class _WorkoutHiitScreenState extends State<WorkoutHiitScreen>
     otherController.cancelCallback = true;
     otherController.triggerLeft();
 
-    debugPrint('rest');
-
     _workoutController.startRest(_exerciseController.index);
     _buildCountDownTimer();
   }
@@ -207,7 +205,9 @@ class _WorkoutHiitScreenState extends State<WorkoutHiitScreen>
               workoutController: _workoutController,
             ),
           );
-        });
+        }).then((value) {
+          setState(() { });
+    });
   }
 
   void _buildCountDownTimer() {

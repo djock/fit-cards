@@ -47,7 +47,7 @@ class WorkoutController {
       this.schemes, this.updateScreen);
 
   factory WorkoutController.initHiit(Function callback) {
-    return new WorkoutController(workoutType.hiit, AppState.tabataSettings,
+    return new WorkoutController(workoutType.hiit, AppState.hiitSettings,
         workoutState.idle, AppState.exercises, AppState.schemes, callback);
   }
 

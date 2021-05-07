@@ -3,6 +3,7 @@ import 'package:fitcards/models/exercise_model.dart';
 import 'package:fitcards/models/scheme_model.dart';
 import 'package:fitcards/utilities/app_colors.dart';
 import 'package:fitcards/utilities/app_localizations.dart';
+import 'package:fitcards/widgets/action_list_item.dart';
 import 'package:fitcards/widgets/custom_app_bar.dart';
 import 'package:fitcards/widgets/fit_card.dart';
 import 'package:fitcards/widgets/flutter_tindercard.dart';
@@ -38,19 +39,20 @@ class _SettingsThemeScreenState extends State<SettingsThemeScreen> {
     return SafeScreen(
       appBar: CustomAppBar.buildEmpty(),
       body: Container(
+        padding: EdgeInsets.symmetric(vertical: 8.0),
         child: Column(
           children: [
             Expanded(
-              flex: 1,
-              child: _buildSectionListItem(
-                  AppLocalizations.nightMode,
-                  FontAwesomeIcons.adjust,
-                  Get.isDarkMode
-                      ? FontAwesomeIcons.toggleOn
-                      : FontAwesomeIcons.toggleOff, () {
-                AppTheme.changeTheme();
-              }),
-            ),
+                flex: 1,
+                child: IconListItem(
+                    text: AppLocalizations.nightMode,
+                    leftIcon: FontAwesomeIcons.adjust,
+                    rightIcon: Get.isDarkMode
+                        ? FontAwesomeIcons.toggleOn
+                        : FontAwesomeIcons.toggleOff,
+                    function: () {
+                      AppTheme.changeTheme();
+                    })),
             Expanded(
               flex: 4,
               child: FitCard(
@@ -85,41 +87,6 @@ class _SettingsThemeScreenState extends State<SettingsThemeScreen> {
             ),
           ],
         ),
-      ),
-    );
-  }
-
-  Widget _buildSectionListItem(
-      String text, IconData leftIcon, IconData rightIcon, Function function) {
-    return Container(
-      color: Theme.of(Get.context).canvasColor,
-      child: ListTile(
-        onTap: () {
-          if (function != null) {
-            function();
-          }
-        },
-        contentPadding: EdgeInsets.only(left: 24, right: 24),
-        title: Text(
-          text,
-          style: AppTheme.textAccentNormal15(),
-        ),
-        leading: leftIcon != null
-            ? _buildIcon(leftIcon, AppTheme.dynamicColor())
-            : SizedBox(),
-        trailing: rightIcon != null
-            ? _buildIcon(rightIcon, AppTheme.dynamicColor())
-            : SizedBox(),
-      ),
-    );
-  }
-
-  Widget _buildIcon(IconData icon, Color color) {
-    return Padding(
-      padding: EdgeInsets.only(top: 5),
-      child: FaIcon(
-        icon,
-        color: color,
       ),
     );
   }

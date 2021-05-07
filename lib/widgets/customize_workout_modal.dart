@@ -1,4 +1,5 @@
 import 'package:fitcards/handlers/app_state.dart';
+import 'package:fitcards/handlers/app_state_handler.dart';
 import 'package:fitcards/handlers/app_theme.dart';
 import 'package:fitcards/handlers/workout_controller.dart';
 import 'package:fitcards/models/workout_settings_model.dart';
@@ -59,7 +60,7 @@ class _CustomizeWorkoutModal extends State<CustomizeWorkoutModal> {
               Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8.0),
-                  color: _changeOccurred ? Colors.green : Colors.white,
+                  color: _changeOccurred ? Colors.green : AppTheme.widgetBackground(),
                 ),
                 height: 5,
                 width: 100,
@@ -158,6 +159,8 @@ class _CustomizeWorkoutModal extends State<CustomizeWorkoutModal> {
                 setState(() {
                   _changeOccurred = true;
                   _canSkip = value;
+
+                  _setState();
                 });
               },
             ),
@@ -333,11 +336,12 @@ class _CustomizeWorkoutModal extends State<CustomizeWorkoutModal> {
   void _setState() {
     var settings = new WorkoutSettingsModel(
         _rounds, _restTime, _workTime, _canSkip, _maxDuration);
+    debugPrint('skip ' + _canSkip.toString());
 
     if (widget.workoutController.type == workoutType.tabata) {
-      AppState.tabataSettings = settings;
+      AppStateHandler.setTabataSettings(settings);
     } else {
-      AppState.hiitSettings = settings;
+      AppStateHandler.setHiitSettings(settings);
     }
 
     widget.workoutController.setSettings(settings);

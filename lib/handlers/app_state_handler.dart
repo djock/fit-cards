@@ -2,7 +2,9 @@ import 'package:fitcards/handlers/user_preferences_handler.dart';
 import 'package:fitcards/models/exercise_model.dart';
 import 'package:fitcards/models/scheme_model.dart';
 import 'package:fitcards/models/workout_log_model.dart';
+import 'package:fitcards/models/workout_settings_model.dart';
 import 'package:fitcards/utilities/app_localizations.dart';
+import 'package:flutter/material.dart';
 
 import 'app_state.dart';
 import 'firebase_database_handler.dart';
@@ -57,5 +59,13 @@ class AppStateHandler {
 
     UserPreferencesHandler.clearAllData();
     HiveHandler.clearAllData();
+  }
+
+  static void setTabataSettings(WorkoutSettingsModel value) {
+    AppState.tabataSettings = value;
+  }
+
+  static void setHiitSettings(WorkoutSettingsModel value) {
+    AppState.hiitSettings = value;
   }
 }
