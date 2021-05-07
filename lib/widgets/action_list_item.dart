@@ -1,4 +1,5 @@
 import 'package:fitcards/handlers/app_theme.dart';
+import 'package:fitcards/utilities/app_colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -31,7 +32,7 @@ class IconListItem extends StatelessWidget {
             ? _buildIcon(leftIcon, Theme.of(Get.context).accentColor)
             : SizedBox(),
         trailing: rightIcon != null
-            ? _buildIcon(rightIcon, AppTheme.dynamicColor())
+            ? _buildIcon(rightIcon, AppColors.inactiveButtonGrey)
             : SizedBox(),
       ),
     );
