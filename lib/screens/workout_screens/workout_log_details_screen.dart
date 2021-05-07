@@ -1,11 +1,14 @@
 import 'package:fitcards/handlers/app_state.dart';
+import 'package:fitcards/handlers/app_theme.dart';
 import 'package:fitcards/models/workout_log_model.dart';
 import 'package:fitcards/utilities/app_localizations.dart';
 import 'package:fitcards/utilities/utils.dart';
 import 'package:fitcards/widgets/custom_app_bar.dart';
+import 'package:fitcards/widgets/list_item.dart';
 import 'package:fitcards/widgets/safe_screen.dart';
 import 'package:fitcards/widgets/slidable_list_item.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class WorkoutLogDetailsScreen extends StatelessWidget {
   final WorkoutLogModel workoutLogModel;
@@ -22,23 +25,7 @@ class WorkoutLogDetailsScreen extends StatelessWidget {
 
     var index = 1;
 
-    _tempList.add(SlidableListItem(
-        leftValue: '',
-        centerValue: AppLocalizations.date,
-        rightValue: Utils.formatDate(workoutLogModel.date),
-        onTap: null));
-
-    _tempList.add(SlidableListItem(
-        leftValue: '',
-        centerValue: AppLocalizations.duration,
-        rightValue: Utils.formatTimeShort(workoutLogModel.duration),
-        onTap: null));
-
-    _tempList.add(SlidableListItem(
-        leftValue: '',
-        centerValue: AppLocalizations.points,
-        rightValue: workoutLogModel.points.toString(),
-        onTap: null));
+    _tempList.add(_buildHeader());
 
     _tempList.add(Divider(
       thickness: 2,
@@ -69,6 +56,29 @@ class WorkoutLogDetailsScreen extends StatelessWidget {
           children: _buildExercisesList(),
         ),
       )),
+    );
+  }
+
+  Widget _buildHeader() {
+    return Container(
+      color: AppTheme.widgetBackground(),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          ListItem(
+              leftValue: '',
+              centerValue: AppLocalizations.date,
+              rightValue: Utils.formatDate(workoutLogModel.date)),
+          ListItem(
+              leftValue: '',
+              centerValue: AppLocalizations.duration,
+              rightValue: Utils.formatTimeShort(workoutLogModel.duration)),
+          ListItem(
+              leftValue: '',
+              centerValue: AppLocalizations.points,
+              rightValue: workoutLogModel.points.toString()),
+        ],
+      ),
     );
   }
 }
