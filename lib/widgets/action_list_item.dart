@@ -11,7 +11,9 @@ class IconListItem extends StatelessWidget {
   final IconData rightIcon;
   final Function function;
 
-  const IconListItem({Key key, this.text, this.leftIcon, this.rightIcon, this.function}) : super(key: key);
+  const IconListItem(
+      {Key key, this.text, this.leftIcon, this.rightIcon, this.function})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {

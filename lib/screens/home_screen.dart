@@ -3,7 +3,6 @@ import 'package:fitcards/handlers/app_theme.dart';
 import 'package:fitcards/screens/leaderboard_screen.dart';
 import 'package:fitcards/screens/stats_screen.dart';
 import 'package:fitcards/screens/workout_screens/workouts_log_screen.dart';
-import 'package:fitcards/utilities/app_colors.dart';
 import 'package:fitcards/utilities/app_localizations.dart';
 import 'package:fitcards/widgets/action_list_item.dart';
 import 'package:fitcards/widgets/custom_app_bar.dart';

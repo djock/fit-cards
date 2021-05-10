@@ -1,6 +1,8 @@
 import 'package:fitcards/handlers/analytics_handler.dart';
 import 'package:fitcards/handlers/app_state.dart';
+import 'package:fitcards/handlers/user_preferences_handler.dart';
 import 'package:fitcards/handlers/workout_controller.dart';
+import 'package:fitcards/screens/how_it_works_overlay.dart';
 import 'package:fitcards/screens/workout_screens/workout_end_screen.dart';
 import 'package:fitcards/utilities/app_colors.dart';
 import 'package:fitcards/utilities/app_localizations.dart';
@@ -33,7 +35,24 @@ class _WorkoutHiitScreenState extends State<WorkoutHiitScreen>
       setState(() {});
     });
 
+    _checkHowItWorks();
+
     super.initState();
+  }
+
+  void _checkHowItWorks() async {
+    await Future.delayed(Duration(seconds: 1));
+    if (!AppState.sawHowItWorksHiit) {
+      var texts = [
+        AppLocalizations.howItWorksHiit1,
+        AppLocalizations.howItWorksHiit2,
+        AppLocalizations.howItWorksHiit3,
+        AppLocalizations.howItWorksHiit4,
+      ];
+
+      HowItWorksOverlay.build(texts);
+      UserPreferencesHandler.saveSawHowItWorksHiit();
+    }
   }
 
   Future<bool> _onBackPressed() {
@@ -192,7 +211,8 @@ class _WorkoutHiitScreenState extends State<WorkoutHiitScreen>
   }
 
   void _onSkipExercise() {
-    AnalyticsHandler.logSkipExercise(_workoutController.exercises[_exerciseController.index].name);
+    AnalyticsHandler.logSkipExercise(
+        _workoutController.exercises[_exerciseController.index].name);
     _exerciseController.triggerLeft();
   }
 
@@ -208,7 +228,7 @@ class _WorkoutHiitScreenState extends State<WorkoutHiitScreen>
             ),
           );
         }).then((value) {
-          setState(() { });
+      setState(() {});
     });
   }
 

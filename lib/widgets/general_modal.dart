@@ -70,9 +70,8 @@ class GeneralModal extends StatelessWidget {
               SizedBox(height: 16.0),
               Text(
                 subTitle,
-                style: TextStyle(
-                    fontSize: 16.0, color: AppTheme.dynamicColor()
-                ),
+                style:
+                    TextStyle(fontSize: 16.0, color: AppTheme.dynamicColor()),
                 textAlign: TextAlign.center,
               ),
               SizedBox(height: 3.0),

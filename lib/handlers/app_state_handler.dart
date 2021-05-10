@@ -4,7 +4,6 @@ import 'package:fitcards/models/scheme_model.dart';
 import 'package:fitcards/models/workout_log_model.dart';
 import 'package:fitcards/models/workout_settings_model.dart';
 import 'package:fitcards/utilities/app_localizations.dart';
-import 'package:flutter/material.dart';
 
 import 'app_state.dart';
 import 'firebase_database_handler.dart';
@@ -52,6 +51,8 @@ class AppStateHandler {
   static void clearAllData() {
     AppState.points = 0;
     AppState.audioEnabled = true;
+    AppState.sawHowItWorksHiit = false;
+    AppState.sawHowItWorksTabata = false;
 //    AppState.tutorialFinished = false;
 
     AppState.loggedWorkouts.clear();

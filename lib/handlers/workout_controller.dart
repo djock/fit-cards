@@ -7,7 +7,6 @@ import 'package:fitcards/models/workout_exercise_model.dart';
 import 'package:fitcards/models/workout_log_model.dart';
 import 'package:fitcards/models/workout_settings_model.dart';
 import 'package:fitcards/utilities/app_localizations.dart';
-import 'package:flutter/foundation.dart';
 
 import 'app_state_handler.dart';
 
@@ -95,12 +94,12 @@ class WorkoutController {
 
   void logExercise(int index) {
     var exerciseName = exercises[index].name;
-    var schemeName = type == workoutType.hiit ? schemes[index].name : settings.restTime.toString();
+    var schemeName = type == workoutType.hiit
+        ? schemes[index].name
+        : settings.restTime.toString();
 
     AppState.activeExercisesList.add(new WorkoutExerciseModel(
-        AppState.loggedWorkouts.length,
-        exerciseName,
-        schemeName));
+        AppState.loggedWorkouts.length, exerciseName, schemeName));
 
     countExercise();
   }
@@ -138,7 +137,9 @@ class WorkoutController {
         duration,
         exercisesCount,
         points,
-        type == workoutType.hiit ? AppLocalizations.hiit : AppLocalizations.tabata);
+        type == workoutType.hiit
+            ? AppLocalizations.hiit
+            : AppLocalizations.tabata);
 
     AppStateHandler.logExercise();
     AppStateHandler.logWorkout(currentWorkout);

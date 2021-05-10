@@ -96,4 +96,23 @@ class AppLocalizations {
   static String date = 'Date';
 
   static String exerciseListHint = 'Tap and hold on an exercise to reorder';
+  static String sendFeedback = 'Feedback';
+
+  static String howItWorks = 'How it works:';
+  static String howItWorksHiit1 =
+      'There are 2 stack of cards, one for the exercise and one for the scheme.';
+  static String howItWorksHiit2 =
+      'The goal is to do as many reps described in the bottom card for the exercise in the top card.';
+  static String howItWorksHiit3 =
+      'Swipe on any of the cards when finished to move on to the next round.';
+  static String howItWorksHiit4 =
+      'Each exercise gives a certain amount of points - Points system is still in development.';
+
+  static String howItWorksTabata1 =
+      'Set the number of rounds, work and rest times.';
+  static String howItWorksTabata2 = 'Swipe the card to swipe and get to work.';
+  static String howItWorksTabata3 =
+      'When the rest period for the current round begins, the next exercise will be revealed.';
+  static String howItWorksTabata4 =
+      'Each exercise gives a certain amount of points - Points system is still in development.';
 }

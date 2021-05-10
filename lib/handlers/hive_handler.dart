@@ -45,7 +45,8 @@ class HiveHandler {
     if (hiitSettingsBox.isNotEmpty) {
       loadHiitSettings();
     } else {
-      AppStateHandler.setHiitSettings(new WorkoutSettingsModel(8, 10, 20, true, 0));
+      AppStateHandler.setHiitSettings(
+          new WorkoutSettingsModel(8, 10, 20, true, 0));
     }
 
     tabataSettingsBox = await Hive.openBox('tabataSettings');
@@ -53,7 +54,8 @@ class HiveHandler {
     if (tabataSettingsBox.isNotEmpty) {
       loadTabataSettings();
     } else {
-      AppStateHandler.setTabataSettings(new WorkoutSettingsModel(8, 10, 20, false, 0));
+      AppStateHandler.setTabataSettings(
+          new WorkoutSettingsModel(8, 10, 20, false, 0));
     }
 
     return true;

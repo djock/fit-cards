@@ -12,8 +12,7 @@ class CustomAppBar {
       brightness: Get.context.isDarkMode ? Brightness.dark : Brightness.light,
       backgroundColor: AppTheme.appBarColor(),
       elevation: elevation,
-      iconTheme: IconThemeData(
-          color: AppTheme.dynamicColor(), size: iconSize),
+      iconTheme: IconThemeData(color: AppTheme.dynamicColor(), size: iconSize),
       actions: actions,
       title: Text(
         text.toUpperCase(),
@@ -81,8 +80,8 @@ class CustomAppBar {
 
   static PreferredSizeWidget buildEmpty() => AppBar(
         backgroundColor: Colors.transparent,
-    brightness: Get.context.isDarkMode ? Brightness.dark : Brightness.light,
-    elevation: 0,
+        brightness: Get.context.isDarkMode ? Brightness.dark : Brightness.light,
+        elevation: 0,
         iconTheme: IconThemeData(
           color: AppTheme.dynamicColor(),
         ),

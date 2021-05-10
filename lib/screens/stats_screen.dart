@@ -1,4 +1,3 @@
-import 'package:fitcards/handlers/app_theme.dart';
 import 'package:fitcards/screens/leaderboard_screen.dart';
 import 'package:fitcards/screens/workout_screens/workouts_log_screen.dart';
 import 'package:fitcards/utilities/app_localizations.dart';

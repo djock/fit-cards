@@ -69,7 +69,7 @@ class _AppScreenState extends State<AppScreen> {
             body: _screens.elementAt(_selectedIndex),
             bottomNavigationBar: _navigationDrawer,
             floatingActionButton: FloatingActionButton(
-              elevation: 0,
+                elevation: 0,
                 backgroundColor: AppColors.inactiveButtonGrey,
                 child: FaIcon(
                   FontAwesomeIcons.running,
@@ -140,7 +140,8 @@ class _AppScreenState extends State<AppScreen> {
       child: Container(
         color: AppTheme.appBarColor().withOpacity(0.3),
         child: Padding(
-          padding: const EdgeInsets.only(left: 24.0, right: 24, bottom: 36, top: 24),
+          padding:
+              const EdgeInsets.only(left: 24.0, right: 24, bottom: 36, top: 24),
           child: Row(
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.center,

@@ -97,7 +97,9 @@ class AppTheme {
   static Color dynamicColor() =>
       Get.context.isDarkMode ? Colors.white : Colors.black;
 
-  static Color appBarColor() =>  Get.context.isDarkMode ? AppColors.barColorDark : AppColors.barColorLight;
+  static Color appBarColor() =>
+      Get.context.isDarkMode ? AppColors.barColorDark : AppColors.barColorLight;
 
-  static Color widgetBackground() =>  Get.isDarkMode ? AppColors.widgetColorDark : AppColors.widgetColorLight;
+  static Color widgetBackground() =>
+      Get.isDarkMode ? AppColors.widgetColorDark : AppColors.widgetColorLight;
 }

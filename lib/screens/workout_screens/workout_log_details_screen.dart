@@ -8,7 +8,6 @@ import 'package:fitcards/widgets/list_item.dart';
 import 'package:fitcards/widgets/safe_screen.dart';
 import 'package:fitcards/widgets/slidable_list_item.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class WorkoutLogDetailsScreen extends StatelessWidget {
   final WorkoutLogModel workoutLogModel;

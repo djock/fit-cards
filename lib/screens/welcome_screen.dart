@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
-import 'input_decoration.dart';
+import '../widgets/input_decoration.dart';
 
 class WelcomeScreen extends StatefulWidget {
   @override

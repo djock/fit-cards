@@ -1,4 +1,3 @@
-import 'package:fitcards/handlers/app_state.dart';
 import 'package:fitcards/handlers/app_state_handler.dart';
 import 'package:fitcards/handlers/app_theme.dart';
 import 'package:fitcards/handlers/workout_controller.dart';
@@ -60,7 +59,9 @@ class _CustomizeWorkoutModal extends State<CustomizeWorkoutModal> {
               Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8.0),
-                  color: _changeOccurred ? Colors.green : AppTheme.widgetBackground(),
+                  color: _changeOccurred
+                      ? Colors.green
+                      : AppTheme.widgetBackground(),
                 ),
                 height: 5,
                 width: 100,
@@ -315,7 +316,10 @@ class _CustomizeWorkoutModal extends State<CustomizeWorkoutModal> {
         ? Center(
             child: Text(
             AppLocalizations.exerciseListHint,
-            style: TextStyle(fontSize: 13, fontStyle: FontStyle.italic, color: AppTheme.dynamicColor()),
+            style: TextStyle(
+                fontSize: 13,
+                fontStyle: FontStyle.italic,
+                color: AppTheme.dynamicColor()),
             textAlign: TextAlign.center,
           ))
         : SizedBox();

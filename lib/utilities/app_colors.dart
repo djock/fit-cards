@@ -6,7 +6,7 @@ class AppColors {
 
   static const barColorDark = Color(0xff131313);
   static const barColorLight = Color(0xffF7F7F8);
-  
+
   static const widgetColorDark = Color(0xff1D1D1E);
   static const widgetColorLight = Color(0xffFFFFFF);
 

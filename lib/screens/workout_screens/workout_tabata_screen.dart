@@ -1,6 +1,9 @@
+import 'package:fitcards/handlers/app_state.dart';
 import 'package:fitcards/handlers/app_theme.dart';
+import 'package:fitcards/handlers/user_preferences_handler.dart';
 import 'package:fitcards/handlers/workout_controller.dart';
 import 'package:fitcards/models/exercise_model.dart';
+import 'package:fitcards/screens/how_it_works_overlay.dart';
 import 'package:fitcards/screens/workout_screens/workout_end_screen.dart';
 import 'package:fitcards/utilities/app_colors.dart';
 import 'package:fitcards/utilities/app_localizations.dart';
@@ -31,7 +34,26 @@ class _WorkoutTabataScreenState extends State<WorkoutTabataScreen>
       setState(() {});
     });
 
+    _checkHowItWorks();
+
     super.initState();
+  }
+
+  void _checkHowItWorks() async {
+    while (this.mounted) {
+      await Future.delayed(Duration(seconds: 1));
+      if (!AppState.sawHowItWorksTabata) {
+        var texts = [
+          AppLocalizations.howItWorksTabata1,
+          AppLocalizations.howItWorksTabata2,
+          AppLocalizations.howItWorksTabata3,
+          AppLocalizations.howItWorksTabata4,
+        ];
+
+        HowItWorksOverlay.build(texts);
+        UserPreferencesHandler.saveSawHowItWorksTabata();
+      }
+    }
   }
 
   Future<bool> _onBackPressed() {

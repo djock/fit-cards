@@ -47,6 +47,7 @@ dependencies:
   firebase_analytics: ^8.0.3
 
   flutter_statusbarcolor: ^0.2.3
+  url_launcher: ^6.0.3
 
 dev_dependencies:
   flutter_test:

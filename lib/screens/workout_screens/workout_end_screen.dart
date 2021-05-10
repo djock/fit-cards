@@ -13,7 +13,8 @@ class WorkoutEndScreen extends StatefulWidget {
   final WorkoutController workoutController;
 
   const WorkoutEndScreen({
-    Key key, this.workoutController,
+    Key key,
+    this.workoutController,
   }) : super(key: key);
 
   @override

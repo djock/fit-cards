@@ -34,4 +34,7 @@ class AppState {
 
   static WorkoutSettingsModel hiitSettings;
   static WorkoutSettingsModel tabataSettings;
+
+  static bool sawHowItWorksHiit = false;
+  static bool sawHowItWorksTabata = false;
 }

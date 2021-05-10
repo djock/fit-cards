@@ -3,16 +3,16 @@ import 'package:fitcards/handlers/app_state_handler.dart';
 import 'package:fitcards/handlers/app_theme.dart';
 import 'package:fitcards/handlers/user_preferences_handler.dart';
 import 'package:fitcards/screens/settings_theme_screen.dart';
-import 'package:fitcards/utilities/app_colors.dart';
+import 'package:fitcards/screens/welcome_screen.dart';
 import 'package:fitcards/utilities/app_localizations.dart';
 import 'package:fitcards/widgets/action_list_item.dart';
 import 'package:fitcards/widgets/custom_app_bar.dart';
 import 'package:fitcards/widgets/general_modal.dart';
 import 'package:fitcards/widgets/safe_screen.dart';
-import 'package:fitcards/widgets/welcome_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class SettingsScreen extends StatefulWidget {
   final Function callback;
@@ -31,7 +31,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
       body: Stack(
         children: [
           Padding(
-            padding: const EdgeInsets.only(bottom: 48, left: 8, right: 8), // EdgeInsets.symmetric(vertical: 8.0)
+            padding: const EdgeInsets.only(
+                bottom: 48,
+                left: 8,
+                right: 8), // EdgeInsets.symmetric(vertical: 8.0)
             child: Container(
                 width: MediaQuery.of(context).size.width,
                 height: MediaQuery.of(context).size.height,
@@ -40,6 +43,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   children: <Widget>[
                     Expanded(
                       child: Column(
+                        mainAxisSize: MainAxisSize.max,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           _buildSectionHeader(AppLocalizations.settings),
@@ -62,7 +66,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                               leftIcon: FontAwesomeIcons.adjust,
                               rightIcon: FontAwesomeIcons.chevronRight,
                               function: () {
-                                Get.to(() => SettingsThemeScreen()).then((value) {
+                                Get.to(() => SettingsThemeScreen())
+                                    .then((value) {
                                   widget.callback();
                                   setState(() {});
                                 });
@@ -81,6 +86,17 @@ class _SettingsScreenState extends State<SettingsScreen> {
                                   UserPreferencesHandler.saveAudioEnabled(
                                       !AppState.audioEnabled);
                                 });
+                              }),
+                          Divider(
+                            height: 3,
+                          ),
+                          IconListItem(
+                              text: AppLocalizations.sendFeedback,
+                              leftIcon: FontAwesomeIcons.comment,
+                              rightIcon: FontAwesomeIcons.externalLinkAlt,
+                              function: () {
+                                _launchURL(
+                                    'mailto:fit.cards.app@gmail.com?subject=Fit%20Cards%20App%20Feedback');
                               }),
                           Divider(
                             height: 3,
@@ -149,5 +165,17 @@ class _SettingsScreenState extends State<SettingsScreen> {
               okActionText: AppLocalizations.close,
               cancelActionText: AppLocalizations.cancel,
             ));
+  }
+
+  _launchURL(url) async {
+    if (await canLaunch(url)) {
+      await launch(
+        url,
+        forceSafariVC: false,
+        forceWebView: false,
+      );
+    } else {
+      throw 'Could not launch $url';
+    }
   }
 }

@@ -1,4 +1,3 @@
-
 import 'package:fitcards/handlers/app_theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -41,8 +40,15 @@ class WorkoutButton extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(height: 10,),
-          Text(text, style: TextStyle(color: AppTheme.dynamicColor(), fontWeight: FontWeight.bold, fontSize: 20 ),
+          SizedBox(
+            height: 10,
+          ),
+          Text(
+            text,
+            style: TextStyle(
+                color: AppTheme.dynamicColor(),
+                fontWeight: FontWeight.bold,
+                fontSize: 20),
           )
         ],
       ),

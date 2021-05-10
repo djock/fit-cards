@@ -4,8 +4,8 @@ import 'package:fitcards/handlers/app_theme.dart';
 import 'package:fitcards/handlers/hive_handler.dart';
 import 'package:fitcards/screens/app_screen.dart';
 import 'package:fitcards/screens/loading_screen.dart';
+import 'package:fitcards/screens/welcome_screen.dart';
 import 'package:fitcards/utilities/json_data_handler.dart';
-import 'package:fitcards/widgets/welcome_screen.dart';
 import 'package:flutter/material.dart';
 
 import 'handlers/user_preferences_handler.dart';

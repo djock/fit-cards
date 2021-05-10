@@ -15,25 +15,40 @@ class UserPreferencesHandler {
 
 //    loadTutorialFinishedPrefs();
 
+    loadSawHowItWorksHiit();
+    loadSawHowItWorksTabata();
+
     loadAudioEnabled();
     loadPoints();
   }
 
-//
-//  static Future<void> markTutorialAsFinished() async {
-//    final SharedPreferences prefs = await _sharedPreferences;
-//    prefs.setBool('tutorialFinished', true);
-//
-//    AppState.tutorialActive = false;
-//    AppState.tutorialFinished = true;
-//  }
-//
-//  static Future<void> loadTutorialFinishedPrefs() async {
-//    final SharedPreferences prefs = await _sharedPreferences;
-//    AppState.tutorialFinished = prefs.getBool('tutorialFinished') != null
-//        ? prefs.getBool('tutorialFinished')
-//        : false;
-//  }
+  static Future<void> saveSawHowItWorksHiit() async {
+    final SharedPreferences prefs = await _sharedPreferences;
+    prefs.setBool('sawHowItWorksHiit', true);
+
+    AppState.sawHowItWorksHiit = true;
+  }
+
+  static Future<void> loadSawHowItWorksHiit() async {
+    final SharedPreferences prefs = await _sharedPreferences;
+    AppState.sawHowItWorksHiit = prefs.getBool('sawHowItWorksHiit') != null
+        ? prefs.getBool('sawHowItWorksHiit')
+        : false;
+  }
+
+  static Future<void> saveSawHowItWorksTabata() async {
+    final SharedPreferences prefs = await _sharedPreferences;
+    prefs.setBool('sawHowItWorksTabata', true);
+
+    AppState.sawHowItWorksTabata = true;
+  }
+
+  static Future<void> loadSawHowItWorksTabata() async {
+    final SharedPreferences prefs = await _sharedPreferences;
+    AppState.sawHowItWorksTabata = prefs.getBool('sawHowItWorksTabata') != null
+        ? prefs.getBool('sawHowItWorksTabata')
+        : false;
+  }
 
   static Future<void> saveUserName(String userName) async {
     final SharedPreferences prefs = await _sharedPreferences;
