@@ -1,3 +1,4 @@
+import 'package:facebook_app_events/facebook_app_events.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:fitcards/app.dart';
@@ -26,8 +27,12 @@ void main() async {
 }
 
 class Main extends StatelessWidget {
+  static final facebookAppEvents = FacebookAppEvents();
+
   @override
   Widget build(BuildContext context) {
+    facebookAppEvents.setAdvertiserTracking(enabled: true);
+
     _setAppVersion();
 
     SystemChrome.setPreferredOrientations([
