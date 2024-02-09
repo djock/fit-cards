@@ -19,22 +19,20 @@ class StatsTable extends StatelessWidget {
       List<String> exercises = [];
 
       for (var workout in AppState.loggedWorkouts) {
-        if (workout.points != null) {
-          index++;
-          totalDuration += workout.duration;
-          totalPoints += workout.points;
+        index++;
+        totalDuration += workout.duration;
+        totalPoints += workout.points;
 
-          var exercisesList = AppState.loggedExercisesList
-              .where((element) => element.index == workout.index)
-              .toList();
+        var exercisesList = AppState.loggedExercisesList
+            .where((element) => element.index == workout.index)
+            .toList();
 
-          for (var exercise in exercisesList) {
-            if (!exercises.contains(exercise)) {
-              exercises.add(exercise.exercise);
-            }
+        for (var exercise in exercisesList) {
+          if (!exercises.contains(exercise)) {
+            exercises.add(exercise.exercise);
           }
         }
-      }
+            }
 
       _averageDuration = totalDuration ~/ index;
       _averagePoints = totalPoints ~/ index;

@@ -269,7 +269,7 @@ class _TinderSwapCardState extends State<TinderSwapCard>
 
   @override
   Widget build(BuildContext context) {
-    widget.cardController?.addListener((trigger) => triggerSwap(trigger));
+    widget.cardController.addListener((trigger) => triggerSwap(trigger));
 
     return Stack(children: _buildCards(context));
   }
@@ -358,7 +358,7 @@ class CardAnimation {
   static Animation<Size?> backCardSize(
       AnimationController controller, Size beginSize, Size endSize) {
     return new SizeTween(begin: beginSize, end: endSize).animate(
-        new CurvedAnimation(parent: controller, curve: Curves.easeOut))!;
+        new CurvedAnimation(parent: controller, curve: Curves.easeOut));
   }
 
   static Animation<Alignment> backCardAlign(AnimationController controller,

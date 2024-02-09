@@ -86,7 +86,7 @@ class GeneralModal extends StatelessWidget {
                     child: Text(
                       AppLocalizations.cancel,
                       style: TextStyle(
-                        color: Theme.of(context).errorColor,
+                        color: Theme.of(context).colorScheme.error,
                         fontSize: 16.0,
                         fontWeight: FontWeight.bold,
                       ),

@@ -19,7 +19,7 @@ class _WorkoutsLogScreenState extends State<WorkoutsLogScreen> {
   List<Widget> _buildWorkoutsLog(BuildContext context) {
     List<Widget> _tempList = <Widget>[];
 
-    if (AppState.loggedWorkouts != null && AppState.loggedWorkouts.length > 0) {
+    if (AppState.loggedWorkouts.length > 0) {
       for (var workout in AppState.loggedWorkouts) {
         _tempList.add(SlidableListItem(
           leftValue: '',

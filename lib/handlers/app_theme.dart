@@ -14,10 +14,10 @@ ThemeData appThemeDark() => ThemeData(
       highlightColor: Colors.transparent,
       splashColor: Colors.transparent,
       textTheme: TextTheme(
-        headline1: TextStyle(fontSize: 72.0, fontWeight: FontWeight.bold),
-        headline6: TextStyle(fontSize: 36.0, fontStyle: FontStyle.italic),
-        bodyText2: TextStyle(fontFamily: 'Roboto'),
-        bodyText1:
+        displayLarge: TextStyle(fontSize: 72.0, fontWeight: FontWeight.bold),
+        titleLarge: TextStyle(fontSize: 36.0, fontStyle: FontStyle.italic),
+        bodyMedium: TextStyle(fontFamily: 'Roboto'),
+        bodyLarge:
             TextStyle(fontFamily: 'Roboto', color: AppColors.canvasColorDark),
       ),
     );
@@ -32,10 +32,10 @@ ThemeData appThemeLight() => ThemeData(
       highlightColor: Colors.transparent,
       splashColor: Colors.transparent,
       textTheme: TextTheme(
-        headline1: TextStyle(fontSize: 72.0, fontWeight: FontWeight.bold),
-        headline6: TextStyle(fontSize: 36.0, fontStyle: FontStyle.italic),
-        bodyText2: TextStyle(fontFamily: 'Roboto'),
-        bodyText1:
+        displayLarge: TextStyle(fontSize: 72.0, fontWeight: FontWeight.bold),
+        titleLarge: TextStyle(fontSize: 36.0, fontStyle: FontStyle.italic),
+        bodyMedium: TextStyle(fontFamily: 'Roboto'),
+        bodyLarge:
             TextStyle(fontFamily: 'Roboto', color: AppColors.canvasColorLight),
       ),
     );
@@ -47,7 +47,7 @@ class AppTheme {
 
   static TextStyle textWhiteBold24() {
     return _textStyle(24, FontWeight.bold,
-        Theme.of(Get.context!).textTheme.bodyText1!.color!);
+        Theme.of(Get.context!).textTheme.bodyLarge!.color!);
   }
 
   static TextStyle textAccentNormal15() {

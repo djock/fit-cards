@@ -83,7 +83,7 @@ class _ExercisesListModalState extends State<ExercisesListModal> {
                 widget.workoutController.exercises.removeAt(oldIndex);
             widget.workoutController.exercises.insert(newIndex, movedExercise);
 
-            if (widget.callback != null) widget.callback();
+            widget.callback();
           });
         },
       ),

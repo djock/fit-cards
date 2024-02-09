@@ -118,7 +118,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     CustomButton(
                       buttonColor: Theme.of(context).primaryColor,
                       textColor:
-                          Theme.of(Get.context!).textTheme.bodyText1!.color!,
+                          Theme.of(Get.context!).textTheme.bodyLarge!.color!,
                       isOutline: false,
                       buttonText: AppLocalizations.start,
                       onPressed: () {
