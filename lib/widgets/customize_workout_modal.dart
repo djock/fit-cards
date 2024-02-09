@@ -12,7 +12,7 @@ import 'package:numberpicker/numberpicker.dart';
 class CustomizeWorkoutModal extends StatefulWidget {
   final WorkoutController workoutController;
 
-  const CustomizeWorkoutModal({Key key, this.workoutController})
+  const CustomizeWorkoutModal({Key? key, required this.workoutController})
       : super(key: key);
 
   @override
@@ -144,26 +144,19 @@ class _CustomizeWorkoutModal extends State<CustomizeWorkoutModal> {
   Widget _buildSkipExerciseCheckbox() {
     return widget.workoutController.type == workoutType.hiit
         ? Theme(
-            data:
-                ThemeData(unselectedWidgetColor: Theme.of(context).accentColor),
+            data: ThemeData(
+                unselectedWidgetColor: Theme.of(context).primaryColor),
             child: CheckboxListTile(
               contentPadding: EdgeInsets.only(left: 0, right: 0),
-              activeColor: Theme.of(context).accentColor,
+              activeColor: Theme.of(context).primaryColor,
               checkColor: Theme.of(context).canvasColor,
-              selectedTileColor: Theme.of(context).accentColor,
+              selectedTileColor: Theme.of(context).primaryColor,
               title: Text(
                 AppLocalizations.skipExercise,
                 style: AppTheme.customAccentText(FontWeight.normal, 14),
               ),
               value: _canSkip,
-              onChanged: (bool value) {
-                setState(() {
-                  _changeOccurred = true;
-                  _canSkip = value;
-
-                  _setState();
-                });
-              },
+              onChanged: (bool? value) {},
             ),
           )
         : SizedBox();
@@ -191,7 +184,7 @@ class _CustomizeWorkoutModal extends State<CustomizeWorkoutModal> {
             }),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(16),
-              border: Border.all(color: Theme.of(context).accentColor),
+              border: Border.all(color: Theme.of(context).primaryColor),
             ),
           )
         : SizedBox();
@@ -220,7 +213,7 @@ class _CustomizeWorkoutModal extends State<CustomizeWorkoutModal> {
             }),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(16),
-              border: Border.all(color: Theme.of(context).accentColor),
+              border: Border.all(color: Theme.of(context).primaryColor),
             ),
           )
         : SizedBox();
@@ -260,7 +253,7 @@ class _CustomizeWorkoutModal extends State<CustomizeWorkoutModal> {
               }),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(16),
-                border: Border.all(color: Theme.of(context).accentColor),
+                border: Border.all(color: Theme.of(context).primaryColor),
               ),
             ),
           ],
@@ -291,7 +284,7 @@ class _CustomizeWorkoutModal extends State<CustomizeWorkoutModal> {
       }),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: Theme.of(context).accentColor),
+        border: Border.all(color: Theme.of(context).primaryColor),
       ),
     );
   }
@@ -330,7 +323,7 @@ class _CustomizeWorkoutModal extends State<CustomizeWorkoutModal> {
         ? Text(
             value,
             style: TextStyle(
-                color: Theme.of(Get.context).accentColor,
+                color: Theme.of(Get.context!).primaryColor,
                 fontWeight: FontWeight.bold,
                 fontSize: 20),
           )

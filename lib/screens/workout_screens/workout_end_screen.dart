@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:math';
 
-import 'package:confetti/confetti.dart';
 import 'package:fitcards/handlers/app_theme.dart';
 import 'package:fitcards/handlers/workout_controller.dart';
 import 'package:fitcards/utilities/app_localizations.dart';
@@ -13,8 +12,8 @@ class WorkoutEndScreen extends StatefulWidget {
   final WorkoutController workoutController;
 
   const WorkoutEndScreen({
-    Key key,
-    this.workoutController,
+    Key? key,
+    required this.workoutController,
   }) : super(key: key);
 
   @override
@@ -22,19 +21,14 @@ class WorkoutEndScreen extends StatefulWidget {
 }
 
 class _WorkoutEndScreenState extends State<WorkoutEndScreen> {
-  ConfettiController _confettiController;
-
   @override
   void initState() {
-    _confettiController =
-        ConfettiController(duration: const Duration(seconds: 10));
     _startCountdown();
     super.initState();
   }
 
   @override
   void dispose() {
-    _confettiController.dispose();
     super.dispose();
   }
 
@@ -65,16 +59,13 @@ class _WorkoutEndScreenState extends State<WorkoutEndScreen> {
   Future<Null> _startCountdown() async {
     const timeOut = const Duration(milliseconds: 500);
     new Timer(timeOut, () {
-      setState(() {
-        _confettiController.play();
-      });
+      setState(() {});
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return SafeScreen(
-      appBar: null,
       body: Stack(
         children: [
           Container(
@@ -115,27 +106,10 @@ class _WorkoutEndScreenState extends State<WorkoutEndScreen> {
               ),
             ),
           ),
-          Align(
-            alignment: Alignment.topCenter,
-            child: ConfettiWidget(
-              confettiController: _confettiController,
-              blastDirectionality: BlastDirectionality.explosive,
-              // don't specify a direction, blast randomly
-              shouldLoop: true,
-              // start again as soon as the animation is finished
-              colors: const [
-                Colors.green,
-                Colors.blue,
-                Colors.pink,
-                Colors.orange,
-                Colors.purple
-              ],
-              // manually specify the colors to be used
-              createParticlePath: _drawStar, // define a custom shape/path.
-            ),
-          ),
         ],
       ),
+      appBar: AppBar(),
+      topSafe: false,
     );
   }
 }

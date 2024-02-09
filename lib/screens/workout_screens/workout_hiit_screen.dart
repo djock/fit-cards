@@ -24,7 +24,7 @@ class WorkoutHiitScreen extends StatefulWidget {
 
 class _WorkoutHiitScreenState extends State<WorkoutHiitScreen>
     with TickerProviderStateMixin {
-  WorkoutController _workoutController;
+  WorkoutController? _workoutController;
 
   CardController _exerciseController = new CardController();
   CardController _schemeController = new CardController();
@@ -55,40 +55,40 @@ class _WorkoutHiitScreenState extends State<WorkoutHiitScreen>
     }
   }
 
-  Future<bool> _onBackPressed() {
-    if (_workoutController.isWorkoutActive()) {
-      return showDialog(
-              context: context,
-              builder: (context) => GeneralModal(
-                    subTitle: AppLocalizations.closeWorkoutSubtitle,
-                    okAction: () {
-                      _onStopWorkout();
-                      Get.back();
-                    },
-                    cancelAction: () => Get.back(),
-                    okActionText: AppLocalizations.close,
-                    cancelActionText: AppLocalizations.cancel,
-                  )) ??
-          false;
+  Future<bool> _onBackPressed() async {
+    if (_workoutController!.isWorkoutActive()) {
+      await showDialog(
+          context: context,
+          builder: (context) => GeneralModal(
+                subTitle: AppLocalizations.closeWorkoutSubtitle,
+                okAction: () {
+                  _onStopWorkout();
+                  Get.back();
+                },
+                cancelAction: () => Get.back(),
+                okActionText: AppLocalizations.close,
+                cancelActionText: AppLocalizations.cancel,
+                title: '',
+              ));
     } else {
       Get.back();
       Get.back();
     }
+
+    return true;
   }
 
   PreferredSizeWidget _buildAppBar() {
-    if (_workoutController.isWorkoutActive()) {
-      return CustomAppBar.buildWorkout(_workoutController.duration,
-          timerType.timer, null, () => _onStopWorkout(), _workoutController);
+    if (_workoutController!.isWorkoutActive()) {
+      return CustomAppBar.buildWorkout(_workoutController!.duration,
+          timerType.timer, null, () => _onStopWorkout(), _workoutController!);
     }
 
     return CustomAppBar.buildWithActions([
       IconButton(
           icon: FaIcon(
             FontAwesomeIcons.slidersH,
-            color: Get.isDarkMode
-                ? Theme.of(Get.context).accentColor
-                : Theme.of(Get.context).primaryColorDark,
+            color: Theme.of(Get.context!).primaryColorDark,
             size: 18,
           ),
           onPressed: () {
@@ -99,9 +99,10 @@ class _WorkoutHiitScreenState extends State<WorkoutHiitScreen>
 
   @override
   Widget build(BuildContext context) {
-    return _workoutController.state == workoutState.finish
+    return _workoutController!.state == workoutState.finish
         ? WorkoutEndScreen(
-            workoutController: _workoutController,
+            workoutController: _workoutController!,
+            key: Key('finish'),
           )
         : WillPopScope(
             onWillPop: _onBackPressed,
@@ -122,7 +123,7 @@ class _WorkoutHiitScreenState extends State<WorkoutHiitScreen>
                             list: AppState.exercises,
                             color: AppColors.exerciseCardColor,
                             cardController: _exerciseController,
-                            isBlocked: _workoutController.state ==
+                            isBlocked: _workoutController!.state ==
                                     workoutState.countdown
                                 ? true
                                 : false,
@@ -133,7 +134,7 @@ class _WorkoutHiitScreenState extends State<WorkoutHiitScreen>
                             onSkip: () {
                               _onSkipExercise();
                             },
-                            workoutController: _workoutController,
+                            workoutController: _workoutController!,
                           ),
                         ),
                         SizedBox(
@@ -145,14 +146,14 @@ class _WorkoutHiitScreenState extends State<WorkoutHiitScreen>
                             list: AppState.schemes,
                             color: AppColors.schemeCardColor,
                             cardController: _schemeController,
-                            isBlocked: _workoutController.isWorkoutActive()
+                            isBlocked: _workoutController!.isWorkoutActive()
                                 ? false
                                 : true,
                             type: cardType.scheme,
                             onCallback: () {
                               _onSwipeSchemeCard();
                             },
-                            workoutController: _workoutController,
+                            workoutController: _workoutController!,
                           ),
                         ),
                         SizedBox(
@@ -168,17 +169,17 @@ class _WorkoutHiitScreenState extends State<WorkoutHiitScreen>
   }
 
   void _onStartWorkout() {
-    _workoutController.startWorkout();
+    _workoutController!.startWorkout();
 
     _buildCountDownTimer();
   }
 
   void _onStopWorkout() {
-    _workoutController.stopWorkout();
+    _workoutController!.stopWorkout();
   }
 
   void _onSwipeExerciseCard() {
-    if (_workoutController.state == workoutState.active) {
+    if (_workoutController!.state == workoutState.active) {
       if (_exerciseController.hasSkipped) {
         _schemeController.cancelCallback = true;
         _schemeController.triggerLeft();
@@ -188,16 +189,16 @@ class _WorkoutHiitScreenState extends State<WorkoutHiitScreen>
       }
     }
 
-    if (_workoutController.state == workoutState.active ||
-        _workoutController.state == workoutState.countdown ||
-        _workoutController.state == workoutState.rest) return;
+    if (_workoutController!.state == workoutState.active ||
+        _workoutController!.state == workoutState.countdown ||
+        _workoutController!.state == workoutState.rest) return;
 
     _onStartWorkout();
     _schemeController.triggerLeft();
   }
 
   void _onSwipeSchemeCard() {
-    if (_workoutController.state == workoutState.active) {
+    if (_workoutController!.state == workoutState.active) {
       _onStartRest(_exerciseController);
     }
   }
@@ -206,13 +207,13 @@ class _WorkoutHiitScreenState extends State<WorkoutHiitScreen>
     otherController.cancelCallback = true;
     otherController.triggerLeft();
 
-    _workoutController.startRest(_exerciseController.index);
+    _workoutController!.startRest(_exerciseController.index);
     _buildCountDownTimer();
   }
 
   void _onSkipExercise() {
     AnalyticsHandler.logSkipExercise(
-        _workoutController.exercises[_exerciseController.index].name);
+        _workoutController!.exercises[_exerciseController.index].name);
     _exerciseController.triggerLeft();
   }
 
@@ -224,7 +225,7 @@ class _WorkoutHiitScreenState extends State<WorkoutHiitScreen>
           return FractionallySizedBox(
             heightFactor: 0.35,
             child: CustomizeWorkoutModal(
-              workoutController: _workoutController,
+              workoutController: _workoutController!,
             ),
           );
         }).then((value) {
@@ -252,7 +253,7 @@ class _WorkoutHiitScreenState extends State<WorkoutHiitScreen>
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        _workoutController.state == workoutState.countdown
+                        _workoutController!.state == workoutState.countdown
                             ? AppLocalizations.getReady
                             : AppLocalizations.rest,
                         style: TextStyle(
@@ -265,14 +266,15 @@ class _WorkoutHiitScreenState extends State<WorkoutHiitScreen>
                       ),
                       TimerWidget(
                         duration:
-                            _workoutController.state == workoutState.countdown
+                            _workoutController!.state == workoutState.countdown
                                 ? 10
-                                : _workoutController.settings.restTime,
+                                : _workoutController!.settings.restTime,
                         callback: () {
-                          _workoutController.setState(workoutState.active);
+                          _workoutController!.setState(workoutState.active);
                           Get.back();
                         },
                         type: timerType.countdown,
+                        workoutController: null,
                       ),
                     ],
                   )),

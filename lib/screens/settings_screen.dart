@@ -17,7 +17,7 @@ import 'package:url_launcher/url_launcher.dart';
 class SettingsScreen extends StatefulWidget {
   final Function callback;
 
-  const SettingsScreen({Key key, this.callback}) : super(key: key);
+  const SettingsScreen({Key? key, required this.callback}) : super(key: key);
 
   @override
   _SettingsScreenState createState() => _SettingsScreenState();
@@ -66,7 +66,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                               leftIcon: FontAwesomeIcons.adjust,
                               rightIcon: FontAwesomeIcons.chevronRight,
                               function: () {
-                                Get.to(() => SettingsThemeScreen())
+                                Get.to(() => SettingsThemeScreen())!
                                     .then((value) {
                                   widget.callback();
                                   setState(() {});
@@ -117,6 +117,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           _buildAppInfo(),
         ],
       ),
+      topSafe: false,
 //      body: SingleChildScrollView(
 //          child: ),
     );
@@ -164,6 +165,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               cancelAction: () => Get.back(),
               okActionText: AppLocalizations.close,
               cancelActionText: AppLocalizations.cancel,
+              title: '',
             ));
   }
 

@@ -5,7 +5,11 @@ class SafeScreen extends StatelessWidget {
   final Widget body;
   final bool topSafe;
 
-  const SafeScreen({Key key, this.appBar, this.body, this.topSafe})
+  const SafeScreen(
+      {Key? key,
+      required this.appBar,
+      required this.body,
+      required this.topSafe})
       : super(key: key);
 
   @override
@@ -33,7 +37,11 @@ class SafeScreenWithNavigation extends StatelessWidget {
   final BottomNavigationBar navigationBar;
 
   const SafeScreenWithNavigation(
-      {Key key, this.appBar, this.body, this.topSafe, this.navigationBar})
+      {Key? key,
+      required this.appBar,
+      required this.body,
+      required this.topSafe,
+      required this.navigationBar})
       : super(key: key);
 
   @override

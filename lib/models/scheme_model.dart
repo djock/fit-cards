@@ -6,7 +6,7 @@ enum schemeType {
 }
 
 class SchemeModel extends BaseModel {
-  final schemeType type;
+  final schemeType? type;
 
   SchemeModel({name, id, this.type}) : super(name, id);
 
@@ -19,7 +19,7 @@ class SchemeModel extends BaseModel {
   }
 
   static List<SchemeModel> fromJsonList(json) {
-    var tempList = List<SchemeModel>(); // ignore: deprecated_member_use
+    var tempList = <SchemeModel>[]; // ignore: deprecated_member_use
 
     for (var item in json) {
       tempList.add(new SchemeModel.fromJson(item));

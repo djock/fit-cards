@@ -88,6 +88,7 @@ class _SettingsThemeScreenState extends State<SettingsThemeScreen> {
           ],
         ),
       ),
+      topSafe: false,
     );
   }
 }

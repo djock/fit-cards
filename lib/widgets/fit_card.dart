@@ -12,17 +12,17 @@ enum cardType { exercise, scheme }
 typedef void BaseModelCallBack(BaseModel val);
 
 class FitCard extends StatelessWidget {
-  final List<BaseModel> list;
-  final Color color;
-  final CardController cardController;
-  final bool isBlocked;
-  final cardType type;
-  final Function onCallback;
-  final Function onSkip;
-  final WorkoutController workoutController;
+  final List<BaseModel>? list;
+  final Color? color;
+  final CardController? cardController;
+  final bool? isBlocked;
+  final cardType? type;
+  final Function? onCallback;
+  final Function? onSkip;
+  final WorkoutController? workoutController;
 
   const FitCard({
-    Key key,
+    Key? key,
     this.list,
     this.color,
     this.cardController,
@@ -36,11 +36,11 @@ class FitCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TinderSwapCard(
-      isBlocked: isBlocked,
+      isBlocked: isBlocked!,
       swipeUp: true,
       swipeDown: true,
       orientation: AmassOrientation.RIGHT,
-      totalNum: list.length,
+      totalNum: list!.length,
       stackNum: 3,
       animDuration: 300,
       swipeEdge: 7.0,
@@ -49,10 +49,10 @@ class FitCard extends StatelessWidget {
       minWidth: MediaQuery.of(context).size.width * 0.8,
       minHeight: MediaQuery.of(context).size.width * 0.8,
       cardBuilder: (context, index) {
-        if (index == list.length - 1) {
-          return _buildRefreshCard(color);
+        if (index == list!.length - 1) {
+          return _buildRefreshCard(color!);
         }
-        cardController.setIndex(index);
+        cardController!.setIndex(index);
 
         int colorIndex = 0;
 
@@ -63,20 +63,20 @@ class FitCard extends StatelessWidget {
         }
 
         if (type == cardType.exercise) {
-          var exerciseModel = list[index] as ExerciseModel;
-          cardController.setPoints(exerciseModel.points);
+          var exerciseModel = list![index] as ExerciseModel;
+          cardController!.setPoints(exerciseModel.points!);
 
           return _buildCard(index, exerciseModel.name,
               AppColors.exerciseCardColors[colorIndex],
-              points: exerciseModel.points,
-              isFirstCard: list[index].name == AppLocalizations.exercise);
+              points: exerciseModel.points!,
+              isFirstCard: list![index].name == AppLocalizations.exercise);
         } else {
           return _buildCard(
-              index, list[index].name, AppColors.schemeCardColors[colorIndex],
-              isFirstCard: list[index].name == AppLocalizations.scheme);
+              index, list![index].name, AppColors.schemeCardColors[colorIndex],
+              isFirstCard: list![index].name == AppLocalizations.scheme);
         }
       },
-      cardController: cardController,
+      cardController: cardController!,
       swipeUpdateCallback: (DragUpdateDetails details, Alignment align) {
         /// Get swiping card's alignment
         if (align.x < 0) {
@@ -86,10 +86,10 @@ class FitCard extends StatelessWidget {
         /// Get orientation & index of swiped card!
         if (orientation == CardSwipeOrientation.LEFT ||
             orientation == CardSwipeOrientation.RIGHT) {
-          if (cardController.cancelCallback) {
-            cardController.cancelCallback = false;
+          if (cardController!.cancelCallback) {
+            cardController!.cancelCallback = false;
           } else {
-            onCallback();
+            onCallback!();
           }
         }
       },
@@ -254,15 +254,15 @@ class FitCard extends StatelessWidget {
 
     if (type == cardType.exercise &&
         index != 0 &&
-        workoutController.settings.canSkipExercise) {
+        workoutController!.settings.canSkipExercise) {
       return Align(
         alignment: Alignment.bottomRight,
         child: IconButton(
           icon: FaIcon(FontAwesomeIcons.forward),
           color: AppColors.canvasColorLight.withOpacity(1),
           onPressed: () {
-            cardController.hasSkipped = true;
-            onSkip();
+            cardController!.hasSkipped = true;
+            onSkip!();
           },
         ),
       );

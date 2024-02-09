@@ -12,13 +12,17 @@ class IconListItem extends StatelessWidget {
   final Function function;
 
   const IconListItem(
-      {Key key, this.text, this.leftIcon, this.rightIcon, this.function})
+      {Key? key,
+      required this.text,
+      required this.leftIcon,
+      required this.rightIcon,
+      required this.function})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Theme.of(Get.context).canvasColor, // AppTheme.widgetBackground(),
+      color: Theme.of(Get.context!).canvasColor, // AppTheme.widgetBackground(),
       child: ListTile(
         onTap: () {
           if (function != null) {
@@ -31,7 +35,7 @@ class IconListItem extends StatelessWidget {
           style: AppTheme.textAccentBold15(), // AppTheme.textAccentNormal15(),
         ),
         leading: leftIcon != null
-            ? _buildIcon(leftIcon, Theme.of(Get.context).accentColor)
+            ? _buildIcon(leftIcon, Theme.of(Get.context!).primaryColor)
             : SizedBox(),
         trailing: rightIcon != null
             ? _buildIcon(rightIcon, AppColors.inactiveButtonGrey)

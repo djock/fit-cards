@@ -9,7 +9,8 @@ class WorkoutButton extends StatelessWidget {
   final String text;
   final IconData icon;
 
-  const WorkoutButton({Key key, this.action, this.text, this.icon})
+  const WorkoutButton(
+      {Key? key, required this.action, required this.text, required this.icon})
       : super(key: key);
 
   @override
@@ -21,7 +22,7 @@ class WorkoutButton extends StatelessWidget {
         children: [
           ClipOval(
             child: Material(
-              color: Theme.of(Get.context).accentColor, // button color
+              color: Theme.of(Get.context!).primaryColor, // button color
               child: InkWell(
                 splashColor: Colors.transparent, // inkwell color
                 child: Container(
@@ -58,16 +59,16 @@ class WorkoutButton extends StatelessWidget {
       label: Text('', style: AppTheme.textWhiteBold24()),
       icon: FaIcon(
         icon,
-        color: Theme.of(Get.context).canvasColor,
+        color: Theme.of(Get.context!).canvasColor,
       ),
       onPressed: () {
         action();
       },
       style: ButtonStyle(
           foregroundColor: MaterialStateProperty.all<Color>(
-              Theme.of(Get.context).accentColor),
+              Theme.of(Get.context!).primaryColor),
           backgroundColor: MaterialStateProperty.all<Color>(
-              Theme.of(Get.context).accentColor),
+              Theme.of(Get.context!).primaryColor),
           shape: MaterialStateProperty.all<RoundedRectangleBorder>(
               RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(100),

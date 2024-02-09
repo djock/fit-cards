@@ -3,10 +3,10 @@ import 'package:fitcards/handlers/workout_controller.dart';
 import 'package:flutter/foundation.dart' as Foundation;
 
 class AnalyticsHandler {
-  static FirebaseAnalytics analytics = FirebaseAnalytics();
+  static FirebaseAnalytics analytics = FirebaseAnalytics.instance;
 
   static Future<void> logEvent(String eventName,
-      {Map<String, dynamic> params}) async {
+      {Map<String, dynamic>? params}) async {
     if (Foundation.kReleaseMode) {
       await analytics.logEvent(
         name: eventName,
@@ -46,5 +46,4 @@ class AnalyticsHandler {
   // start workout: type
   // end workout
   // skip exercise
-
 }

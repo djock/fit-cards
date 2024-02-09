@@ -8,7 +8,8 @@ class ExercisesListModal extends StatefulWidget {
   final WorkoutController workoutController;
   final Function callback;
 
-  const ExercisesListModal({Key key, this.workoutController, this.callback})
+  const ExercisesListModal(
+      {Key? key, required this.workoutController, required this.callback})
       : super(key: key);
 
   @override
@@ -67,6 +68,10 @@ class _ExercisesListModalState extends State<ExercisesListModal> {
               leftValue: (index + 1).toString(),
               centerValue: '${widget.workoutController.exercises[index].name}',
               rightValue: '═',
+              onTap: () {},
+              deleteAction: () {},
+              shareAction: () {},
+              backgroundColor: Colors.red,
             ),
         ],
         onReorder: (int oldIndex, int newIndex) {
@@ -99,7 +104,7 @@ class _ExercisesListModalState extends State<ExercisesListModal> {
 //            child: Text(
 //              AppLocalizations.exercisesOrder,
 //              style: TextStyle(
-//                  color: Theme.of(Get.context).accentColor,
+//                  color: Theme.of(Get.context!).primaryColor,
 //                  fontFamily: 'Lora',
 //                  fontSize: 22,
 //                  decoration: TextDecoration.none,

@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 class HowItWorksOverlay {
   static void build(List<String> texts) {
     showGeneralDialog(
-        context: Get.context,
+        context: Get.context!,
         pageBuilder: (BuildContext buildContext, Animation<double> animation,
             Animation<double> secondaryAnimation) {
           return SafeArea(
@@ -33,7 +33,7 @@ class HowItWorksOverlay {
         },
         barrierDismissible: true,
         barrierLabel:
-            MaterialLocalizations.of(Get.context).modalBarrierDismissLabel,
+            MaterialLocalizations.of(Get.context!).modalBarrierDismissLabel,
         transitionDuration: const Duration(milliseconds: 150));
   }
 

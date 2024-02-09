@@ -6,8 +6,7 @@ import '../utilities/app_colors.dart';
 
 ThemeData appThemeDark() => ThemeData(
       brightness: Brightness.dark,
-      primaryColor: AppColors.accentColor,
-      accentColor: AppColors.accentColor,
+      primaryColor: AppColors.primaryColor,
       canvasColor: AppColors.canvasColorDark,
       primaryColorDark: AppColors.canvasColorDark,
       floatingActionButtonTheme: FloatingActionButtonThemeData(),
@@ -25,8 +24,7 @@ ThemeData appThemeDark() => ThemeData(
 
 ThemeData appThemeLight() => ThemeData(
       brightness: Brightness.light,
-      primaryColor: AppColors.accentColor,
-      accentColor: AppColors.accentColor,
+      primaryColor: AppColors.primaryColor,
       canvasColor: AppColors.canvasColorLight,
       primaryColorDark: AppColors.canvasColorDark,
       floatingActionButtonTheme: FloatingActionButtonThemeData(),
@@ -48,8 +46,8 @@ class AppTheme {
   }
 
   static TextStyle textWhiteBold24() {
-    return _textStyle(
-        24, FontWeight.bold, Theme.of(Get.context).textTheme.bodyText1.color);
+    return _textStyle(24, FontWeight.bold,
+        Theme.of(Get.context!).textTheme.bodyText1!.color!);
   }
 
   static TextStyle textAccentNormal15() {
@@ -95,10 +93,11 @@ class AppTheme {
   }
 
   static Color dynamicColor() =>
-      Get.context.isDarkMode ? Colors.white : Colors.black;
+      Get.context!.isDarkMode ? Colors.white : Colors.black;
 
-  static Color appBarColor() =>
-      Get.context.isDarkMode ? AppColors.barColorDark : AppColors.barColorLight;
+  static Color appBarColor() => Get.context!.isDarkMode
+      ? AppColors.barColorDark
+      : AppColors.barColorLight;
 
   static Color widgetBackground() =>
       Get.isDarkMode ? AppColors.widgetColorDark : AppColors.widgetColorLight;

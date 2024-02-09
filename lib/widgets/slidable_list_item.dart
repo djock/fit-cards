@@ -12,14 +12,14 @@ class SlidableListItem extends StatelessWidget {
   final Color backgroundColor;
 
   const SlidableListItem(
-      {Key key,
-      this.leftValue,
-      this.centerValue,
-      this.rightValue,
-      this.onTap,
-      this.deleteAction,
-      this.shareAction,
-      this.backgroundColor})
+      {Key? key,
+      required this.leftValue,
+      required this.centerValue,
+      required this.rightValue,
+      required this.onTap,
+      required this.deleteAction,
+      required this.shareAction,
+      required this.backgroundColor})
       : super(key: key);
 
   @override
@@ -27,42 +27,15 @@ class SlidableListItem extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: Slidable(
-        actionPane: SlidableScrollActionPane(),
         direction: Axis.horizontal,
-        actionExtentRatio: 0.25,
         child: ListItem(
           leftValue: leftValue,
           centerValue: centerValue,
           rightValue: rightValue,
           backgroundColor: backgroundColor,
         ),
-        secondaryActions: _buildActions(),
       ),
     );
-  }
-
-  List<Widget> _buildActions() {
-    List<Widget> result = [];
-
-    if (deleteAction != null || shareAction != null) {
-      if (deleteAction != null) {
-        result.add(IconSlideAction(
-          caption: 'Delete',
-          color: Colors.red,
-          icon: Icons.delete,
-          onTap: () => _delete(),
-        ));
-      }
-      if (shareAction != null) {
-        result.add(IconSlideAction(
-          caption: 'Share',
-          color: Colors.indigo,
-          icon: Icons.share,
-          onTap: () => _share(),
-        ));
-      }
-    }
-    return result;
   }
 
   void _share() {

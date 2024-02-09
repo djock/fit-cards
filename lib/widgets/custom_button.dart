@@ -11,13 +11,13 @@ class CustomButton extends StatefulWidget {
   final Color buttonColor;
 
   const CustomButton(
-      {Key key,
-      this.buttonText,
-      this.onPressed,
-      this.textColor,
-      this.isOutline,
+      {Key? key,
+      required this.buttonText,
+      required this.onPressed,
+      required this.textColor,
+      required this.isOutline,
       this.isRequest = false,
-      this.buttonColor})
+      required this.buttonColor})
       : super(key: key);
 
   @override
@@ -57,21 +57,15 @@ class _CustomButtonState extends State<CustomButton> {
   }
 
   Widget _buildRaisedButton() {
-    return RaisedButton(
-      shape: _shape(),
-      onPressed: widget.onPressed,
-      color: widget.buttonColor,
+    return TextButton(
+      onPressed: () => widget.onPressed(),
       child: widget.isRequest ? CircularProgressIndicator() : _buttonText(),
     );
   }
 
   Widget _buildOutlineButton() {
-    return OutlineButton(
-      borderSide: BorderSide(
-          color: Theme.of(Get.context).textTheme.bodyText1.color, width: 2),
-      shape: _shape(),
-      onPressed: widget.onPressed,
-      color: widget.buttonColor,
+    return OutlinedButton(
+      onPressed: () => widget.onPressed(),
       child: widget.isRequest ? CircularProgressIndicator() : _buttonText(),
     );
   }

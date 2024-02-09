@@ -10,14 +10,14 @@ import 'package:fitcards/widgets/slidable_list_item.dart';
 import 'package:flutter/material.dart';
 
 class WorkoutLogDetailsScreen extends StatelessWidget {
-  final WorkoutLogModel workoutLogModel;
+  final WorkoutLogModel? workoutLogModel;
 
-  const WorkoutLogDetailsScreen({Key key, this.workoutLogModel})
+  const WorkoutLogDetailsScreen({Key? key, this.workoutLogModel})
       : super(key: key);
 
   List<Widget> _buildExercisesList() {
     var exercisesList = AppState.loggedExercisesList
-        .where((element) => element.index == workoutLogModel.index)
+        .where((element) => element.index == workoutLogModel!.index)
         .toList();
 
     List<Widget> _tempList = <Widget>[];
@@ -32,10 +32,14 @@ class WorkoutLogDetailsScreen extends StatelessWidget {
 
     for (var exercise in exercisesList) {
       _tempList.add(SlidableListItem(
-          leftValue: index.toString(),
-          centerValue: exercise.exercise,
-          rightValue: exercise.scheme,
-          onTap: null));
+        leftValue: index.toString(),
+        centerValue: exercise.exercise,
+        rightValue: exercise.scheme,
+        onTap: () {},
+        deleteAction: () {},
+        shareAction: () {},
+        backgroundColor: Colors.black,
+      ));
       index++;
     }
 
@@ -46,7 +50,7 @@ class WorkoutLogDetailsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeScreen(
       topSafe: false,
-      appBar: CustomAppBar.buildNormal(workoutLogModel.name),
+      appBar: CustomAppBar.buildNormal(workoutLogModel!.name),
       body: SingleChildScrollView(
           child: Container(
         padding: EdgeInsets.symmetric(horizontal: 8),
@@ -65,17 +69,21 @@ class WorkoutLogDetailsScreen extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           ListItem(
-              leftValue: '',
-              centerValue: AppLocalizations.date,
-              rightValue: Utils.formatDate(workoutLogModel.date)),
+            leftValue: '',
+            centerValue: AppLocalizations.date,
+            rightValue: Utils.formatDate(workoutLogModel!.date),
+            backgroundColor: Colors.red,
+          ),
           ListItem(
               leftValue: '',
               centerValue: AppLocalizations.duration,
-              rightValue: Utils.formatTimeShort(workoutLogModel.duration)),
+              rightValue: Utils.formatTimeShort(workoutLogModel!.duration),
+              backgroundColor: Colors.red),
           ListItem(
               leftValue: '',
               centerValue: AppLocalizations.points,
-              rightValue: workoutLogModel.points.toString()),
+              rightValue: workoutLogModel!.points.toString(),
+              backgroundColor: Colors.red),
         ],
       ),
     );

@@ -37,6 +37,8 @@ class _WorkoutsLogScreenState extends State<WorkoutsLogScreen> {
                   workoutLogModel: workout,
                 ));
           },
+          shareAction: () {},
+          backgroundColor: Colors.red,
         ));
       }
     } else {

@@ -10,7 +10,7 @@ class AppColors {
   static const widgetColorDark = Color(0xff1D1D1E);
   static const widgetColorLight = Color(0xffFFFFFF);
 
-  static const accentColor = Color(0xff1481BA);
+  static const primaryColor = Color(0xff1481BA);
 
   static const exerciseCardColor = Color(0xff659B5E);
   static const schemeCardColor = Color(0xffCE4257);

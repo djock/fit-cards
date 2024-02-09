@@ -115,8 +115,8 @@
 //          icon: FaIcon(
 //            FontAwesomeIcons.slidersH,
 //            color: Get.isDarkMode
-//                ? Theme.of(Get.context).accentColor
-//                : Theme.of(Get.context).primaryColorDark,
+//                ? Theme.of(Get.context!).primaryColor
+//                : Theme.of(Get.context!).primaryColorDark,
 //            size: 18,
 //          ),
 //          onPressed: () {

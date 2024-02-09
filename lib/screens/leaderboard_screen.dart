@@ -17,11 +17,6 @@ class _LeaderBoardScreenState extends State<LeaderBoardScreen> {
 
   @override
   void initState() {
-    FirebaseDatabaseHandler.getLeaderBoard().then((value) {
-      setState(() {
-        _hasLoaded = true;
-      });
-    });
     super.initState();
   }
 
@@ -53,9 +48,9 @@ class _LeaderBoardScreenState extends State<LeaderBoardScreen> {
 
       for (var entry in FirebaseDatabaseHandler.leaderBoard) {
         var deviceId = RegExp(r'^[^_]*_').stringMatch(entry.name);
-        var userName = entry.name.replaceAll(deviceId, '');
+        var userName = entry.name.replaceAll(deviceId!, '');
 
-        Color backgroundColor;
+        Color? backgroundColor;
 
         if (index == 1) {
           backgroundColor = AppColors.goldColor.withOpacity(0.8);
@@ -69,7 +64,10 @@ class _LeaderBoardScreenState extends State<LeaderBoardScreen> {
           leftValue: index.toString(),
           centerValue: userName,
           rightValue: entry.points.toString(),
-          backgroundColor: backgroundColor,
+          backgroundColor: backgroundColor!,
+          onTap: () {},
+          deleteAction: () {},
+          shareAction: () {},
         ));
         index++;
       }

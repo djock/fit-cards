@@ -8,11 +8,11 @@ class ListItem extends StatelessWidget {
   final Color backgroundColor;
 
   const ListItem(
-      {Key key,
-      this.leftValue,
-      this.centerValue,
-      this.rightValue,
-      this.backgroundColor})
+      {Key? key,
+      required this.leftValue,
+      required this.centerValue,
+      required this.rightValue,
+      required this.backgroundColor})
       : super(key: key);
 
   @override

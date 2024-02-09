@@ -9,7 +9,6 @@ class CustomAppBar {
   static PreferredSizeWidget buildWithActions(List<Widget> actions,
       {double elevation = 0.0, String text = '', double iconSize = 24}) {
     return AppBar(
-      brightness: Get.context.isDarkMode ? Brightness.dark : Brightness.light,
       backgroundColor: AppTheme.appBarColor(),
       elevation: elevation,
       iconTheme: IconThemeData(color: AppTheme.dynamicColor(), size: iconSize),
@@ -25,7 +24,6 @@ class CustomAppBar {
   static PreferredSizeWidget buildNormal(String text,
           {double elevation = 0.0}) =>
       AppBar(
-        brightness: Get.context.isDarkMode ? Brightness.dark : Brightness.light,
         backgroundColor: AppTheme.appBarColor(),
         elevation: elevation,
         iconTheme: IconThemeData(
@@ -41,7 +39,6 @@ class CustomAppBar {
   static PreferredSizeWidget buildWorkoutIdle(String text,
           {double elevation = 0.0}) =>
       AppBar(
-        brightness: Get.context.isDarkMode ? Brightness.dark : Brightness.light,
         backgroundColor: Colors.transparent,
         elevation: 0.0,
         iconTheme: IconThemeData(color: Colors.red),
@@ -56,7 +53,6 @@ class CustomAppBar {
   static PreferredSizeWidget buildWorkoutActive(
           String text, Function callback) =>
       AppBar(
-        brightness: Get.context.isDarkMode ? Brightness.dark : Brightness.light,
         backgroundColor: Colors.transparent,
         elevation: 0.0,
         iconTheme: IconThemeData(color: Colors.red),
@@ -73,14 +69,13 @@ class CustomAppBar {
                 color: Colors.red,
                 size: 40,
               ),
-              onPressed: callback)
+              onPressed: () => callback)
         ],
         centerTitle: true,
       );
 
   static PreferredSizeWidget buildEmpty() => AppBar(
         backgroundColor: Colors.transparent,
-        brightness: Get.context.isDarkMode ? Brightness.dark : Brightness.light,
         elevation: 0,
         iconTheme: IconThemeData(
           color: AppTheme.dynamicColor(),
@@ -91,11 +86,10 @@ class CustomAppBar {
   static PreferredSizeWidget buildWorkout(
           int duration,
           timerType timerType,
-          Function timerCallback,
+          Function? timerCallback,
           Function buttonCallback,
           WorkoutController workoutController) =>
       AppBar(
-        brightness: Get.context.isDarkMode ? Brightness.dark : Brightness.light,
         elevation: 0.0,
         backgroundColor: Colors.transparent,
         centerTitle: true,
@@ -107,7 +101,7 @@ class CustomAppBar {
                 color: Colors.red,
                 size: 35,
               ),
-              onPressed: buttonCallback)
+              onPressed: () => buttonCallback)
         ],
         flexibleSpace: Container(
           child: Column(
@@ -118,7 +112,7 @@ class CustomAppBar {
                 child: TimerWidget(
                   duration: duration,
                   callback: () {
-                    timerCallback();
+                    timerCallback!();
                   },
                   type: timerType,
                   workoutController: workoutController,

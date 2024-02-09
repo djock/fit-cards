@@ -14,13 +14,13 @@ class GeneralModal extends StatelessWidget {
   final Function cancelAction;
 
   const GeneralModal(
-      {Key key,
-      this.title,
-      this.subTitle,
-      this.okAction,
-      this.cancelAction,
-      this.okActionText,
-      this.cancelActionText})
+      {Key? key,
+      required this.title,
+      required this.subTitle,
+      required this.okAction,
+      required this.cancelAction,
+      required this.okActionText,
+      required this.cancelActionText})
       : super(key: key);
 
   @override
@@ -79,7 +79,7 @@ class GeneralModal extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  FlatButton(
+                  TextButton(
                     onPressed: () {
                       cancelAction();
                     },
@@ -92,14 +92,14 @@ class GeneralModal extends StatelessWidget {
                       ),
                     ),
                   ),
-                  FlatButton(
+                  TextButton(
                     onPressed: () {
                       okAction();
                     },
                     child: Text(
                       AppLocalizations.continueText,
                       style: TextStyle(
-                          color: Theme.of(Get.context).accentColor,
+                          color: Theme.of(Get.context!).primaryColor,
                           fontSize: 16.0,
                           fontWeight: FontWeight.bold),
                     ),

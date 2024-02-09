@@ -15,24 +15,26 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 
 class AppScreen extends StatefulWidget {
-  const AppScreen({Key key}) : super(key: key);
+  const AppScreen({Key? key}) : super(key: key);
 
   @override
   _AppScreenState createState() => _AppScreenState();
 }
 
 class _AppScreenState extends State<AppScreen> {
-  Future<bool> _onBackPressed() {
-    return showDialog(
-            context: context,
-            builder: (context) => GeneralModal(
-                  subTitle: AppLocalizations.closeAppSubtitle,
-                  okAction: () => SystemNavigator.pop(),
-                  cancelAction: () => Get.back(),
-                  okActionText: AppLocalizations.close,
-                  cancelActionText: AppLocalizations.cancel,
-                )) ??
-        false;
+  Future<bool> _onBackPressed() async {
+    await showDialog(
+        context: context,
+        builder: (context) => GeneralModal(
+              subTitle: AppLocalizations.closeAppSubtitle,
+              okAction: () => SystemNavigator.pop(),
+              cancelAction: () => Get.back(),
+              okActionText: AppLocalizations.close,
+              cancelActionText: AppLocalizations.cancel,
+              title: '',
+            ));
+
+    return true;
   }
 
   int _selectedIndex = 0;
@@ -73,13 +75,14 @@ class _AppScreenState extends State<AppScreen> {
                 backgroundColor: AppColors.inactiveButtonGrey,
                 child: FaIcon(
                   FontAwesomeIcons.running,
-                  color: Theme.of(Get.context).canvasColor,
+                  color: Theme.of(Get.context!).canvasColor,
                 ),
                 onPressed: () {
                   _openBottomSheet();
                 }),
             floatingActionButtonLocation:
                 FloatingActionButtonLocation.centerDocked),
+        appBar: AppBar(),
       ),
     );
   }
@@ -98,9 +101,7 @@ class _AppScreenState extends State<AppScreen> {
                 child: IconButton(
                   icon: FaIcon(
                     FontAwesomeIcons.chartBar,
-                    color: _selectedIndex == 0
-                        ? Theme.of(Get.context).accentColor
-                        : AppColors.inactiveButtonGrey,
+                    color: AppColors.inactiveButtonGrey,
                   ),
                   onPressed: () {
                     _onItemTapped(0);
@@ -111,9 +112,7 @@ class _AppScreenState extends State<AppScreen> {
                 padding: const EdgeInsets.only(left: 42),
                 child: IconButton(
                   icon: FaIcon(FontAwesomeIcons.cog,
-                      color: _selectedIndex == 1
-                          ? Theme.of(Get.context).accentColor
-                          : AppColors.inactiveButtonGrey),
+                      color: AppColors.inactiveButtonGrey),
                   onPressed: () {
                     _onItemTapped(1);
                   },
@@ -153,7 +152,7 @@ class _AppScreenState extends State<AppScreen> {
                 action: () {
                   AppStateHandler.shuffleJson();
                   Get.back();
-                  Get.to(() => WorkoutHiitScreen()).then((value) {
+                  Get.to(() => WorkoutHiitScreen())!.then((value) {
                     setState(() {});
                   });
                 },
@@ -167,7 +166,7 @@ class _AppScreenState extends State<AppScreen> {
                 action: () {
                   AppStateHandler.shuffleJson();
                   Get.back();
-                  Get.to(() => WorkoutTabataScreen()).then((value) {
+                  Get.to(() => WorkoutTabataScreen())!.then((value) {
                     setState(() {});
                   });
                 },

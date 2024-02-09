@@ -19,17 +19,18 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _textController = TextEditingController();
 
-  Future<bool> _onBackPressed() {
-    return showDialog(
-            context: context,
-            builder: (context) => GeneralModal(
-                  subTitle: AppLocalizations.closeAppSubtitle,
-                  okAction: () => SystemNavigator.pop(),
-                  cancelAction: () => Get.back(),
-                  okActionText: AppLocalizations.close,
-                  cancelActionText: AppLocalizations.cancel,
-                )) ??
-        false;
+  Future<bool> _onBackPressed() async {
+    await showDialog(
+        context: context,
+        builder: (context) => GeneralModal(
+              subTitle: AppLocalizations.closeAppSubtitle,
+              okAction: () => SystemNavigator.pop(),
+              cancelAction: () => Get.back(),
+              okActionText: AppLocalizations.close,
+              cancelActionText: AppLocalizations.cancel,
+              title: ' ',
+            ));
+    return true;
   }
 
   Widget _entryField(String defaultText) {
@@ -45,7 +46,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               keyboardType: TextInputType.name,
               validator: (value) {
                 bool fieldValid = false;
-                fieldValid = value.length > 0;
+                fieldValid = value!.length > 0;
 
                 if (!fieldValid) {
                   return AppLocalizations.errorNoName;
@@ -59,8 +60,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               },
               obscureText: false,
               decoration: CustomInputDecoration.build(defaultText),
-              style:
-                  TextStyle(color: Theme.of(context).accentColor, fontSize: 20),
+              style: TextStyle(
+                  color: Theme.of(context).primaryColor, fontSize: 20),
             )
           ],
         ),
@@ -105,7 +106,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                       style: TextStyle(
                           fontFamily: 'Lora',
                           fontSize: 28,
-                          color: Theme.of(context).accentColor),
+                          color: Theme.of(context).primaryColor),
                     ),
                     SizedBox(
                       height: 50,
@@ -115,13 +116,13 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                       height: 50,
                     ),
                     CustomButton(
-                      buttonColor: Theme.of(context).accentColor,
+                      buttonColor: Theme.of(context).primaryColor,
                       textColor:
-                          Theme.of(Get.context).textTheme.bodyText1.color,
+                          Theme.of(Get.context!).textTheme.bodyText1!.color!,
                       isOutline: false,
                       buttonText: AppLocalizations.start,
                       onPressed: () {
-                        if (_formKey.currentState.validate()) {
+                        if (_formKey.currentState!.validate()) {
                           UserPreferencesHandler.saveUserName(
                               _textController.text);
 

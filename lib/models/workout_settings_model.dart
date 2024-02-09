@@ -1,6 +1,6 @@
 import 'package:hive/hive.dart';
 
-@HiveType()
+@HiveType(typeId: 34)
 class WorkoutSettingsModel {
   @HiveField(0)
   int rounds;

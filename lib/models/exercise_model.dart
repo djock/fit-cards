@@ -1,7 +1,7 @@
 import 'package:fitcards/models/base_model.dart';
 
 class ExerciseModel extends BaseModel {
-  final int points;
+  final int? points;
 
   ExerciseModel({name, id, this.points}) : super(name, id);
 

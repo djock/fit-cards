@@ -29,7 +29,7 @@ class WorkoutSettings {
 
 class WorkoutController {
   List<ExerciseModel> exercises;
-  List<SchemeModel> schemes;
+  List<SchemeModel>? schemes;
 
   workoutType type;
   workoutState state;
@@ -46,12 +46,12 @@ class WorkoutController {
       this.schemes, this.updateScreen);
 
   factory WorkoutController.initHiit(Function callback) {
-    return new WorkoutController(workoutType.hiit, AppState.hiitSettings,
+    return new WorkoutController(workoutType.hiit, AppState.hiitSettings!,
         workoutState.idle, AppState.exercises, AppState.schemes, callback);
   }
 
   factory WorkoutController.initTabata(Function callback) {
-    return new WorkoutController(workoutType.tabata, AppState.tabataSettings,
+    return new WorkoutController(workoutType.tabata, AppState.tabataSettings!,
         workoutState.idle, AppState.exercises, null, callback);
   }
 
@@ -95,7 +95,7 @@ class WorkoutController {
   void logExercise(int index) {
     var exerciseName = exercises[index].name;
     var schemeName = type == workoutType.hiit
-        ? schemes[index].name
+        ? schemes![index].name
         : settings.restTime.toString();
 
     AppState.activeExercisesList.add(new WorkoutExerciseModel(
@@ -146,7 +146,7 @@ class WorkoutController {
   }
 
   void startRest(int index) {
-    addPoints(exercises[index].points);
+    addPoints(exercises[index].points!);
     logExercise(index);
     setState(workoutState.rest);
   }

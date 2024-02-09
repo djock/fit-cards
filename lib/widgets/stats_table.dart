@@ -50,7 +50,7 @@ class StatsTable extends StatelessWidget {
 
     return Table(
       border: TableBorder.symmetric(
-          inside: BorderSide(color: Theme.of(Get.context).accentColor)),
+          inside: BorderSide(color: Theme.of(Get.context!).primaryColor)),
       columnWidths: const <int, TableColumnWidth>{
         0: FlexColumnWidth(),
         1: FlexColumnWidth(),

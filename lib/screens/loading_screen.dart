@@ -10,7 +10,7 @@ class LoadingScreen extends StatefulWidget {
 
 class _LoadingScreenState extends State<LoadingScreen>
     with TickerProviderStateMixin {
-  AnimationController _controller;
+  AnimationController? _controller;
   String _loadingText = '';
 
   @override
@@ -22,14 +22,14 @@ class _LoadingScreenState extends State<LoadingScreen>
     )..addListener(() {
         setState(() {});
       });
-    _controller.repeat(reverse: false);
+    _controller!.repeat(reverse: false);
 
     super.initState();
   }
 
   @override
   void dispose() {
-    _controller.dispose();
+    _controller!.dispose();
     super.dispose();
   }
 
@@ -38,7 +38,7 @@ class _LoadingScreenState extends State<LoadingScreen>
     return Scaffold(
       body: SizedBox.expand(
         child: Container(
-          color: Theme.of(Get.context).canvasColor,
+          color: Theme.of(Get.context!).canvasColor,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.end,
             children: <Widget>[
@@ -48,8 +48,8 @@ class _LoadingScreenState extends State<LoadingScreen>
                     style: AppTheme.customAccentText(FontWeight.normal, 18)),
               ),
               LinearProgressIndicator(
-                value: _controller.value,
-                backgroundColor: Theme.of(Get.context).canvasColor,
+                value: _controller!.value,
+                backgroundColor: Theme.of(Get.context!).canvasColor,
                 semanticsLabel: 'Linear progress indicator',
               )
             ],

@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class FirebaseDatabaseHandler {
-  static String user;
+  static String? user;
   static List<LeaderBoardEntry> leaderBoard = [];
 
   static void updateLeaderBoard() {
@@ -15,30 +15,8 @@ class FirebaseDatabaseHandler {
     dbRef.update({
       firebaseUserId.toString(): AppState.points,
     }).catchError((onError) {
-      ScaffoldMessenger.of(Get.context)
+      ScaffoldMessenger.of(Get.context!)
           .showSnackBar(SnackBar(content: Text(onError.toString())));
     });
-  }
-
-  static Future<bool> getLeaderBoard() async {
-    final dbRef = FirebaseDatabase.instance.reference().child("leaderboard");
-    await dbRef.once().then((DataSnapshot snapshot) {
-      Map<dynamic, dynamic> snapshotValues = snapshot.value;
-      leaderBoard.clear();
-
-      snapshotValues.forEach((key, value) {
-        var entry = new LeaderBoardEntry(key, value);
-
-        leaderBoard.add(entry);
-      });
-
-      leaderBoard.sort((b, a) {
-        return a.points.compareTo(b.points);
-      });
-
-      return true;
-    });
-
-    return false;
   }
 }

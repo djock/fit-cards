@@ -26,6 +26,8 @@ class _TestScreenState extends State<TestScreen> {
       callback: () {
         _setState();
       },
+      type: timerType.timer,
+      workoutController: null,
     ));
   }
 }

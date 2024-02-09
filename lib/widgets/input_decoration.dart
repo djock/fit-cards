@@ -15,7 +15,7 @@ class CustomInputDecoration {
       ),
       border: new OutlineInputBorder(
         borderSide: BorderSide(
-            color: Theme.of(Get.context).accentColor.withOpacity(0.7),
+            color: Theme.of(Get.context!).primaryColor.withOpacity(0.7),
             width: 2),
         borderRadius: const BorderRadius.all(
           const Radius.circular(8),
@@ -23,7 +23,7 @@ class CustomInputDecoration {
       ),
       enabledBorder: new OutlineInputBorder(
         borderSide: BorderSide(
-            color: Theme.of(Get.context).accentColor.withOpacity(0.7),
+            color: Theme.of(Get.context!).primaryColor.withOpacity(0.7),
             width: 2),
         borderRadius: const BorderRadius.all(
           const Radius.circular(8),
@@ -31,18 +31,18 @@ class CustomInputDecoration {
       ),
       focusedBorder: new OutlineInputBorder(
         borderSide: BorderSide(
-            color: Theme.of(Get.context).accentColor.withOpacity(0.7),
+            color: Theme.of(Get.context!).primaryColor.withOpacity(0.7),
             width: 2),
         borderRadius: const BorderRadius.all(
           const Radius.circular(8),
         ),
       ),
-      fillColor: Theme.of(Get.context).canvasColor.withOpacity(0.5),
+      fillColor: Theme.of(Get.context!).canvasColor.withOpacity(0.5),
       filled: true,
       hintText: defaultText,
       contentPadding: EdgeInsets.symmetric(vertical: 16, horizontal: 24),
       hintStyle: TextStyle(
-          color: Theme.of(Get.context).accentColor.withOpacity(0.7),
+          color: Theme.of(Get.context!).primaryColor.withOpacity(0.7),
           fontSize: 18,
           fontStyle: FontStyle.italic));
 }

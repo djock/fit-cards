@@ -1,6 +1,6 @@
 import 'package:hive/hive.dart';
 
-@HiveType()
+@HiveType(typeId: 12)
 class WorkoutExerciseModel extends HiveObject {
   @HiveField(0)
   int index;

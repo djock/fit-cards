@@ -21,19 +21,19 @@ class AppState {
 
   static String userName = '';
 
-  static String appVersion;
-  static int appBuildNumber;
+  static String? appVersion;
+  static int? appBuildNumber;
 
   static bool audioEnabled = true;
 
   static int points = 0;
 
-  static String deviceId;
+  static String? deviceId;
 
   static bool isNightMode = false;
 
-  static WorkoutSettingsModel hiitSettings;
-  static WorkoutSettingsModel tabataSettings;
+  static WorkoutSettingsModel? hiitSettings;
+  static WorkoutSettingsModel? tabataSettings;
 
   static bool sawHowItWorksHiit = false;
   static bool sawHowItWorksTabata = false;

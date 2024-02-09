@@ -27,6 +27,7 @@ class StatsScreen extends StatelessWidget {
 //          _buildButtons()
         ],
       ),
+      topSafe: false,
     );
   }
 

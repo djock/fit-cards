@@ -7,21 +7,21 @@ import 'package:flutter/material.dart';
 enum timerType { timer, countdown }
 
 class TimerWidgetController {
-  int duration;
+  late int duration;
 }
 
 class TimerWidget extends StatefulWidget {
   final int duration;
   final Function callback;
   final timerType type;
-  final WorkoutController workoutController;
+  final WorkoutController? workoutController;
 
   const TimerWidget(
-      {Key key,
-      this.callback,
-      this.duration,
-      this.type,
-      this.workoutController})
+      {Key? key,
+      required this.callback,
+      required this.duration,
+      required this.type,
+      required this.workoutController})
       : super(key: key);
 
   @override
@@ -84,7 +84,7 @@ class _TimerWidgetState extends State<TimerWidget> {
       if (!_disposed) {
         _timeInSec.value++;
         if (widget.workoutController != null)
-          widget.workoutController.setDuration(_timeInSec.value);
+          widget.workoutController!.setDuration(_timeInSec.value);
       }
     }
   }

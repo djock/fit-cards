@@ -85,7 +85,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 //         minHeight: 7,
                 //         value: 0.5,
                 //         backgroundColor:
-                //             Theme.of(Get.context).accentColor.withOpacity(0.5),
+                //             Theme.of(Get.context!).primaryColor.withOpacity(0.5),
                 //         semanticsLabel: 'Linear progress indicator',
                 //       ),
                 //     ],

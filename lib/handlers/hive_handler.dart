@@ -10,10 +10,10 @@ import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart';
 
 class HiveHandler {
-  static Box exercisesBox;
-  static Box workoutsBox;
-  static Box hiitSettingsBox;
-  static Box tabataSettingsBox;
+  static Box? exercisesBox;
+  static Box? workoutsBox;
+  static Box? hiitSettingsBox;
+  static Box? tabataSettingsBox;
 
   static void init() {
     Hive.registerAdapter(WorkoutExerciseModelAdapter());
@@ -28,7 +28,7 @@ class HiveHandler {
     workoutsBox = await Hive.openBox('workouts');
     AppState.loggedWorkouts = <WorkoutLogModel>[];
 
-    if (workoutsBox.isNotEmpty) {
+    if (workoutsBox!.isNotEmpty) {
       loadLoggedWorkouts();
     }
 
@@ -36,13 +36,13 @@ class HiveHandler {
     AppState.activeExercisesList = <WorkoutExerciseModel>[];
     AppState.loggedExercisesList = <WorkoutExerciseModel>[];
 
-    if (exercisesBox.isNotEmpty) {
+    if (exercisesBox!.isNotEmpty) {
       loadLoggedExercises();
     }
 
     hiitSettingsBox = await Hive.openBox('hiitSettings');
 
-    if (hiitSettingsBox.isNotEmpty) {
+    if (hiitSettingsBox!.isNotEmpty) {
       loadHiitSettings();
     } else {
       AppStateHandler.setHiitSettings(
@@ -51,7 +51,7 @@ class HiveHandler {
 
     tabataSettingsBox = await Hive.openBox('tabataSettings');
 
-    if (tabataSettingsBox.isNotEmpty) {
+    if (tabataSettingsBox!.isNotEmpty) {
       loadTabataSettings();
     } else {
       AppStateHandler.setTabataSettings(
@@ -64,7 +64,7 @@ class HiveHandler {
   /// LOAD
 
   static void loadLoggedExercises() {
-    var _box = exercisesBox.get('exercises');
+    var _box = exercisesBox!.get('exercises');
 
     for (var item in _box) {
       AppState.loggedExercisesList.add(item);
@@ -72,7 +72,7 @@ class HiveHandler {
   }
 
   static void loadLoggedWorkouts() {
-    var _box = workoutsBox.get('workouts');
+    var _box = workoutsBox!.get('workouts');
 
     for (var item in _box) {
       AppState.loggedWorkouts.add(item);
@@ -80,35 +80,35 @@ class HiveHandler {
   }
 
   static void loadHiitSettings() {
-    var _box = hiitSettingsBox.get('hiitSettings');
+    var _box = hiitSettingsBox!.get('hiitSettings');
     AppStateHandler.setHiitSettings(_box);
   }
 
   static void loadTabataSettings() {
-    var _box = tabataSettingsBox.get('tabataSettings');
+    var _box = tabataSettingsBox!.get('tabataSettings');
     AppStateHandler.setTabataSettings(_box);
   }
 
   /// SAVE
 
   static void saveExerciseToBox() {
-    exercisesBox.put('exercises', AppState.loggedExercisesList);
+    exercisesBox!.put('exercises', AppState.loggedExercisesList);
   }
 
   static void saveWorkoutToBox() {
-    workoutsBox.put('workouts', AppState.loggedWorkouts);
+    workoutsBox!.put('workouts', AppState.loggedWorkouts);
   }
 
   static void saveHiitSettings() {
-    hiitSettingsBox.put('hiitSettings', AppState.hiitSettings);
+    hiitSettingsBox!.put('hiitSettings', AppState.hiitSettings);
   }
 
   static void saveTabataSettings() {
-    tabataSettingsBox.put('tabataSettings', AppState.tabataSettings);
+    tabataSettingsBox!.put('tabataSettings', AppState.tabataSettings);
   }
 
   static void clearAllData() {
-    workoutsBox.clear();
-    exercisesBox.clear();
+    workoutsBox!.clear();
+    exercisesBox!.clear();
   }
 }

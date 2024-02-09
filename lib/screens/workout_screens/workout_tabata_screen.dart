@@ -25,7 +25,7 @@ class WorkoutTabataScreen extends StatefulWidget {
 
 class _WorkoutTabataScreenState extends State<WorkoutTabataScreen>
     with TickerProviderStateMixin {
-  WorkoutController _workoutController;
+  WorkoutController? _workoutController;
   CardController _exerciseController = new CardController();
 
   @override
@@ -56,58 +56,58 @@ class _WorkoutTabataScreenState extends State<WorkoutTabataScreen>
     }
   }
 
-  Future<bool> _onBackPressed() {
-    if (_workoutController.isWorkoutActive()) {
-      return showDialog(
-              context: context,
-              builder: (context) => GeneralModal(
-                    subTitle: AppLocalizations.closeWorkoutSubtitle,
-                    okAction: () => _onStopWorkout(),
-                    cancelAction: () => Get.back(),
-                    okActionText: AppLocalizations.close,
-                    cancelActionText: AppLocalizations.cancel,
-                  )) ??
-          false;
+  Future<bool> _onBackPressed() async {
+    if (_workoutController!.isWorkoutActive()) {
+      await showDialog(
+          context: context,
+          builder: (context) => GeneralModal(
+                subTitle: AppLocalizations.closeWorkoutSubtitle,
+                okAction: () => _onStopWorkout(),
+                cancelAction: () => Get.back(),
+                okActionText: AppLocalizations.close,
+                cancelActionText: AppLocalizations.cancel,
+                title: '',
+              ));
     } else {
       Get.back();
       Get.back();
     }
+
+    return true;
   }
 
   PreferredSizeWidget _buildAppBar() {
-    if (_workoutController.state == workoutState.countdown) {
+    if (_workoutController!.state == workoutState.countdown) {
       return CustomAppBar.buildWorkout(
         10,
         timerType.countdown,
         () => _setState(),
         () => Get.back(),
-        _workoutController,
+        _workoutController!,
       );
     }
 
-    if (_workoutController.isWorkoutActive()) {
-      _workoutController.addDuration(
-          _workoutController.state == workoutState.active
-              ? _workoutController.settings.workTime
-              : _workoutController.settings.restTime);
+    if (_workoutController!.isWorkoutActive()) {
+      _workoutController!.addDuration(
+          _workoutController!.state == workoutState.active
+              ? _workoutController!.settings.workTime
+              : _workoutController!.settings.restTime);
 
       return CustomAppBar.buildWorkout(
-          _workoutController.state == workoutState.active
-              ? _workoutController.settings.workTime
-              : _workoutController.settings.restTime,
+          _workoutController!.state == workoutState.active
+              ? _workoutController!.settings.workTime
+              : _workoutController!.settings.restTime,
           timerType.countdown,
           () => _setState(),
           () => _onStopWorkout(),
-          _workoutController);
+          _workoutController!);
     }
 
     return CustomAppBar.buildWithActions([
       IconButton(
           icon: FaIcon(
             FontAwesomeIcons.slidersH,
-            color: Get.isDarkMode
-                ? Theme.of(Get.context).accentColor
-                : Theme.of(Get.context).primaryColorDark,
+            color: Theme.of(Get.context!).primaryColorDark,
             size: 18,
           ),
           onPressed: () {
@@ -119,14 +119,14 @@ class _WorkoutTabataScreenState extends State<WorkoutTabataScreen>
   void _setState() async {
     await Future.delayed(Duration(seconds: 1));
     setState(() {
-      if (_workoutController.state == workoutState.countdown) {
-        _workoutController.setState(workoutState.active);
+      if (_workoutController!.state == workoutState.countdown) {
+        _workoutController!.setState(workoutState.active);
         return;
       }
 
-      if (_workoutController.state == workoutState.active) {
-        if (_workoutController.exercisesCount + 1 ==
-            _workoutController.settings.rounds) {
+      if (_workoutController!.state == workoutState.active) {
+        if (_workoutController!.exercisesCount + 1 ==
+            _workoutController!.settings.rounds) {
           _onStopWorkout();
           return;
         }
@@ -136,8 +136,8 @@ class _WorkoutTabataScreenState extends State<WorkoutTabataScreen>
         return;
       }
 
-      if (_workoutController.state == workoutState.rest) {
-        _workoutController.setState(workoutState.active);
+      if (_workoutController!.state == workoutState.rest) {
+        _workoutController!.setState(workoutState.active);
         return;
       }
     });
@@ -145,8 +145,10 @@ class _WorkoutTabataScreenState extends State<WorkoutTabataScreen>
 
   @override
   Widget build(BuildContext context) {
-    return _workoutController.state == workoutState.finish
-        ? WorkoutEndScreen(workoutController: _workoutController)
+    return _workoutController!.state == workoutState.finish
+        ? WorkoutEndScreen(
+            workoutController: _workoutController!,
+          )
         : WillPopScope(
             onWillPop: _onBackPressed,
             child: SafeScreen(
@@ -159,12 +161,12 @@ class _WorkoutTabataScreenState extends State<WorkoutTabataScreen>
                     height: MediaQuery.of(context).size.height * 0.91,
                     child: Column(
                       children: [
-                        _workoutController.isWorkoutActive()
+                        _workoutController!.isWorkoutActive()
                             ? Expanded(
                                 flex: 1,
                                 child: Container(
                                   child: Text(
-                                    '${AppLocalizations.round} ${_workoutController.exercisesCount + 1} / ${_workoutController.settings.rounds}',
+                                    '${AppLocalizations.round} ${_workoutController!.exercisesCount + 1} / ${_workoutController!.settings.rounds}',
                                     style: AppTheme.textAccentBold30(),
                                   ),
                                 ),
@@ -178,15 +180,15 @@ class _WorkoutTabataScreenState extends State<WorkoutTabataScreen>
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       Text(
-                                        '${_workoutController.settings.rounds}x',
+                                        '${_workoutController!.settings.rounds}x',
                                         style: AppTheme.textAccentBold30(),
                                       ),
                                       Text(
-                                        '${_workoutController.settings.workTime}/',
+                                        '${_workoutController!.settings.workTime}/',
                                         style: AppTheme.textAccentBold30(),
                                       ),
                                       Text(
-                                        '${_workoutController.settings.restTime}',
+                                        '${_workoutController!.settings.restTime}',
                                         style: AppTheme.textAccentBold30(),
                                       ),
                                     ],
@@ -196,11 +198,11 @@ class _WorkoutTabataScreenState extends State<WorkoutTabataScreen>
                         Expanded(
                           flex: 6,
                           child: FitCard(
-                            list: _workoutController.exercises,
+                            list: _workoutController!.exercises,
                             color: AppColors.exerciseCardColor,
                             cardController: _exerciseController,
                             isBlocked:
-                                _workoutController.state == workoutState.idle
+                                _workoutController!.state == workoutState.idle
                                     ? false
                                     : true,
                             type: cardType.exercise,
@@ -208,7 +210,7 @@ class _WorkoutTabataScreenState extends State<WorkoutTabataScreen>
                               _onSwipeExerciseCard();
                             },
                             onSkip: null,
-                            workoutController: _workoutController,
+                            workoutController: _workoutController!,
                           ),
                         ),
                         Expanded(
@@ -220,20 +222,21 @@ class _WorkoutTabataScreenState extends State<WorkoutTabataScreen>
                   ),
                 ],
               ),
+              topSafe: false,
             ),
           );
   }
 
   void _onStartWorkout() {
-    _workoutController.setState(workoutState.countdown);
+    _workoutController!.setState(workoutState.countdown);
   }
 
   void _onStopWorkout() {
-    _workoutController.stopWorkout();
+    _workoutController!.stopWorkout();
   }
 
   void _onSwipeExerciseCard() {
-    if (_workoutController.state == workoutState.active) {
+    if (_workoutController!.state == workoutState.active) {
       if (_exerciseController.hasSkipped) {
         _exerciseController.hasSkipped = false;
       } else {
@@ -241,15 +244,15 @@ class _WorkoutTabataScreenState extends State<WorkoutTabataScreen>
       }
     }
 
-    if (_workoutController.state == workoutState.active ||
-        _workoutController.state == workoutState.countdown ||
-        _workoutController.state == workoutState.rest) return;
+    if (_workoutController!.state == workoutState.active ||
+        _workoutController!.state == workoutState.countdown ||
+        _workoutController!.state == workoutState.rest) return;
 
     _onStartWorkout();
   }
 
   void _onStartRest() {
-    _workoutController.startRest(_exerciseController.index);
+    _workoutController!.startRest(_exerciseController.index);
   }
 
   void _onOpenFilters() {
@@ -260,15 +263,15 @@ class _WorkoutTabataScreenState extends State<WorkoutTabataScreen>
           return FractionallySizedBox(
             heightFactor: 0.9,
             child: CustomizeWorkoutModal(
-              workoutController: _workoutController,
+              workoutController: _workoutController!,
             ),
           );
         }).then((value) {
-      if (_workoutController.exercises.first.name !=
+      if (_workoutController!.exercises.first.name !=
           AppLocalizations.exercise) {
         var dummyExercise = new ExerciseModel(
             name: AppLocalizations.exercise, id: -1, points: 0);
-        _workoutController.exercises.insert(0, dummyExercise);
+        _workoutController!.exercises.insert(0, dummyExercise);
 
         setState(() {});
       }
