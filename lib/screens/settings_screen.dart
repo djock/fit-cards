@@ -12,7 +12,6 @@ import 'package:fitcards/widgets/safe_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class SettingsScreen extends StatefulWidget {
   final Function callback;
@@ -94,10 +93,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                               text: AppLocalizations.sendFeedback,
                               leftIcon: FontAwesomeIcons.comment,
                               rightIcon: FontAwesomeIcons.externalLinkAlt,
-                              function: () {
-                                _launchURL(
-                                    'mailto:fit.cards.app@gmail.com?subject=Fit%20Cards%20App%20Feedback');
-                              }),
+                              function: () {}),
                           Divider(
                             height: 3,
                           ),
@@ -167,17 +163,5 @@ class _SettingsScreenState extends State<SettingsScreen> {
               cancelActionText: AppLocalizations.cancel,
               title: '',
             ));
-  }
-
-  _launchURL(url) async {
-    if (await canLaunch(url)) {
-      await launch(
-        url,
-        forceSafariVC: false,
-        forceWebView: false,
-      );
-    } else {
-      throw 'Could not launch $url';
-    }
   }
 }

@@ -1,4 +1,3 @@
-import 'package:fitcards/handlers/analytics_handler.dart';
 import 'package:fitcards/handlers/app_state.dart';
 import 'package:fitcards/handlers/hive_handler.dart';
 import 'package:fitcards/models/exercise_model.dart';
@@ -105,7 +104,7 @@ class WorkoutController {
   }
 
   void startWorkout() {
-    AnalyticsHandler.logStartWorkout(type);
+    // AnalyticsHandler.logStartWorkout(type);
     setState(workoutState.countdown);
   }
 
@@ -119,7 +118,7 @@ class WorkoutController {
   }
 
   void stopWorkout() {
-    AnalyticsHandler.logStopWorkout(type, points);
+    // AnalyticsHandler.logStopWorkout(type, points);
 
     if (state == workoutState.countdown) {
       AppStateHandler.shuffleJson();

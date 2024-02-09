@@ -55,7 +55,7 @@ class GeneralModal extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               SizedBox(height: 16.0),
-              title != null && title.isNotEmpty
+              title.isNotEmpty
                   ? Text(
                       title,
                       style: TextStyle(

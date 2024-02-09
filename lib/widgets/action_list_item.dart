@@ -1,6 +1,5 @@
 import 'package:fitcards/handlers/app_theme.dart';
 import 'package:fitcards/utilities/app_colors.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
@@ -25,10 +24,8 @@ class IconListItem extends StatelessWidget {
       color: Theme.of(Get.context!).canvasColor, // AppTheme.widgetBackground(),
       child: ListTile(
         onTap: () {
-          if (function != null) {
-            function();
-          }
-        },
+          function();
+                },
         contentPadding: EdgeInsets.only(left: 24, right: 24),
         title: Text(
           text,

@@ -1,4 +1,3 @@
-import 'package:fitcards/handlers/analytics_handler.dart';
 import 'package:fitcards/handlers/app_state.dart';
 import 'package:fitcards/handlers/user_preferences_handler.dart';
 import 'package:fitcards/handlers/workout_controller.dart';
@@ -212,8 +211,8 @@ class _WorkoutHiitScreenState extends State<WorkoutHiitScreen>
   }
 
   void _onSkipExercise() {
-    AnalyticsHandler.logSkipExercise(
-        _workoutController!.exercises[_exerciseController.index].name);
+    // AnalyticsHandler.logSkipExercise(
+    //     _workoutController!.exercises[_exerciseController.index].name);
     _exerciseController.triggerLeft();
   }
 

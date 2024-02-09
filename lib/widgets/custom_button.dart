@@ -1,6 +1,5 @@
 import 'package:fitcards/utilities/utils.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class CustomButton extends StatefulWidget {
   final String buttonText;

@@ -1,10 +1,7 @@
 import 'package:facebook_app_events/facebook_app_events.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:fitcards/app.dart';
 import 'package:fitcards/handlers/app_state.dart';
 import 'package:fitcards/handlers/app_theme.dart';
-import 'package:fitcards/handlers/firebase_database_handler.dart';
 import 'package:fitcards/handlers/hive_handler.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -14,11 +11,6 @@ import 'package:package_info/package_info.dart';
 void main() async {
   HiveHandler.init();
   WidgetsFlutterBinding.ensureInitialized();
-
-  await Firebase.initializeApp();
-  await FirebaseAuth.instance.signInAnonymously().then((value) {
-    FirebaseDatabaseHandler.user = value.user!.uid;
-  });
 
   runApp(Main());
 }

@@ -1,5 +1,3 @@
-import 'package:assets_audio_player/assets_audio_player.dart';
-import 'package:fitcards/handlers/app_state.dart';
 import 'package:fitcards/handlers/workout_controller.dart';
 import 'package:fitcards/utilities/utils.dart';
 import 'package:flutter/material.dart';
@@ -94,8 +92,7 @@ class _TimerWidgetState extends State<TimerWidget> {
     return ValueListenableBuilder(
         valueListenable: _timeInSec,
         builder: (context, value, child) {
-          _playAudio();
-          return Text(Utils.formatTimeSeconds(value),
+          return Text(Utils.formatTimeSeconds(int.parse(value!.toString())),
               style: TextStyle(
                 color: Colors.red,
                 fontSize: 60,
@@ -103,41 +100,5 @@ class _TimerWidgetState extends State<TimerWidget> {
               ),
               textAlign: TextAlign.center);
         });
-  }
-
-  void _playAudio() {
-    if (AppState.audioEnabled && widget.type == timerType.countdown) {
-      if (_timeInSec.value == 3) {
-        AssetsAudioPlayer.newPlayer().open(
-          Audio("assets/tick.flac"),
-          autoStart: true,
-          showNotification: true,
-        );
-      }
-
-      if (_timeInSec.value == 2) {
-        AssetsAudioPlayer.newPlayer().open(
-          Audio("assets/tick.flac"),
-          autoStart: true,
-          showNotification: true,
-        );
-      }
-
-      if (_timeInSec.value == 1) {
-        AssetsAudioPlayer.newPlayer().open(
-          Audio("assets/tick.flac"),
-          autoStart: true,
-          showNotification: true,
-        );
-      }
-
-      if (_timeInSec.value == 0) {
-        AssetsAudioPlayer.newPlayer().open(
-          Audio("assets/start.flac"),
-          autoStart: true,
-          showNotification: true,
-        );
-      }
-    }
   }
 }

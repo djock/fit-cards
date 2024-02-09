@@ -6,7 +6,6 @@ import 'package:fitcards/models/workout_settings_model.dart';
 import 'package:fitcards/utilities/app_localizations.dart';
 
 import 'app_state.dart';
-import 'firebase_database_handler.dart';
 import 'hive_handler.dart';
 
 class AppStateHandler {
@@ -45,7 +44,6 @@ class AppStateHandler {
     AppState.points += value;
 
     UserPreferencesHandler.savePoints();
-    FirebaseDatabaseHandler.updateLeaderBoard();
   }
 
   static void clearAllData() {

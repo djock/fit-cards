@@ -188,14 +188,10 @@ class _TinderSwapCardState extends State<TinderSwapCard>
                       details.delta.dx * 20 / MediaQuery.of(context).size.width,
                   0);
 
-              if (widget.swipeUpdateCallback != null) {
-                widget.swipeUpdateCallback(details, frontCardAlign);
-              }
-            }
-
-            if (widget.swipeUpdateCallback != null) {
               widget.swipeUpdateCallback(details, frontCardAlign);
             }
+
+            widget.swipeUpdateCallback(details, frontCardAlign);
           });
         },
         onPanEnd: (DragEndDetails details) {
@@ -265,8 +261,7 @@ class _TinderSwapCardState extends State<TinderSwapCard>
           frontCardAlign = _cardAligns[widget._stackNum - 1];
           orientation = CardSwipeOrientation.RECOVER;
         }
-        if (widget.swipeCompleteCallback != null)
-          widget.swipeCompleteCallback(orientation, index);
+        widget.swipeCompleteCallback(orientation, index);
         if (orientation != CardSwipeOrientation.RECOVER) changeCardOrder();
       }
     });
